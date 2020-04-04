@@ -1,0 +1,134 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+
+.cu-tag {
+    font-size: rpx(24);
+    vertical-align: middle;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: rpx(0) rpx(16);
+    height: rpx(48);
+    font-family: Helvetica Neue, Helvetica, sans-serif;
+    white-space: nowrap;
+}
+
+.cu-tag:not([class*="bg"]):not([class*="line"]) {
+    background-color: #f1f1f1;
+}
+
+.cu-tag[class*="line-"]::after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1 upx solid currentColor;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: inherit;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cu-tag.radius[class*="line"]::after {
+    border-radius: rpx(12);
+}
+
+.cu-tag.round[class*="line"]::after {
+    border-radius: rpx(1000);
+}
+
+.cu-tag[class*="line-"]::after {
+    border-radius: 0;
+}
+
+.cu-tag + .cu-tag {
+    margin-left: rpx(10);
+}
+
+.cu-tag.sm {
+    font-size: rpx(20);
+    padding: rpx(0) rpx(12);
+    height: rpx(32);
+}
+
+.cu-capsule {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.cu-capsule + .cu-capsule {
+    margin-left: rpx(10);
+}
+
+.cu-capsule .cu-tag {
+    margin: 0;
+}
+
+.cu-capsule .cu-tag[class*="line-"]:last-child::after {
+    border-left: rpx(0) solid transparent;
+}
+
+.cu-capsule .cu-tag[class*="line-"]:first-child::after {
+    border-right: rpx(0) solid transparent;
+}
+
+.cu-capsule.radius .cu-tag:first-child {
+    border-top-left-radius: rpx(6);
+    border-bottom-left-radius: rpx(6);
+}
+
+.cu-capsule.radius .cu-tag:last-child::after,
+.cu-capsule.radius .cu-tag[class*="line-"] {
+    border-top-right-radius: rpx(12);
+    border-bottom-right-radius: rpx(12);
+}
+
+.cu-capsule.round .cu-tag:first-child {
+    border-top-left-radius: rpx(200);
+    border-bottom-left-radius: rpx(200);
+    text-indent: rpx(4);
+}
+
+.cu-capsule.round .cu-tag:last-child::after,
+.cu-capsule.round .cu-tag:last-child {
+    border-top-right-radius: rpx(200);
+    border-bottom-right-radius: rpx(200);
+    text-indent: -(rpx(4));
+}
+
+.cu-tag.badge {
+    border-radius: rpx(200);
+    position: absolute;
+    top: -(rpx(10));
+    right: -(rpx(10));
+    font-size: rpx(20);
+    padding: rpx(0) rpx(10);
+    height: rpx(28);
+    color: #ffffff;
+}
+
+.cu-tag.badge:not([class*="bg-"]) {
+    background-color: #dd514c;
+}
+
+.cu-tag:empty:not([class*="fa-"]) {
+    padding: rpx(0);
+    width: rpx(16);
+    height: rpx(16);
+    top: -(rpx(4));
+    right: -(rpx(4));
+}
+
+.cu-tag[class*="fa-"] {
+    width: rpx(32);
+    height: rpx(32);
+    top: -(rpx(4));
+    right: -(rpx(4));
+}

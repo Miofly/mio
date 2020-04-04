@@ -1,0 +1,63 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+
+.cu-avatar {
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    color: #ffffff;
+    white-space: nowrap;
+    position: relative;
+    width: rpx(64);
+    height: rpx(64);
+    background-size: cover;
+    background-position: center;
+    vertical-align: middle;
+    font-size: 1.5em;
+}
+
+.cu-avatar.sm {
+    width: rpx(48);
+    height: rpx(48);
+    font-size: 1em;
+}
+
+.cu-avatar.lg {
+    width: rpx(96);
+    height: rpx(96);
+    font-size: 2em;
+}
+
+.cu-avatar.xl {
+    width: rpx(128);
+    height: rpx(128);
+    font-size: 2.5em;
+}
+
+.cu-avatar .avatar-text {
+    font-size: 0.4em;
+}
+
+.cu-avatar-group {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    padding: 0 rpx(10) 0 rpx(40);
+    display: inline-block;
+}
+
+.cu-avatar-group .cu-avatar {
+    margin-left: -(rpx(30));
+    border: rpx(4) solid #f1f1f1;
+    vertical-align: middle;
+}
+
+.cu-avatar-group .cu-avatar.sm {
+    margin-left: -(rpx(20));
+    border: rpx(1) solid #f1f1f1;
+}

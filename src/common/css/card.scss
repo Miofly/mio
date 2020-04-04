@@ -1,0 +1,133 @@
+
+.cu-card {
+    display: block;
+    overflow: hidden;
+}
+
+.cu-card>.cu-item {
+    display: block;
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 10rpx;
+    margin: 30rpx;
+}
+
+.cu-card>.cu-item.shadow-blur {
+    overflow: initial;
+}
+
+.cu-card.no-card>.cu-item {
+    margin: 0rpx;
+    border-radius: 0rpx;
+}
+
+.cu-card .grid.grid-square {
+    margin-bottom: -20rpx;
+}
+
+.cu-card.case .image {
+    position: relative;
+}
+
+.cu-card.case .image image {
+    width: 100%;
+}
+
+.cu-card.case .image .cu-tag {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.cu-card.case .image .cu-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 0rpx 30rpx;
+}
+
+.cu-card.case.no-card .image {
+    margin: 30rpx 30rpx 0;
+    overflow: hidden;
+    border-radius: 10rpx;
+}
+
+.cu-card.dynamic {
+    display: block;
+}
+
+.cu-card.dynamic>.cu-item {
+    display: block;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.cu-card.dynamic>.cu-item>.text-content {
+    padding: 0 30rpx 0;
+    max-height: 6.4em;
+    overflow: hidden;
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.cu-card.dynamic>.cu-item .square-img {
+    width: 100%;
+    height: 200rpx;
+    border-radius: 6rpx;
+}
+
+.cu-card.dynamic>.cu-item .only-img {
+    width: 100%;
+    height: 320rpx;
+    border-radius: 6rpx;
+}
+
+/* card.dynamic>.cu-item .comment {
+  padding: 20rpx;
+  background-color: #f1f1f1;
+  margin: 0 30rpx 30rpx;
+  border-radius: 6rpx;
+} */
+
+.cu-card.article {
+    display: block;
+}
+
+.cu-card.article>.cu-item {
+    padding-bottom: 30rpx;
+}
+
+.cu-card.article>.cu-item .title {
+    font-size: 30rpx;
+    font-weight: 900;
+    color: #333333;
+    line-height: 100rpx;
+    padding: 0 30rpx;
+}
+
+.cu-card.article>.cu-item .content {
+    display: flex;
+    padding: 0 30rpx;
+}
+
+.cu-card.article>.cu-item .content>image {
+    width: 240rpx;
+    height: 6.4em;
+    margin-right: 20rpx;
+    border-radius: 6rpx;
+}
+
+.cu-card.article>.cu-item .content .desc {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cu-card.article>.cu-item .content .text-content {
+    font-size: 28rpx;
+    color: #888;
+    height: 4.8em;
+    overflow: hidden;
+}

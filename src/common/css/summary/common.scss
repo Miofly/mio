@@ -1,0 +1,27 @@
+.block {
+    display: block;
+}
+
+.inline {
+    display: inline;
+}
+
+.fr {
+    float: right
+}
+
+.fl {
+    float: left
+}
+
+.fixed {
+    position: fixed;
+}
+
+.center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}

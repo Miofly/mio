@@ -1,0 +1,117 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+
+.text-xs {
+    font-size: rpx(20);
+}
+
+.text-sm {
+    font-size: rpx(24);
+}
+
+.text-df {
+    font-size: rpx(28);
+}
+
+.text-lg {
+    font-size: rpx(32);
+}
+
+.text-xl {
+    font-size: rpx(36);
+}
+
+.text-xxl {
+    font-size: rpx(44);
+}
+
+.text-sl {
+    font-size: rpx(80);
+}
+
+.text-xsl {
+    font-size: rpx(120);
+}
+
+.text-Abc {
+    text-transform: Capitalize;
+}
+
+.text-ABC {
+    text-transform: Uppercase;
+}
+
+.text-abc {
+    text-transform: Lowercase;
+}
+
+.text-price::before {
+    content: "￥";
+    font-size: 80%;
+    margin-right: rpx(4);
+}
+
+.text-cut {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-content {
+    line-height: 1.6;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-indent-xs {
+    text-indent: rpx(20);
+}
+
+.text-indent-sm {
+    text-indent: rpx(24);
+}
+
+.text-indent-df {
+    text-indent: rpx(28);
+}
+
+.text-indent-lg {
+    text-indent: rpx(32);
+}
+
+.text-indent-xl {
+    text-indent: rpx(36);
+}
+
+.text-indent-xxl {
+    text-indent: rpx(44);
+}
+
+.text-indent-sl {
+    text-indent: rpx(80);
+}
+
+.text-indent-xsl {
+    text-indent: rpx(120);
+}
+
+.text-warp {
+    word-wrap: break-word;
+    word-break: break-all
+}
+

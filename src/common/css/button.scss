@@ -1,0 +1,112 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+
+.cu-btn {
+    position: relative;
+    border: rpx(0);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 rpx(30);
+    font-size: rpx(28);
+    height: rpx(64);
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    overflow: visible;
+    margin-left: initial;
+    transform: translate(rpx(0), rpx(0));
+    margin-right: initial;
+}
+
+.cu-btn::after {
+    display: none;
+}
+
+.cu-btn:not([class*="bg-"]) {
+    background-color: #f0f0f0;
+}
+
+.cu-btn[class*="line"] {
+    background-color: transparent;
+}
+
+.cu-btn[class*="line"]::after {
+    content: " ";
+    display: block;
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: rpx(1) solid currentColor;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    border-radius: rpx(12);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cu-btn.round[class*="line"]::after {
+    border-radius: rpx(1000);
+}
+
+.cu-btn[class*="lines"]::after {
+    border: rpx(6) solid currentColor;
+}
+
+.cu-btn[class*="bg-"]::after {
+    display: none;
+}
+
+.cu-btn.sm {
+    padding: 0 rpx(20);
+    font-size: rpx(20);
+    height: rpx(48);
+}
+
+.cu-btn.lg {
+    padding: 0 rpx(40);
+    font-size: rpx(32);
+    height: rpx(80);
+}
+
+.cu-btn.fa.sm {
+    width: rpx(48);
+    height: rpx(48);
+}
+
+.cu-btn.fa {
+    width: rpx(64);
+    height: rpx(64);
+    border-radius: rpx(500);
+    padding: 0;
+}
+
+button.fa.lg {
+    width: rpx(80);
+    height: rpx(80);
+}
+
+.cu-btn.shadow-blur::before {
+    top: 4 upx;
+    left: 4 upx;
+    filter: blur(rpx(6));
+    opacity: 0.6;
+}
+
+.cu-btn.button-hover {
+    transform: translate(rpx(1), rpx(1));
+}
+
+.cu-btn.block {
+    display: flex;
+}
+
+.cu-btn[disabled] {
+    opacity: 0.6;
+    color: #ffffff;
+}

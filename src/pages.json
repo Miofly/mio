@@ -1,0 +1,109 @@
+{
+    "pages": [
+        {
+            "path": "pages/index/index",
+            "name": "index",
+            "style": {
+                "navigationBarTitleText": "主页"
+            }
+        },
+        {
+            "path": "pages/module/avatar",
+            "name": "avatar",
+            "style": {}
+        },
+        {
+            "path": "pages/module/button",
+            "name": "button",
+            "style": {}
+        },
+        {
+            "path": "pages/module/fab",
+            "name": "fab",
+            "style": {}
+        },
+        {
+            "path": "pages/module/footBar",
+            "name": "footBar",
+            "style": {}
+        },
+        {
+            "path": "pages/module/home",
+            "name": "home",
+            "style": {}
+        },
+        {
+            "path": "pages/module/list",
+            "name": "list",
+            "style": {}
+        },
+        {
+            "path": "pages/module/luckDraw",
+            "name": "luckDraw",
+            "style": {}
+        },
+        {
+            "path": "pages/module/messTip",
+            "name": "messTip",
+            "style": {}
+        },
+        {
+            "path": "pages/module/modal",
+            "name": "modal",
+            "style": {}
+        },
+        {
+            "path": "pages/module/nav",
+            "name": "nav"
+        },
+        {
+            "path": "pages/module/webview",
+            "name": "webview"
+        },
+        {
+            "path": "pages/module/test",
+            "name": "test",
+            "style": {}
+        },
+        {
+            "path": "pages/plugin/home",
+            "name": "phome",
+            "style": {}
+        },
+        {
+            "path": "pages/setting/home",
+            "name": "shome",
+            "style": {}
+        },
+        {
+            "path": "pages/user/home",
+            "name": "uhome",
+            "style": {}
+        },
+        {
+            "path": "pages/index/home",
+            "name": "ihome",
+            "style": {}
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "condition": {
+        // 模式配置，仅开发期间生效
+        "current": 0,
+        // 当前激活的模式（list 的索引项）
+        "list": [
+            {
+                "name": "test",
+                "path": "pages/module/test"
+            },
+            {
+                "name": "list",
+                "path": "pages/module/list"
+            }
+        ]
+    }
+}

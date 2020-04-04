@@ -1,0 +1,44 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+
+image {
+    max-width: 100%;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+}
+
+image.loading::before {
+    content: "";
+    background-color: #f5f5f5;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+image.loading::after {
+    content: "\e7f1";
+    font-family: "fa";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: rpx(32);
+    height: rpx(32);
+    line-height: rpx(32);
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    font-size: rpx(32);
+    margin: auto;
+    color: #ccc;
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    display: block;
+}
+
+.response {
+    width: 100%;
+}

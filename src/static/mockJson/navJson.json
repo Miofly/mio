@@ -1,0 +1,72 @@
+[
+    {
+        "title": "头像模块",
+        "name": "avatar",
+        "color": "cyan",
+        "icon": "book",
+        "url": "avatar"
+    },
+    {
+        "title": "导航模块",
+        "name": "nav",
+        "color": "cyan",
+        "icon": "book",
+        "url": "nav"
+    },
+    {
+        "title": "测试模块",
+        "name": "test",
+        "color": "blue",
+        "icon": "bug",
+        "url": "test"
+    },
+    {
+        "title": "按钮模块",
+        "name": "button",
+        "color": "purple",
+        "icon": "car",
+        "url": "button"
+    },
+    {
+        "title": "底部栏模块",
+        "name": "footBar",
+        "color": "pink",
+        "icon": "book",
+        "url": "footBar"
+    },
+    {
+        "title": "悬浮按钮",
+        "name": "fab",
+        "color": "green",
+        "icon": "book",
+        "url": "fab"
+    },
+    {
+        "title": "列表模块",
+        "name": "list",
+        "color": "purple",
+        "icon": "car",
+        "url": "list"
+    },
+    {
+        "title": "随机抽奖模块",
+        "name": "luckDraw",
+        "color": "pink",
+        "icon": "book",
+        "url": "luckDraw"
+    },
+    {
+        "title": "消息提示",
+        "name": "messTip",
+        "color": "green",
+        "icon": "book",
+        "url": "messTip"
+    },
+    {
+        "title": "模态框",
+        "name": "modal",
+        "color": "green",
+        "icon": "book",
+        "url": "modal"
+    }
+]

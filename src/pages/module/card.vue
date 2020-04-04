@@ -31,6 +31,11 @@
                 </view>
             </view>
         </view>
+		<view class="padding">
+			<view class="bg-white border-radius padding">
+
+			</view>
+		</view>
     </view>
 </template>
 

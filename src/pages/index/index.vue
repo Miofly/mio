@@ -50,7 +50,7 @@
                 PageCur: this.$store.state.indexPage,
                 // #endif
                 // #ifdef H5
-                PageCur: 'module'
+                PageCur: 'index'
                 // #endif
             }
         },
@@ -62,7 +62,7 @@
                 if (this.$store.state.indexPage !== '') {
                     this.PageCur = this.$store.state.indexPage
                 } else {
-                    this.PageCur = 'module'
+                    this.PageCur = 'index'
                 }
             }, 1000)
         },

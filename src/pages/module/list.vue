@@ -31,6 +31,68 @@
                 </view>
             </view>
         </view>
+
+		<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
+			<view v-for="(item, index) in
+				[{name: '列表一', icon: 'video-camera'},
+				{name: '列表一', icon: 'user'},
+				{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
+				<view class="content padding-tb-sm">
+					<view>
+						<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
+						<text>{{ item.name }}</text>
+					</view>
+				</view>
+
+				<view v-show="false" class="action">
+					<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+						操作
+					</button>
+				</view>
+				<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+			</view>
+		</view>
+
+		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
+			<view v-for="(item, index) in
+				[{name: '列表一', imgSrc: 'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1312059974,1893880587&fm=111&gp=0.jpg'},
+				{name: '列表一', imgSrc: 'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1312059974,1893880587&fm=111&gp=0.jpg'},
+				{name: '列表一', imgSrc: 'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1312059974,1893880587&fm=111&gp=0.jpg'}]" :key="index" class="cu-item">
+				<view class="content padding-tb-sm">
+					<view class="padding-top-bottom" >
+						<image :src="item.imgSrc" style="height: 200rpx;width: 200rpx"
+							   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
+						></image>
+						<view class="padding-left-xl">
+							<view>
+								{{ item.name }}
+							</view>
+							<view class="inline">
+								<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+							        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+									<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
+									短链
+								</button>
+								<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+							        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+									<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
+									图文
+								</button>
+							</view>
+
+						</view>
+
+					</view>
+				</view>
+
+				<view v-show="false" class="action">
+					<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+						操作
+					</button>
+				</view>
+				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+			</view>
+		</view>
     </view>
 </template>
 

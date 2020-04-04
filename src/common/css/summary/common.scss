@@ -3,7 +3,7 @@
 }
 
 .inline {
-    display: inline;
+    display: -webkit-box;
 }
 
 .fr {
@@ -24,4 +24,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+}
+
+.margin-center {
+    margin: 0 auto;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    z-index: 1024;
 }

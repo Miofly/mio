@@ -3,6 +3,6 @@
  */
 export default {
     ggkz: true,
-    indexData: [],
+    indexData: ['moduleOne', 'moduleTwo', 'moduleThree', 'moduleFour', 'moduleFive'],
     indexPage: ''
 }

@@ -8,6 +8,28 @@
             }
         },
         {
+            "path": "pages/index/itest",
+            "name": "itest",
+            "style": {}
+        },
+
+        {
+            "path": "pages/index/login/login",
+            "name": "login",
+            "style": {}
+        },
+        {
+            "path": "pages/index/login/forget",
+            "name": "forget",
+            "style": {}
+        },
+        {
+            "path": "pages/index/login/reg",
+            "name": "reg",
+            "style": {}
+        },
+
+        {
             "path": "pages/module/avatar",
             "name": "avatar",
             "style": {}
@@ -89,7 +111,8 @@
     "globalStyle": {
         "navigationBarTextStyle": "black",
         "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8"
+        "backgroundColor": "#F8F8F8",
+        "navigationStyle": "custom"
     },
     "condition": {
         // 模式配置，仅开发期间生效

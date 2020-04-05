@@ -12,7 +12,6 @@
             "name": "itest",
             "style": {}
         },
-
         {
             "path": "pages/index/loadRefresh/loadHome",
             "name": "loadHome",
@@ -33,7 +32,41 @@
             "name": "loadThree",
             "style": {}
         },
-
+        {
+            "path": "pages/index/lz/login/login",
+            "name": "lz_login",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/login/forget",
+            "name": "lz_forget",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/login/reg",
+            "name": "lz_reg",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/index/index",
+            "name": "lz_index",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/index/team",
+            "name": "lz_team",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/index/user",
+            "name": "lz_user",
+            "style": {}
+        },
+        {
+            "path": "pages/index/lz/index/home",
+            "name": "lz_home",
+            "style": {}
+        },
         {
             "path": "pages/index/login/login",
             "name": "login",
@@ -49,7 +82,6 @@
             "name": "reg",
             "style": {}
         },
-
         {
             "path": "pages/module/avatar",
             "name": "avatar",
@@ -147,6 +179,32 @@
             {
                 "name": "list",
                 "path": "pages/module/list"
+            }
+        ]
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/lz/index/index",
+                "iconPath": "static/tabbar/module.png",
+                "selectedIconPath": "static/tabbar/module_blue_cur.png",
+                "text": "组件"
+            },
+            {
+                "pagePath": "pages/index/lz/index/team",
+                "iconPath": "static/tabbar/plugin.png",
+                "selectedIconPath": "static/tabbar/plugin_blue_cur.png",
+                "text": "组件"
+            },
+            {
+                "pagePath": "pages/index/lz/index/user",
+                "iconPath": "static/tabbar/setting.png",
+                "selectedIconPath": "static/tabbar/setting_blue_cur.png",
+                "text": "接口"
             }
         ]
     }

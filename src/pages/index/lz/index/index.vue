@@ -4,7 +4,7 @@
 			  style="height: 180rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
 			固定在头部的内容
 		</view>
-		<mescroll-body ref="mescrollRef" top="180" bottom="100" :down="downOption" :up="upOption"
+		<mescroll-body ref="mescrollRef" top="180" bottom="0" :down="downOption" :up="upOption"
 					   @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
@@ -46,9 +46,6 @@
 				</view>
 			</view>
 		</mescroll-body>
-
-		<image class="footer" src="http://www.mescroll.com/img/beibei/footer.jpg" mode="aspectFit"/>
-
 	</view>
 </template>
 
@@ -91,6 +88,7 @@
                 // 若整个downCallback方法仅调用mescroll.resetUpScroll(),则downCallback方法可删 (mixins已默认)
             },
             async upCallback(page) { // 上拉加载的回调
+                console.log(1231)
                 const pageNum = page.num // 页码, 默认从1开始
                 const pageSize = page.size // 页长, 默认每页10条
 
@@ -119,8 +117,3 @@
         }
     }
 </script>
-
-<style>
-	image{width: 100%;vertical-align: bottom;will-change: transform}
-	.footer{z-index: 9900;position: fixed;bottom: 0;left: 0;height: 100upx;background: white;}
-</style>

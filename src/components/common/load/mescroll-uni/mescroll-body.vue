@@ -1,6 +1,8 @@
 <template>
 	<view class="mescroll-body"
-		  :style="{'minHeight':minHeight, 'padding-top': padTop, 'padding-bottom': padBottom, 'padding-bottom': padBottomConstant, 'padding-bottom': padBottomEnv }"
+		  :style="{'minHeight':minHeight, 'padding-top': padTop,
+		  'padding-bottom': padBottom, 'padding-bottom': padBottomConstant,
+		  'padding-bottom': padBottomEnv }"
 		  @touchstart="touchstartEvent" @touchmove="touchmoveEvent" @touchend="touchendEvent"
 		  @touchcancel="touchendEvent">
 		<view class="mescroll-body-content" :style="{ transform: translateY, transition: transition }">
@@ -59,7 +61,7 @@
         data() {
             return {
                 mescroll: {optDown: {}, optUp: {}}, // mescroll实例
-                downHight: 0, //下拉刷新: 容器高度
+                downHight: 0, // 下拉刷新: 容器高度
                 downRate: 0, // 下拉比率(inOffset: rate<1; outOffset: rate>=1)
                 downLoadType: 4, // 下拉刷新状态 （inOffset：1， outOffset：2， showLoading：3， endDownScroll：4）
                 upLoadType: 0, // 上拉加载状态：0（loading前），1（loading中），2（没有更多了）

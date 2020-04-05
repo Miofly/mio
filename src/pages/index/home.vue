@@ -16,6 +16,7 @@
                 elements: [
                     {title: '登录模块', name: 'login', icon: 'user', color: 'blue', url: 'login'},
                     {title: '测试模块', name: 'itest', icon: 'user', color: 'blue', url: 'itest'},
+                    {title: '乐转模块', name: 'lz_login', icon: 'user', color: 'blue', url: 'lz_login'},
                     {title: '上拉加载', name: '下滑刷新', icon: 'user', color: 'blue', url: 'loadHome'}
                 ]
             }

@@ -6,6 +6,12 @@ import user from './pages/user/home.vue'
 import index from './pages/index/home.vue'
 import module from './pages/module/home.vue'
 import plugin from './pages/plugin/home.vue'
+
+import lz_index from './pages/index/lz/index/index'
+import lz_team from './pages/index/lz/index/team'
+import lz_user from './pages/index/lz/index/user'
+
+
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
 import router from './router' // eslint-disable-line
@@ -29,6 +35,10 @@ Vue.component('index', index)
 Vue.component('module', module)
 Vue.component('plugin', plugin)
 Vue.component('router-link', routerLink)
+
+Vue.component('lz_index', lz_index)
+Vue.component('lz_team', lz_team)
+Vue.component('lz_user', lz_user)
 
 Vue.prototype.ColorList = colorData
 

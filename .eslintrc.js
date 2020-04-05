@@ -62,6 +62,7 @@ module.exports = {
             'before': true,
             'after': true
         }],
+        'vue/html-closing-bracket-newline': 0,
         'handle-callback-err': [2, '^(err|error)$'],
         'indent': 'off', // 缩进
         'jsx-quotes': [2, 'prefer-single'],

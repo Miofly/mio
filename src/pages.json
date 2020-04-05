@@ -14,6 +14,27 @@
         },
 
         {
+            "path": "pages/index/loadRefresh/loadHome",
+            "name": "loadHome",
+            "style": {}
+        },
+        {
+            "path": "pages/index/loadRefresh/loadOne",
+            "name": "loadOne",
+            "style": {}
+        },
+        {
+            "path": "pages/index/loadRefresh/loadTwo",
+            "name": "loadTwo",
+            "style": {}
+        },
+        {
+            "path": "pages/index/loadRefresh/loadThree",
+            "name": "loadThree",
+            "style": {}
+        },
+
+        {
             "path": "pages/index/login/login",
             "name": "login",
             "style": {}

@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import MescrollItem from './loadRefresh/mescroll-swiper-item.vue'
+    import MescrollItem from './mescroll-swiper-item.vue'
     import AppTabs from 'cn/load/mescroll-uni/app-tabs.vue'
 
     export default {
@@ -73,7 +73,7 @@
         onLoad() {
             // 需要固定swiper的高度
             // this.height = uni.getSystemInfoSync().windowHeight + 'px'
-			console.log(this.height)
+            console.log(this.height)
         }
     }
 </script>

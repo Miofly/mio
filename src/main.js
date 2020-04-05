@@ -15,6 +15,12 @@ import colorData from './static/mockJson/color'
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
 
+import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
+import MescrollUni from 'cn/load/mescroll-uni/mescroll-uni.vue'
+Vue.component('mescroll-body', MescrollBody)
+Vue.component('mescroll-uni', MescrollUni)
+
+
 Vue.prototype.ui = ui
 Vue.prototype.tu = tu
 Vue.component('setting', setting)
@@ -30,7 +36,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
     ...App,
-    store,
+    store
 })
 
 // v1.3.5起 H5端 你应该去除原有的app.$mount();使用路由自带的渲染方式

@@ -12,7 +12,6 @@
 
 <script>
 	export default {
-		name: 'mix-load-more',
 		props: {
 			status: {
 				// 0加载前，1加载中，2没有更多了

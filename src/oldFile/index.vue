@@ -1,21 +1,13 @@
 <template>
-	<view class="" style="overflow: hidden">
+	<view class="">
 		<view class="header bg-blue full-width"
 			  style="height: 260rpx;position: fixed;top: --window-top;left: 0;z-index: 9999;overflow: hidden">
-			<view>
-				screenWidth:{{screenWidth}}
-				screenHeight:{{screenWidth}}
-			</view>
+			<view>固定在头部的内容</view>
 			<scrollMessage style="position: absolute;bottom: 0" ></scrollMessage>
 		</view>
 
-		<!--<mescroll-body  ref="mescrollRef" top="260" bottom="110" :down="downOption" :up="upOption"-->
-					   <!--@init="mescrollInit" @down="downCallback" @up="upCallback">-->
-		<!--</mescroll-body>-->
-
-		<mescroll-uni ref="mescrollRef" height="100%" top="260" :down="downOption"
-					  :up="upOption" @init="mescrollInit"
-					  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
+		<mescroll-body  ref="mescrollRef" top="260" bottom="110" :down="downOption" :up="upOption"
+					   @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
@@ -55,11 +47,9 @@
 					<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 				</view>
 			</view>
-		</mescroll-uni>
+		</mescroll-body>
 
-
-		<!--<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"-->
-		<view @tap="test" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
+		<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
 			  class="bg-blue padding-sm">
 			批量获取短链
 		</view>
@@ -98,19 +88,19 @@
     import {
         dbJsonData
     } from '@/api'
-    import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
-    import mioModal from 'cn/modal/modal'
+    import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
+    import MescrollMixin from 'cn/load//mescroll-uni/mescroll-mixins.js'
+	import mioModal from 'cn/modal/modal'
 	import scrollMessage from 'cn/module/scrollMessage'
     export default {
         components: {
+            MescrollBody,
             mioModal,
             scrollMessage
         },
         mixins: [MescrollMixin],
         data() {
             return {
-                screenHeight: '',
-                screenWidth: '',
                 modalStatus: false,
                 downOption: {
                     textInOffset: '下拉刷新',
@@ -120,7 +110,7 @@
                 // 上拉加载的常用配置
                 upOption: {
                     use: true, // 是否启用上拉加载; 默认true
-                    auto: false, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
+                    auto: true, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
                     noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
                     empty: {
                         tip: '暂无相关数据'
@@ -164,7 +154,7 @@
                 // 若整个downCallback方法仅调用mescroll.resetUpScroll(),则downCallback方法可删 (mixins已默认)
             },
             async upCallback(page) { // 上拉加载的回调
-                console.log(page)
+                console.log(1231)
                 const pageNum = page.num // 页码, 默认从1开始
                 const pageSize = page.size // 页长, 默认每页10条
 

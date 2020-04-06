@@ -1,40 +1,14 @@
 <template>
-	<!--
-	swiper中的transfrom会使fixed失效,此时用height="100%"固定高度;
-	swiper中无法触发mescroll-mixins.js的onPageScroll和onReachBottom方法,
-	只能用mescroll-uni,不能用mescroll-body
-	-->
-	<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
-				  :up="upOption" @init="mescrollInit"
-				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
-		<!-- 数据列表 -->
-		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+	<view>
+		<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
+			<view v-for="(item, index) in
+				[{name: '列表一', icon: 'video-camera'},
+				{name: '列表一', icon: 'user'},
+				{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
-					<view class="padding-top-bottom">
-						<image :src="'https://images.weserv.nl/?url=' + item.cover"
-							   style="height: 200rpx;width: 200rpx"
-							   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
-						></image>
-						<view class="padding-left-xl">
-							<view>
-								{{ item.title }}
-							</view>
-							<view class="inline">
-								<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-									<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
-									短链
-								</button>
-								<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-									<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
-									图文
-								</button>
-							</view>
-
-						</view>
-
+					<view>
+						<text class="fa text-blue width-lg" :class="['fa-' + item.icon]"></text>
+						<text class="margin-left">{{ item.name }}</text>
 					</view>
 				</view>
 
@@ -43,28 +17,69 @@
 						操作
 					</button>
 				</view>
-				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+				<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
 		</view>
 
-	</mescroll-uni>
+		<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
+					  :up="upOption" @init="mescrollInit"
+					  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
+			<!-- 数据列表 -->
+			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
+				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+					<view class="content padding-tb-sm">
+						<view class="padding-top-bottom">
+							<image :src="'https://images.weserv.nl/?url=' + item.cover"
+								   style="height: 200rpx;width: 200rpx"
+								   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
+							></image>
+							<view class="padding-left-xl">
+								<view>
+									{{ item.title }}
+								</view>
+								<view class="inline">
+									<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
+										短链
+									</button>
+									<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
+										图文
+									</button>
+								</view>
+
+							</view>
+
+						</view>
+					</view>
+
+					<view v-show="false" class="action">
+						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+							操作
+						</button>
+					</view>
+					<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+				</view>
+			</view>
+		</mescroll-uni>
+	</view>
+
 </template>
 
 <script>
     import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
-    import MescrollMoreItemMixin from 'cn/load/mescroll-uni/mixins/mescroll-more-item.js'
     import {
         dbJsonData
     } from '@/api'
 
-
     export default { // 注意此处还需使用MescrollMoreItemMixin (必须写在MescrollMixin后面)
-        mixins: [MescrollMixin, MescrollMoreItemMixin],
-        props: {
-            tabs: Array // tab菜单,此处用于取关键词
-        },
+        mixins: [MescrollMixin],
         data() {
             return {
+                screenWidth: '',
+                screenHeight: '',
                 downOption: {
                     auto: false, // 不自动加载 (mixin已处理第一个tab触发downCallback)
                     bgColor: 'white'
@@ -86,6 +101,15 @@
             }
         },
         methods: {
+            mescrollInit(mescroll) {
+                this.mescroll = mescroll
+                this.mescrollInitByRef && this.mescrollInitByRef() // 兼容字节跳动小程序 (mescroll-mixins.js)
+                // 自动加载当前tab的数据
+                // if (this.i === this.index) {
+                //     this.isInit = true // 标记为true
+                this.mescroll.triggerDownScroll()
+                // }
+            },
             /* 下拉刷新的回调 */
             downCallback() {
                 // 这里加载你想下拉刷新的数据, 比如刷新轮播数据

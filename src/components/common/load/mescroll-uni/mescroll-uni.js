@@ -17,7 +17,10 @@ export default function MeScroll(options, isScrollBody) {
     // 初始化下拉刷新
     me.initDownScroll()
     // 初始化上拉加载,则初始化
+    // console.log(me.options.up.auto)
+    // if (me.options.up.auto) {
     me.initUpScroll()
+    // }
 
     // 自动加载
     setTimeout(function () { // 待主线程执行完毕再执行,避免new MeScroll未初始化,在回调获取不到mescroll的实例

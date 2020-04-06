@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="full-width-height">
 		<lz_index v-if="PageCur===pageOptions[0]"></lz_index>
 		<lz_team v-if="PageCur===pageOptions[1]"></lz_team>
 		<lz_user v-if="PageCur===pageOptions[2]"></lz_user>

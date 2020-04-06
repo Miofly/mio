@@ -44,3 +44,15 @@
     top: 0;
     z-index: 99999;
 }
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    z-index: 99999;
+}
+
+.position-bottom {
+    position: absolute;
+    bottom: 0;
+    z-index: 99999;
+}

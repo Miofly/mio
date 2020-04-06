@@ -2,6 +2,10 @@ import ClipboardJS from 'mioJs/utils/clipboard.min.js'
 import {ui} from 'mioJs/uniapp'
 
 const tu = {
+    jumpWX () {
+        console.log(1213)
+        window.location.replace('weixin://')
+    },
     loadAsyncScript(src, callback = function () {}) { // 同步加载js
         const head = document.getElementsByTagName('head')[0];
         const script = document.createElement('script');

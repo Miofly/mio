@@ -1,10 +1,25 @@
 <template>
 	<view>
 		<view class="header bg-blue full-width"
-			  style="height: 180rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
-			固定在头部的内容
+			  style="height: 260rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
+			<view>固定在头部的内容</view>
+			<view class="tui-notice-board">
+				<view class="fa fa-bullhorn" style="color: #f54f46;background: #fff8d5;
+			padding-left: 30rpx;position: relative;z-index: 10;"></view>
+				<view class="tui-scorll-view margin-left">
+					<view class="tui-notice" :class="[true?'tui-animation':'']">
+						B站10分日本动漫已消失，9.9分仅剩12部，这一部动漫包揽三席！
+					</view>
+				</view>
+			</view>
 		</view>
-		<mescroll-body ref="mescrollRef" top="180" bottom="0" :down="downOption" :up="upOption"
+
+		<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
+			  class="bg-blue padding-sm">
+			批量获取短链
+		</view>
+
+		<mescroll-body ref="mescrollRef" top="260" bottom="0" :down="downOption" :up="upOption"
 					   @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
@@ -21,12 +36,12 @@
 								</view>
 								<view class="inline">
 									<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']" @tap="tu.getClipboardData('111')">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										短链
 									</button>
 									<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']" @tap="tu.jumpWX()">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										图文
 									</button>
@@ -46,6 +61,34 @@
 				</view>
 			</view>
 		</mescroll-body>
+
+		<mio-modal title="标题" content="这是内容" :show="modalStatus"
+				:custom="true" @click="handleClick" @cancel="hide8">
+			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px" @tap="modalStatus = !modalStatus"></view>
+			<view class="text-lg text-center margin-center padding-top-bottom">批量获取短链链接</view>
+			<view class="text-center border-radius padding" style="border: 1px solid rgba(0, 0, 0, 0.7)">
+				<view v-for="(url_list, index) in url_lists" :key="index">
+					<view>{{url_list.title}}</view>
+				</view>
+			</view>
+			<view class="flex justify-between margin-top">
+				<button class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+				        <text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
+						换一批
+				</button>
+				<button @tap="tu.jumpWX()" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+					<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
+					打开微信
+				</button>
+				<button @tap="tu.getClipboardData('复制内容')" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
+				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+					<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
+					复制内容
+				</button>
+			</view>
+		</mio-modal>
 	</view>
 </template>
 
@@ -55,14 +98,17 @@
     } from '@/api'
     import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
     import MescrollMixin from 'cn/load//mescroll-uni/mescroll-mixins.js'
-
+	import mioModal from 'cn/modal/modal'
     export default {
         components: {
-            MescrollBody
+            MescrollBody,
+            mioModal
+
         },
         mixins: [MescrollMixin],
         data() {
             return {
+                modalStatus: false,
                 downOption: {
                     textInOffset: '下拉刷新',
                     textOutOffset: '释放更新',
@@ -79,7 +125,34 @@
                     textLoading: '正在玩命的加载...',
                     textNoMore: '我也是有底线的...'
                 },
-                dataLists: []
+                dataLists: [],
+                url_lists: [
+                    {
+                        id: 95,
+                        title: '他出尽洋相，女神对他避而远之，没想到他的真实身份...',
+                        share_url: 'https://w.url.cn/s/AJSMYMC'
+                    },
+                    {
+                        id: 89,
+                        title: '大学生再次怀孕，说出真相后，家人懵了......',
+                        share_url: 'https://w.url.cn/s/AbbcLhy'
+                    },
+                    {
+                        id: 87,
+                        title: '你是被他玩了，还是被他爱了？',
+                        share_url: 'https://w.url.cn/s/AIjZmMz'
+                    },
+                    {
+                        id: 77,
+                        title: '姐姐每天晚上都要缠着我一起睡，我越来越控制不住......',
+                        share_url: 'https://w.url.cn/s/AZzfwFe'
+                    },
+                    {
+                        id: 103,
+                        title: '啃吻你这里的男人，才是真的爱你......',
+                        share_url: 'https://w.url.cn/s/A51vrxk'
+                    }
+                ]
             }
         },
         methods: {
@@ -117,3 +190,56 @@
         }
     }
 </script>
+
+<style>
+	.tui-notice-board {
+		width: 100%;
+		padding-right: 30rpx;
+		box-sizing: border-box;
+		font-size: 28rpx;
+		height: 60rpx;
+		background: #fff8d5;
+		display: flex;
+		align-items: center;
+		position: absolute;
+		bottom: 0;
+		z-index: 999;
+	}
+
+	.tui-scorll-view {
+		flex: 1;
+		line-height: 1;
+		white-space: nowrap;
+		overflow: hidden;
+		color: #f54f46;
+	}
+
+	.tui-notice {
+		transform: translateX(30%);
+	}
+
+	.tui-animation {
+		-webkit-animation: tui-rolling 10s linear infinite;
+		animation: tui-rolling 10s linear infinite;
+	}
+
+	@-webkit-keyframes tui-rolling {
+		0% {
+			transform: translateX(0%);
+		}
+
+		100% {
+			transform: translateX(100%);
+		}
+	}
+
+	@keyframes tui-rolling {
+		0% {
+			transform: translateX(30%);
+		}
+
+		100% {
+			transform: translateX(-100%);
+		}
+	}
+</style>

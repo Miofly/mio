@@ -21,6 +21,7 @@ module.exports = {
         'vue'
     ],
     rules: {
+        "comma-dangle": "off",
         "eqeqeq": "off",
         "vue/max-attributes-per-line": 0,
         // "vue/max-attributes-per-line": [2, {
@@ -48,7 +49,7 @@ module.exports = {
         'camelcase': [0, {
             'properties': 'always'
         }],
-        'comma-dangle': [2, 'never'],
+        // 'comma-dangle': [2, 'never'],
         'comma-spacing': [2, {
             'before': false,
             'after': true

@@ -113,8 +113,13 @@
             "style": {}
         },
         {
-            "path": "pages/module/luckDraw",
-            "name": "luckDraw",
+            "path": "pages/module/list",
+            "name": "list",
+            "style": {}
+        },
+        {
+            "path": "pages/module/scrollMessage",
+            "name": "scrollMessage",
             "style": {}
         },
         {
@@ -184,27 +189,27 @@
     },
     "tabBar": {
         "color": "#7A7E83",
-        "selectedColor": "#3cc51f",
+        "selectedColor": "rgb(0, 129, 255)",
         "borderStyle": "black",
         "backgroundColor": "#ffffff",
         "list": [
             {
                 "pagePath": "pages/index/lz/index/index",
-                "iconPath": "static/tabbar/module.png",
-                "selectedIconPath": "static/tabbar/module_blue_cur.png",
-                "text": "组件"
+                "iconPath": "static/images/lz/home.png",
+                "selectedIconPath": "static/images/lz/home_blue.png",
+                "text": "主页"
             },
             {
                 "pagePath": "pages/index/lz/index/team",
-                "iconPath": "static/tabbar/plugin.png",
-                "selectedIconPath": "static/tabbar/plugin_blue_cur.png",
-                "text": "组件"
+                "iconPath": "static/images/lz/team.png",
+                "selectedIconPath": "static/images/lz/team_blue.png",
+                "text": "团队"
             },
             {
                 "pagePath": "pages/index/lz/index/user",
-                "iconPath": "static/tabbar/setting.png",
-                "selectedIconPath": "static/tabbar/setting_blue_cur.png",
-                "text": "接口"
+                "iconPath": "static/images/lz/user.png",
+                "selectedIconPath": "static/images/lz/user_blue.png",
+                "text": "我的"
             }
         ]
     }

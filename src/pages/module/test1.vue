@@ -1,9 +1,9 @@
 <script>
     export default {
         methods: {
-            test () {
+            test() {
 
-            },
-        },
+            }
+        }
     }
 </script>

@@ -5,9 +5,9 @@
 		</view>
 		<view class="cu-list menu margin-top-xl" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 			<view v-for="(item, index) in
-				[{name: '我要提现', icon: 'video-camera'},
-				{name: '提现记录', icon: 'user'},
-				{name: '账单记录', icon: 'phone'}]" :key="index" class="cu-item" @tap="listFn(item.name)">
+				[{name: '我要提现', icon: 'money'},
+				{name: '提现记录', icon: 'file-text'},
+				{name: '账单记录', icon: 'file-text'}]" :key="index" class="cu-item" @tap="listFn(item.name)">
 				<view class="content padding-tb-sm">
 					<view>
 						<text class="fa text-blue width-lg" :class="['fa-' + item.icon]"></text>
@@ -26,8 +26,8 @@
 
 		<view class="cu-list menu margin-top" :class="[false?'sm-border':'', false?'card-menu margin-top-xxl':'']">
 			<view v-for="(item, index) in
-				[{name: '修改密码', icon: 'video-camera'},
-				{name: '退出登录', icon: 'phone'}]" :key="index" class="cu-item">
+				[{name: '修改密码', icon: 'lock'},
+				{name: '退出登录', icon: 'power-off'}]" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
 					<view>
 						<text class="fa text-blue width-lg" :class="['fa-' + item.icon]"></text>

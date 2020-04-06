@@ -4,7 +4,7 @@
 	swiper中无法触发mescroll-mixins.js的onPageScroll和onReachBottom方法,
 	只能用mescroll-uni,不能用mescroll-body
 	-->
-	<mescroll-uni ref="mescrollRef" height="62%" top="0" bottom="100" :down="downOption"
+	<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
 				  :up="upOption" @init="mescrollInit"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->

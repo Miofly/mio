@@ -1,25 +1,12 @@
 <template>
-	<view>
+	<view class="">
 		<view class="header bg-blue full-width"
-			  style="height: 260rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
+			  style="height: 260rpx;position: fixed;top: --window-top;left: 0;z-index: 9999;overflow: hidden">
 			<view>固定在头部的内容</view>
-			<view class="tui-notice-board">
-				<view class="fa fa-bullhorn" style="color: #f54f46;background: #fff8d5;
-			padding-left: 30rpx;position: relative;z-index: 10;"></view>
-				<view class="tui-scorll-view margin-left">
-					<view class="tui-notice" :class="[true?'tui-animation':'']">
-						B站10分日本动漫已消失，9.9分仅剩12部，这一部动漫包揽三席！
-					</view>
-				</view>
-			</view>
+			<scrollMessage style="position: absolute;bottom: 0" ></scrollMessage>
 		</view>
 
-		<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
-			  class="bg-blue padding-sm">
-			批量获取短链
-		</view>
-
-		<mescroll-body ref="mescrollRef" top="260" bottom="0" :down="downOption" :up="upOption"
+		<mescroll-body  ref="mescrollRef" top="260" bottom="110" :down="downOption" :up="upOption"
 					   @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
@@ -62,6 +49,11 @@
 			</view>
 		</mescroll-body>
 
+		<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
+			  class="bg-blue padding-sm">
+			批量获取短链
+		</view>
+
 		<mio-modal title="标题" content="这是内容" :show="modalStatus"
 				:custom="true" @click="handleClick" @cancel="hide8">
 			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px" @tap="modalStatus = !modalStatus"></view>
@@ -73,17 +65,17 @@
 			</view>
 			<view class="flex justify-between margin-top">
 				<button class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+				        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 				        <text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
 						换一批
 				</button>
 				<button @tap="tu.jumpWX()" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+				        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 					<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
 					打开微信
 				</button>
 				<button @tap="tu.getClipboardData('复制内容')" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+				        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 					<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
 					复制内容
 				</button>
@@ -99,11 +91,12 @@
     import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
     import MescrollMixin from 'cn/load//mescroll-uni/mescroll-mixins.js'
 	import mioModal from 'cn/modal/modal'
+	import scrollMessage from 'cn/module/scrollMessage'
     export default {
         components: {
             MescrollBody,
-            mioModal
-
+            mioModal,
+            scrollMessage
         },
         mixins: [MescrollMixin],
         data() {
@@ -190,56 +183,3 @@
         }
     }
 </script>
-
-<style>
-	.tui-notice-board {
-		width: 100%;
-		padding-right: 30rpx;
-		box-sizing: border-box;
-		font-size: 28rpx;
-		height: 60rpx;
-		background: #fff8d5;
-		display: flex;
-		align-items: center;
-		position: absolute;
-		bottom: 0;
-		z-index: 999;
-	}
-
-	.tui-scorll-view {
-		flex: 1;
-		line-height: 1;
-		white-space: nowrap;
-		overflow: hidden;
-		color: #f54f46;
-	}
-
-	.tui-notice {
-		transform: translateX(30%);
-	}
-
-	.tui-animation {
-		-webkit-animation: tui-rolling 10s linear infinite;
-		animation: tui-rolling 10s linear infinite;
-	}
-
-	@-webkit-keyframes tui-rolling {
-		0% {
-			transform: translateX(0%);
-		}
-
-		100% {
-			transform: translateX(100%);
-		}
-	}
-
-	@keyframes tui-rolling {
-		0% {
-			transform: translateX(30%);
-		}
-
-		100% {
-			transform: translateX(-100%);
-		}
-	}
-</style>

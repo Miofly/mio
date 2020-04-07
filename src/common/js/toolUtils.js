@@ -3,36 +3,35 @@ import {ui} from 'mioJs/uniapp'
 
 const tu = {
     jumpWX () {
-        console.log(1213)
         window.location.replace('weixin://')
     },
     loadAsyncScript(src, callback = function () {}) { // 同步加载js
-        const head = document.getElementsByTagName('head')[0];
-        const script = document.createElement('script');
-        script.setAttribute('type', 'text/javascript');
-        script.setAttribute('src', src);
-        script.setAttribute('async', true);
-        script.setAttribute('defer', true);
-        head.appendChild(script);
+        const head = document.getElementsByTagName('head')[0]
+        const script = document.createElement('script')
+        script.setAttribute('type', 'text/javascript')
+        script.setAttribute('src', src)
+        script.setAttribute('async', true)
+        script.setAttribute('defer', true)
+        head.appendChild(script)
 
         if (script.readyState) { // ie
             script.onreadystatechange = function () {
-                var state = this.readyState;
+                var state = this.readyState
                 if (state === 'loaded' || state === 'complete') {
-                    callback();
+                    callback()
                 }
             }
         } else {
             script.onload = function () {
-                callback();
+                callback()
             }
         }
     },
     loadJS(src) { // 异步加载js
-        const s = document.createElement('script');
-        s.setAttribute('src', src);
-        s.setAttribute('charset', 'utf-8');
-        document.body.appendChild(s);
+        const s = document.createElement('script')
+        s.setAttribute('src', src)
+        s.setAttribute('charset', 'utf-8')
+        document.body.appendChild(s)
     },
     addEllipsis(str, num, ellipsis = '...') { // 文字过长在指定位置加省略号
         return str.slice(0, num) + ellipsis

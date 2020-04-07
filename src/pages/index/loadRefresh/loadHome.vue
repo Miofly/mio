@@ -3,7 +3,8 @@
 		<router-link v-for="(item,index) in [
                     {title: 'loadOne', name: 'loadOne~', icon: 'user', color: 'blue', url: 'loadOne'},
                     {title: 'loadTwo', name: 'loadTwo~', icon: 'user', color: 'blue', url: 'loadTwo'},
-                    {title: 'loadThree', name: 'loadThree~', icon: 'user', color: 'blue', url: 'loadThree'}
+                    {title: 'loadThree', name: 'loadThree~', icon: 'user', color: 'blue', url: 'loadThree'},
+                    {title: 'loadFour', name: 'loadFour~', icon: 'user', color: 'blue', url: 'loadFour'}
                 ]" :key="index" :to="'{name:'+item.url+'}'"
 					 class="nav-li" :class="'bg-'+item.color">
 			<view class="nav-title">{{ item.title }}</view>

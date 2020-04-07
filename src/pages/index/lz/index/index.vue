@@ -1,19 +1,19 @@
 <template>
-	<view class="" style="overflow: hidden">
+	<view class="full-width-height">
 		<view class="header bg-blue full-width"
 			  style="height: 260rpx;position: fixed;top: --window-top;left: 0;z-index: 9999;overflow: hidden">
 			<view>
-				screenWidth:{{screenWidth}}
+				screenWidth:{{screenWidth}}111
 				screenHeight:{{screenWidth}}
 			</view>
-			<scrollMessage style="position: absolute;bottom: 0" ></scrollMessage>
+			<scrollMessage style="position: absolute;bottom: 0"></scrollMessage>
 		</view>
 
 		<!--<mescroll-body  ref="mescrollRef" top="260" bottom="110" :down="downOption" :up="upOption"-->
-					   <!--@init="mescrollInit" @down="downCallback" @up="upCallback">-->
+		<!--@init="mescrollInit" @down="downCallback" @up="upCallback">-->
 		<!--</mescroll-body>-->
 
-		<mescroll-uni ref="mescrollRef" height="100%" top="260" :down="downOption"
+		<mescroll-uni ref="mescrollRef" height="100vh" top="260" bottom="110" :down="downOption"
 					  :up="upOption" @init="mescrollInit"
 					  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 			<!--数据列表-->
@@ -31,12 +31,14 @@
 								</view>
 								<view class="inline">
 									<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']" @tap="tu.getClipboardData('111')">
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
+											@tap="tu.getClipboardData('111')">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										短链
 									</button>
 									<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']" @tap="tu.jumpWX()">
+								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
+											@tap="tu.jumpWX()">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										图文
 									</button>
@@ -59,14 +61,16 @@
 
 
 		<!--<view @tap="modalStatus = !modalStatus" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"-->
-		<view @tap="test" style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
+		<view @tap="test"
+			  style="position: fixed;top: 55%;right: 0%;z-index: 999999999;border-top-left-radius: 0.5rem;border-bottom-left-radius: 0.5rem"
 			  class="bg-blue padding-sm">
 			批量获取短链
 		</view>
 
 		<mio-modal title="标题" content="这是内容" :show="modalStatus"
-				:custom="true" @click="handleClick" @cancel="hide8">
-			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px" @tap="modalStatus = !modalStatus"></view>
+				   :custom="true" @click="handleClick" @cancel="hide8">
+			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px"
+				  @tap="modalStatus = !modalStatus"></view>
 			<view class="text-lg text-center margin-center padding-top-bottom">批量获取短链链接</view>
 			<view class="text-center border-radius padding" style="border: 1px solid rgba(0, 0, 0, 0.7)">
 				<view v-for="(url_list, index) in url_lists" :key="index">
@@ -76,8 +80,8 @@
 			<view class="flex justify-between margin-top">
 				<button class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
 				        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-				        <text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
-						换一批
+					<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>
+					换一批
 				</button>
 				<button @tap="tu.jumpWX()" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
 				        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
@@ -100,7 +104,9 @@
     } from '@/api'
     import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
     import mioModal from 'cn/modal/modal'
-	import scrollMessage from 'cn/module/scrollMessage'
+    import scrollMessage from 'cn/module/scrollMessage'
+    import {mapState} from 'vuex'
+
     export default {
         components: {
             mioModal,
@@ -113,6 +119,7 @@
                 screenWidth: '',
                 modalStatus: false,
                 downOption: {
+                    auto: false,
                     textInOffset: '下拉刷新',
                     textOutOffset: '释放更新',
                     textLoading: '正在拼命的加载中 ...'
@@ -158,6 +165,13 @@
                 ]
             }
         },
+        mounted() {
+            console.log('mounted')
+            if (this.$store.state.indexControl) {
+                this.mescroll.resetUpScroll()
+            }
+            this.$store.state.indexControl = false
+        },
         methods: {
             downCallback() { // 下拉刷新的回调
                 this.mescroll.resetUpScroll() // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
@@ -190,6 +204,9 @@
                 // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
                 // this.mescroll.endSuccess(curPageLen, hasNext);
             }
-        }
+        },
+        computed: {
+            ...mapState(['indexControl']),
+        },
     }
 </script>

@@ -1,9 +1,14 @@
 <template>
 	<view class="full-width-height">
-		<lz_index v-if="PageCur===pageOptions[0]"></lz_index>
-		<lz_team v-if="PageCur===pageOptions[1]"></lz_team>
-		<lz_user v-if="PageCur===pageOptions[2]"></lz_user>
-
+		<keep-alive>
+			<lz_index v-if="PageCur===pageOptions[0]"></lz_index>
+		</keep-alive>
+		<keep-alive>
+			<lz_team v-if="PageCur===pageOptions[1]"></lz_team>
+		</keep-alive>
+		<keep-alive>
+			<lz_user v-if="PageCur===pageOptions[2]"></lz_user>
+		</keep-alive>
 		<view class="cu-bar tabbar bg-white foot">
 			<view @click="NavChange" class="action" :data-cur=pageOptions[1]>
 				<view class="fa fa-users" :class="PageCur==pageOptions[1]?'text-blue':'text-gray'"></view>

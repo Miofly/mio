@@ -46,11 +46,11 @@
 				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
 		</view>
-
 	</mescroll-uni>
 </template>
 
 <script>
+	import {mapState} from 'vuex'
     import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
     import MescrollMoreItemMixin from 'cn/load/mescroll-uni/mixins/mescroll-more-item.js'
     import {
@@ -63,24 +63,30 @@
         props: {
             tabs: Array // tab菜单,此处用于取关键词
         },
+        mounted () {
+            if (this.$store.state.teamControl) {
+
+            }
+        },
         data() {
             return {
                 downOption: {
-                    auto: false, // 不自动加载 (mixin已处理第一个tab触发downCallback)
-                    bgColor: 'white'
+                    auto: false,
+                    textInOffset: '下拉刷新',
+                    textOutOffset: '释放更新',
+                    textLoading: '正在拼命的加载中 ...',
+					bgColor: 'white'
                 },
+                // 上拉加载的常用配置
                 upOption: {
-                    auto: false, // 不自动加载
-                    // page: {
-                    // 	num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-                    // 	size: 10 // 每页数据的数量
-                    // },
-                    bgColor: 'white',
-                    noMoreSize: 4, // 如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                    use: true, // 是否启用上拉加载; 默认true
+                    auto: false, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
+                    noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
                     empty: {
-                        tip: '~ 暂无数据 ~' // 提示
-                        // btnText: '去看看'
-                    }
+                        tip: '暂无相关数据'
+                    },
+                    textLoading: '正在玩命的加载...',
+                    textNoMore: '我也是有底线的...'
                 },
                 dataLists: []
             }
@@ -138,6 +144,9 @@
                     title: '点击了按钮,具体逻辑自行实现'
                 })
             }
-        }
+        },
+		computed: {
+		    ...mapState(['teamControl']),
+		},
     }
 </script>

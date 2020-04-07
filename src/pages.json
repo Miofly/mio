@@ -33,6 +33,11 @@
             "style": {}
         },
         {
+            "path": "pages/index/loadRefresh/loadFour",
+            "name": "loadFour",
+            "style": {}
+        },
+        {
             "path": "pages/index/lz/login/login",
             "name": "lz_login",
             "style": {}

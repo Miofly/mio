@@ -5,42 +5,42 @@
             <view>
                 <view class="fa fa-phone fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('username')"></view>
+                    <view v-show='username' class="fa fa-close fr margin-right-lower" @tap="delVals('username')"></view>
                     <input v-model="username" :focus="false" :password=false placeholder="请输入手机号码" maxlength="11" confirm-type="完成"/>
                 </view>
             </view>
             <view class="margin-top-ten">
                 <view class="fa fa-commenting-o fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('code')"></view>
+                    <view v-show='code' class="fa fa-close fr margin-right-lower" @tap="delVals('code')"></view>
                     <input v-model="code" :focus="false" :password=false placeholder="请输入验证码" maxlength="8" confirm-type="完成"/>
                 </view>
             </view>
             <view class="margin-top-ten">
                 <view class="fa fa-lock fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('password')"></view>
+                    <view v-show='password' class="fa fa-close fr margin-right-lower" @tap="delVals('password')"></view>
                     <input v-model="password" :focus="false" :password=false placeholder="请输入6-20位密码" maxlength="11" confirm-type="完成"/>
                 </view>
             </view>
             <view class="margin-top-ten">
                 <view class="fa fa-lock fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('passwords')"></view>
+                    <view v-show='passwords' class="fa fa-close fr margin-right-lower" @tap="delVals('passwords')"></view>
                     <input v-model="passwords" :focus="false" :password=false placeholder="请再次输入密码" maxlength="8" confirm-type="完成"/>
                 </view>
             </view>
             <view class="margin-top-ten">
                 <view class="fa fa-user fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('nickname')"></view>
+                    <view v-show='nickname' class="fa fa-close fr margin-right-lower" @tap="delVals('nickname')"></view>
                     <input v-model="nickname" :focus="false" :password=false placeholder="请输入注册昵称" maxlength="8" confirm-type="完成"/>
                 </view>
             </view>
             <view class="margin-top-ten">
                 <view class="fa fa-hand-o-right fl margin-right-xl text-blue" style="margin-top: -0.2rem;font-size: 50rpx;width: 1rem"></view>
                 <view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)" >
-                    <view class="fa fa-close fr margin-right-lower" @tap="delVals('invitationCode')"></view>
+                    <view v-show='invitationCode' class="fa fa-close fr margin-right-lower" @tap="delVals('invitationCode')"></view>
                     <input v-model="invitationCode" :focus="false" :password=false placeholder="请输入邀请码（必填）" maxlength="8" confirm-type="完成"/>
                 </view>
             </view>

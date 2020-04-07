@@ -38,21 +38,6 @@
             "style": {}
         },
         {
-            "path": "pages/index/lz/login/login",
-            "name": "lz_login",
-            "style": {}
-        },
-        {
-            "path": "pages/index/lz/login/forget",
-            "name": "lz_forget",
-            "style": {}
-        },
-        {
-            "path": "pages/index/lz/login/reg",
-            "name": "lz_reg",
-            "style": {}
-        },
-        {
             "path": "pages/index/lz/index/index",
             "name": "lz_index",
             "style": {}

@@ -31,6 +31,8 @@ module.exports = {
         //         "allowFirstLine": false
         //     }
         // }],
+        "vue/mustache-interpolation-spacing": 0, // 大括号两边加空格
+        "vue/attributes-order": "off", // class方法等顺序问题
         "vue/singleline-html-element-content-newline": "off",
         "vue/multiline-html-element-content-newline": "off",
         "vue/name-property-casing": ["error", "PascalCase"],

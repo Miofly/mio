@@ -13,6 +13,62 @@
             "style": {}
         },
         {
+            "path": "pages/index/chart/chartHome",
+            "name": "chartHome",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartIndex",
+            "name": "chartIndex",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartBar",
+            "name": "chartBar",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartColumn",
+            "name": "chartColumn",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartColumns",
+            "name": "chartColumns",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartLine",
+            "name": "chartLine",
+            "style": {}
+        },
+        {
+            "path": "pages/index/chart/chartPie",
+            "name": "chartPie",
+            "style": {}
+        },
+        {
+            "path": "pages/index/time/timeHome",
+            "name": "timeHome",
+            "style": {}
+        },
+        {
+            "path": "pages/index/time/timeOne",
+            "name": "timeOne",
+            "style": {}
+        },
+        {
+            "path": "pages/index/time/timeTwo",
+            "name": "timeTwo",
+            "style": {}
+        },
+        {
+            "path": "pages/index/time/timeThree",
+            "name": "timeThree",
+            "style": {}
+        },
+
+        {
             "path": "pages/index/loadRefresh/loadHome",
             "name": "loadHome",
             "style": {}

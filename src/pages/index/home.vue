@@ -19,6 +19,8 @@
                     {title: '测试模块', name: 'itest', icon: 'user', color: 'blue', url: 'itest'},
                     {title: '乐转登录模块', name: 'lz_login', icon: 'user', color: 'blue', url: 'lz_login'},
                     {title: '乐转主页模块', name: 'lz_index', icon: 'user', color: 'blue', url: 'lz_index', isTab: true},
+                    {title: '图表模块', name: 'chartHome', icon: 'user', color: 'blue', url: 'chartHome'},
+                    {title: '时间模块', name: 'timeHome', icon: 'user', color: 'blue', url: 'timeHome'},
                     {title: '上拉加载', name: '下滑刷新', icon: 'user', color: 'blue', url: 'loadHome'}
                 ]
             }

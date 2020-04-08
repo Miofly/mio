@@ -10,6 +10,7 @@ module.exports = {
         alias: {
             '@': resolve('src'),
             cn: resolve('src/components/common'),
+            cm: resolve('src/components/common/module'),
             mioJs: resolve('src/common/js'),
             json: resolve('src/static/mockJson')
         }

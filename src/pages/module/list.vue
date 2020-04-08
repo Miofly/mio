@@ -1,8 +1,30 @@
 <template>
     <view class="container bg-white">
+
+		<view class="cu-list grid" :class="['col-' + 5, true?'':'no-border']">
+			<view class="cu-item" v-for="(item, index) in [
+                    {icon: 'weixin', color: 'red', badge: 120, name: 'weixin'},
+                    {icon: 'close', color: 'orange', badge: 1, name: '录像'},
+                    {icon: 'weixin', color: 'yellow', badge: 0, name: '图像'},
+                    {icon: 'weixin', color: 'olive', badge: 22, name: '通知'},
+                    {icon: 'weibo', color: 'cyan', badge: 0, name: '排行榜'},
+                    {icon: 'qq', color: 'blue', badge: 0, name: '皮肤'},
+                    {icon: 'weixin', color: 'purple', badge: 0, name: '发现'},
+                    {icon: 'weixin', color: 'mauve', badge: 0, name: '帮助'},
+                    {icon: 'weixin', color: 'purple', badge: 0, name: '问答'},
+                    {icon: 'weixin', color: 'mauve', badge: 0, name: '版权'}
+                    ]" :key="index">
+				<view class="fa" :class="['fa-' + item.icon,'text-' + item.color]">
+					<view class="cu-tag badge" v-if="item.badge!=0">
+						<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+					</view>
+				</view>
+				<text>{{item.name}}</text>
+			</view>
+		</view>
         <!--九格宫列表-->
         <view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-            <view class="cu-item" v-for="(item,index) in listData" :key="index" >
+            <view class="cu-item" v-for="(item,index) in listData" :key="index">
                 <view class="fa" :class="['fa-' + item.icon,'text-' + item.color]">
                     <view class="cu-tag badge" v-if="item.badge!=0">
                         <block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
@@ -59,7 +81,7 @@
 				{name: '列表一', imgSrc: 'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1312059974,1893880587&fm=111&gp=0.jpg'},
 				{name: '列表一', imgSrc: 'https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1312059974,1893880587&fm=111&gp=0.jpg'}]" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
-					<view class="padding-top-bottom" >
+					<view class="padding-top-bottom">
 						<image :src="item.imgSrc" style="height: 200rpx;width: 200rpx"
 							   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
 						></image>
@@ -105,7 +127,6 @@
                 listData: [],
                 gridCol: 4,
                 gridBorder: true,
-
                 keywordLists: [
                     {name: 1},
                     {name: 11},

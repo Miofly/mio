@@ -6,8 +6,10 @@
 				<view class="fa fa-phone fl margin-right-xl text-blue" style="font-size: 50rpx;width: 1rem"></view>
 				<view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)">
 					<view v-show="phone" class="fa fa-close fr margin-right-lower" @tap="delVals('phone')"></view>
-					<input type="['number']" v-model="phone" :focus="true" :password="false" placeholder="请输入手机号码" maxlength="11"
-						   confirm-type="完成" />
+					<!--<input type="['text', 'number', 'digit'][1]" v-model="phone" :focus="true" :password="false" placeholder="请输入手机号码" maxlength="11"-->
+						   <!--confirm-type="['send', 'search', 'next', 'go', 'done'][0]" />-->
+					<input type='number' v-model="phone" :focus="true" :password="false" placeholder="请输入手机1号码" maxlength="11"/>
+
 				</view>
 			</view>
 			<view class="margin-top-ten">

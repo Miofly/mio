@@ -36,7 +36,12 @@
                 type: 'rangetime',
                 value: ''
             }
-        }
+        },
+        methods: {
+            onShowDatePicker () {
+                this.showPicker = true
+            },
+        },
     }
 </script>
 

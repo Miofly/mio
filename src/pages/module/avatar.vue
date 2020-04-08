@@ -4,7 +4,7 @@
 		<view class="cu-avatar margin-left" @tap="takePhoto"
 			  :class="[false ? 'radius' : 'round', ['sm', 'lg', 'xl', ''][3], ]"
 			  style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg);">
-			<view v-show="true" class='cu-tag badge'>999</view>
+			<view v-show="true" class="cu-tag badge">999</view>
 		</view>
 
 		<view class="padding">
@@ -46,14 +46,14 @@
 		</view>
 
 		<view class="padding">
-			<view class='cu-avatar xl radius'
+			<view class="cu-avatar xl radius"
 				  style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg)">
-				<view class='cu-tag badge'>999</view>
+				<view class="cu-tag badge">999</view>
 			</view>
 
-			<view class='cu-avatar xl round margin-left-xl'
+			<view class="cu-avatar xl round margin-left-xl"
 				  style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg)">
-				<view class='cu-tag badge bg-green'>yy</view>
+				<view class="cu-tag badge bg-green">yy</view>
 			</view>
 		</view>
 	</view>
@@ -62,7 +62,7 @@
 <script>
     export default {
         methods: {
-            takePhoto() {
+            takePhoto () {//123
                 uni.chooseImage({
                     count: 1, // 默认9
                     sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有 'original',

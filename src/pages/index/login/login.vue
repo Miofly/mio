@@ -5,11 +5,10 @@
 			<view>
 				<view class="fa fa-phone fl margin-right-xl text-blue" style="font-size: 50rpx;width: 1rem"></view>
 				<view style="border-bottom: 1px solid rgba(0, 0, 0, 0.3)">
-					<view v-show="phone" class="fa fa-close fr margin-right-lower" @tap="delVals('phone')"></view>
-					<!--<input type="['text', 'number', 'digit'][1]" v-model="phone" :focus="true" :password="false" placeholder="请输入手机号码" maxlength="11"-->
+					<view v-show="mobile" class="fa fa-close fr margin-right-lower" @tap="delVals('mobile')"></view>
+					<!--<input type="['text', 'number', 'digit'][1]" v-model="mobile" :focus="true" :password="false" placeholder="请输入手机号码" maxlength="11"-->
 						   <!--confirm-type="['send', 'search', 'next', 'go', 'done'][0]" />-->
-					<input type='number' v-model="phone" :focus="true" :password="false" placeholder="请输入手机1号码" maxlength="11"/>
-
+					<input type='number' v-model="mobile" :focus="true" :password="false" placeholder="请输入手机号码" maxlength="11"/>
 				</view>
 			</view>
 			<view class="margin-top-ten">
@@ -40,34 +39,48 @@
 </template>
 
 <script>
+	import {
+        commonPost
+	} from '@/api'
     export default {
         data() {
             return {
-                phone: '',
+                mobile: '',
                 password: '',
-                wx: 'SUNP8694'
+                wx: 'SUNP8694',
             }
         },
+		onLoad () {
+            console.log(localStorage.getItem('TOKEN_KEY'))
+		},
         methods: {
             delVals(val) {
-                console.log(val)
                 this[val] = ''
             },
             copy() {
                 this.tu.getClipboardData(this.wx)
             },
-            login() {
-                if (this.phone.length != 11) {
-                    this.ui.showToast('手机号码格式不正确')
-					return
-                }
-                if (this.phone.trim() == '') {
+            async login() {
+                if (this.mobile.trim() == '') {
                     this.ui.showToast('手机号码不能为空')
                     return
                 }
                 if (this.password.trim() == '') {
                     this.ui.showToast('密码不能为空')
+					return
                 }
+                if (this.mobile.length != 11) {
+                    this.ui.showToast('手机号码格式不正确')
+                    return
+                }
+                const data = await commonPost('/auth/login', {mobile: this.mobile, password: this.password})
+				this.ui.showToast(data.message)
+				if (data.code == 200) {
+				    console.log(localStorage.getItem('TOKEN_KEY'))
+				    setTimeout(() => {
+                        this.router.replace({name: 'lz_home'})
+					}, 2000)
+				}
             },
         },
     }

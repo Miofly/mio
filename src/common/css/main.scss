@@ -15,6 +15,7 @@
 @import "avatar"; // 头像样式模块
 @import "image"; // 图片样式模块
 @import "modal"; // 模态框样式模块
+@import "form"; // 模态框样式模块
 @import "summary/color"; // 颜色样式模块
 @import "summary/box"; // 颜色样式模块
 @import "summary/common"; // 颜色样式模块
@@ -165,9 +166,8 @@ body {
         @include navList(100%);
     }
 }
+
 /* #endif */
-
-
 .solid,
 .solid-top,
 .solid-right,

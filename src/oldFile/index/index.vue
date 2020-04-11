@@ -1,16 +1,16 @@
 <template>
 	<view class="full-width-height">
 		<view class="full-width bg-red" style="height: 200rpx;position: fixed;top: --window-top;left: 0;z-index: 9999;overflow: hidden">
-			<view class="bg-white flex justify-between width-fifty text-center text-lg padding-left-right"
+			<view class="bg-white flex justify-between width-fifty text-center"
 				  style="border-radius: 0.3rem;border: 1px solid white;margin: 0 auto;margin-top: 5%">
-				<view @tap="teamSwitch" class="padding" :class="[status? 'text-red' : 'text-grey']"
+				<view @tap="teamSwitch" class="padding" :class="[status? 'bg-white' : 'bg-red']"
 					  style="width: 50%;border-radius: 0.3rem;border-bottom-right-radius: 0;
-				;border-top-right-radius: 0">团队标题</view>
-				<view @tap="personSwitch" class="padding" :class="[!status? 'text-red' : 'text-grey']"
+				;border-top-right-radius: 0">团队私有</view>
+				<view @tap="personSwitch" class="padding" :class="[!status? 'bg-white' : 'bg-red']"
 					  style="width: 50%;border-radius: 0.3rem;border-bottom-left-radius: 0;
-				;border-top-left-radius: 0">公有标题</view>
+				;border-top-left-radius: 0">平台公有</view>
 			</view>
-			<view class="text-right" @tap="jumpPage">
+			<view class="text-right">
 				<button class="cu-btn margin-right" :class="[['bg-white', 'line-white', 'line-white lines-white'][0],
 			        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 					<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
@@ -67,12 +67,11 @@
 			</view>
 		</mescroll-uni>
 
-		<view @tap="test" style="position: fixed;bottom: 12%;z-index: 999999999;" class="text-center margin-center full-width">
-			<button class="cu-btn" :class="[['bg-red', 'line-blue', 'line-red lines-red'][0],
-			        ['sm', 'lg', ''][1], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-			        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
-				批量获取短链
-			</button>
+		<view @tap="test"
+			  style="position: fixed;bottom: 12%;z-index: 999999999;
+			  border-radius: 0.5rem;left: 35.5%"
+			  class="bg-red padding text-lg">
+			批量获取短链
 		</view>
 		<mio-modal title="标题" content="这是内容" :show="modalStatus"
 				   :custom="true" @click="handleClick" @cancel="hide8">
@@ -136,7 +135,7 @@
                 // 上拉加载的常用配置
                 upOption: {
                     use: true, // 是否启用上拉加载; 默认true
-                    auto: true, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
+                    auto: false, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
                     noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
                     // page: {
                     //     num: 1, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
@@ -159,10 +158,6 @@
             // this.$store.state.indexControl = false
         },
         methods: {
-            jumpPage () {
-                this.router.replace({name: 'addItem'})
-                console.log(11)
-            },
             personSwitch () {
                 this.status = !this.status
                 // this.upCallback(page, 1)

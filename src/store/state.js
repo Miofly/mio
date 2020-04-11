@@ -8,4 +8,5 @@ export default {
     indexControl: true,
     teamControl: true,
     userControl: true,
+    TOKEN_KEY: ''
 }

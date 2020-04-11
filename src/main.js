@@ -14,21 +14,24 @@ import lz_user from './pages/index/lz/index/user'
 
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
-import router from './router' // eslint-disable-line
 import {RouterMount} from 'uni-simple-router'
 import routerLink from '../node_modules/uni-simple-router/component/router-link.vue'
 import colorData from './static/mockJson/color'
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
+import Router from '@/router'
 
+import cuCustom from 'cm/cu-custom'
 import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
 import MescrollUni from 'cn/load/mescroll-uni/mescroll-uni.vue'
 Vue.component('mescroll-body', MescrollBody)
 Vue.component('mescroll-uni', MescrollUni)
+Vue.component('cu-custom', cuCustom)
 
 
 Vue.prototype.ui = ui
 Vue.prototype.tu = tu
+Vue.prototype.router = Router
 Vue.component('setting', setting)
 Vue.component('user', user)
 Vue.component('index', index)

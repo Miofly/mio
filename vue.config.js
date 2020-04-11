@@ -45,6 +45,15 @@ module.exports = {
                 pathRewrite: {
                     '^/db': ''
                 }
+            },
+            '/lz': {
+                // target: "http://10.19.193.135:8870/ssyth",
+                target: 'http://new-lz-test.52eja.com/api',
+                changeOrigin: true, // 是否跨域
+                ws: true,
+                pathRewrite: {
+                    '^/lz': ''
+                }
             }
         }
     },

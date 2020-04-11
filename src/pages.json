@@ -8,6 +8,11 @@
             }
         },
         {
+            "path": "pages/index/lz/module/addItem",
+            "style": {},
+            "name": "addItem"
+        },
+        {
             "path": "pages/index/itest",
             "name": "itest",
             "style": {}
@@ -96,22 +101,30 @@
         {
             "path": "pages/index/lz/index/index",
             "name": "lz_index",
-            "style": {}
+            "style": {
+                "navigationStyle": "custom"
+            }
         },
         {
             "path": "pages/index/lz/index/team",
             "name": "lz_team",
-            "style": {}
+            "style": {
+                "navigationStyle": "custom"
+            }
         },
         {
             "path": "pages/index/lz/index/user",
             "name": "lz_user",
-            "style": {}
+            "style": {
+                "navigationStyle": "custom"
+            }
         },
         {
             "path": "pages/index/lz/index/home",
             "name": "lz_home",
-            "style": {}
+            "style": {
+                "navigationStyle": "custom"
+            }
         },
         {
             "path": "pages/index/login/login",

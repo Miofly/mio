@@ -4,14 +4,13 @@ ajax请求函数模块
  */
 // import axios from '@/common/js/utils/uni-axios'
 import axios from 'axios'
-
 // 默认配置
-axios.defaults.baseURL = 'http://localhost:8080/h5' // 优先级比axios实例要低
+axios.defaults.baseURL = '' // 优先级比axios实例要低
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
 // 创建一个axios实例 ==> instanceOne
 const instanceOne = axios.create()
-instanceOne.defaults.baseURL = 'http://localhost:8080/h5' // 实例的baseurl
+instanceOne.defaults.baseURL = '' // 实例的baseurl
 
 let cancel
 function ajax ({
@@ -33,6 +32,9 @@ function ajax ({
         // 请求拦截器1 设置loading效果与是否之前取消未完成的请求
         sourceAxios.interceptors.request.use(
             config => {
+                const token = localStorage.getItem('TOKEN_KEY')
+                config.headers.Authorization = `${token}`
+
                 if (cancelBefore) { // 在准备发请求前, 取消未完成的请求
                     if (typeof cancel === 'function') { // 当cancel是函数时表示上个请求未完成
                         cancel('取消上一个未完成的请求')
@@ -53,6 +55,10 @@ function ajax ({
         sourceAxios.interceptors.response.use(
             response => {
                 cancel = null // 响应成功把cancel置为null
+                console.log(response.data, 'response.data')
+                console.log(response.data.data, 'response.data.data')
+                console.log(response.data.data.token, 'response.data.data.token')
+                response.data.data.token && localStorage.setItem('TOKEN_KEY', response.data.data.token)
                 return response
             }, (error) => {
                 console.log('第一个响应拦截器执行fail')

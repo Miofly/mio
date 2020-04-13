@@ -41,6 +41,8 @@
         "highcharts-vue": "^1.3.5",
         "http": "0.0.0",
         "hydrogen-js-sdk": "^2.1.0",
+        "jweixin-module": "^1.6.0",
+        "nativeshare": "^2.1.3",
         "regenerator-runtime": "^0.12.1",
         "request": "^2.88.2",
         "uni-read-pages": "^1.0.4",

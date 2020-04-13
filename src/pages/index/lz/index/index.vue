@@ -13,7 +13,7 @@
 			<view class="text-right" @tap="jumpPage">
 				<button class="cu-btn margin-right" :class="[['bg-white', 'line-white', 'line-white lines-white'][0],
 			        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-					<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+					<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled="false"></text>
 					新增
 				</button>
 			</view>
@@ -35,18 +35,20 @@
 							<view class="padding-left-xl">
 								<view>
 									{{ item.title }}
+								</view>
+								<view class="text-df text-grey">
 									{{ item.desc }}
 								</view>
-								<view class="inline">
-									<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
-											@tap="tu.getClipboardData('111')">
+								<view>
+									<button class="cu-btn fl" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
+								        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
+											@tap="getLink(item.id)">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										短链
 									</button>
-									<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
-								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
-											@tap="tu.jumpWX()">
+									<button class="cu-btn fr" style="margin-left: 10px" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
+								        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
+											@tap="jumpWx(item.title, item.desc, item.pic, item.id)">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										图文
 									</button>
@@ -58,7 +60,7 @@
 					</view>
 
 					<view v-show="false" class="action">
-						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+						<button :class="['cu-btn', 'bg-red', 'shadow']" @tap="detail(item.url)">
 							操作
 						</button>
 					</view>
@@ -68,9 +70,9 @@
 		</mescroll-uni>
 
 		<view @tap="test" style="position: fixed;bottom: 12%;z-index: 999999999;" class="text-center margin-center full-width">
-			<button class="cu-btn" :class="[['bg-red', 'line-blue', 'line-red lines-red'][0],
+			<button class="cu-btn" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
 			        ['sm', 'lg', ''][1], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-			        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+			        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled="false"></text>
 				批量获取短链
 			</button>
 		</view>
@@ -85,17 +87,17 @@
 				<!--</view>-->
 			<!--</view>-->
 			<!--<view class="flex justify-between margin-top">-->
-				<!--<button class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],-->
+				<!--<button class="cu-btn" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],-->
 				        <!--['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">-->
 					<!--<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>-->
 					<!--换一批-->
 				<!--</button>-->
-				<!--<button @tap="tu.jumpWX()" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],-->
+				<!--<button @tap="tu.jumpWX()" class="cu-btn" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],-->
 				        <!--['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">-->
 					<!--<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>-->
 					<!--打开微信-->
 				<!--</button>-->
-				<!--<button @tap="tu.getClipboardData('复制内容')" class="cu-btn" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],-->
+				<!--<button @tap="tu.getClipboardData('复制内容')" class="cu-btn" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],-->
 				        <!--['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">-->
 					<!--<text v-show="false" class="fa fa-wechat padding-right-twenty"></text>-->
 					<!--复制内容-->
@@ -111,7 +113,7 @@
     } from '@/api'
     import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
     import mioModal from 'cn/modal/modal'
-    import scrollMessage from 'cn/module/scrollMessage'
+    import NativeShare from 'nativeshare'
     import {mapState} from 'vuex'
 
     export default {
@@ -149,32 +151,55 @@
                     textNoMore: '我也是有底线的...'
                 },
                 dataLists: [],
+                nativeShare: new NativeShare()
             }
         },
         async mounted() {
-            console.log('mounted')
-            // if (this.$store.state.indexControl) {
-                this.mescroll.resetUpScroll()
-            // }
-            // this.$store.state.indexControl = false
+        	this.mescroll.resetUpScroll()
         },
         methods: {
+            async getLink (id) {
+				const data = await commonPost('/title/title-share', {id: id})
+				console.log(data)
+            },
+            async jumpWx (title, desc, pic, id) {
+                const data = await commonPost('/title/title-share', {id: id})
+                if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
+                    this.ui.showToast('图文分享请打开QQ浏览器', 2)
+                } else {
+                    try {
+                        this.nativeShare.setShareData({
+                            link: data.data,
+                            title: title,
+                            desc: desc,
+                            icon: pic,
+                        })
+                        this.nativeShare.call('wechatFriend')
+                    } catch (err) {
+                        console.log(err)
+                        this.ui.showToast('此浏览器不支持跳转 ', 2)
+                    }
+                }
+            },
             jumpPage () {
                 this.router.replace({name: 'addItem'})
                 console.log(11)
             },
             personSwitch () {
+                this.dataLists = []
                 this.status = !this.status
-                // this.upCallback(page, 1)
+                this.upCallback({num: 1, size: 10}, 0)
             },
             teamSwitch () {
+                this.dataLists = []
+                this.upCallback({num: 1, size: 10}, 1)
                 this.status = !this.status
             },
             downCallback() { // 下拉刷新的回调
                 this.mescroll.resetUpScroll() // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
                 // 若整个downCallback方法仅调用mescroll.resetUpScroll(),则downCallback方法可删 (mixins已默认)
             },
-            async upCallback(page, common = 0) { // 上拉加载的回调
+            async upCallback(page, common = 1) { // 上拉加载的回调
                 console.log(page)
                 const pageNum = page.num // 页码, 默认从1开始
                 const pageSize = page.size // 页长, 默认每页10条

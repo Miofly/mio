@@ -26,7 +26,10 @@ const commonPost = (url, data) => ajax({
     // sourceAxios: instanceOne,
     url: '/lz' + url,
     method: 'POST',
-    data: data
+    data: data,
+    getHeader: {
+        'Content-Type': 'multipart/form-data'
+    }
 })
 
 export {

@@ -55,9 +55,9 @@ function ajax ({
         sourceAxios.interceptors.response.use(
             response => {
                 cancel = null // 响应成功把cancel置为null
-                console.log(response.data, 'response.data')
-                console.log(response.data.data, 'response.data.data')
-                console.log(response.data.data.token, 'response.data.data.token')
+                // console.log(response.data, 'response.data')
+                // console.log(response.data.data, 'response.data.data')
+                // console.log(response.data.data.token, 'response.data.data.token')
                 response.data.data.token && localStorage.setItem('TOKEN_KEY', response.data.data.token)
                 return response
             }, (error) => {

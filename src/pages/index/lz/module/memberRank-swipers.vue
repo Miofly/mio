@@ -10,17 +10,16 @@
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
-				<view v-if="url == '/team/team-list'" class="content">
-					<view class="fl">{{index + 1}}</view>
-					<view class="fl margin-left">{{item.true_name}}</view>
-					<view class="fr text-red">总计费次数：{{item.effective_click_total}}</view>
+				<view class="content flex justify-between align-center">
+					<view class="fl full-width margin-left">
+						<view class="align-center">{{index + 1}}</view>
+						<view class="width-fifty-five margin-left-lg">
+							<view class="">{{item.true_name}}</view>
+						</view>
+					</view>
+					<view class="width-fifty-five fr text-red ">总计费次数：{{item.effective_click_total}}</view>
 				</view>
-				<view v-else class="content">
-					<view class="fl">{{index + 1}}</view>
-					<view class="fl margin-left">{{item.name}}</view>
-					<view class="fr text-red">总计费次数：{{item.total_click}}</view>
-				</view>
-				<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
 		</view>
 	</mescroll-uni>
@@ -38,6 +37,8 @@
         mixins: [MescrollMixin, MescrollMoreItemMixin],
         props: {
             tabs: Array, // tab菜单,此处用于取关键词
+			url: String,
+            parmas: Object
         },
         mounted () {
             // if (this.$store.state.teamControl) {
@@ -46,7 +47,6 @@
         },
         data() {
             return {
-                url: '/team/team-list',
                 downOption: {
                     auto: false,
                     textInOffset: '下拉刷新',
@@ -65,14 +65,10 @@
                     textLoading: '正在玩命的加载...',
                     textNoMore: '我也是有底线的...'
                 },
-                dataLists: [],
+                dataLists: []
             }
         },
         methods: {
-            tzMemRank (id, name) {
-                console.log(id)
-                this.router.push({name: 'memberRank', params: { department_id: id, name: name}})
-            },
             /* 下拉刷新的回调 */
             downCallback() {
                 // 这里加载你想下拉刷新的数据, 比如刷新轮播数据
@@ -82,44 +78,36 @@
             },
             /* 上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
             async upCallback(page) {
-                console.log(this.url)
+                console.log('这里调用了吗？1')
                 // 联网加载数据
-                const data = await commonPost(this.url, {date_type: this.i + 1}) // 默认数据
+                const keyword = this.tabs[this.i]
 
+				const parmas = Object.assign({date_type: this.i + 1}, this.parmas)
 
-				console.log(data, '21333333')
+                // const pageNum = page.num // 页码, 默认从1开始
+                // const pageSize = page.size // 页长, 默认每页10条
+				//
+                const data = await commonPost(this.url, parmas) // 默认数据
                 // 接口返回的当前页数据列表 (数组)
-				if (this.url == '/team/department-list') {
-				    console.log(true)
-                    const curPageData = data.data
-					console.log(curPageData, 'curPageData')
-                    // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)
-                    const curPageLen = curPageData.length
-                    // 接口返回的总页数 (如列表有26个数据,每页10条,共3页; 则totalPage=3)
-                    // const totalPage = data.xxx
-                    // // 接口返回的总数据量(如列表有26个数据,每页10条,共3页; 则totalSize=26)
-                    // const totalSize = data.xxx
-                    // // 接口返回的是否有下一页 (true/false)
-                    // const hasNext = data.xxx
-                    // 设置列表数据
-                    if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
-                    this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
-                    // 请求成功,隐藏加载状态
-                    // 方法一(推荐): 后台接口有返回列表的总页数 totalPage
-                    this.mescroll.endByPage(curPageLen, 3)
-                    // 方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-                    // this.mescroll.endBySize(curPageLen, totalSize);
-                    // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-                    // this.mescroll.endSuccess(curPageLen, hasNext);
-				} else {
-                    const curPageData = data.data.data
-                    console.log(curPageData, 'curPageData')
-
-                    const curPageLen = curPageData.length
-                    if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
-                    this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
-                    this.mescroll.endByPage(curPageLen, 3)
-                }
+                const curPageData = data.data.data
+                // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)
+                const curPageLen = curPageData.length
+                // 接口返回的总页数 (如列表有26个数据,每页10条,共3页; 则totalPage=3)
+                // const totalPage = data.xxx
+                // // 接口返回的总数据量(如列表有26个数据,每页10条,共3页; 则totalSize=26)
+                // const totalSize = data.xxx
+                // // 接口返回的是否有下一页 (true/false)
+                // const hasNext = data.xxx
+                // 设置列表数据
+                if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
+                this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
+                // 请求成功,隐藏加载状态
+                // 方法一(推荐): 后台接口有返回列表的总页数 totalPage
+                this.mescroll.endByPage(curPageLen, 3)
+                // 方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+                // this.mescroll.endBySize(curPageLen, totalSize);
+                // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+                // this.mescroll.endSuccess(curPageLen, hasNext);
             },
             // 点击空布局按钮的回调
             emptyClick() {

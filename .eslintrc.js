@@ -21,6 +21,7 @@ module.exports = {
         'vue'
     ],
     rules: {
+        "vue/order-in-components": "off",
         "comma-dangle": "off",
         "eqeqeq": "off",
         "vue/max-attributes-per-line": 0,

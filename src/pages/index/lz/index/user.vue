@@ -6,15 +6,11 @@
 				  style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg);">
 				<view v-show="false" class="cu-tag badge">999</view>
 			</view>
-			<view class="text-xxl text-bold">常冬冬</view>
-			<view class="text-lg">支付宝账号：123333</view>
+			<view class="text-xxl">{{name}}</view>
+			<view class="text-lg">支付宝账号：{{alipay_account}}</view>
 		</view>
 		<view class="cu-list grid" :class="['col-' + 3, true?'':'no-border']">
-			<view class="cu-item" v-for="(item, index) in [
-		            {frequency: '666', color: 'red', badge: 0, name: '今日计费次数'},
-		            {frequency: '888', color: 'red', badge: 0,  name: '昨日计费次数'},
-		            {frequency: '11989', color: 'red', badge: 0, name: '本月计费次数'},
-		            ]" :key="index">
+			<view class="cu-item" v-for="(item, index) in jfLists" :key="index">
 				<view class="fa" :class="['fa-' + item.icon,'text-' + item.color]">
 					<view class="cu-tag badge" v-if="item.badge!=0">
 						<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
@@ -51,20 +47,45 @@
 	    components: {
 	        mioModal
 	    },
+		async mounted () {
+			const res = await commonPost('/my/click-info')
+			const data = res.data
+			this.monthClick = data.monthClick
+			this.todayClick = data.todayClick
+			this.yesterdayClick = data.yesterdayClick
+			this.mobile = data.mobile
+			this.alipay_account = data.alipay_account
+			this.name = data.true_name
+		},
         data () {
             return {
+                name: '',
+                alipay_account: '',
+                mobile: '',
+                monthClick: '',
+                todayClick: '',
+                yesterdayClick: '',
+
                 modalStatus: false,
                 menuList: [
                     {icon: 'navicon', color: 'red', badge: 0, name: '点击明细'},
                     {icon: 'lock', color: 'red', badge: 0, name: '修改密码'},
                     {icon: 'address-card', color: 'red', badge: 0, name: '个人资料'},
-                    {icon: 'commenting', color: 'red', badge: 0, name: '联系客服'},
-                    {icon: 'info-circle', color: 'red', badge: 0, name: '关于我们'},
+                    {icon: 'commenting', color: 'red', badge: 0, name: '配置管理'},
                     {icon: 'power-off', color: 'red', badge: 0, name: '退出登录'},
                     {icon: 'user-plus', color: 'red', badge: 0, name: '团队管理'}
                 ]
             }
         },
+		computed: {
+            jfLists: function () {
+                return [
+                    {frequency: this.todayClick, color: 'red', badge: 0, name: '今日计费次数'},
+                    {frequency: this.yesterdayClick, color: 'red', badge: 0, name: '昨日计费次数'},
+                    {frequency: this.monthClick, color: 'red', badge: 0, name: '本月计费次数'}
+                ]
+            }
+		},
 		methods: {
             async handClick (e) {
                 console.log(e)
@@ -82,15 +103,18 @@
             hide () {
                 this.modalStatus = false
             },
-            listFn (name) {
-				if (name == '退出登录') {
-                    this.modalStatus = true
+            async listFn (name) {
+				if (name == '点击明细') {
+					this.router.push({name: 'personCharts'})
 				}
-                if (name == '提现记录') {
-                    this.ui.showToast(name)
+                if (name == '配置管理') {
+                    this.router.push({name: 'config'})
                 }
-                if (name == '账单记录') {
-                    this.ui.showToast(name)
+                if (name == '个人资料') {
+                    this.router.push({name: 'personInfos'})
+                }
+                if (name == '团队管理') {
+                    this.router.push({name: 'config'})
                 }
             },
 		},

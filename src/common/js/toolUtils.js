@@ -2,6 +2,12 @@ import ClipboardJS from 'mioJs/utils/clipboard.min.js'
 import {ui} from 'mioJs/uniapp'
 
 const tu = {
+    getUrlParmas () { // 得到当前网站地址？后面的语句
+        return decodeURI(window.location.href.split('?')[1])
+    },
+    getUrl () { // 得到当前网站地址
+        return window.location.href
+    },
     jumpWX () {
         window.location.replace('weixin://')
     },

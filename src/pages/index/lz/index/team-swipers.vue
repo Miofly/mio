@@ -9,7 +9,7 @@
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+			<view @click.native="tzMemRank(item.id, item.name)" v-for="(item, index) in dataLists" :key="index" class="cu-item">
 				<view v-if="url == '/team/team-list'" class="content">
 					<view class="fl">{{index + 1}}</view>
 					<view class="fl margin-left">{{item.true_name}}</view>
@@ -46,7 +46,7 @@
         },
         data() {
             return {
-                url: '/team/team-list',
+                url: '/team/department-list',
                 downOption: {
                     auto: false,
                     textInOffset: '下拉刷新',

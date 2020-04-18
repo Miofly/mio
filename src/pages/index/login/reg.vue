@@ -44,7 +44,7 @@
 					<view v-show="regInfos.repassword" class="fa fa-close fr margin-right-lower"
 						  @tap="delVals('repassword')"></view>
 					<input v-model="regInfos.repassword" :focus="false" :password="true" placeholder="请再次输入密码"
-						   maxlength="8" confirm-type="完成"/>
+						   maxlength="11" confirm-type="完成"/>
 				</view>
 			</view>
 			<view class="margin-top-ten">

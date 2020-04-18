@@ -29,12 +29,13 @@ const MescrollMoreItemMixin = {
     },
     watch: {
         // 监听下标的变化
-        // index(val) {
-        //     if (this.i === val && !this.isInit) {
-        //         this.isInit = true // 标记为true
-        //         this.mescroll && this.mescroll.triggerDownScroll()
-        //     }
-        // }
+        index(val) {
+            if (this.i === val && !this.isInit) {
+
+                this.isInit = true // 标记为true
+                this.mescroll && this.mescroll.triggerDownScroll()
+            }
+        }
     },
     methods: {
         // mescroll组件初始化的回调,可获取到mescroll对象
@@ -42,10 +43,10 @@ const MescrollMoreItemMixin = {
             this.mescroll = mescroll
             this.mescrollInitByRef && this.mescrollInitByRef() // 兼容字节跳动小程序 (mescroll-mixins.js)
             // 自动加载当前tab的数据
-            // if (this.i === this.index) {
-            //     this.isInit = true // 标记为true
+            if (this.i === this.index) {
+                this.isInit = true // 标记为true
                 this.mescroll.triggerDownScroll()
-            // }
+            }
         },
     }
 }

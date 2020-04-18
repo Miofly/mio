@@ -39,14 +39,14 @@
 								<view class="text-df text-grey">
 									{{ item.desc }}
 								</view>
-								<view>
-									<button class="cu-btn fl" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
+								<view class="flex">
+									<button class="cu-btn fl full-width" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
 								        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
 											@tap="getLink(item.id)">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
 										短链
 									</button>
-									<button class="cu-btn fr" style="margin-left: 10px" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
+									<button class="cu-btn fr full-width" style="margin-left: 10px" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
 								        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']"
 											@tap="jumpWx(item.title, item.desc, item.pic, item.id)">
 										<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
@@ -68,8 +68,7 @@
 				</view>
 			</view>
 		</mescroll-uni>
-
-		<view @tap="test" style="position: fixed;bottom: 12%;z-index: 999999999;" class="text-center margin-center full-width">
+		<view @tap="getShortChain" style="position: fixed;bottom: 12%;z-index: 999999999;" class="text-center margin-center full-width">
 			<button class="cu-btn" :class="[['bg-red', 'line-red', 'line-red lines-red'][0],
 			        ['sm', 'lg', ''][1], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 			        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled="false"></text>
@@ -158,18 +157,23 @@
         	this.mescroll.resetUpScroll()
         },
         methods: {
+            async getShortChain () {
+                // const data = await commonPost('/team/team-info')
+				// console.log(data)
+            },
             async getLink (id) {
 				const data = await commonPost('/title/title-share', {id: id})
-				console.log(data)
+				console.log(data.data.substring(0, data.data.length - 1))
             },
             async jumpWx (title, desc, pic, id) {
                 const data = await commonPost('/title/title-share', {id: id})
+				const url = data.data
                 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     this.ui.showToast('图文分享请打开QQ浏览器', 2)
                 } else {
                     try {
                         this.nativeShare.setShareData({
-                            link: data.data,
+                            link: url,
                             title: title,
                             desc: desc,
                             icon: pic,

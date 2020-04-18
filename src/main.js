@@ -10,6 +10,7 @@ import plugin from './pages/plugin/home.vue'
 import lz_index from './pages/index/lz/index/index'
 import lz_team from './pages/index/lz/index/team'
 import lz_user from './pages/index/lz/index/user'
+import lz_rank from './pages/index/lz/index/rank'
 
 
 import '@/common/css/module/font-awesome.css' // font-awesome图标
@@ -42,6 +43,7 @@ Vue.component('router-link', routerLink)
 Vue.component('lz_index', lz_index)
 Vue.component('lz_team', lz_team)
 Vue.component('lz_user', lz_user)
+Vue.component('lz_rank', lz_rank)
 
 Vue.prototype.ColorList = colorData
 

@@ -13,6 +13,36 @@
             "name": "addItem"
         },
         {
+            "path": "pages/index/lz/module/teamManage",
+            "style": {},
+            "name": "teamManage"
+        },
+        {
+            "path": "pages/index/lz/module/memberRank",
+            "style": {},
+            "name": "memberRank"
+        },
+        {
+            "path": "pages/index/lz/module/config",
+            "style": {},
+            "name": "config"
+        },
+        {
+            "path": "pages/index/lz/module/personCharts",
+            "style": {},
+            "name": "personCharts"
+        },
+        {
+            "path": "pages/index/lz/module/personsCharts",
+            "style": {},
+            "name": "personsCharts"
+        },
+        {
+            "path": "pages/index/lz/module/personInfos",
+            "style": {},
+            "name": "personInfos"
+        },
+        {
             "path": "pages/index/itest",
             "name": "itest",
             "style": {}
@@ -115,6 +145,13 @@
         {
             "path": "pages/index/lz/index/user",
             "name": "lz_user",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/lz/index/rank",
+            "name": "lz_rank",
             "style": {
                 "navigationStyle": "custom"
             }

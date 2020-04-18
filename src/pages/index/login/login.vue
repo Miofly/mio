@@ -45,8 +45,8 @@
     export default {
         data() {
             return {
-                mobile: '17862983627',
-                password: '111111',
+                mobile: '18205622643',
+                password: '1234567',
                 wx: 'SUNP8694',
             }
         },

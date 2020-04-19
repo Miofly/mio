@@ -30,51 +30,51 @@ function ajax ({
         method = method.toUpperCase()
 
         // 请求拦截器1 设置loading效果与是否之前取消未完成的请求
-        sourceAxios.interceptors.request.use(
-            config => {
-                const token = localStorage.getItem('TOKEN_KEY')
-                config.headers.Authorization = `${token}`
-
-                if (cancelBefore) { // 在准备发请求前, 取消未完成的请求
-                    if (typeof cancel === 'function') { // 当cancel是函数时表示上个请求未完成
-                        cancel('取消上一个未完成的请求')
-                    }
-                    // 添加一个cancelToken的配置
-                    config.cancelToken = new axios.CancelToken((c) => { // c是用于取消当前请求的函数
-                        // 保存取消函数, 用于之后可能需要取消当前请求
-                        cancel = c // 把函数c赋给cancel
-                    })
-                }
-                return config
-            }, error => {
-                return Promise.reject(error)
-            }
-        )
-
-        // 响应拦截器
-        sourceAxios.interceptors.response.use(
-            response => {
-                cancel = null // 响应成功把cancel置为null
-                // console.log(response.data, 'response.data')
-                // console.log(response.data.data, 'response.data.data')
-                // console.log(response.data.data.token, 'response.data.data.token')
-                response.data.data.token && localStorage.setItem('TOKEN_KEY', response.data.data.token)
-                return response
-            }, (error) => {
-                console.log('第一个响应拦截器执行fail')
-                console.log(error)
-
-                if (axios.isCancel(error)) { // 取消请求的错误
-                    cancel = null
-                    console.log('请求取消的错误', error.message) // 做相应处理
-                    return new Promise(() => { // 中断promise链接
-                    })
-                } else { // 请求出错了
-                    cancel = null
-                    return Promise.reject(error) // 将错误向下传递 throw error
-                }
-            }
-        )
+        // sourceAxios.interceptors.request.use(
+        //     config => {
+        //         const token = localStorage.getItem('TOKEN_KEY')
+        //         config.headers.Authorization = `${token}`
+        //
+        //         if (cancelBefore) { // 在准备发请求前, 取消未完成的请求
+        //             if (typeof cancel === 'function') { // 当cancel是函数时表示上个请求未完成
+        //                 cancel('取消上一个未完成的请求')
+        //             }
+        //             // 添加一个cancelToken的配置
+        //             config.cancelToken = new axios.CancelToken((c) => { // c是用于取消当前请求的函数
+        //                 // 保存取消函数, 用于之后可能需要取消当前请求
+        //                 cancel = c // 把函数c赋给cancel
+        //             })
+        //         }
+        //         return config
+        //     }, error => {
+        //         return Promise.reject(error)
+        //     }
+        // )
+        //
+        // // 响应拦截器
+        // sourceAxios.interceptors.response.use(
+        //     response => {
+        //         cancel = null // 响应成功把cancel置为null
+        //         // console.log(response.data, 'response.data')
+        //         // console.log(response.data.data, 'response.data.data')
+        //         // console.log(response.data.data.token, 'response.data.data.token')
+        //         response.data.data.token && localStorage.setItem('TOKEN_KEY', response.data.data.token)
+        //         return response
+        //     }, (error) => {
+        //         console.log('第一个响应拦截器执行fail')
+        //         console.log(error)
+        //
+        //         if (axios.isCancel(error)) { // 取消请求的错误
+        //             cancel = null
+        //             console.log('请求取消的错误', error.message) // 做相应处理
+        //             return new Promise(() => { // 中断promise链接
+        //             })
+        //         } else { // 请求出错了
+        //             cancel = null
+        //             return Promise.reject(error) // 将错误向下传递 throw error
+        //         }
+        //     }
+        // )
 
         // 执行异步ajax请求
         let promise

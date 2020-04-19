@@ -60,9 +60,8 @@ module.exports = {
     chainWebpack: config => {
         config.resolve.alias
             .set('@', resolve('src'))
-            .set('cn', resolve('src/components/common'))
+            .set('zj', resolve('src/components'))
             .set('mioJs', resolve('src/common/js'))
             .set('json', resolve('src/static/mockJson'))
-            .set('cm', resolve('src/components/common/module'))
     }
 }

@@ -108,8 +108,8 @@
     import {
        commonPost
     } from '@/api'
-    import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
-    import mioModal from 'cn/modal/modal'
+    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
+    import mioModal from 'cn/../../components/modal/modal'
     import scrollMessage from 'cn/module/scrollMessage'
     import {mapState} from 'vuex'
 

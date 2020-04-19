@@ -35,5 +35,5 @@ export default {
 </script>
 
 <style>
-@import './mescroll-up.css';
+@import 'mescroll-up.css';
 </style>

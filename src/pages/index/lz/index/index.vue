@@ -75,7 +75,7 @@
 				批量获取短链
 			</button>
 		</view>
-		<mio-modal title="标题" content="这是内容" :show="modalStatus"
+		<modal title="标题" content="这是内容" :show="modalStatus"
 				   :custom="true" @click="handleClick" @cancel="hide8">
 			<!--<view class="fa fa-close" style="position: absolute; top:20px;right: 20px"-->
 				  <!--@tap="modalStatus = !modalStatus"></view>-->
@@ -102,7 +102,7 @@
 					<!--复制内容-->
 				<!--</button>-->
 			<!--</view>-->
-		</mio-modal>
+		</modal>
 	</view>
 </template>
 
@@ -110,16 +110,11 @@
     import {
        commonPost
     } from '@/api'
-    import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
-    import mioModal from 'cn/modal/modal'
+    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
     import NativeShare from 'nativeshare'
     import {mapState} from 'vuex'
 
     export default {
-        components: {
-            mioModal,
-            // scrollMessage
-        },
         mixins: [MescrollMixin],
         data() {
             return {

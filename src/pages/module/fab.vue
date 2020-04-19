@@ -10,19 +10,15 @@
             <button class="margin-top cu-btn line-blue round lg" @click="change(6)">拓展按钮无图标展示</button>
         </view>
 
-        <mio-fab :left="left" :right="right" :bottom="bottom" :bgColor="bgColor" :btnList="btnList" @click="onClick"></mio-fab>
+        <fab :left="left" :right="right" :bottom="bottom" :bgColor="bgColor" :btnList="btnList" @click="onClick"></fab>
     </view>
 </template>
 
 <script>
     import {ui} from 'mioJs/uniapp'
     import {toolUtils} from 'mioJs/toolUtils'
-    import mioFab from 'cn/fab/mio-fab'
 
     export default {
-        components: {
-            mioFab
-        },
         data () {
             return {
                 left: 0,

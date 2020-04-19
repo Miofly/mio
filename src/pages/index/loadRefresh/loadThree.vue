@@ -56,8 +56,8 @@
     import {
         dbJsonData
     } from '@/api'
-    import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
-    import MescrollMixin from 'cn/load//mescroll-uni/mescroll-mixins.js'
+    import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
+    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
 
     export default {
         components: {

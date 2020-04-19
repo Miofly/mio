@@ -15,7 +15,7 @@ import MescrollEmpty from '@/components/mescroll-uni/components/mescroll-empty.v
 
 <script>
 // 引入全局配置
-import GlobalOption from './../mescroll-uni-option.js';
+import GlobalOption from '../mescroll-uni-option.js';
 export default {
 	props: {
 		// empty的配置项: 默认为GlobalOption.up.empty

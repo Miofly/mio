@@ -69,7 +69,7 @@
 </template>
 
 <script>
-    import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
+    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
     import {
         dbJsonData
     } from '@/api'

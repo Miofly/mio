@@ -21,6 +21,7 @@ module.exports = {
         'vue'
     ],
     rules: {
+        "vue/attribute-hyphenation": "off",
         "vue/order-in-components": "off",
         "comma-dangle": "off",
         "eqeqeq": "off",

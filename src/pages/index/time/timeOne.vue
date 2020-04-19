@@ -13,18 +13,13 @@
 			{{rangetime[0]}} - {{rangetime[1]}}
 			<button type="primary" @click="onShowDatePicker('rangetime')">选择日期时间范围</button>
 		</view>
-		<Datepicker :show="showPicker" :type="type" :value="value" :show-tips="true" :begin-text="'入住'" :end-text="'离店'"
+		<datepicker :show="showPicker" :type="type" :value="value" :show-tips="true" :begin-text="'入住'" :end-text="'离店'"
 					:show-seconds="true" @confirm="onSelected" @cancel="onSelected"/>
 	</view>
 </template>
 
 <script>
-    import Datepicker from 'cm/datepicker'
-
     export default {
-        components: {
-            Datepicker
-        },
         data() {
             return {
                 showPicker: false,

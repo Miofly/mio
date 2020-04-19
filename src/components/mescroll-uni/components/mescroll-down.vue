@@ -43,5 +43,5 @@ export default {
 </script>
 
 <style>
-@import "./mescroll-down.css";
+@import "mescroll-down.css";
 </style>

@@ -9,8 +9,7 @@ module.exports = {
     resolve: {
         alias: {
             '@': resolve('src'),
-            cn: resolve('src/components/common'),
-            cm: resolve('src/components/common/module'),
+            zj: resolve('src/components'),
             mioJs: resolve('src/common/js'),
             json: resolve('src/static/mockJson')
         }

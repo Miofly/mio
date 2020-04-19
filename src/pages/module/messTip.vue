@@ -1,11 +1,11 @@
 <template>
     <view class="bg-white padding">
         <!--顶部消息-->
-        <mio-tips ref="toast" v-if="index==0"></mio-tips>
+        <messTip ref="toast" v-if="index==0"></messTip>
         <!--居中消息-->
-        <mio-tips position="center" ref="toast" v-if="index==1"></mio-tips>
+        <messTip position="center" ref="toast" v-if="index==1"></messTip>
         <!--底部消息-->
-        <mio-tips position="bottom" ref="toast" v-if="index==2"></mio-tips>
+        <messTip position="bottom" ref="toast" v-if="index==2"></messTip>
 
         <view class="mio-subsection">
             <view :class="[index==0?'mio-active':'']" @tap="switchTabs" data-index="0">顶部提示</view>
@@ -27,12 +27,7 @@
 </template>
 
 <script>
-    import mioTips from 'cn/modal/messTips'
-
     export default {
-        components: {
-            mioTips
-        },
         data () {
             return {
                 basicData: [{

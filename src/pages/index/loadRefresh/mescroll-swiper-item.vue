@@ -51,8 +51,8 @@
 </template>
 
 <script>
-    import MescrollMixin from 'cn/load/mescroll-uni/mescroll-mixins.js'
-    import MescrollMoreItemMixin from 'cn/load/mescroll-uni/mixins/mescroll-more-item.js'
+    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
+    import MescrollMoreItemMixin from 'zj/mescroll-uni/mixins/mescroll-more-item.js'
     import {
         dbJsonData
     } from '@/api'
@@ -67,7 +67,10 @@
             return {
                 downOption: {
                     auto: false, // 不自动加载 (mixin已处理第一个tab触发downCallback)
-                    bgColor: 'white'
+                    bgColor: 'white',
+                    textInOffset: '下拉刷新',
+                    textOutOffset: '释放更新',
+                    textLoading: '正在拼命的加载中 ...',
                 },
                 upOption: {
                     auto: false, // 不自动加载

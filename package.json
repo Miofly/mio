@@ -1,5 +1,5 @@
 {
-    "name": "my-project",
+    "name": "vue_project",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -77,7 +77,6 @@
         "eslint-plugin-vue": "^6.1.2",
         "mini-types": "*",
         "miniprogram-api-typings": "^2.8.0-2",
-        "node-sass": "^4.13.1",
         "postcss-comment": "^2.0.0",
         "postcss-loader": "^3.0.0",
         "sass-loader": "^8.0.0",

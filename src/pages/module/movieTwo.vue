@@ -75,7 +75,7 @@
 </template>
 
 <script>
-    import modal from 'cn/modal/modal'
+    import modal from 'cn/../../components/modal/modal'
     import mSearch from 'cn/module/mio-search'
     import loadMore from 'cn/load/loadMore'
     import {tu} from 'mioJs/toolUtils'

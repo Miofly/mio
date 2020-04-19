@@ -68,5 +68,12 @@
         "color": "green",
         "icon": "book",
         "url": "modal"
+    },
+    {
+        "title": "消息滚动",
+        "name": "modal",
+        "color": "green",
+        "icon": "book",
+        "url": "scrollMessage"
     }
 ]

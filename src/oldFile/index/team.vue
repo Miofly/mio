@@ -47,7 +47,7 @@
 
 <script>
     import MescrollItem from './team-swiper'
-    import AppTabs from 'cn/load/mescroll-uni/app-tabs.vue'
+    import AppTabs from 'zj/mescroll-uni/app-tabs.vue'
 	import {mapState} from 'vuex'
     export default {
         components: {

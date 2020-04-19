@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import mioTips from 'cn/modal/messTips'
+    import mioTips from 'cn/../../components/messTip/messTip'
 
     export default {
         components: {

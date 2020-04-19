@@ -30,23 +30,19 @@
 				<text>{{item.name}}</text>
 			</view>
 		</view>
-		<mio-modal title="提示" content="退出登录后将无法继续转发赚钱哦~" @click="handClick"
+		<modal title="提示" content="退出登录后将无法继续转发赚钱哦~" @click="handClick"
 				   :show="modalStatus" :custom="false" @cancel="hide">
-		</mio-modal>
+		</modal>
 	</view>
 
 </template>
 
 <script>
-	import mioModal from 'cn/modal/modal'
 	import {
 	    commonPost
 	} from '@/api'
 
     export default {
-	    components: {
-	        mioModal
-	    },
 		async mounted () {
 			const res = await commonPost('/my/click-info')
 			const data = res.data

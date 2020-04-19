@@ -30,12 +30,7 @@
 	    commonPost
 	} from '@/api'
 
-	import refresh from 'cn/load/refresh'
-
     export default {
-	    components: {
-	        refresh
-	    },
         async mounted () {
         	const data = await commonPost('/my/seven-click-info')
 			this.menuList = data.data

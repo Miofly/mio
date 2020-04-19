@@ -9,8 +9,10 @@
                 <view class="mio-modal-content" :class="[title?'':'mio-mtop']" :style="{color:color,fontSize:size+'rpx'}">{{content}}</view>
                 <view class="mio-modalBtn-box" :class="[button.length!=2?'mio-flex-column':'']">
                     <block v-for="(item,index) in button" :key="index">
-                        <button class="mio-modal-btn" :class="['mio-'+(item.type || 'primary')+(item.plain?'-outline':''),button.length!=2?'mio-btn-width':'',button.length>2?'mio-mbtm':'',shape=='circle'?'mio-circle-btn':'']"
-                                :hover-class="'mio-'+(item.plain?'outline':(item.type || 'primary'))+'-hover'" :data-index="index" @tap="handleClick">{{item.text || "确定"}}</button>
+                        <button class="mio-modal-btn" :class="['mio-'+(item.type || 'primary')+(item.plain?'-outline':''),
+                        button.length!=2?'mio-btn-width':'',button.length>2?'mio-mbtm':'',
+                        shape=='circle'?'mio-circle-btn':'']"
+                        :hover-class="'mio-'+(item.plain?'outline':(item.type || 'primary'))+'-hover'" :data-index="index" @tap="handleClick">{{item.text || "确定"}}</button>
                     </block>
                 </view>
             </view>
@@ -74,14 +76,14 @@
             },
             button: {
                 type: Array,
-                default: function () {
+                default: function () { // red
                     return [{
                         text: '取消',
-                        type: 'red',
+                        type: 'default',
                         plain: true // 是否空心
                     }, {
                         text: '确定',
-                        type: 'red',
+                        type: 'primary',
                         plain: false
                     }]
                 }

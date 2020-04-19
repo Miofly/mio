@@ -12,40 +12,34 @@
             <button class="round cu-btn line-blue margin-top" @click="show8">自定义弹窗内容</button>
         </view>
 
-        <mio-modal :show="modal" @click="handleClick" @cancel="hide" title="提示" content="确定退出登录吗？"></mio-modal>
+        <modal :show="modal" @click="handleClick" @cancel="hide" title="提示" content="确定退出登录吗？"></modal>
 
-        <mio-modal :show="modal2" @click="handleClick2" @cancel="hide2" content="确定退出登录吗？" color="blue" :size="32"></mio-modal>
+        <modal :show="modal2" @click="handleClick2" @cancel="hide2" content="确定退出登录吗？" color="blue" :size="32"></modal>
 
-        <mio-modal :show="modal3" @click="handleClick3" @cancel="hide3" content="您还未登录，请先登录" :button="button3"></mio-modal>
+        <modal :show="modal3" @click="handleClick3" @cancel="hide3" content="您还未登录，请先登录" :button="button3"></modal>
 
-        <mio-modal :show="modal4" @click="handleClick4" @cancel="hide4" content="请选择支付方式" :button="button4"></mio-modal>
+        <modal :show="modal4" @click="handleClick4" @cancel="hide4" content="请选择支付方式" :button="button4"></modal>
 
-        <mio-modal :show="modal5" @click="handleClick5" @cancel="hide5" content="确定退出登录吗？" color="#333" :size="32" shape="circle"></mio-modal>
+        <modal :show="modal5" @click="handleClick5" @cancel="hide5" content="确定退出登录吗？" color="#333" :size="32" shape="circle"></modal>
 
-        <mio-modal :show="modal6" @click="handleClick6" @cancel="hide6" content="确定退出登录吗？" color="#333" :size="32" :button="button6"></mio-modal>
+        <modal :show="modal6" @click="handleClick6" @cancel="hide6" content="确定退出登录吗？" color="#333" :size="32" :button="button6"></modal>
 
-        <mio-modal :show="modal7" @click="handleClick7" @cancel="hide7" content="您还未登录，请先登录" :button="button3" :maskClosable="false"></mio-modal>
+        <modal :show="modal7" @click="handleClick7" @cancel="hide7" content="您还未登录，请先登录" :button="button3" :maskClosable="false"></modal>
 
-        <mio-modal :show="modal8" @cancel="hide8" :custom="true">
+        <modal :show="modal8" @cancel="hide8" :custom="true">
             <view class="mio-modal-custom">
                 <image src="http://img2.imgtn.bdimg.com/it/u=1344996754,553300684&fm=26&gp=0.jpg" class="mio-tips-img"></image>
                 <view class="mio-modal-custom-text">我是自定内容</view>
                 <button class="cu-btn bg-blue block round">常用大按钮</button>
             </view>
-        </mio-modal>
+        </modal>
     </view>
 </template>
 
 <script>
     import {ui} from 'mioJs/uniapp'
 
-    import mioModal from 'cn/modal/modal'
-    // const mioModal = () => import('cn/modal/modal')
-
     export default {
-        components: {
-            mioModal
-        },
         data () {
             return {
                 modal: false,

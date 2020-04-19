@@ -12,7 +12,7 @@ import lz_team from './pages/index/lz/index/team'
 import lz_user from './pages/index/lz/index/user'
 import lz_rank from './pages/index/lz/index/rank'
 
-
+// import uView from '@/uView'
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
 import {RouterMount} from 'uni-simple-router'
@@ -22,12 +22,11 @@ import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
 import Router from '@/router'
 
-import cuCustom from 'cm/cu-custom'
-import MescrollBody from 'cn/load/mescroll-uni/mescroll-body.vue'
-import MescrollUni from 'cn/load/mescroll-uni/mescroll-uni.vue'
+import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
+import MescrollUni from 'zj/mescroll-uni/mescroll-uni.vue'
+// Vue.use(uView)
 Vue.component('mescroll-body', MescrollBody)
 Vue.component('mescroll-uni', MescrollUni)
-Vue.component('cu-custom', cuCustom)
 
 
 Vue.prototype.ui = ui

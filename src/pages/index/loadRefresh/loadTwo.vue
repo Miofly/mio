@@ -50,7 +50,7 @@
 
 <script>
     import MescrollItem from './mescroll-swiper-item.vue'
-    import AppTabs from 'cn/load/mescroll-uni/app-tabs.vue'
+    import AppTabs from 'zj/mescroll-uni/app-tabs.vue'
 
     export default {
         components: {

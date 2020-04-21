@@ -13,8 +13,9 @@
 			{{rangetime[0]}} - {{rangetime[1]}}
 			<button type="primary" @click="onShowDatePicker('rangetime')">选择日期时间范围</button>
 		</view>
-		<datepicker :show="showPicker" :type="type" :value="value" :show-tips="true" :begin-text="'入住'" :end-text="'离店'"
-					:show-seconds="true" @confirm="onSelected" @cancel="onSelected"/>
+		<datepicker :show="showPicker" type="date" :value="value" :show-tips="true" :begin-text="'入住'"
+					:end-text="'离店'"
+					:show-seconds="true" @confirm="showPicker = false" @cancel="showPicker = false"/>
 	</view>
 </template>
 

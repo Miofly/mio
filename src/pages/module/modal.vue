@@ -33,6 +33,14 @@
                 <button class="cu-btn bg-blue block round">常用大按钮</button>
             </view>
         </modal>
+
+		<!--test (e) {if (e.index == 0) {console.log('点击了第一个按钮')}if (e.index == 1) {console.log('点击了第二个按钮')}}-->
+		<modal title="标题111" content="这是内容" @click="test" color="#999" :size="32" :maskClosable="false"
+				:show="status" @cancel="status = false" shape="['circle', 'square'][1]"
+				:button="[{text: '微信', type: ['green', 'default', 'primary', 'red', 'danger', 'warning', 'white', 'gray'][5], plain: true},
+				{text: '支付宝', plain: false}]" :custom="true">
+			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px" @tap="status = false"></view>
+		</modal>
     </view>
 </template>
 
@@ -42,6 +50,7 @@
     export default {
         data () {
             return {
+                status: true,
                 modal: false,
                 modal2: false,
                 modal3: false,
@@ -131,8 +140,9 @@
                     ui.showToast('你点击了取消按钮')
                 } else {
                     ui.showToast('你点击了确定按钮', 'success')
+                    this.ui.showToast('复制成功')
                 }
-                this.hide()
+                // this.hide()
             },
             handleClick2 (e) {
                 const index = e.index

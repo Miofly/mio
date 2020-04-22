@@ -2,6 +2,9 @@ import ClipboardJS from 'mioJs/utils/clipboard.min.js'
 import {ui} from 'mioJs/uniapp'
 
 const tu = {
+    back () {
+        window.history.back()
+    },
     getUrlParmas () { // 得到当前网站地址？后面的语句
         return decodeURI(window.location.href.split('?')[1])
     },
@@ -230,6 +233,7 @@ const tu = {
         // #endif
 
         // #ifdef H5
+        console.log(data, 213123)
         const event = window.event || {}
         const clipboard = new ClipboardJS('', {
             text: () => data
@@ -242,6 +246,8 @@ const tu = {
         })
         clipboard.on('error', (e) => {
             (typeof callback === 'function') && callback(false)
+            console.log(321312)
+
             clipboard.off('success')
             clipboard.off('error')
             clipboard.destroy()

@@ -11,6 +11,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+    publicPath: './',
     transpileDependencies: ['uni-simple-router'],
     configureWebpack: {
         plugins: [
@@ -21,6 +22,14 @@ module.exports = {
     },
     devServer: {
         proxy: {
+            '/wx': {
+                // target: "http://10.19.193.135:8870/ssyth",
+                target: 'https://api.weixin.qq.com',
+                changeOrigin: true, // 是否跨域
+                pathRewrite: {
+                    '^/wx': ''
+                }
+            },
             '/api': {
                 // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://www.okzyw.com',

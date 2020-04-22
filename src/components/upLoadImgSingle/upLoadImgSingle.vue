@@ -9,17 +9,14 @@
 						<text class="fa fa-close"></text>
 					</view>
 				</view>
-
-				<view class="solids text-center">
-					<input class="fa fa-camera text-grey margin-top-forty padding"
-						   style="font-size: 1.0rem;margin-left: 8%" type="file" @tap="ChooseImage"/>
+				<view class="solids text-center " @tap="ChooseImage" v-if="imgList.length<4">
+					<view class="fa fa-camera text-grey" style="margin-top: 43.5%"></view>
 				</view>
 			</view>
 		</view>
 		<modal title="提示" content="确认要删除图片吗？" @click="handleClick"
 				:show="status" :custom="false" @cancel="status = false">
-			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px"
-				  @tap="status = false"></view>
+			<view class="fa fa-close" style="position: absolute; top:20px;right: 20px" @tap="status = false"></view>
 		</modal>
 	</view>
 </template>
@@ -28,7 +25,6 @@
     export default {
         data() {
             return {
-
                 imgList: '',
                 file: '',
 				status: false,
@@ -36,9 +32,9 @@
         },
         methods: {
             test () {
-                console.log(this.imgList)
                 uni.previewImage({
-					urls: [this.imgList]
+					urls: [this.imgList],
+                    current: this.imgList
                 })
             },
             handleClick (e) {

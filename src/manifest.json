@@ -107,7 +107,8 @@
     "h5" : {
         "template" : "template.h5.html",
         "router" : {
-            "mode" : "history",
+//            "mode" : "history",
+            "mode" : "hash",
             "base" : "/"
         },
         "sdkConfigs" : {

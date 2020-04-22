@@ -32,7 +32,15 @@ const commonPost = (url, data) => ajax({
     }
 })
 
+const commonGet = (url) => ajax({
+    url: '/wx' + url,
+    getHeader: {
+        'Content-Type': 'json'
+    }
+})
+
 export {
+    commonGet,
     commonPost,
     navJsonData,
     listJsonData,

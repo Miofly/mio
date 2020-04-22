@@ -1,4 +1,10 @@
 const ui = {
+    showImg (url) {
+        uni.previewImage({
+            urls: [url],
+            current: 0
+        })
+    },
     // loading设置
     showLoading (title = '正在加载', mask = true) {
         uni.showLoading({

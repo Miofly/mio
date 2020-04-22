@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/box.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/color.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/flex.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/text.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/animation.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		#review_boxs {
+			width: 500px;
+			height: 70%; /* 必须 */
+			overflow: hidden; /* 必须 */
+		}
+	</style>
+</head>
+<body class="bg-white">
+<div id="app" class="bg-white">
+	<div class="full-width">
+		<img :src=headerSrc>
+	</div>
+	<div id="qrcode" style="display: none"></div>
+	<div class="text-center margin-top margin-bottom">
+		<p class="text-black text-xxl text-bold margin-bottom">{{hbName}}</p>
+		<p class="text-grey ">{{messOne}}</p>
+		<p style="font-size: 3rem;color: rgba(207, 170 ,114, 1)" class="margin-top-xxl text-bold" v-html="messTwo"></p>
+	</div>
+	<div id="review_boxs" class="padding">
+		<div id="comment1s" class="width-eighty" style="position: relative;" v-for="(list, index) in lists"
+			 :key="index">
+			<div style="border-bottom: 1px solid #eee;padding-bottom: 0.6rem;padding-top: 0.6rem">
+				<img style="border-radius: 0.5rem;width: 3rem;margin-right: 0.5rem" src=>
+				<div class="" style="margin-left: 16%;margin-top: -11%;">
+					<p class="margin-bottom-sm">{{list.name}}</p>
+					<p></p>
+				</div>
+				<span class="text-bold fr" style="margin-top: -2rem;padding-right: 2rem"> sjm + '元</span>
+			</div>
+		</div>
+		<div id="comment2s" class="width-eighty" style=""></div>
+	</div>
+	<div id="modal" class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
+		 style="border-radius: 1rem;width: 80%;position: relative;top:-90%;left: 10%;border: 1px solid red;
+animation: shake 2s 2 linear;z-index: 11;opacity: 0;transition: 1s">
+		<p class="text-center text-blue text-bold margin-bottom text-xxl"><b id="gxn">恭喜您</b></p>
+		<p class="text-center text-lg">获得补贴现金</p>
+		<p class=" margin-top-xl text-red margin-right"><b id="money" class="text-bold" style="font-size: 1.5rem"></b>
+		</p>
+		<p class="text-lg text-center margin-top" id="mess"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
+		<p class="margin-top-xl">完成后钱自动存到您的微信钱包</p>
+		<p class="margin-top-xl margin-bottom-xl">红包还剩
+			<b class="text-red margin-top-xl" id="sx"></b>
+		<p class="margin-top" style="margin-bottom: 10%">先到先得，领完为止，马上去分享领取</p>
+		</p>
+		<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
+	border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
+			长按屏幕发送到微信群
+		</div>
+	</div>
+
+	<div style="position: fixed;bottom: 0;width: 100%;text-align: center;z-index: 9999">
+		<img style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center;position: relative;
+    top: 7rem;" src="../img/zhiwen.png">
+
+		<div style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center" class="capmcz"></div>
+		<h1 style="font-size: 1.5rem;color: #449AFA;margin-bottom: 8%">长按屏幕分享</h1>
+	</div>
+
+	<img id="avatar"
+		 style="width: 100vw;height: 100vh;opacity: 0;;position: fixed;top: 0px;left: 0;z-index: 99999999999999"/>
+
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                headerSrc: '../img/xingzhuang.png',
+                hbName: 'Mio的红包',
+                messOne: '恭喜发财，大吉大利',
+                messTwo: '1200.00 <span style="font-size: 1.5rem">元</span>',
+                lists: [ // 随机留言
+                    {src: "../img/xtx/1.jpg", name: "次日图捏"}, {
+                        src: "../img/xtx/2.jpg",
+                        name: "laneud"
+                    }, {src: "../img/xtx/3.jpg", name: "开诶女聪明"}, {
+                        src: "../img/xtx/4.jpg",
+                        name: "奥Y他们"
+                    }, {src: "../img/xtx/5.jpg", name: "拉开日~"}, {
+                        src: "../img/xtx/6.jpg",
+                        name: "NFHEY楷模"
+                    }, {src: "../img/xtx/7.jpg", name: "默默的爱"}, {
+                        src: "../img/xtx/8.jpg",
+                        name: "本田销售"
+                    }, {src: "../img/xtx/9.jpg", name: "小妞儿"}, {
+                        src: "../img/xtx/10.jpg",
+                        name: "MK-星图"
+                    }, {src: "../img/xtx/11.jpg", name: "猪猪侠"}, {
+                        src: "../img/xtx/12.jpg",
+                        name: "宝贝"
+                    }, {src: "../img/xtx/13.jpg", name: "左左妈妈"}, {
+                        src: "../img/xtx/14.jpg",
+                        name: "大量收号"
+                    }, {src: "../img/xtx/15.jpg", name: "吃遍天下无敌手"}, {
+                        src: "../img/xtx/16.jpg",
+                        name: "情归何处"
+                    }, {src: "../img/xtx/17.jpg", name: "小亮儿奶奶"}, {
+                        src: "../img/xtx/18.jpg",
+                        name: "柳暗花明"
+                    }, {src: "../img/xtx/19.jpg", name: "pangeOne"},
+                    {src: "../img/xtx/20.jpg", name: "周.."}
+                ]
+            }
+        },
+        mounted() {
+            document.addEventListener('visibilitychange', this.handleVisiable)
+        },
+        destroyed() {
+            document.removeEventListener('visibilitychange', this.handleVisiable)
+        },
+        methods: {
+            handleVisiable(e) { // 监听页面离开事件
+                if (e.target.visibilityState === 'visible') {
+                    window.location.href = 'http://www.baidu.com'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

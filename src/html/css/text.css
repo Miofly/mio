@@ -1,0 +1,52 @@
+.text-xs {
+    font-size: 3vw;
+}
+
+.text-sm {
+    font-size: 3.4vw;
+}
+
+.text-df {
+    font-size: 3.8vw;
+}
+
+.text-lg {
+    font-size: 4.2vw;
+}
+
+.text-xl {
+    font-size: 4.6vw;
+}
+
+.text-xxl {
+    font-size: 5vw;
+}
+
+.text-sl {
+    font-size: 5.4vw;
+}
+
+.text-xsl {
+    font-size: 5.8vw;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-warp {
+    word-wrap: break-word;
+    word-break: break-all
+}

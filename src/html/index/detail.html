@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>Title</title>
+	<!--<link rel="stylesheet" type="text/css" href="../css/reset.css"/>-->
+	<!--<link rel="stylesheet" type="text/css" href="../css/common.css"/>-->
+	<link rel="stylesheet" type="text/css" href="../css/box.css"/>
+	<!--<link rel="stylesheet" type="text/css" href="../css/color.css"/>-->
+	<!--<link rel="stylesheet" type="text/css" href="../css/flex.css"/>-->
+	<!--<link rel="stylesheet" type="text/css" href="../css/text.css"/>-->
+	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
+	<style>
+	</style>
+</head>
+<body class="bg-white" style="overflow: hidden">
+<div>
+	<audio src="../img/music.mp3" preload="auto" autoplay="autoplay" id="mp3"></audio>
+	<div class="daoztx padding">
+		<div class="new-bg-tz">
+			<div class="daoz_top">
+				<div class="t_l_text">
+					<div><img src="../img/wei_xin.png" alt=""></div>
+					<div>微信·<span class="text-new">刚刚</span></div>
+				</div>
+				<div class="safe-img"><img src="../img/safe.png" alt=""></div>
+			</div>
+			<div class="daoz_bottom">
+				<div>
+					<div>微信红包</div>
+					<div class="text-ling">您获取了一个红包，现在去领取</div>
+				</div>
+				<div class="tz_img"><img src="../img/tongzhi.jpg" alt=""></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="full-width">
+	<img style="position: fixed;width: 0.7rem;top: 2%;left: 4%;z-index: 9999999" src="../img/back.png"
+		 onclick="jumpAd()">
+	<img src="../img/xingzhuang.png">
+</div>
+<div id="qrcode" style="display: none"></div>
+<div class="text-center margin-top margin-bottom">
+	<p class="text-black text-xxl text-bold margin-bottom">货拉拉的红包</p>
+	<p class="text-grey ">恭喜发财，大吉大利</p>
+	<p style="font-size: 3rem;color: rgba(207, 170 ,114, 1)" class="margin-top-xxl text-bold">100.00
+		<span style="font-size: 1.5rem">元</span>
+	</p>
+</div>
+<div id="review_boxs" class="padding" style="width: 100%">
+	<div id="comment1s"></div>
+	<div id="comment2s"></div>
+</div>
+<div id="modal" class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
+	 style="border-radius: 1rem;width: 80%;position: relative;top:-90%;left: 10%;border: 1px solid red;
+animation: shake 2s 2 linear;z-index: 11;opacity: 0;transition: 1s">
+	<p class="text-center text-blue text-bold margin-bottom text-xxl"><b id="gxn">恭喜您</b></p>
+	<p class="text-center text-xl hideMes">获得五一福利金</p>
+	<p class="margin-top-xl text-red margin-right hideMes"><b id="money" class="text-bold"
+															  style="font-size: 1.5rem"></b></p>
+	<p class="text-lg text-center margin-top hideMes" id="mess"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
+	<p class="margin-top-xl hideMess">完成后钱自动存到您的微信钱包</p>
+	<p class="margin-top-xl margin-bottom-xl" id="tempText">红包还剩
+		<b class="text-red margin-top-xl" id="sx"></b>
+	<p class="margin-top hideMess" style="margin-bottom: 10%">先到先得，领完为止，马上去分享领取</p>
+	<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
+	border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
+		长按屏幕发送到微信群
+	</div>
+</div>
+<div style="position: fixed;bottom: 0;width: 100%;text-align: center;z-index: 9999">
+	<img style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center;position: relative;
+    top: 7rem;" src="../img/zhiwen.png">
+
+	<div style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center" class="capmcz"></div>
+	<h1 style="font-size: 1.5rem;color: #449AFA;margin-bottom: 8%">长按屏幕分享</h1>
+</div>
+<img id="avatar" style="width: 100vw;height: 100vh;opacity: 0;position: fixed;top: 0px;left: 0;z-index: 999999"/>
+</body>
+<script type="text/javascript" src="../js/index.js"></script>
+</html>

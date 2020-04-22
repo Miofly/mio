@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><?php echo TITLE;?>-流量分配</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" href="../static/admin/css/allstyle.css">
+	<style>
+		.revise_icon1:hover,.delet_icon1:hover{ color:#fff;}
+		.wx_red{color:red;}
+		.wx_green{color:#09d009;}
+		.wx_gray{color:#aaa;}
+		.wx_show{display: block;}
+	</style>
+</head>
+<body>
+  	<!-- header -->
+  	<?php include_once ADMIN_PATH .'view/public/header.php';?>
+  	
+	<!-- left -->
+	<?php include_once ADMIN_PATH .'view/public/left.php';?>
+	<!-- right -->
+	<div class="mainright">
+		<div class="right_con">
+			<div class="right_title">
+				<span>流量分配</span>
+				<?php end($alltask);$key_last = key($alltask);?>
+				（<?php if($alltask):foreach($alltask as $key => $value):?>
+					<a href="task.php?admin_id=<?=$value['task_admin']?>"><?=isset($admin_users[$value['task_admin']]) ? $admin_users[$value['task_admin']]['name'] : '-'?>:<?=$value['random_chance']?>%</a><?=($key_last == $key?'':'&nbsp;&nbsp;')?>
+				<?php endforeach;endif;?>）
+			</div>
+			<div class="right_table">
+				<form action="" method="post" name="newsform">
+				<style type="text/css">
+				.table_style td {font-size: 13px;line-height: 23px;}
+				.table_style th {font-size: 90%;}	
+				</style>
+				<table cellpadding="0" cellspacing="0" class="table_style">
+					<thead>
+						<tr>
+							<th style="text-align: center;width:60px;">序号</th>
+							<th style="text-align: center;width:100px;">管理员</th>
+                          	<th class="padL15">分配地址</th>
+                          	<th class="padL15" style="width:100px;">概率/<?=$random_chance_all?>%</th>
+                          	<th class="padL15" style="width:280px;">备注</th>
+                          	<th style="text-align: center;width:200px;">修改时间</th>
+                          	<th style="text-align: center;width:180px;">过期时间</th>
+							<th class="padL15" style="width:180px;">操作</th>
+						</tr>
+					</thead>
+					<tbody id='template_tbody'><?php $w_key = 1;?>
+						<?php if($task):foreach ($task as $key => $value):?>
+						<?php $tr_class = $value['task_status'] ? '' : 'wx_gray';?>
+						<tr class="<?=$tr_class?>"><input type="hidden" name="ids[]" value='<?php echo $key;?>' />
+							<td align="center"><?php echo $w_key;$w_key++;?></td>
+							<td align="center"><span style="cursor: pointer;" onclick="location.href='task.php?admin_id=<?=$value['task_admin']?>'"><?=isset($admin_users[$value['task_admin']]) ? $admin_users[$value['task_admin']]['name'] : '-'?></span></td>
+							<td class="padL15" style="width: 500px;word-break: break-word;"><?php echo $value['appoint_dir'];?></td>
+							<td class="padL15"><?php echo $value['random_chance'];?>%</td>
+							<td class="padL15"><?php echo $value['task_desc'];?></td>
+							<td align="center"><?php echo $value['addtime'] ? date('Y-m-d H:i:s', $value['addtime']) : '-';?></td>
+							<td align="center">
+								<?php $t = $value['random_time'] ? intval(sprintf('%0.4f', $value['random_time'])*3600) : '';?>
+								<?php if($value['task_status'] == 0):?>
+									已禁用
+								<?php elseif(!$value['random_time']):?>
+									<span class="wx_green <?=$tr_class?>">永久</span>	
+								<?php elseif(($value['addtime'] + $t) > time()):?>
+									<span class="wx_green <?=$tr_class?>"><?=date('Y-m-d H:i:s', $value['addtime'] + $t);?></span>	
+								<?php else:?>	
+									<span class="wx_red <?=$tr_class?>">已过期</span><br>
+									<span class="wx_red <?=$tr_class?>"><?=date('Y-m-d H:i:s', $value['addtime'] + $t);?></span>	
+								<?php endif;?>
+							</td>
+							<td class="padL15" style="width: 250px;">
+								<?php if($value['task_status'] == 0):?>
+									<input onClick="able_task('<?=$key;?>',1)" type="button" class="revise_icon1" value="启用"/>
+								<?php else:?>
+									<input onClick="able_task('<?=$key;?>',0)" type="button" class="delet_icon1" value="禁用"/>
+								<?php endif;?>
+								<input  type="button"  onClick="edit('<?php echo $key;?>')" class="delet_icon1" value="编辑"/>
+								<input onClick="del('<?php echo $key;?>')" type="button"  class="delet_icon1" value="删除"/>
+							</td>
+						</tr>
+						<?php endforeach;endif;?>
+					</tbody>
+				</table>
+				<div style="margin-bottom:10px;color:#aaa;">
+					<span>域名检测：<?=ROOT_WEB?>task/jiance.php</span>
+				</div>
+					<button type="button" class="btn sure" onclick="add()">添加</button>
+					<?php if($adusers['right_desc'] == 'admin'):?>
+					<button type="button" class="btn sure" onclick="peizhi()">配置</button>
+					<?php endif;?>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<link rel="stylesheet" type="text/css" href="<?=get_static('datepickerZip/css/datepicker.css')?>">
+	<script src="<?=get_static('datepickerZip/js/moment.min.js')?>"></script>
+	<script src="<?=get_static('datepickerZip/js/datepicker.all.min.js')?>"></script>
+
+	<!-- 弹出层 -->
+	<div class="popdiv" id="wx1_popdiv">
+		<!-- 批量添加入口域名 -->
+		<div class="popdivYm" id="wx1_popdivYm" style="height: 600px;">
+			<form action="task.php?action=save&admin_id=<?=$admin_id?>" method="post" name="newsform" onsubmit="return checkform(this);">
+				<input type="hidden" name="task_id" id='task_id' value=''>
+				<div class="popdiv_title">流量分配<a href="javascript:void(0);" class="close_popdiv closeDIV icon"></a></div>
+				<div class="popdiv_con">
+					<div class="infor_list">
+						<div class="fl infor_title" style="width: 101px;">分配概率：</div>
+						<div class="fl"><input type="text" style="width:78px;" placeholder="1%~100%" name="random_chance" id="random_chance" class="input_box textbox" value=""></div>
+
+						<div class="fl infor_title" style="width: 71px;margin-left: 50px;">分类：</div>
+						<div class="fl">
+							<select id="task_admin_selecttj" name="task_admin_selecttj" class="input_box textbox" style="width: 100px;">
+								<?php foreach ($task_admin_tongji_arr as $key => $value):?>
+								<option value="<?=$key?>"><?=$value?></option>
+								<?php endforeach;?>	
+							</select>
+						</div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+
+					<div class="infor_list">
+						<div class="fl infor_title" style="width: 101px;">分配地址：</div>
+						<div class="fl input_zs">
+							<div class="fl"><input type="text" style="width:300px;" name="appoint_dir" id="appoint_dir" class="input_box textbox" value="" ></div>
+						</div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+
+					<div class="infor_list">
+						<div class="fl infor_title" style="width: 101px;">api请求：</div>
+						<div class="fl startUse">
+							<input id='aaaaa' name="task_custom_api" type="radio" class="radioimg" value="1"><span>是</span>
+							<input id='bbbbb' name="task_custom_api" type="radio" class="radioimg" value="0"><span>否</span>
+						</div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+
+					<div class="infor_list">
+						<div class="fl popdiv_bt">分配时长：</div>
+						<div class="fl">
+							<input type="text" id="random_time" name="random_time" style="width:300px;" placeholder="单位：小时（选填）"  class="input_box textbox" value="">
+						</div>
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="infor_list">
+						<div class="fl infor_title" style="width: 101px;">备注：</div>
+						<div class="fl">
+							<input type="text" id="task_desc" name="task_desc" style="width:300px;" class="input_box textbox" value="">
+						</div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+
+					<div class="infor_list">
+						<div class="fl infor_title" style="width: 101px;">统计代码：</div>
+						<div class="fl">
+							<textarea id="task_tongji" name="task_tongji" class="input_box textareabox" style="width:300px;height: 150px;"></textarea>
+						</div>
+						<div class="fl infor_prompt" style="padding-left: 101px;"><span class="red">注：外层无需加'script'标签</span></div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+
+					<div class="infor_list">
+						<div class="fl popdiv_bt"></div>
+						<div class="fl">
+							<button type="submit" class="btn sure">保存</button>
+							<button type="button" class="btn cancel closeDIV">取消</button>
+						</div>
+						<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script >
+
+	function able_task(id, status){
+		if(status == 1){
+			var msg = '确认启用？';
+		}else{
+			var msg = '确认禁用？';	
+		}
+		layer.confirm(msg, function(){
+			$.post('task.php?a=able_task', {id:id,task_status:status}, function(res){
+				if(res.code){
+					window.location.reload();
+				}
+				layer.msg(res.msg);
+			}, 'json');		
+		});
+	}
+
+	function checkform(obj){
+		var appoint_dir = $.trim($(obj).find("input[name=appoint_dir]").val());
+		var random_chance = $.trim($(obj).find("input[name=random_chance]").val());
+		var task_admin_selecttj = $.trim($(obj).find("#task_admin_selecttj").val()); 
+
+		if(appoint_dir == '' || random_chance == ''){
+			layer.msg('数据不完整');
+			return false;
+		}
+
+		if(parseInt(random_chance) <= 0){
+			layer.msg('数据不完整');
+			return false;	
+		}
+
+		if(parseInt(task_admin_selecttj) == 0){
+			layer.msg('数据不完整');
+			return false;	
+		}
+	}
+
+	function add(){
+		$("#wx1_popdiv").css({"width":"100%","height":"100%","opacity":"1"});
+		$("#wx1_popdivYm").show();
+
+		$('#wx1_popdiv input').val('');
+		$('#wx1_popdiv textarea').val('');
+		$('#wx1_popdiv #task_admin_selecttj').val(0);
+
+		console.log($("#aaaaa").val());
+		//console.log($("input[name='task_custom_api'][value=1]").val());
+		//$("input[name='task_custom_api'][value=1]").prop("checked",true);
+	}
+
+	function edit(path){
+		$("#wx1_popdiv").css({"width":"100%","height":"100%","opacity":"1"});
+		$("#wx1_popdivYm").show();
+		$("input[name='task_custom_api'][value=0]").prop("checked",true);
+		$.post('task.php?',{action:'edit',id:path},function(res){
+			var datas = JSON.parse(res.data);
+			$("#appoint_dir").val(datas.appoint_dir);
+			$("#random_chance").val(datas.random_chance +'%');
+			$("#random_time").val(datas.random_time);
+			$('#task_tongji').val(datas.task_tongji);
+			$('#task_desc').val(datas.task_desc);
+			$("#task_id").val(datas.id);
+			$('#task_admin_selecttj').val(datas.task_admin_selecttj);
+			$("input[name='task_custom_api'][value="+datas.task_custom_api+"]").prop("checked",true);
+		},'json');
+	}
+
+	function del(path){
+
+		if(typeof(path) == 'object'){
+			$(path).closest('tr').remove();
+			return;
+		}
+		var r=confirm('确认删除？');
+		if(r==true){
+			$.post('task.php?a=dels',{path:path},function(res){
+				if(res.code){
+					window.location.reload();
+				}else{
+					alert(res.msg);
+				}
+			},'json');
+		}
+
+	}
+</script>
+
+	<!-- 弹出层 -->
+	<div class="popdiv" id="wx2_popdiv">
+		<!-- 批量添加入口域名 -->
+		<div class="popdivYm" id="wx2_popdivYm" style="height: 350px;">
+			<div class="popdiv_title">配置<a href="javascript:void(0);" class="close_popdiv closeDIV icon"></a></div>
+			<div class="popdiv_con">
+				<div class="infor_list">
+					<div class="fl infor_title" style="width: 101px;">统计代码：</div>
+					<div class="fl">
+						<textarea id="sys_tongji" name="sys_tongji" id='newtask_name' class="input_box textareabox" style="width:349px;height: 150px;"><?=$sys_tongji?></textarea>
+					</div>
+					<div class="fl infor_prompt" style="padding-left: 101px;"><span class="red">注：外层无需加'script'标签</span></div>
+					<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+				</div>
+
+				<div class="infor_list">
+					<div class="fl popdiv_bt"></div>
+					<div class="fl">
+						<button type="button" onclick="savepeizhi()" class="btn sure">保存</button>
+						<button type="button" class="btn cancel closeDIV">取消</button>
+					</div>
+					<div class="clearfix"></div><!-- 清除浮动代码，不可删除 -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function peizhi(){
+			$("#wx2_popdiv").css({"width":"100%","height":"100%","opacity":"1"});
+			$("#wx2_popdivYm").show();		
+		}
+
+		function savepeizhi(){
+			var sys_tongji = $('#sys_tongji').val();
+			$.post('task.php?a=peizhi', {sys_tongji:sys_tongji}, function(res){
+				if(res.code){
+					location.href = 'task.php';
+				}
+				layer.msg(res.msg);
+			}, 'json');	
+		}
+	</script>
+</body>
+</html>

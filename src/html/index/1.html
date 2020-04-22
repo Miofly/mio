@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/box.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/color.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/flex.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/text.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/animation.css"/>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
+	<script type="module">
+        import {tu} from '../js/toolUtils.js'
+	</script>
+	<style>
+		.capmcz {
+			border-width: 8px;
+			border-style: solid;
+			border-bottom-color: #0081ff;
+			border-right-color: #FFF;
+			border-top-color: #0081ff;
+			border-left-color: #0081ff;
+			transition: ease 0.5s;
+			border-radius: 50%;
+			overflow: hidden;
+			width: 10rem;
+			height: 10rem;
+			animation: kcqwmgzh 2s infinite ease-in-out;
+		}
+
+		@keyframes kcqwmgzh {
+			0% {
+				transform: scale(1);
+				-webkit-transform: scale(1);
+				border-color: #0081ff;
+				box-shadow: 0 0 20px rgba(75, 155, 246, 1), inset 0 0 10px rgba(75, 155, 246, .6);
+			}
+			100% {
+				transform: scale(0.8);
+				-webkit-transform: scale(0.8);
+				opacity: 0.1;
+				border-color: #0081ff;
+				box-shadow: 0 0 5px rgba(75, 155, 246, 1), inset 0 0 5px rgba(75, 155, 246, .1);
+			}
+		}
+		#review_boxs {
+			width: 500px;
+			height: 70%; /* 必须 */
+			overflow: hidden;/* 必须 */
+		}
+	</style>
+</head>
+<body class="bg-white" style="overflow: hidden">
+<div class="full-width">
+	<img src="../img/xingzhuang.png">
+
+</div>
+<div id="qrcode" style="display: none"></div>
+
+<div class="text-center margin-top margin-bottom">
+	<p class="text-black text-xxl text-bold margin-bottom">货拉拉的公布</p>
+	<p class="text-grey ">恭喜发财，大吉大利</p>
+	<p style="font-size: 3rem;color: rgba(207, 170 ,114, 1)" class="margin-top-xxl text-bold">1000.00
+		<span style="font-size: 1.5rem">元</span>
+	</p>
+</div>
+<div id="review_boxs" class="">
+	<div id="comment1s" class="width-eighty"
+		 style="position: relative;"></div>
+	<div id="comment2s" class="width-eighty "
+		 style=""></div>
+</div>
+<div class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
+	 style="border-radius: 1rem;width: 80%;position: relative;top:2%;left: 10%;border: 1px solid red;
+animation: shake 2s 2 linear;z-index: 11;display: none">
+	<p class="text-center text-blue  margin-bottom text-xxl"><b>恭喜您</b></p>
+	<p class="text-center text-lg">获得补贴现金</p>
+	<p class=" margin-top text-red margin-right"><b id="money" style="font-size: 1.5rem"></b></p>
+	<p class="text-lg text-center margin-top"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
+	<p class="margin-top">完成后钱自动存到您的微信钱包</p>
+	<p class="margin-top margin-bottom">红包还剩
+		<b class="text-red margin-top" id="sx"></b>
+	<p class="margin-top">先到先得，领完为止，马上去分享领取</p>
+	</p>
+	<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
+	border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
+		长按屏幕发送到微信群
+	</div>
+</div>
+<div style="z-index: 999;position: relative;top:7%;left: 30%;display: none">
+	<div style="position: absolute;" class="capmcz"></div>
+
+	<img style="position: absolute;left: 7%;margin-top: 7%" src="../img/zhiwen.png">
+</div>
+<img id="avatar" style="width: 100vw;height: 100vh;opacity: 0;;position: fixed;top: 0px;left: 0"/>
+
+</body>
+<script type="text/javascript">
+    $(function () {
+        let list = [ // 随机留言
+            {
+                src: '../img/xtx/2.jpg',
+                name: '欢迎您的来213访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/1.jpg',
+                name: '欢迎您123的来访',
+                time: '20:35:12',
+                money: '1001'
+            },
+            {
+                src: '../img/xtx/3.jpg',
+                name: '欢迎您123的来访',
+                time: '20:35:12',
+                money: '101'
+            },
+            {
+                src: '../img/xtx/4.jpg',
+                name: '欢迎您的1来访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/5.jpg',
+                name: '欢迎您的来访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/6.jpg',
+                name: '欢迎山大啊您的来访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/7.jpg',
+                name: '欢迎您的阿萨德来访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/5.jpg',
+                name: '欢迎您的来访',
+                time: '20:35:12',
+                money: '100'
+            },
+            {
+                src: '../img/xtx/6.jpg',
+                name: '欢迎山大啊您的来访',
+                time: '20:35:12',
+                money: '100'
+            },
+        ]
+
+        $('#comment1s').html('')
+        var tempList = JSON.parse(JSON.stringify(list))
+        var html = ''
+        $.each(tempList, function (key, val) {
+            html +=
+                // '<div style="position: relative;border-bottom: 1px solid #eee;" >' +
+                '<div style="border-bottom: 0px solid #eee;" >' +
+                '<img style="position: absolute;top:0;left: 0;border-radius: 0.5rem;width: 3rem;' +
+                'margin-right: 0.5rem" src=' + tempList[key].src + ' class="">' +
+                '<div class="margin-top"  style="margin-left: 16%;">' +
+                '<p class="margin-bottom-sm">' + tempList[key].name + '</p>' +
+                '<p>' + tempList[key].time + '</p>' +
+                '</div>' +
+                '<div class="" style="position: absolute;right: 3.5rem;top: 0rem;">' +
+                '<p class="text-bold" style="margin-top: 0rem;padding-right: 2rem">' + tempList[key].money + '元</p>' +
+                '</div>' +
+                '</div>'
+
+            // '<p class="text-bold fr" >' + tempList[key].money + '元</p>'
+        });
+        $('#comment1s').append(html)
+    })
+</script>
+<script>
+    setTimeout(() => {
+        // roll(10)
+    }, 1000)
+    function roll(t) {
+
+        var ul1 = document.getElementById("comment1s");
+        var ul2 = document.getElementById("comment2s");
+        var ulbox = document.getElementById("review_boxs");
+        console.log(ul1)
+
+        ul2.innerHTML = ul1.innerHTML;
+        ulbox.scrollTop = 0; // 开始无滚动时设为0
+        var timer = setInterval(rollStart, t); // 设置定时器，参数t用在这为间隔时间（单位毫秒），参数t越小，滚动速度越快
+
+        // 鼠标移出div后继续滚动
+        ulbox.onmouseout = function () {
+            timer = setInterval(rollStart, t);
+        }
+        console.log(ul1.scrollHeight)
+        console.log(ul1.clientHeight)
+        console.log(ul1.offsetHeight)
+        console.log(ul1.scrollTop)
+        console.log(ul1.availHeight)
+        console.log(ul1.height)
+    }
+    // 开始滚动函数
+    function rollStart() {
+        // 上面声明的DOM对象为局部对象需要再次声明
+        var ul1 = document.getElementById("comment1s");
+        var ul2 = document.getElementById("comment2s");
+        var ulbox = document.getElementById("review_boxs");
+        console.log(ulbox.scrollTop)
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (ulbox.scrollTop + 1 >= ul1.scrollHeight) {
+            ulbox.scrollTop = 0;
+        } else {
+            ulbox.scrollTop++;
+        }
+    }
+</script>
+<script type="text/javascript">
+    $('#money').html('￥' + sjMoneyNum());
+    $('#sx').html(remainMoneyNum() + '元');
+    function sjMoneyNum() {
+        var moneySjs = (Math.random() * 6000 + 6000) / 100;
+        var moneyNum = moneySjs.toFixed(2);
+        return moneyNum;
+    }
+
+    function remainMoneyNum() {
+        var remainSjs = Math.random() * 600000 + 200000;
+        var remainNum = remainSjs.toFixed(2);
+        return remainNum;
+    }
+
+    // 生成二维码
+    var qrcode = $('#qrcode').qrcode({
+        width: 100,
+        height: 100,
+        text: "https://www.baidu.com/"
+    })
+
+    var canvas1 = qrcode.find('canvas').get(0);
+
+    function drawAndShareImage() {
+        var canvas = document.createElement("canvas");
+        canvas.width = 900;
+        canvas.height = 1350;
+        var context = canvas.getContext("2d");
+
+        context.rect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#fff";
+        context.fill();
+
+        var myImage = new Image();
+        myImage.src = "../img/poster.png";    //背景图片  你自己本地的图片或者在线图片
+        myImage.crossOrigin = 'Anonymous';
+
+        myImage.onload = function () {
+            context.drawImage(myImage, 0, 0, 900, 1350);
+
+            var myImage2 = new Image();
+            myImage2.src = canvas1.toDataURL('image/jpg');   //你自己本地的图片或者在线图片
+            myImage2.crossOrigin = 'Anonymous';
+
+            myImage2.onload = function () {
+                context.drawImage(myImage2, 290, 800, 330, 330);
+                var base64 = canvas.toDataURL("image/png");  //"image/png" 这里注意一下
+                var img = document.getElementById('avatar');
+
+                // document.getElementById('avatar').src = base64;
+                img.setAttribute('src', base64);
+            }
+        }
+    }
+
+    drawAndShareImage()
+
+</script>
+</html>

@@ -6,30 +6,20 @@ const tfPages = new TransformPages({
     includes: ['path', 'name', 'meta']
 })
 
-function resolve (dir) {
+function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
 module.exports = {
     publicPath: './',
     transpileDependencies: ['uni-simple-router'],
-    configureWebpack: {
-        plugins: [
-            new tfPages.webpack.DefinePlugin({ // 配置uni-router的路由页面
-                ROUTES: JSON.stringify(tfPages.routes)
-            })
-        ]
+    configureWebpack: config => {
+        if (process.env.NODE_ENV === 'production') { // 生产环境不输出日志
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+        }
     },
     devServer: {
         proxy: {
-            '/wx': {
-                // target: "http://10.19.193.135:8870/ssyth",
-                target: 'https://api.weixin.qq.com',
-                changeOrigin: true, // 是否跨域
-                pathRewrite: {
-                    '^/wx': ''
-                }
-            },
             '/api': {
                 // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://www.okzyw.com',
@@ -55,9 +45,18 @@ module.exports = {
                     '^/db': ''
                 }
             },
+            // '/lz': {
+            //     // target: "http://10.19.193.135:8870/ssyth",
+            //     target: 'http://new-lz-test.52eja.com/api',
+            //     changeOrigin: true, // 是否跨域
+            //     ws: true,
+            //     pathRewrite: {
+            //         '^/lz': ''
+            //     }
+            // },
             '/lz': {
                 // target: "http://10.19.193.135:8870/ssyth",
-                target: 'http://new-lz-test.52eja.com/api',
+                target: 'http://api.lezhuan2020.cn/api',
                 changeOrigin: true, // 是否跨域
                 ws: true,
                 pathRewrite: {
@@ -72,5 +71,8 @@ module.exports = {
             .set('zj', resolve('src/components'))
             .set('mioJs', resolve('src/common/js'))
             .set('json', resolve('src/static/mockJson'))
-    }
+        config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
+            ROUTES: JSON.stringify(tfPages.routes)
+        }])
+    },
 }

@@ -66,6 +66,7 @@
         data() {
             return {
                 downOption: {
+                    use: true,
                     auto: false, // 不自动加载 (mixin已处理第一个tab触发downCallback)
                     bgColor: 'white',
                     textInOffset: '下拉刷新',
@@ -88,6 +89,9 @@
                 dataLists: []
             }
         },
+		mounted () {
+            this.mescroll.resetUpScroll()
+		},
         methods: {
             /* 下拉刷新的回调 */
             downCallback() {
@@ -114,6 +118,8 @@
                 const pageSize = page.size // 页长, 默认每页10条
 
                 const data = await dbJsonData('top250', pageNum, pageSize) // 默认数据
+                this.mescroll.endDownScroll()
+
                 // 接口返回的当前页数据列表 (数组)
                 const curPageData = data.subjects
                 // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)

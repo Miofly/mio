@@ -13,7 +13,7 @@ const ui = {
         })
     },
     // 提示信息
-    showToast (title = '操作成功', icon = 'none', duration = 1300, mask = true) {
+    showToast (title = '操作成功', icon = 'none', duration = 1300, mask = false) {
         uni.showToast({
             title: title,
             icon: icon,

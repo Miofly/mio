@@ -3,6 +3,7 @@
  * 2020-03-15 wenju
  * http://www.mescroll.com
  */
+import {ui} from 'mioJs/uniapp'
 
 export default function MeScroll(options, isScrollBody) {
     const me = this
@@ -49,7 +50,7 @@ MeScroll.prototype.extendDownScroll = function (optDown) {
         autoShowLoading: false, // 如果设置auto=true(在初始化完毕之后自动执行下拉刷新的回调),那么是否显示下拉刷新的进度; 默认false
         isLock: false, // 是否锁定下拉刷新,默认false;
         offset: 80, // 在列表顶部,下拉大于80px,松手即可触发下拉刷新的回调
-        startTop: 100, // scroll-view滚动到顶部时,此时的scroll-top不一定为0, 此值用于控制最大的误差
+        startTop: 0, // scroll-view滚动到顶部时,此时的scroll-top不一定为0, 此值用于控制最大的误差
         fps: 80, // 下拉节流 (值越大每秒刷新频率越高)
         inOffsetRate: 1, // 在列表顶部,下拉的距离小于offset时,改变下拉区域高度比例;值小于1且越接近0,高度变化越小,表现为越往下越难拉
         outOffsetRate: 0.2, // 在列表顶部,下拉的距离大于offset时,改变下拉区域高度比例;值小于1且越接近0,高度变化越小,表现为越往下越难拉
@@ -228,6 +229,7 @@ MeScroll.prototype.touchmoveEvent = function (e) {
         // 可下拉的条件
         if (!me.inTouchend && !me.isDownScrolling && !me.optDown.isLock && (!me.isUpScrolling || (me.isUpScrolling &&
             me.optUp.isBoth))) {
+
             // 下拉的角度是否在配置的范围内
             const angle = me.getAngle(me.lastPoint, curPoint) // 两点之间的角度,区间 [0,90]
             if (angle < me.optDown.minAngle) return // 如果小于配置的角度,则不往下执行下拉刷新
@@ -248,23 +250,37 @@ MeScroll.prototype.touchmoveEvent = function (e) {
 
             // 下拉距离  < 指定距离
             if (me.downHight < me.optDown.offset) {
+
                 if (me.movetype !== 1) {
                     me.movetype = 1 // 加入标记,保证只执行一次
                     me.optDown.inOffset && me.optDown.inOffset(me) // 进入指定距离范围内那一刻的回调,只执行一次
                     me.isMoveDown = true // 标记下拉区域高度改变,在touchend重置回来
                 }
                 me.downHight += diff * me.optDown.inOffsetRate // 越往下,高度变化越小
-
+                setTimeout(() => {
+                    ui.showToast('这里是否触发4')
+                }, 100)
                 // 指定距离  <= 下拉距离
             } else {
+
                 if (me.movetype !== 2) {
+                    setTimeout(() => {
+                        ui.showToast('这里是否触发55')
+                    }, 500)
                     me.movetype = 2 // 加入标记,保证只执行一次
                     me.optDown.outOffset && me.optDown.outOffset(me) // 下拉超过指定距离那一刻的回调,只执行一次
                     me.isMoveDown = true // 标记下拉区域高度改变,在touchend重置回来
                 }
                 if (diff > 0) { // 向下拉
+
                     me.downHight += Math.round(diff * me.optDown.outOffsetRate) // 越往下,高度变化越小
+                    setTimeout(() => {
+                        ui.showToast(me.downHight,' me.downHight')
+                    }, 10)
                 } else { // 向上收
+                    setTimeout(() => {
+                        ui.showToast('这里是否触发777')
+                    }, 900)
                     me.downHight += diff // 向上收回高度,则向上滑多少收多少高度
                 }
             }
@@ -280,12 +296,21 @@ MeScroll.prototype.touchmoveEvent = function (e) {
 /* 列表touchend事件 */
 MeScroll.prototype.touchendEvent = function (e) {
     if (!this.optDown.use) return
+
     // 如果下拉区域高度已改变,则需重置回来
     if (this.isMoveDown) {
         if (this.downHight >= this.optDown.offset) {
+            setTimeout(() => {
+                // ui.showToast('这里是否触发3333')
+            }, 1000)
+
             // 符合触发刷新的条件
             this.triggerDownScroll()
         } else {
+            setTimeout(() => {
+                // ui.showToast('这里是否触发33')
+            }, 200)
+
             // 不符合的话 则重置
             this.downHight = 0
             this.optDown.endDownScroll && this.optDown.endDownScroll(this)
@@ -346,6 +371,9 @@ MeScroll.prototype.getAngle = function (p1, p2) {
 
 /* 触发下拉刷新 */
 MeScroll.prototype.triggerDownScroll = function () {
+    setTimeout(() => {
+        // ui.showToast('这里是否触发2')
+    }, 2000)
     if (this.optDown.beforeLoading && this.optDown.beforeLoading(this)) {
         // return true则处于完全自定义状态
     } else {
@@ -356,6 +384,9 @@ MeScroll.prototype.triggerDownScroll = function () {
 
 /* 显示下拉进度布局 */
 MeScroll.prototype.showDownScroll = function () {
+    setTimeout(() => {
+        // ui.showToast('这里是否触发1')
+    }, 2500)
     this.isDownScrolling = true // 标记下拉中
     if (this.optDown.native) {
         uni.startPullDownRefresh() // 系统自带的下拉刷新
@@ -375,6 +406,9 @@ MeScroll.prototype.onPullDownRefresh = function () {
 
 /* 结束下拉刷新 */
 MeScroll.prototype.endDownScroll = function () {
+    setTimeout(() => {
+        // ui.showToast('这里是否触发')
+    }, 3500)
     if (this.optDown.native) { // 结束原生下拉刷新
         this.isDownScrolling = false
         this.optDown.endDownScroll && this.optDown.endDownScroll(this)
@@ -791,7 +825,7 @@ MeScroll.prototype.preventDefault = function (e) {
 }
 
 /* 是否允许下拉回弹(橡皮筋效果); true或null为允许; false禁止bounce */
-MeScroll.prototype.setBounce = function (isBounce) {
+MeScroll.prototype.setBounce = function (isBounce = true) {
     // #ifdef H5
     if (isBounce === false) {
         this.optUp.isBounce = false // 禁止

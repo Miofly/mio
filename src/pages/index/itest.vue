@@ -1,67 +1,103 @@
-<template>
-	<div class="flex-box-column-center pdf">
-		<p class="margin-top bg-red" ref="copyBtn"
-		   @click="copy($event)"
-		>复制发票地址</p>
-	</div>
-	<!--@touchstart="copy($event)"-->
+<template xlang="wxml">
+	<view class="container">
+		<tki-qrcode :show="true" :size="200" unit="upx" cid="qrcode1" ref="qrcode"
+					val="https://ext.dcloud.net.cn/plugin?id=39"
+					icon="/static/images/lz/lz_bg.png" pdground="rgba(50, 50, 200, 1)"
+					:iconSize="40" :onval="onval" :loadMake="true" :usingComponents="true"
+					@result="qrR" />
+
+		<!--  -->
+
+		<!--<tki-qrcode cid="qrcode2" ref="qrcode2" val="http://www.baidu.com" :size="size" :onval="onval"-->
+					<!--:loadMake="loadMake" :usingComponents="true" @result="qrR"/>-->
+
+		<input class="uni-input" placeholder="请输入要生成的二维码内容" v-model="val"/>
+
+		<button type="primary" @tap="creatQrcode">生成二维码</button>
+		<button type="primary" @tap="saveQrcode">保存到图库</button>
+		<button type="warn" @tap="clearQrcode">清除二维码</button>
+		<button type="warn" @tap="ifQrcode">显示隐藏二维码</button>
+	</view>
 </template>
 <script>
-    import Clipboard from 'clipboard'
-    import {
-        commonGet
-    } from '@/api'
-
+	import {dateUtils} from 'mioJs/dateUtils'
     export default {
+	    onLoad () {
+	        console.log(dateUtils.today({ymrSign: true}))
+	    },
         data() {
             return {
-                pdfUrl: '213321123213', // pdf的网址
-                clipboard: null, // clipboard的实例
-
+                ifShow: true,
+                val: 'http://www.baidu.com', // 要生成的二维码值
+                size: 200, // 二维码大小
+                unit: 'upx', // 单位
+                background: '#b4e9e2', // 背景色
+                foreground: '#309286', // 前景色
+                pdground: '#32dbc6', // 角标色
+                icon: '', // 二维码图标
+                iconsize: 40, // 二维码图标大小
+                lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
+                onval: false, // val值变化时自动重新生成二维码
+                loadMake: true, // 组件加载完成后自动生成二维码
+                src: '' // 二维码生成后的图片地址或base64
             }
-        },
-        mounted() {
-            this.clipboard = new Clipboard(this.$refs.copyBtn, {text: () => this.pdfUrl})
         },
         methods: {
-            async copy(e, text) {
-                const data = await commonGet('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa4cec9585a0c00d6&secret=4e3a25657f654f522a820189dc41138a')
-                this.pdfUrl = data.expires_in
-                this.clipboard.on('success', e => {
-                    this.ui.showToast('复制成功')
-                })
-                this.clipboard.on('error', e => {
-                    this.ui.showToast('213312')
-                })
-            }
-        }
+
+            creatQrcode() {
+                this.$refs.qrcode._makeCode()
+            },
+            saveQrcode() {
+                this.$refs.qrcode._saveCode()
+            },
+            qrR(res) {
+                this.src = res
+            },
+            clearQrcode() {
+                this.$refs.qrcode._clearCode()
+                this.val = ''
+            },
+            ifQrcode() {
+                this.ifShow = !this.ifShow
+            },
+        },
     }
 </script>
-<style scoped>
-	.pdf {
-		img {
-			width: 106px;
-			margin: 200px auto 30px;
-		}
 
-		.pdf-href {
-			margin: 60px auto 20px;
-			padding: 0 80px;
-			word-break: break-all;
-			text-align: center;
-		}
+<style>
+	/* @import "../../../common/icon.css"; */
+	.container {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
 
-		.pdf-btn {
-			width: 294px;
-			height: 80px;
-			font-size: 32px;
-			color: #fff;
-			border-radius: 40px;
-			background: #1b82d2;
-			margin-top: 60px;
-			box-shadow: 0.05rem 0.05rem 0.1rem #cde4f5;
-			cursor: pointer;
-			margin: 60px auto 40px;
-		}
+	.qrimg {
+		display: flex;
+		justify-content: center;
+	}
+
+	.qrimg-i {
+		margin-right: 10px;
+	}
+
+	slider {
+		width: 100%;
+	}
+
+	input {
+		width: 100%;
+		margin-bottom: 20 upx;
+	}
+
+	.btns {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	button {
+		width: 100%;
+		margin-top: 10 upx;
 	}
 </style>

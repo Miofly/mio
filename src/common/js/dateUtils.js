@@ -12,6 +12,7 @@ const monthDayShift = (monthNum, dayNum) => new Date(
         ).setDate(dayNum)
     ) // 控制月/日
 
+const today = dateShift(0) // 今天
 const yesterdayTime = dateShift(1) // 昨天
 const beforeYesterdayTime = dateShift(2) // 前天
 const beforeSevenDays = dateShift(7) // 七天前
@@ -85,6 +86,10 @@ const dateUtils = {
         if (allTime) return dateStr + timeStr
         if (allTimeWeek) return dateHaveSign + ' ' + timeHaveSign + ' ' + this.weekStr(week)
         if (allTimeSign) return dateHaveSign + ' ' + timeHaveSign
+    },
+
+    today (params) {
+        return this.timeFun({date: today, ...params})
     },
     beforeWeekFirst (params) { // 上周第一天
         return this.timeFun({date: beforeWeekFirstDay, ...params})

@@ -64,3 +64,7 @@
     bottom: 0;
     z-index: 99999;
 }
+
+[v-cloak] {
+    display: none !important;
+}

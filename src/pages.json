@@ -102,7 +102,6 @@
             "name": "timeThree",
             "style": {}
         },
-
         {
             "path": "pages/index/loadRefresh/loadHome",
             "name": "loadHome",
@@ -116,7 +115,9 @@
         {
             "path": "pages/index/loadRefresh/loadTwo",
             "name": "loadTwo",
-            "style": {}
+            "style": {
+                "enablePullDownRefresh": false
+            }
         },
         {
             "path": "pages/index/loadRefresh/loadThree",

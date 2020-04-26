@@ -1,6 +1,6 @@
 <template>
     <view class="container bg-white">
-
+		<!--#ifdef h5-->
 		<view class="cu-list grid" :class="['col-' + 5, true?'':'no-border']">
 			<view class="cu-item" v-for="(item, index) in [
                     {icon: 'weixin', color: 'red', badge: 120, name: 'weixin'},
@@ -22,37 +22,37 @@
 				<text>{{item.name}}</text>
 			</view>
 		</view>
-        <!--九格宫列表-->
-        <view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-            <view class="cu-item" v-for="(item,index) in listData" :key="index">
-                <view class="fa" :class="['fa-' + item.icon,'text-' + item.color]">
-                    <view class="cu-tag badge" v-if="item.badge!=0">
-                        <block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
-                    </view>
-                </view>
-                <text>{{item.name}}</text>
-            </view>
-        </view>
-        <!--菜单型列表-->
-        <view class="bg-gradual-pink text-black padding">
-            <view class="cu-list menu" :class="[true?'sm-border':'', false?'card-menu margin-top':'']">
-                <view class="cu-item" v-for="(keywordList, index) in keywordLists" :key="index">
-                    <view class="content padding-tb-sm">
-                        <view>
-                            <text class="fa fa-video-camera text-blue margin-right-sm"></text>
-                            <text>{{keywordList.name}}</text>
-                        </view>
-                    </view>
+		<!--九格宫列表-->
+		<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
+			<view class="cu-item" v-for="(item,index) in listData" :key="index">
+				<view class="fa" :class="['fa-' + item.icon,'text-' + item.color]">
+					<view class="cu-tag badge" v-if="item.badge!=0">
+						<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
+					</view>
+				</view>
+				<text>{{item.name}}</text>
+			</view>
+		</view>
+		<!--菜单型列表-->
+		<view class="bg-gradual-pink text-black padding">
+			<view class="cu-list menu" :class="[true?'sm-border':'', false?'card-menu margin-top':'']">
+				<view class="cu-item" v-for="(keywordList, index) in keywordLists" :key="index">
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="fa fa-video-camera text-blue margin-right-sm"></text>
+							<text>{{keywordList.name}}</text>
+						</view>
+					</view>
 
-                    <view class="action">
-                        <button @tap="detail(keywordList.url)" :class="['cu-btn', 'bg-blue', 'shadow']">
-                            播放
-                        </button>
-                    </view>
-                    <view v-show="true" class="fa fa-angle-right fa-2x margin-left"></view>
-                </view>
-            </view>
-        </view>
+					<view class="action">
+						<button @tap="detail(keywordList.url)" :class="['cu-btn', 'bg-blue', 'shadow']">
+							播放
+						</button>
+					</view>
+					<view v-show="true" class="fa fa-angle-right fa-2x margin-left"></view>
+				</view>
+			</view>
+		</view>
 
 		<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 			<view v-for="(item, index) in
@@ -115,6 +115,8 @@
 				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
 		</view>
+		<!--#endif-->
+
     </view>
 </template>
 

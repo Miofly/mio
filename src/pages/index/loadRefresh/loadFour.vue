@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<!--#ifdef h5-->
 		<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 			<view v-for="(item, index) in
 				[{name: '列表一', icon: 'video-camera'},
@@ -66,6 +67,7 @@
 		</mescroll-uni>
 	</view>
 
+	<!--#endif-->
 </template>
 
 <script>

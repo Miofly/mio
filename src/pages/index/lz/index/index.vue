@@ -111,7 +111,9 @@
        commonPost
     } from '@/api'
     import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
+	// #ifdef h5
     import NativeShare from 'nativeshare'
+    // #endif
     import {mapState} from 'vuex'
 
     export default {
@@ -160,9 +162,10 @@
 				const data = await commonPost('/title/title-share', {id: id})
 				console.log(data.data.substring(0, data.data.length - 1))
             },
+			// #ifdef h5
             async jumpWx (title, desc, pic, id) {
                 const data = await commonPost('/title/title-share', {id: id})
-				const url = data.data
+                const url = data.data
                 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     this.ui.showToast('图文分享请打开QQ浏览器', 2)
                 } else {
@@ -180,6 +183,7 @@
                     }
                 }
             },
+			// #endif
             jumpPage () {
                 this.router.replace({name: 'addItem'})
                 console.log(11)

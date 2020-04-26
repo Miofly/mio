@@ -8,6 +8,16 @@
             }
         },
         {
+            "path": "pages/index/song/song",
+            "style": {},
+            "name": "song"
+        },
+        {
+            "path": "pages/index/song/songList",
+            "style": {},
+            "name": "songList"
+        },
+        {
             "path": "pages/index/lz/module/addItem",
             "style": {},
             "name": "addItem"
@@ -210,11 +220,6 @@
             "style": {}
         },
         {
-            "path": "pages/module/list",
-            "name": "list",
-            "style": {}
-        },
-        {
             "path": "pages/module/scrollMessage",
             "name": "scrollMessage",
             "style": {}
@@ -276,11 +281,11 @@
         "list": [
             {
                 "name": "test",
-                "path": "pages/module/test"
+                "path": "pages/index/song/song"
             },
             {
                 "name": "list",
-                "path": "pages/module/list"
+                "path": "pages/index/song/songList"
             }
         ]
     },

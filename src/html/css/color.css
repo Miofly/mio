@@ -1,0 +1,542 @@
+.solid-red {
+    color: rgb(255, 0, 0);
+}
+
+.solid-blue {
+    color: rgb(0, 0, 255);
+}
+
+.solid-green {
+    color: rgb(0, 255, 0);
+}
+
+.bg-red {
+    background-color: #e54d42;
+    color: #ffffff;
+}
+
+.bg-orange {
+    background-color: #f37b1d;
+    color: #ffffff;
+}
+
+.bg-yellow {
+    background-color: #fbbd08;
+    color: #333333;
+}
+
+.bg-olive {
+    background-color: #8dc63f;
+    color: #ffffff;
+}
+
+.bg-green {
+    background-color: #39b54a;
+    color: #ffffff;
+}
+
+.bg-cyan {
+    background-color: #1cbbb4;
+    color: #ffffff;
+}
+
+.bg-blue {
+    background-color: #0081ff;
+    color: #ffffff;
+}
+
+.bg-purple {
+    background-color: #6739b6;
+    color: #ffffff;
+}
+
+.bg-mauve {
+    background-color: #9c26b0;
+    color: #ffffff;
+}
+
+.bg-pink {
+    background-color: #e03997;
+    color: #ffffff;
+}
+
+.bg-brown {
+    background-color: #a5673f;
+    color: #ffffff;
+}
+
+.bg-grey {
+    background-color: #8799a3;
+    color: #ffffff;
+}
+
+.bg-gray {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+.bg-black {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.bg-white {
+    background-color: #ffffff;
+    color: #666666;
+}
+
+.bg-shadeTop {
+    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
+    color: #ffffff;
+}
+
+.bg-shadeBottom {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
+    color: #ffffff;
+}
+
+.bg-red.light {
+    color: #e54d42;
+    background-color: #fadbd9;
+}
+
+.bg-orange.light {
+    color: #f37b1d;
+    background-color: #fde6d2;
+}
+
+.bg-yellow.light {
+    color: #fbbd08;
+    background-color: #fef2ced2;
+}
+
+.bg-olive.light {
+    color: #8dc63f;
+    background-color: #e8f4d9;
+}
+
+.bg-green.light {
+    color: #39b54a;
+    background-color: #d7f0dbff;
+}
+
+.bg-cyan.light {
+    color: #1cbbb4;
+    background-color: #d2f1f0;
+}
+
+.bg-blue.light {
+    color: #0081ff;
+    background-color: #cce6ff;
+}
+
+.bg-purple.light {
+    color: #6739b6;
+    background-color: #e1d7f0;
+}
+
+.bg-mauve.light {
+    color: #9c26b0;
+    background-color: #ebd4ef;
+}
+
+.bg-pink.light {
+    color: #e03997;
+    background-color: #f9d7ea;
+}
+
+.bg-brown.light {
+    color: #a5673f;
+    background-color: #ede1d9;
+}
+
+.bg-grey.light {
+    color: #8799a3;
+    background-color: #e7ebed;
+}
+
+.bg-gradual-red {
+    background-image: linear-gradient(45deg, #f43f3b, #ec008c);
+    color: #ffffff;
+}
+
+.bg-gradual-orange {
+    background-image: linear-gradient(45deg, #ff9700, #ed1c24);
+    color: #ffffff;
+}
+
+.bg-gradual-green {
+    background-image: linear-gradient(45deg, #39b54a, #8dc63f);
+    color: #ffffff;
+}
+
+.bg-gradual-purple {
+    background-image: linear-gradient(45deg, #9000ff, #5e00ff);
+    color: #ffffff;
+}
+
+.bg-gradual-pink {
+    background-image: linear-gradient(45deg, #ec008c, #6739b6);
+    color: #ffffff;
+}
+
+.bg-gradual-blue {
+    background-image: linear-gradient(45deg, #0081ff, #1cbbb4);
+    color: #ffffff;
+}
+
+.bg-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-mask {
+    background-color: #333333;
+    position: relative;
+}
+
+.bg-mask::after {
+    content: "";
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.bg-mask view,
+.bg-mask cover-view {
+    z-index: 5;
+    position: relative;
+}
+
+.bg-video {
+    position: relative;
+}
+
+.bg-video video {
+    display: block;
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.text-red,
+.line-red,
+.lines-red {
+    color: #e54d42;
+}
+
+.text-orange,
+.line-orange,
+.lines-orange {
+    color: #f37b1d;
+}
+
+.text-yellow,
+.line-yellow,
+.lines-yellow {
+    color: #fbbd08;
+}
+
+.text-olive,
+.line-olive,
+.lines-olive {
+    color: #8dc63f;
+}
+
+.text-green,
+.line-green,
+.lines-green {
+    color: #39b54a;
+}
+
+.text-cyan,
+.line-cyan,
+.lines-cyan {
+    color: #1cbbb4;
+}
+
+.text-blue,
+.line-blue,
+.lines-blue {
+    color: #0081ff;
+}
+
+.text-purple,
+.line-purple,
+.lines-purple {
+    color: #6739b6;
+}
+
+.text-mauve,
+.line-mauve,
+.lines-mauve {
+    color: #9c26b0;
+}
+
+.text-pink,
+.line-pink,
+.lines-pink {
+    color: #e03997;
+}
+
+.text-brown,
+.line-brown,
+.lines-brown {
+    color: #a5673f;
+}
+
+.text-grey,
+.line-grey,
+.lines-grey {
+    color: #8799a3;
+}
+
+.text-gray,
+.line-gray,
+.lines-gray {
+    color: #aaaaaa;
+}
+
+.text-black,
+.line-black,
+.lines-black {
+    color: #333333;
+}
+
+.text-white,
+.line-white,
+.lines-white {
+    color: #ffffff;
+}
+
+.line-red::after,
+.lines-red::after {
+    border-color: #e54d42;
+}
+
+.line-orange::after,
+.lines-orange::after {
+    border-color: #f37b1d;
+}
+
+.line-yellow::after,
+.lines-yellow::after {
+    border-color: #fbbd08;
+}
+
+.line-olive::after,
+.lines-olive::after {
+    border-color: #8dc63f;
+}
+
+.line-green::after,
+.lines-green::after {
+    border-color: #39b54a;
+}
+
+.line-cyan::after,
+.lines-cyan::after {
+    border-color: #1cbbb4;
+}
+
+.line-blue::after,
+.lines-blue::after {
+    border-color: #0081ff;
+}
+
+.line-purple::after,
+.lines-purple::after {
+    border-color: #6739b6;
+}
+
+.line-mauve::after,
+.lines-mauve::after {
+    border-color: #9c26b0;
+}
+
+.line-pink::after,
+.lines-pink::after {
+    border-color: #e03997;
+}
+
+.line-brown::after,
+.lines-brown::after {
+    border-color: #a5673f;
+}
+
+.line-grey::after,
+.lines-grey::after {
+    border-color: #8799a3;
+}
+
+.line-gray::after,
+.lines-gray::after {
+    border-color: #aaaaaa;
+}
+
+.line-black::after,
+.lines-black::after {
+    border-color: #333333;
+}
+
+.line-white::after,
+.lines-white::after {
+    border-color: #ffffff;
+}
+
+.text-black-filter-nine {
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.text-black-filter-eight {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.text-black-filter-seven {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.text-black-filter-six {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.text-black-filter-five {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.text-black-filter-four {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.text-black-filter-three {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.text-black-filter-two {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.text-black-filter-one {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+.text-white-filter-nine {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.text-white-filter-eight {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.text-white-filter-seven {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.text-white-filter-six {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.text-white-filter-five {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.text-white-filter-four {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.text-white-filter-three {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.text-white-filter-two {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.text-white-filter-one {
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.background-black-filter-nine {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.background-black-filter-eight {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.background-black-filter-seven {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.background-black-filter-six {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.background-black-filter-five {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.background-black-filter-four {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.background-black-filter-three {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.background-black-filter-two {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.background-black-filter-one {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.background-white-filter-nine {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.background-white-filter-eight {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.background-white-filter-seven {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.background-white-filter-six {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.background-white-filter-five {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.background-white-filter-four {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.background-white-filter-three {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.background-white-filter-two {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.background-white-filter-one {
+    background: rgba(255, 255, 255, 0.1);
+}

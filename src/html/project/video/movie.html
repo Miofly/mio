@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="../../css/video.css"/>
+	<script src="../../js/vue.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                dpr = 1,
+                scale = 1 / dpr,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var metaEl = doc.createElement('meta');
+            metaEl.name = 'viewport';
+            metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+            docEl.firstElementChild.appendChild(metaEl);
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 375) {
+                    width = 375 * dpr;
+                }
+                // 乘以100，px : rem = 100 : 1
+                docEl.style.fontSize = 100 * (width / 375) + 'px';
+            };
+            recalc()
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+	</script>
+	<style>
+
+	</style>
+</head>
+<body style="font-size: 0.05rem;">
+<div id="app" class="bg-black">
+	<!--<div class="text-center bg-black" style="position: relative;top: 0;left: 0;width:100%;height:2.12rem;line-height: 2.12rem;"-->
+		<!--:style="{background: 'url('+ videoSrc +') no-repeat', backgroundSize: '100% 100%'}">-->
+		<!--<img class="margin-center inline-block ver-center" style="line-height: 2.12rem;width: 0.58rem;height: 0.58rem" :src="bfImg">-->
+	<!--</div>-->
+
+	<!--<video v-show="!coverImg" custom-cache="false" :title="videoTitle" enable-play-gesture="true"-->
+	<!--show-mute-btn="true" style="width: 100%;height: 300rpx;display: block" ad-unit-id="adunit-6d8d6c137d7b7841"-->
+	<!--@aderror="playAd"-->
+	<!--:id="videoId" @error="videoError" :src="videoSrc" :poster="posterImg" @play="play" autoplay="true">-->
+	<!--</video>-->
+	<!--src="https://iqiyi.cdn8-okzy.com/20200414/7800_dbb29d00/index.m3u8" -->
+
+	<video ref="myVideo" webkit-playsinline="true" playsinline="true" :muted="muted"
+		   x5-playsinline=""
+		   x5-video-player-fullscreen="true"
+		   x-webkit-airplay="allow"
+		   x5-video-orientation="portraint"
+		   controls="true" style="width: 100%;height:2.12rem" :autoplay="autoplay"
+		   @ended="endFn"
+		   @timeupdate="videoPlay" :src="videoSrc" id="videoId" preload="auto" :poster="tvInfos.poster" @error="error">
+	</video>
+
+	<div class="padding">
+		<div style="margin-top: 0.21rem">
+			<img style="width: 0.18rem;height: 0.21rem" class="fl" src="../../img/huo.png">
+			<span class="fl"
+				  style="width:2.52rem;height:0.25rem;font-size:0.18rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.2rem;">{{tvInfos.title}}</span>
+		</div>
+		<div style="clear: both;margin-top: 0.08rem">
+			<span style="width:1.14rem;height:0.41rem;">
+				<span style="color:rgba(253,74,89,1);font-size: 0.29rem;font-weight:600;">{{tvInfos.rate}}</span>
+				<span style="font-size: 0.16rem">· {{tvInfos.pageNum}}</span>
+			</span>
+
+			<span class="margin-left-xxl"
+				  style="width:1rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">{{tvInfos.type}}</span>
+		</div>
+		<div style="margin-top: 0.08rem;width:2.18rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			{{tvInfos.actor}}
+		</div>
+		<div style="margin-top: 0.08rem;width:0.90rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			{{tvInfos.director}}
+		</div>
+		<div ref="sumRefs"
+			 style="margin-bottom: 10px;margin-top: 0.08rem;height:auto;;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			<div ref="sumRef" :style="{overflow: isExpand ? 'visible' : 'hidden' }" style="height:0.63rem">
+				{{tvInfos.desc}}
+			</div>
+			<div @click="viewAll"
+				 style="height:0.17rem;font-size:0.12rem;font-weight:400;color:#ECCA70;line-height:0.17rem;">
+				{{viewAllText}}
+				<img :src="arrowImg" style="margin-top: -0.03rem;margin-left: 0.04rem">
+			</div>
+		</div>
+		<div>
+			<div class="flex justify-between" style="margin-top: 0.18rem">
+				<div style="width:0.30rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(236,202,112,1);line-height:0.21rem;">
+					选集
+				</div>
+				<div style="height:0.20rem;font-size:0.14rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.20rem;">
+					{{tvInfos.pageNum}}
+					<img :src="arrowsImg" style="margin-top: -0.03rem;">
+					<!--<a style="color: white;height: 0.15rem;width: 0.06rem;font-size: 0.18rem">&gt;</a>-->
+				</div>
+			</div>
+			<ul id="page" style="display:-webkit-flex;display: flex;display:-webkit-box;
+		margin-top: 0.11rem;width: 100%;overflow-x: scroll;height: 0.5rem;
+		-webkit-flex-wrap:nowrap;flex-wrap:nowrap;-webkit-justify-content:space-between;justify-content:space-between;">
+				<li @click="videoChange(page.num, page.src, index)"
+					:style="{background: index === bgIndex ? 'chocolate' : 'rgba(51,58,68,1)'}"
+					v-for="(page, index) in tvInfos.pages" :key="index"><span>{{page.num}}</span></li>
+			</ul>
+
+			<div style="margin-top: 0.16rem;width:0.60rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(236,202,112,1);line-height:0.21rem;">
+				{{recommend}}
+			</div>
+
+			<!--横向-->
+			<div style="margin-top: 0.14rem">
+				<ul id="tj" style="width: 100%;overflow-x: scroll;display: -webkit-box;display: flex;
+		-webkit-flex-wrap:nowrap;flex-wrap:nowrap;-webkit-justify-content:space-between;justify-content:space-between;">
+					<li @click="changePage(tj.tvInfos)" v-for="(tj, index) in tjs" :key="index">
+						<div style="position: relative">
+							<img style="width: 1.1rem;height: 1.46rem;border-radius: 0.03rem" :src="tj.cover">
+							<img style="position: absolute;right: 0;top: 0;width: 0.36rem;height: 0.16rem"
+								 :src="tj.type">
+							<span style="position: absolute;right: 0;bottom: 0;height: 0.16rem;margin-bottom: 0.03rem;margin-right: 0.06rem">{{tj.remark}}</span>
+						</div>
+						<h3 style="font-size: 0.15rem;height: 0.22rem;margin-top: 0.06rem">{{tj.name.length>7?
+							tj.name.slice(0, 6) + '...' : tj.name}}</h3>
+					</li>
+				</ul>
+			</div>
+			<!--竖向-->
+			<div style="margin-top: 0.34rem">
+				<ul id="tjs" style="width: 100%;">
+					<li v-for="(tj, index) in tjs" :key="index" style="height: 0.77rem;margin-top: 0.11rem"
+						class="flex justify-between">
+						<div style="position: relative">
+							<img style="width: 1.22rem;height: 0.77rem;border-radius: 0.05rem" :src="tj.cover">
+							<img style="position: absolute;left: 0.86rem;top: 0;width: 0.36rem;height: 0.16rem"
+								 :src="tj.type">
+							<div class="fr" style="margin-left: 0.12rem;margin-top: 0.08rem">
+								<p style="width:1.80rem;height:0.28rem;font-size:0.18rem;">{{tj.name}}</p>
+								<p style="width:1.46rem;height:0.21rem;font-size:0.13rem;">{{tj.remark}}</p>
+							</div>
+							<div style="position: absolute;right:-0.4rem;top: 0.2rem;font-size:0.21rem;color: #FD4A59;">
+								<p>{{tj.rate}} <b>分</b></p>
+							</div>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                muted: true,
+                autoplay: false,
+                bfImg: '../../img/bofag.png',
+                arrowImg: '../../img/arrow.png',
+                arrowsImg: '../../img/arrows.png',
+                viewAllText: '查看全部',
+                recommend: '为你推荐',
+                tvInfos: {},
+                videoSrc: '', // 默认视频
+                videoId: '', // 默认视频Id
+                times: 0, // 分享次数
+                playStatus: true, // 变量控制
+                isExpand: false, // 简介是否展开
+                bgIndex: 0,
+                tjs: [
+                    {
+                        rate: '9.8', name: '这是第一个推荐', remark: '更新至39集',
+                        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=9031fad21f8695dbc43cfc69432fbe5f&imgtype=0&src=http%3A%2F%2Fp4.ssl.cdn.btime.com%2Ft010f6ac348ab51a9f2.jpg%3Fsize%3D640x960',
+                        type: '../../img/dsj.png',
+                        tvInfos: { // 电视剧信息
+                            title: '这是第一个推荐',
+                            poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=8e2d6f740b4315442c7bb3b0947e328a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201606%2F27%2F20160627132240_2rXiY.jpeg',
+                            rate: '9.3分',
+                            pageNum: '更新至39集',
+                            type: '竞技 爱情 青春',
+                            tvType: '../../img/movie.png',
+                            actor: '主演：吴倩/张新成/周历杰/楚月',
+                            director: '导演：朱锐斌',
+                            desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                            pages: [
+                                {
+                                    num: 1,
+                                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                                },
+                                {
+                                    num: 2,
+                                    src: 'http://mpvideo.qpic.cn/shg_3862243085_50000_891eb692d73e4aaaac815a6d81e43166.f10002.mp4?dis_k=08729fdd550ec08b1c87f715a6896400&dis_t=1586864983'
+                                },
+                                {num: 3, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                            ],
+                            currentSrc: {
+                                num: 7,
+                                src: 'http://mpvideo.qpic.cn/shg_3862243085_50000_891eb692d73e4aaaac815a6d81e43166.f10002.mp4?dis_k=08729fdd550ec08b1c87f715a6896400&dis_t=1586864983'
+                            }
+                        }
+                    },
+                    {
+                        rate: '8.3',
+                        name: '春风十里不如你',
+                        remark: '更新至39集',
+                        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=20bb99d209a014cf007a861fa5fad93c&imgtype=0&src=http%3A%2F%2Fpics0.baidu.com%2Ffeed%2Fa50f4bfbfbedab64b860c5dcd481f6c578311edd.jpeg%3Ftoken%3D444923940a55ae574a57cc9911cb668b',
+                        type: '../../img/movie.png',
+                        tvInfos: { // 电视剧信息
+                            title: '这是第二个推荐',
+                            poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=8e2d6f740b4315442c7bb3b0947e328a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201606%2F27%2F20160627132240_2rXiY.jpeg',
+                            rate: '2分',
+                            pageNum: '2',
+                            type: '竞技 爱情 青春',
+                            tvType: '../../img/movie.png',
+                            actor: '主演：吴倩/张新成/周历杰/楚月',
+                            director: '导演：朱锐斌',
+                            desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                            pages: [
+                                {
+                                    num: 1,
+                                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                                },
+                                {num: 2, src: 'https://youku.cdn2-okzy.com/20200401/8664_2d034499/index.m3u8'},
+                            ],
+                            currentSrc: {num: 1, src: 'https://youku.cdn2-okzy.com/20200401/8662_321b984a/index.m3u8'}
+                        }
+                    },
+                    {
+                        rate: '9.8',
+                        name: '春风十里不如你',
+                        remark: '更新至39集',
+                        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292435&di=d59a16696c482b3e394df489eb626032&imgtype=0&src=http%3A%2F%2Fi3.3conline.com%2Fimages%2Fpiclib%2F201312%2F15%2Fbatch%2F1%2F206274%2F1387096729848w5e79qbggo.jpg',
+                        type: '../../img/dsj.png',
+                        tvInfos: { // 电视剧信息
+                            title: '这是第三个推荐',
+                            poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=8e2d6f740b4315442c7bb3b0947e328a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201606%2F27%2F20160627132240_2rXiY.jpeg',
+                            rate: '3分',
+                            pageNum: '更新至3集',
+                            type: '竞技 爱情 青春',
+                            tvType: '../../img/movie.png',
+                            actor: '主演：吴倩/张新成/周历杰/楚月',
+                            director: '导演：朱锐斌',
+                            desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                            pages: [
+                                {
+                                    num: 1,
+                                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                                },
+                                {num: 2, src: 'https://iqiyi.cdn8-okzy.com/20200414/7786_6afba855/index.m3u8'},
+                                {num: 3, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                            ],
+                            currentSrc: {num: 7, src: 'https://youku.cdn2-okzy.com/20200401/8663_d20635c5/index.m3u8'}
+                        }
+                    },
+                    {
+                        rate: '7.8',
+                        name: '一出好戏',
+                        remark: '更新至39集',
+                        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292435&di=2c42f43da759ba6f178261943aabee15&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20190617%2F9bea96c8ce71443e9af345aad34247aa.JPG',
+                        type: '../../img/movie.png',
+                        tvInfos: { // 电视剧信息
+                            title: '这是第四个推荐',
+                            poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=8e2d6f740b4315442c7bb3b0947e328a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201606%2F27%2F20160627132240_2rXiY.jpeg',
+                            rate: '4分',
+                            pageNum: '更新至4集',
+                            type: '竞技 爱情 青春',
+                            tvType: '../../img/movie.png',
+                            actor: '主演：吴倩/张新成/周历杰/楚月',
+                            director: '导演：朱锐斌',
+                            desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                            pages: [
+                                {
+                                    num: 1,
+                                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                                },
+                                {num: 2, src: 'https://iqiyi.cdn8-okzy.com/20200414/7786_6afba855/index.m3u8'},
+                                {num: 3, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                                {num: 4, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                            ],
+                            currentSrc: {
+                                num: 7,
+                                src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                            }
+                        }
+                    },
+                    {
+                        rate: '9.1',
+                        name: '这是丢我个五个推荐',
+                        remark: '更新至39集',
+                        cover: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292435&di=115c7724d8fe13aa76017717cd7dff95&imgtype=0&src=http%3A%2F%2Fwww.ps-xxw.cn%2Fuploadfile%2F201501%2F27%2F18173721805.jpg',
+                        type: '../../img/dsj.png',
+                        tvInfos: { // 电视剧信息
+                            title: '这是丢我个五个推荐',
+                            poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586841292436&di=8e2d6f740b4315442c7bb3b0947e328a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201606%2F27%2F20160627132240_2rXiY.jpeg',
+                            rate: '9.3分',
+                            pageNum: '更新至39集',
+                            type: '竞技 爱情 青春',
+                            tvType: '../../img/movie.png',
+                            actor: '主演：吴倩/张新成/周历杰/楚月',
+                            director: '导演：朱锐斌',
+                            desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                            pages: [
+                                {
+                                    num: 1,
+                                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                                },
+                                {num: 2, src: 'https://iqiyi.cdn8-okzy.com/20200414/7786_6afba855/index.m3u8'},
+                                {num: 3, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                                {num: 4, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                                {num: 5, src: 'https://iqiyi.cdn8-okzy.com/20200414/7790_1bdb247b/index.m3u8'},
+                            ],
+                            currentSrc: {
+                                num: 7,
+                                src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                            }
+                        }
+                    }
+                ],
+                tempVar: false,
+                breakTime: 3,
+                shareStatus: false,
+            }
+        },
+        created() {
+            this.tvInfos = this.getUrlParam('tvInfos') ? this.getUrlParam('tvInfos') : {
+                title: '《冰糖炖雪梨》全集高清观看！',
+                poster: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=295745191,3619717758&fm=26&gp=0.jpg',
+                rate: '8.3分',
+                pageNum: '40集全',
+                type: '竞技 爱情 青春',
+                actor: '主演：吴倩/张新成/周历杰/楚月',
+                director: '导演：朱锐斌',
+                desc: '小学里，懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被懦弱胆怯的男孩黎语冰一直被“大王同学”棠欺负，她们唯一的共同之处，是都有一个滑冰的梦想。数年后，当他们在“霖大”校园重逢时',
+                pages: [
+                    {
+                        num: 1,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                    {
+                        num: 2,
+                        src: 'http://mpvideo.qpic.cn/shg_3862243085_50000_891eb692d73e4aaaac815a6d81e43166.f10002.mp4?dis_k=08729fdd550ec08b1c87f715a6896400&dis_t=1586864983'
+                    },
+                    {num: 3, src: 'https://youku.cdn2-okzy.com/20200401/8661_fafefc37/index.m3u8'},
+                    {num: 4, src: 'https://iqiyi.cdn8-okzy.com/20200414/7791_885d80f3/index.m3u8'},
+                    {
+                        num: 5,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                    {
+                        num: 6,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                    {
+                        num: 7,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                    {
+                        num: 8,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                    {
+                        num: 9,
+                        src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                    },
+                ],
+                currentSrc: {
+                    num: 1,
+                    src: 'https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4'
+                }
+            }
+            this.videoSrc = this.tvInfos.currentSrc.src // 加载默认视频
+            this.videoId = this.tvInfos.currentSrc.num // 加载默认视频
+        },
+        methods: {
+            endFn() {
+                console.log(21312)
+            },
+            getUrlParam(name) { // 获取地址栏参数
+                var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg) // 匹配目标参数
+                if (r != null) return unescape(r[2])
+                return null // 返回参数值
+            },
+            error(err) {
+                console.log(err)
+            },
+            changePage(infos) {
+                this.$refs.myVideo.pause()
+                this.tvInfos = infos
+                this.videoSrc = this.tvInfos.currentSrc.src // 加载默认视频
+                this.videoId = this.tvInfos.currentSrc.num // 加载默认视频
+                setTimeout(() => {
+                    this.$refs.myVideo.play()
+                }, 1000)
+            },
+            videoChange(num, src, index) { // 切换视频
+                this.bgIndex = index
+                this.$refs.myVideo.id = num.toString()
+                this.videoSrc = src
+                setTimeout(() => {
+                    this.$refs.myVideo.play()
+                }, 1000)
+            },
+            videoPlay(e) { // 控制播放跳转分享
+                this.muted = false
+                if (this.shareStatus) { // 是否分享完成 默认不执行 分享回来之后执行 跳转到播放节点
+                    if (!this.tempVar) { // 如果分享完成的话
+                        this.$refs.myVideo.currentTime = this.breakTime
+                        this.tempVar = true
+                    }
+                }
+
+                var that = this
+                if (this.$refs.myVideo.currentTime > this.$refs.myVideo.duration) {
+                    console.log(123123123)
+                }
+                // console.log(this.$refs)
+                // console.log(this.$refs.myVideo)
+
+                // if (this.$refs.myVideo.currentTime > this.breakTime) {
+                //     // if (that.playStatus) {
+                // 	// 	window.location.href = 'http://192.168.3.167:8888/html/project/video/share.html?_ijt=eccjag9vj15taek3ppcg4agp6h'
+                //     //     this.$refs.myVideo.pause()
+                //     }
+                // }
+            },
+            // handleVisiable(e) { // 监听页面离开事件
+            //     if (e.target.visibilityState === 'visible') {
+            //         this.times = this.times + 1
+            //         if (this.times == 1) {
+            //             console.log('出去了一次')
+            //         }
+            //         if (this.times == 2) {
+            //             console.log('出去了第二次')
+            //             this.playStatus = false
+            //             this.modalStatus = false
+            //         }
+            //     }
+            // },
+            viewAll() { // 简介查看
+                if (this.viewAllText == '查看全部') {
+                    this.isExpand = true
+                    this.$refs.sumRef.style.height = 'auto'
+                    this.viewAllText = '收起简介'
+                } else {
+                    this.isExpand = false
+                    this.$refs.sumRef.style.height = '0.63rem'
+                    this.viewAllText = '查看全部'
+                }
+            }
+        },
+
+    })
+</script>
+</body>
+</html>

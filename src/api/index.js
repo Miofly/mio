@@ -22,6 +22,20 @@ const movieDetail = (url) => ajax({
     getHeader: {'Content-Type': 'json'}
 })
 
+const publicPost = (url, data) => ajax({
+    // sourceAxios: instanceOne,
+    url: url,
+    method: 'POST',
+    data: data,
+})
+
+const publicGet = (url) => ajax({
+    url: url,
+    getHeader: {
+        'Content-Type': 'json'
+    }
+})
+
 const commonPost = (url, data) => ajax({
     // sourceAxios: instanceOne,
     url: '/lz' + url,
@@ -40,6 +54,8 @@ const commonGet = (url) => ajax({
 })
 
 export {
+    publicGet,
+    publicPost,
     commonGet,
     commonPost,
     navJsonData,

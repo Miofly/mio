@@ -111,7 +111,7 @@
        commonPost
     } from '@/api'
     import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
-	// #ifdef h5
+	// #ifdef H5
     import NativeShare from 'nativeshare'
     // #endif
     import {mapState} from 'vuex'
@@ -162,7 +162,7 @@
 				const data = await commonPost('/title/title-share', {id: id})
 				console.log(data.data.substring(0, data.data.length - 1))
             },
-			// #ifdef h5
+			// #ifdef H5
             async jumpWx (title, desc, pic, id) {
                 const data = await commonPost('/title/title-share', {id: id})
                 const url = data.data

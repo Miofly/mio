@@ -1,6 +1,6 @@
 <template>
     <view class="container bg-white">
-		<!--#ifdef h5-->
+		<!--#ifdef H5-->
 		<view class="cu-list grid" :class="['col-' + 5, true?'':'no-border']">
 			<view class="cu-item" v-for="(item, index) in [
                     {icon: 'weixin', color: 'red', badge: 120, name: 'weixin'},

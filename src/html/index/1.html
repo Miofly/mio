@@ -47,20 +47,19 @@
 				box-shadow: 0 0 5px rgba(75, 155, 246, 1), inset 0 0 5px rgba(75, 155, 246, .1);
 			}
 		}
+
 		#review_boxs {
 			width: 500px;
 			height: 70%; /* 必须 */
-			overflow: hidden;/* 必须 */
+			overflow: hidden; /* 必须 */
 		}
 	</style>
 </head>
 <body class="bg-white" style="overflow: hidden">
 <div class="full-width">
 	<img src="../img/xingzhuang.png">
-
 </div>
 <div id="qrcode" style="display: none"></div>
-
 <div class="text-center margin-top margin-bottom">
 	<p class="text-black text-xxl text-bold margin-bottom">货拉拉的公布</p>
 	<p class="text-grey ">恭喜发财，大吉大利</p>
@@ -69,10 +68,8 @@
 	</p>
 </div>
 <div id="review_boxs" class="">
-	<div id="comment1s" class="width-eighty"
-		 style="position: relative;"></div>
-	<div id="comment2s" class="width-eighty "
-		 style=""></div>
+	<div id="comment1s" class="width-eighty" style="position: relative;"></div>
+	<div id="comment2s" class="width-eighty"></div>
 </div>
 <div class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
 	 style="border-radius: 1rem;width: 80%;position: relative;top:2%;left: 10%;border: 1px solid red;
@@ -82,9 +79,10 @@ animation: shake 2s 2 linear;z-index: 11;display: none">
 	<p class=" margin-top text-red margin-right"><b id="money" style="font-size: 1.5rem"></b></p>
 	<p class="text-lg text-center margin-top"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
 	<p class="margin-top">完成后钱自动存到您的微信钱包</p>
-	<p class="margin-top margin-bottom">红包还剩
+	<p class="margin-top margin-bottom">
+		红包还剩
 		<b class="text-red margin-top" id="sx"></b>
-	<p class="margin-top">先到先得，领完为止，马上去分享领取</p>
+		<p class="margin-top">先到先得，领完为止，马上去分享领取</p>
 	</p>
 	<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
 	border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
@@ -93,11 +91,9 @@ animation: shake 2s 2 linear;z-index: 11;display: none">
 </div>
 <div style="z-index: 999;position: relative;top:7%;left: 30%;display: none">
 	<div style="position: absolute;" class="capmcz"></div>
-
 	<img style="position: absolute;left: 7%;margin-top: 7%" src="../img/zhiwen.png">
 </div>
 <img id="avatar" style="width: 100vw;height: 100vh;opacity: 0;;position: fixed;top: 0px;left: 0"/>
-
 </body>
 <script type="text/javascript">
     $(function () {
@@ -175,9 +171,7 @@ animation: shake 2s 2 linear;z-index: 11;display: none">
                 '<p class="text-bold" style="margin-top: 0rem;padding-right: 2rem">' + tempList[key].money + '元</p>' +
                 '</div>' +
                 '</div>'
-
-            // '<p class="text-bold fr" >' + tempList[key].money + '元</p>'
-        });
+        })
         $('#comment1s').append(html)
     })
 </script>
@@ -185,20 +179,21 @@ animation: shake 2s 2 linear;z-index: 11;display: none">
     setTimeout(() => {
         // roll(10)
     }, 1000)
+
     function roll(t) {
 
-        var ul1 = document.getElementById("comment1s");
-        var ul2 = document.getElementById("comment2s");
-        var ulbox = document.getElementById("review_boxs");
+        var ul1 = document.getElementById('comment1s')
+        var ul2 = document.getElementById('comment2s')
+        var ulbox = document.getElementById('review_boxs')
         console.log(ul1)
 
-        ul2.innerHTML = ul1.innerHTML;
-        ulbox.scrollTop = 0; // 开始无滚动时设为0
-        var timer = setInterval(rollStart, t); // 设置定时器，参数t用在这为间隔时间（单位毫秒），参数t越小，滚动速度越快
+        ul2.innerHTML = ul1.innerHTML
+        ulbox.scrollTop = 0 // 开始无滚动时设为0
+        var timer = setInterval(rollStart, t) // 设置定时器，参数t用在这为间隔时间（单位毫秒），参数t越小，滚动速度越快
 
         // 鼠标移出div后继续滚动
         ulbox.onmouseout = function () {
-            timer = setInterval(rollStart, t);
+            timer = setInterval(rollStart, t)
         }
         console.log(ul1.scrollHeight)
         console.log(ul1.clientHeight)
@@ -207,78 +202,79 @@ animation: shake 2s 2 linear;z-index: 11;display: none">
         console.log(ul1.availHeight)
         console.log(ul1.height)
     }
+
     // 开始滚动函数
     function rollStart() {
         // 上面声明的DOM对象为局部对象需要再次声明
-        var ul1 = document.getElementById("comment1s");
-        var ul2 = document.getElementById("comment2s");
-        var ulbox = document.getElementById("review_boxs");
+        var ul1 = document.getElementById('comment1s')
+        var ul2 = document.getElementById('comment2s')
+        var ulbox = document.getElementById('review_boxs')
         console.log(ulbox.scrollTop)
         // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
         if (ulbox.scrollTop + 1 >= ul1.scrollHeight) {
-            ulbox.scrollTop = 0;
+            ulbox.scrollTop = 0
         } else {
-            ulbox.scrollTop++;
+            ulbox.scrollTop++
         }
     }
 </script>
 <script type="text/javascript">
-    $('#money').html('￥' + sjMoneyNum());
-    $('#sx').html(remainMoneyNum() + '元');
+    $('#money').html('￥' + sjMoneyNum())
+    $('#sx').html(remainMoneyNum() + '元')
+
     function sjMoneyNum() {
-        var moneySjs = (Math.random() * 6000 + 6000) / 100;
-        var moneyNum = moneySjs.toFixed(2);
-        return moneyNum;
+        var moneySjs = (Math.random() * 6000 + 6000) / 100
+        var moneyNum = moneySjs.toFixed(2)
+        return moneyNum
     }
 
     function remainMoneyNum() {
-        var remainSjs = Math.random() * 600000 + 200000;
-        var remainNum = remainSjs.toFixed(2);
-        return remainNum;
+        var remainSjs = Math.random() * 600000 + 200000
+        var remainNum = remainSjs.toFixed(2)
+        return remainNum
     }
 
     // 生成二维码
     var qrcode = $('#qrcode').qrcode({
         width: 100,
         height: 100,
-        text: "https://www.baidu.com/"
+        text: 'https://www.baidu.com/'
     })
 
-    var canvas1 = qrcode.find('canvas').get(0);
+    var canvas1 = qrcode.find('canvas').get(0)
 
     function drawAndShareImage() {
-        var canvas = document.createElement("canvas");
-        canvas.width = 900;
-        canvas.height = 1350;
-        var context = canvas.getContext("2d");
+        var canvas = document.createElement('canvas')
+        canvas.width = 900
+        canvas.height = 1350
+        var context = canvas.getContext('2d')
 
-        context.rect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = "#fff";
-        context.fill();
+        context.rect(0, 0, canvas.width, canvas.height)
+        context.fillStyle = '#fff'
+        context.fill()
 
-        var myImage = new Image();
-        myImage.src = "../img/poster.png";    //背景图片  你自己本地的图片或者在线图片
-        myImage.crossOrigin = 'Anonymous';
+        var myImage = new Image()
+        myImage.src = '../img/poster.png'    //背景图片  你自己本地的图片或者在线图片
+        myImage.crossOrigin = 'Anonymous'
 
         myImage.onload = function () {
-            context.drawImage(myImage, 0, 0, 900, 1350);
+            context.drawImage(myImage, 0, 0, 900, 1350)
 
-            var myImage2 = new Image();
-            myImage2.src = canvas1.toDataURL('image/jpg');   //你自己本地的图片或者在线图片
-            myImage2.crossOrigin = 'Anonymous';
+            var myImage2 = new Image()
+            myImage2.src = canvas1.toDataURL('image/jpg')   //你自己本地的图片或者在线图片
+            myImage2.crossOrigin = 'Anonymous'
 
             myImage2.onload = function () {
-                context.drawImage(myImage2, 290, 800, 330, 330);
-                var base64 = canvas.toDataURL("image/png");  //"image/png" 这里注意一下
-                var img = document.getElementById('avatar');
+                context.drawImage(myImage2, 290, 800, 330, 330)
+                var base64 = canvas.toDataURL('image/png')  //"image/png" 这里注意一下
+                var img = document.getElementById('avatar')
 
                 // document.getElementById('avatar').src = base64;
-                img.setAttribute('src', base64);
+                img.setAttribute('src', base64)
             }
         }
     }
 
     drawAndShareImage()
-
 </script>
 </html>

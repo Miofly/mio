@@ -21,7 +21,6 @@
 				<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
 		</view>
-
 		<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
 					  :up="upOption" @init="mescrollInit"
 					  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
@@ -65,9 +64,9 @@
 				</view>
 			</view>
 		</mescroll-uni>
+		<!--#endif-->
 	</view>
 
-	<!--#endif-->
 </template>
 
 <script>

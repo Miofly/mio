@@ -79,6 +79,29 @@
     }
 }
 
+@keyframes scale-upOne {
+    0% {
+        opacity: 1;
+        transform: scale(1)
+    }
+    25% {
+        opacity: 1;
+        transform: scale(1.1)
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2)
+    }
+    75% {
+        opacity: 1;
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.0)
+    }
+}
+
 @keyframes scale-down {
     0% {
         opacity: 0;

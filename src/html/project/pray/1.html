@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head style="overflow: hidden!important;">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script src="../../js/vue.js"></script>
+	<script>
+        (function (doc, win) { // 移动端适配
+            var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                dpr = 1,
+                scale = 1 / dpr,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+            docEl.dataset.dpr = dpr
+            var metaEl = doc.createElement('meta')
+            metaEl.name = 'viewport'
+            metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale
+            docEl.firstElementChild.appendChild(metaEl)
+            var recalc = function () {
+                var width = docEl.clientWidth
+                if (width / dpr > 375) {
+                    width = 375 * dpr
+                }
+                // 乘以100，px : rem = 100 : 1
+                docEl.style.fontSize = 100 * (width / 375) + 'px'
+            }
+            recalc()
+            if (!doc.addEventListener) return
+            win.addEventListener(resizeEvt, recalc, false)
+        })(document, window)
+	</script>
+</head>
+<body style="font-size: 0.05rem;background: rgb(210, 36, 56);">
+<div id="app" style="overflow: hidden!important;" class="">
+	<!--抽到的签文-->
+	<div v-if="getQian" class="flex justify-center"
+		 style="z-index: 99999;position: relative;animation: cq_two-data-v-ce8ed35e 1.5s linear;">
+		<div style="position: absolute;top: 0.82rem;left: 0.55rem;-webkit-animation: yuncai1 2s linear infinite;animation: yuncai1 2s linear infinite;">
+			<img style="width: 0.87rem;height: 0.23rem;" src="../../img/pray/download-5.png">
+		</div>
+		<div style="-webkit-animation: yuncai2 2s linear infinite;animation: yuncai2 2s linear infinite;position: absolute;top: 2.67rem;left: 2.36rem">
+			<img style="width: 0.9rem;height: 0.19rem;"
+				 src="../../img/pray/download-4.png">
+		</div>
+
+		<div style="position: absolute;top: 0.36rem;left: 0;width: 100%;text-align: center">
+			<img style="width: 0.64rem;height: 2.68rem;" :src="qianImg">
+
+		</div>
+		<div style="position: absolute;top: 3.19rem;left: 0;width: 100%;text-align: center">
+			<img style="width: 2.97rem;height: 0.96rem;"
+				 src="../../img/pray/shangshangqian.png">
+		</div>
+		<div style="position: absolute;top: 4.48rem;left: 0;width: 100%;text-align: center">
+			<img @click="chakan" style="width: 1.87rem;height: 0.48rem;;"
+				 src="../../img/pray/chakan.png">
+		</div>
+	</div>
+	<!--蒙版-->
+	<div v-show="modalStatus" class="mio-modal-mask"></div>
+	<!--首页-->
+	<div v-show="true" style="position: relative;" class="">
+		<img style="z-index: 1;" src="../../img/pray/gy_bj@2x.png" class="full-width-height">
+		<div style="z-index: 3;position: absolute;top: 1.81rem;left: 0;width: 100%;text-align: center;">
+			<img style="width: 2.06rem;height: 2.07rem" src="../../img/pray/yuanpan@2x.png">
+		</div>
+		<div style="z-index: 5;position: absolute;top: 1.24rem;left: 0;width: 100%;text-align: center;">
+			<img class="xuanzhun" style="width: 3.16rem;height: 3.2rem" src="../../img/pray/guang@2x.png">
+		</div>
+		<div style="z-index: 7;position: absolute;top: 2.29rem;text-align: center;left: 0;width: 100%">
+			<img style="width: 2.87rem;height: 4.15rem;" src="../../img/pray/guanyin_new@2x.png">
+		</div>
+	</div>
+	<div v-show="true">
+		<div style="position: fixed;bottom: 0;z-index: 8;">
+			<img style="width: 3.75rem;height: 2.02rem" src="../../img/pray/kaishi_bj@2x.png">
+		</div>
+		<div style="position: fixed;bottom: 0.27rem;z-index: 9;text-align: center;left: 0;width: 100%">
+			<img @click="lot"
+				 style="animation:scale-upOne 2s infinite linear;width: 1.12rem;height: 0.44rem;"
+				 src="../../img/pray/kaishi_btn@2x.png">
+		</div>
+	</div>
+	<!--抽签动画-->
+	<div v-if="qianStatus" style="position: fixed;top: 60%;left: 50%;transform: translate(-50%, -50%);z-index: 999;">
+		<div class="qianhe"
+			 style="width: 1.1rem;-webkit-transform-origin: center bottom;transform-origin: center bottom;
+			 -webkit-animation: qianhe 1s linear 0s;animation: qianhe 1s linear 0s;">
+			<img style="z-index: 99;" src="../../img/pray/qiantong.png">
+		</div>
+		<div class="getQian2"
+			 style="position: absolute;width: 0.25rem;right: 0.3rem;top: 0.2rem;font-size: 0;opacity: 0;
+			 -webkit-animation: qian 1s linear 2s;animation: qian 1s linear 1s;">
+			<img style="z-index: 88;" src="../../img/pray/qian.png">
+		</div>
+	</div>
+
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                qianStatus: false,
+                show: false,
+                modalStatus: false,
+                qianImg: '',
+                getQian: false,
+                num: ''
+            }
+        },
+        methods: {
+            lot() {
+                this.modalStatus = true
+                this.qianStatus = true
+                this.num = this.randomNum(1, 24)
+                this.qianImg = `../../img/pray/qian/q${this.num}.png`
+                // this.show = false
+                setTimeout(() => {
+                    this.qianStatus = false
+                    this.getQian = true
+                }, 1500)
+                setTimeout(() => {
+                    // this.chakan()
+                }, 5000)
+            },
+            randomNum(min, max) { // 生成随机数 min<=num<=max
+                return Math.floor(Math.random() * (max - min + 1)) + min
+            },
+            chakan() {
+                window.location.href = `http://192.168.3.99:8888/mios/src/html/project/pray/share.html?num=${this.num}`
+            },
+        },
+    })
+</script>
+</body>
+</html>

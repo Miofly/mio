@@ -34,7 +34,7 @@ html, body, #app {
     height: 100vh;
     width: 100%;
     /*font-size: 13.33vw;*/
-    background: rgb(0, 0, 0);
+    /*background: rgb(0, 0, 0);*/
 }
 
 /*解决手机端点击的BUG*/

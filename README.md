@@ -17,3 +17,10 @@ npm start
 功能模块都在 components 文件夹内
 
 
+### 微信公众号
+![Image text](https://github.com/Miofly/mio/blob/master/src/static/me/1024.jpg)
+### 线上小程序
+![Image text](https://github.com/Miofly/mio/blob/master/src/static/me/yszs.jpg)
+
+![Image text](https://github.com/Miofly/mio/blob/master/src/static/me/zsdt.jpg)
+

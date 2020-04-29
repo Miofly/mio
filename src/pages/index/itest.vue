@@ -1,21 +1,37 @@
 <template>
 	<view class="container">
-		<button @tap="resolve">解析</button>
+		<p class="text" v-for="(text, index) in arrs" :key="index">{{text}}</p>
 	</view>
 </template>
 <script>
-	import {
-        publicGet,
-	    publicPost
-	} from '@/api'
 	export default {
-	    methods: {
-			async resolve () {
-				const data = await publicPost('http://x2.itsm.top/pub/sv/parse', {url: 'https://kphbeijing.m.chenzhongtech.com/fw/photo/3xbiitmn346pw82?fid=1272311984&cc=share_wxms&appType=21&docId=9&photoId=3xbiitmn346pw82&shareId=161809250937&shareToken=X8F6vAxEXzKM1rh_A&userId=3xfh32jhpgcxb6s&shareType=1&et=1_a%2F2000046395501986801_p0&timestamp=1587621571362'})
-				var test = `http://x2.itsm.top/pub/sv/parse/video?rid=${data}&failRetry=4`
-				const mess = await publicGet(test)
-				console.log(mess)
-			},
+	    data () {
+	        return {
+                arrs: [
+                    '1 不是被郭德纲发现的，也不是一开始就收为徒弟。',
+                    '2 现在雅阁这个状态像极了新A4L上市那段日子。',
+                    '3 低配太寒碜，各种需要加装，中配定价过高，又没啥特色',
+                    '4 然后各种机油门、经销商造反什么的幺蛾子。',
+                    '5 看五月销量，建议参考A4，打8折吧。',
+                    '1 不是被郭德纲发现的，也不是一开始就收为徒弟。',
+                ],
+	        }
 	    },
 	}
 </script>
+
+<style>
+	.inner-container {
+		animation: myMove 5s linear infinite;
+		animation-fill-mode: forwards;
+	}
+	/*文字无缝滚动*/
+	@keyframes myMove {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(-150px);
+		}
+	}
+</style>

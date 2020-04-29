@@ -2,7 +2,7 @@
 uniapp 项目模块 --- 完全 vue 模式开发
 
 ## 安装项目
-npm install --registry=https://registry.npm.taobao.org
+npm install --registry=[https://registry.npm.taobao.org][]
 建议运行npm，因为cnpm会出现一些未知问题
 
 如果一直有问题可直接拷贝项目的node_modules：
@@ -15,3 +15,5 @@ npm install --registry=https://registry.npm.taobao.org
 npm start
 
 功能模块都在 components 文件夹内
+
+

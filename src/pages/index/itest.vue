@@ -1,37 +1,82 @@
 <template>
-	<view class="container">
-		<p class="text" v-for="(text, index) in arrs" :key="index">{{text}}</p>
-	</view>
+	<div id="box">
+		<div id="con1" ref="con1" :class="{anim:animate==true}" @mouseenter="mEnter" @mouseleave="mLeave">
+			<p v-for="item in items">中奖人的名字是--{{item.name}}</p>
+		</div>
+	</div>
 </template>
+
 <script>
-	export default {
-	    data () {
-	        return {
-                arrs: [
-                    '1 不是被郭德纲发现的，也不是一开始就收为徒弟。',
-                    '2 现在雅阁这个状态像极了新A4L上市那段日子。',
-                    '3 低配太寒碜，各种需要加装，中配定价过高，又没啥特色',
-                    '4 然后各种机油门、经销商造反什么的幺蛾子。',
-                    '5 看五月销量，建议参考A4，打8折吧。',
-                    '1 不是被郭德纲发现的，也不是一开始就收为徒弟。',
+    export default {
+        data() {
+            return {
+                animate: false,
+                items: [ // 消息列表对应的数组
+                    {name: '马云'},
+                    {name: '雷军'},
+                    {name: '王勤1'},
+                    {name: '王勤2'},
+                    {name: '王勤3'},
+                    {name: '王勤4'},
+                    {name: '王勤5'},
+                    {name: '王勤6'},
+                    {name: '王勤7'},
+                    {name: '王勤8'},
                 ],
-	        }
-	    },
-	}
+
+            }
+        },
+        mounted() {
+            this.timer1 = setInterval(this.scroll, 1000)
+        },
+        methods: {
+            scroll() {
+                const con1 = this.$refs.con1
+                con1.style.marginTop = '-30px'
+                this.animate = !this.animate
+                var that = this // 在异步函数中会出现this的偏移问题，此处一定要先保存好this的指向
+                setTimeout(function () {
+                    that.items.push(that.items[0])
+                    that.items.shift()
+                    con1.style.marginTop = '0px'
+                    that.animate = !that.animate // 这个地方如果不把animate 取反会出现消息回滚的现象，此时把ul 元素的过渡属性取消掉就可以完美实现无缝滚动的效果了
+                }, 500)
+            },
+            mEnter() {
+                clearInterval(this.timer1)
+            },
+            mLeave() {
+                this.timer1 = setInterval(this.scroll, 1000)
+            },
+
+        },
+    }
 </script>
 
-<style>
-	.inner-container {
-		animation: myMove 5s linear infinite;
-		animation-fill-mode: forwards;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+	* {
+		margin: 0;
+		padding: 0;
 	}
-	/*文字无缝滚动*/
-	@keyframes myMove {
-		0% {
-			transform: translateY(0);
-		}
-		100% {
-			transform: translateY(-150px);
-		}
+
+	#box {
+		width: 300px;
+		height: 175px;
+		line-height: 30px;
+		overflow: hidden;
+		padding-left: 30px;
+		border: 1px solid black;
+		transition: all 0.5s;
+	}
+
+	.anim {
+		transition: all 0.5s;
+	}
+
+	#con1 li {
+		list-style: none;
+		line-height: 30px;
+		height: 30px;
 	}
 </style>

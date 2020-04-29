@@ -50,6 +50,7 @@
 </head>
 <body style="font-size: 0.05rem;background: rgb(210, 36, 56);">
 <div id="app" style="overflow: hidden!important;">
+	<audio src="../../img/pray/yaoqian.mp3" preload="auto" ref="audioSrc" id="mp3"></audio>
 	<!--抽到的签文-->
 	<div v-if="getQian" class="flex justify-center"
 		 style="z-index: 99999;position: relative;animation: cq_two-data-v-ce8ed35e 1.5s linear;">
@@ -139,6 +140,7 @@
         },
         methods: {
             lot() {
+                this.$refs.audioSrc.play()
                 this.modalStatus = true
                 this.qianStatus = true
                 this.num = this.randomNum(1, 24)
@@ -148,7 +150,7 @@
                     this.getQian = true
                 }, 1500)
                 setTimeout(() => {
-                    this.chakan()
+                    // this.chakan()
                 }, 5000)
             },
             randomNum(min, max) { // 生成随机数 min<=num<=max

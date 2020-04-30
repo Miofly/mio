@@ -1,8 +1,10 @@
 <template>
-	<div id="box">
-		<div id="con1" ref="con1" :class="{anim:animate==true}" @mouseenter="mEnter" @mouseleave="mLeave">
-			<p v-for="item in items">中奖人的名字是--{{item.name}}</p>
-		</div>
+	<div>
+		<ul class="noticeContent" :class="noticeList.length>1?{notice_top:animate}:''">
+			<li v-for="(item, index) in noticeList" :key="index">
+				{{item.content}}
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -10,73 +12,50 @@
     export default {
         data() {
             return {
-                animate: false,
-                items: [ // 消息列表对应的数组
-                    {name: '马云'},
-                    {name: '雷军'},
-                    {name: '王勤1'},
-                    {name: '王勤2'},
-                    {name: '王勤3'},
-                    {name: '王勤4'},
-                    {name: '王勤5'},
-                    {name: '王勤6'},
-                    {name: '王勤7'},
-                    {name: '王勤8'},
+                noticeList: [
+                    {
+                        content: '苹果也疯狂！iPhone XR来到小米价，刷新售价底线'
+                    },
+					{
+                        content: '“5号电池一出”，充电宝没用了，所有手机通用，行千里不关机'
+                    },
+					{
+                        content: '小米10一出手就高配置，小米9难及十分之一，友商都汗颜'
+                    },
+					{
+                        content: 'iPhone XR2性能曝光，A13处理器+后置双摄'
+                    }
                 ],
-
+                animate: false
             }
         },
-        mounted() {
-            this.timer1 = setInterval(this.scroll, 1000)
+        created() {
+            // 页面显示
+            setInterval(this.showNotice, 3000)
         },
         methods: {
-            scroll() {
-                const con1 = this.$refs.con1
-                con1.style.marginTop = '-30px'
-                this.animate = !this.animate
-                var that = this // 在异步函数中会出现this的偏移问题，此处一定要先保存好this的指向
-                setTimeout(function () {
-                    that.items.push(that.items[0])
-                    that.items.shift()
-                    con1.style.marginTop = '0px'
-                    that.animate = !that.animate // 这个地方如果不把animate 取反会出现消息回滚的现象，此时把ul 元素的过渡属性取消掉就可以完美实现无缝滚动的效果了
+            showNotice() {
+                this.animate = true
+                setTimeout(() => {
+                    this.noticeList.push(this.noticeList[0])
+                    this.noticeList.shift()
+                    this.animate = false
                 }, 500)
-            },
-            mEnter() {
-                clearInterval(this.timer1)
-            },
-            mLeave() {
-                this.timer1 = setInterval(this.scroll, 1000)
-            },
-
-        },
+            }
+        }
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-	* {
-		margin: 0;
-		padding: 0;
+<style>
+	.noticeContent {
+		margin-top: 10px;
+		display: block;
+		width: 100%;
+		height: 20px;
+	// 控制高度以达到控制显示条数的目的 overflow: hidden;
 	}
 
-	#box {
-		width: 300px;
-		height: 175px;
-		line-height: 30px;
-		overflow: hidden;
-		padding-left: 30px;
-		border: 1px solid black;
+	.notice_top {
 		transition: all 0.5s;
-	}
-
-	.anim {
-		transition: all 0.5s;
-	}
-
-	#con1 li {
-		list-style: none;
-		line-height: 30px;
-		height: 30px;
+		margin-top: -30px;
 	}
 </style>

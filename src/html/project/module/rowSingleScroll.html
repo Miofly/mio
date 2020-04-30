@@ -57,7 +57,7 @@
 </head>
 <body style="font-size: 0.05rem">
 <div id="app" class="full-width">
-	<ul id="Scroll" style="height: 0.2rem;overflow: hidden;">
+	<ul id="Scroll" ref="Scroll" style="height: 0.2rem;overflow: hidden;">
 		<li>
 			<div>
 				<span>梦里浮生</span>
@@ -107,12 +107,12 @@
                     });
                 }, t);
                 // 鼠标放到快递信息(ul)上时
-                $('#Scroll').hover(function () {
-                    $(this).css("cursor", "pointer");
-                    stop = true; // 停止动画
-                }, function () {
-                    stop = false; // 开始动画
-                });
+                // $('#Scroll').hover(function () {
+                //     $(this).css("cursor", "pointer");
+                //     stop = true; // 停止动画
+                // }, function () {
+                //     stop = false; // 开始动画
+                // });
             }
         },
     })

@@ -1,4 +1,4 @@
-# mio
+# MIO
 uniapp 项目模块 --- 完全 vue 模式开发
 
 # 可以的话点一个Star吧

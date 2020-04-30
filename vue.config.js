@@ -1,7 +1,6 @@
 const path = require('path')
 // 配置uni-router的路由页面
 const TransformPages = require('uni-read-pages')
-// const uni-simple-router = require('uni-read-pages')
 const tfPages = new TransformPages({
     includes: ['path', 'name', 'meta']
 })
@@ -18,7 +17,7 @@ module.exports = {
             config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
         }
     },
-    devServer: {
+    devServer: { // 测试环境跨域处理
         proxy: {
             '/api': {
                 // target: "http://10.19.193.135:8870/ssyth",
@@ -66,11 +65,13 @@ module.exports = {
         }
     },
     chainWebpack: config => {
+        // 配置快捷访问文件夹
         config.resolve.alias
             .set('@', resolve('src'))
             .set('zj', resolve('src/components'))
             .set('mioJs', resolve('src/common/js'))
             .set('json', resolve('src/static/mockJson'))
+        // 配置uni-router
         config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
             ROUTES: JSON.stringify(tfPages.routes)
         }])

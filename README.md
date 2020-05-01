@@ -16,8 +16,6 @@ npm start
 
 原生html项目在 src/html 目录下面，此目录下面文件是独立的。
 
-### 微信公众号
-![Image text](https://i.loli.net/2020/04/29/U72bHxanENvJpR4.jpg)
-### 线上小程序
-![Image text](https://i.loli.net/2020/04/29/zrBxEGDC53FIdq7.jpg) ![Image text](https://i.loli.net/2020/04/29/O9gqu4Wa52Vnbhv.jpg)
+### 微信公众号 or 线上小程序
+![Image text](https://i.loli.net/2020/04/29/U72bHxanENvJpR4.jpg) ![Image text](https://i.loli.net/2020/04/29/zrBxEGDC53FIdq7.jpg) ![Image text](https://i.loli.net/2020/04/29/O9gqu4Wa52Vnbhv.jpg)
 

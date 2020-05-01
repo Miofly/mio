@@ -11,12 +11,6 @@ npm install --registry=https://registry.npm.taobao.org
 如果遇到 node-sass 报错：
 解决方法：https://blog.csdn.net/weixin_40013817/article/details/105218844
 
-
-如果一直有问题可直接拷贝项目的node_modules：
-### 下方为百度云链接
-链接：https://pan.baidu.com/s/1DUVkStXfh-8fx2dPWNJ2jw <br>
-提取码：aqh0
-
 ### 启动项目
 npm start
 

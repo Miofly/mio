@@ -50,6 +50,11 @@
                 wx: 'SUNP8694',
             }
         },
+        created() {
+            document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
+                evt.preventDefault()
+            }, {passive: false})
+        },
 		onLoad () {
             console.log(localStorage.getItem('TOKEN_KEY'))
 		},

@@ -72,6 +72,9 @@
             }
         },
         onLoad() {
+            document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
+                evt.preventDefault()
+            }, {passive: false})
             // 需要固定swiper的高度
             // this.height = uni.getSystemInfoSync().windowHeight + 'px'
             console.log(this.height)

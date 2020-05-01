@@ -8,12 +8,8 @@ uniapp 项目模块 --- 完全 vue 模式开发
 npm install --registry=https://registry.npm.taobao.org
 建议运行 npm，因为 cnpm 会出现一些未知问题
 
-如果遇到node-sass报错：
-解决方法：安装 cnpm , 然后使用 cnpm 安装
-
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-
-cnpm i node-sass
+如果遇到 node-sass 报错：
+解决方法：https://blog.csdn.net/weixin_40013817/article/details/105218844
 
 
 如果一直有问题可直接拷贝项目的node_modules：
@@ -24,8 +20,7 @@ cnpm i node-sass
 ### 启动项目
 npm start
 
-功能模块都在 components 文件夹内
-
+原生html项目在 src/html 目录下面，此目录下面文件是独立的。
 
 ### 微信公众号
 ![Image text](https://i.loli.net/2020/04/29/U72bHxanENvJpR4.jpg)

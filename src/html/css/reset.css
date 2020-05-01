@@ -23,34 +23,19 @@ time, mark, audio, video, input {
     margin: 0;
     padding: 0;
     border: 0;
-    /*font-size: 100%;*/
     font-weight: normal;
     vertical-align: baseline;
 }
-html {
-    /*font-size: 13.33vw;*/
-}
+
 html, body, #app {
     height: 100vh;
     width: 100%;
-    /*font-size: 13.33vw;*/
-    /*background: rgb(0, 0, 0);*/
 }
 
 /*解决手机端点击的BUG*/
 /*html {*/
 /*touch-action: manipulation;*/
 /*}*/
-
-body {
-    /*font-weight: 100;*/
-    color: #1D262E;
-    /*line-height: 1;*/
-    background: #F5F8FA;
-    /*font-size: 3.6vw;*/
-}
-
-/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
     display: block;
@@ -104,12 +89,10 @@ textarea,
 button {
     border: none;
     outline: none;
-    /*font-size: 14px;*/
 }
 
 button {
     cursor: pointer;
-    /*font-size: 14px;*/
 }
 
 input {
@@ -203,8 +186,7 @@ input::-webkit-inner-spin-button {
     -webkit-border-radius: 6px;
 }
 
-/*显示省略号*/
-.ellipsis {
+.ellipsis { /*显示省略号*/
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

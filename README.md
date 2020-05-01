@@ -2,7 +2,7 @@
 uniapp 项目模块 --- 完全 vue 模式开发
 
 ## 可以的话点一个 Star 吧
-以上内容都是本人所有项目的总结，希望对大家有用。基本每天都会更新新内容
+以上内容都是本人所有项目的总结，希望对大家有用。基本每天都会更新内容
 
 ## 安装项目
 npm install --registry=https://registry.npm.taobao.org

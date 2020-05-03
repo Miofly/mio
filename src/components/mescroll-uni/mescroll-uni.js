@@ -272,11 +272,7 @@ MeScroll.prototype.touchmoveEvent = function (e) {
                     me.isMoveDown = true // 标记下拉区域高度改变,在touchend重置回来
                 }
                 if (diff > 0) { // 向下拉
-
                     me.downHight += Math.round(diff * me.optDown.outOffsetRate) // 越往下,高度变化越小
-                    setTimeout(() => {
-                        ui.showToast(me.downHight,' me.downHight')
-                    }, 10)
                 } else { // 向上收
                     setTimeout(() => {
                         ui.showToast('这里是否触发777')

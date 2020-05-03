@@ -57,7 +57,6 @@
         dbJsonData
     } from '@/api'
 
-
     export default { // 注意此处还需使用MescrollMoreItemMixin (必须写在MescrollMixin后面)
         mixins: [MescrollMixin, MescrollMoreItemMixin],
         props: {

@@ -54,3 +54,7 @@ npm i -D optimize-css-assets-webpack-plugin // 代码压缩合并
 {
  'plugins': [["@ba"]]
 }
+
+"sideEffects": [
+        "*.css"
+    ],

@@ -1,10 +1,6 @@
-const path = require('path')
+const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 不支持热更新，在线上环境使用
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // 压缩css生成的代码
-const glob = require('glob')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const PurifyCssPlugin = require('purifycss-webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const prodConfig = { // 配置好后 npx webpack
     mode: 'production', // development 不压缩 production 默认是被压缩
@@ -38,6 +34,7 @@ const prodConfig = { // 配置好后 npx webpack
                             modules: false // css模块化
                         }
                     },
+                    'sass-loader',
                     {
                         loader: 'postcss-loader', // css厂商前缀 npm i postcss-loader -D 配合 autoprefixer 插件
                         options: {
@@ -45,8 +42,7 @@ const prodConfig = { // 配置好后 npx webpack
                                 path: path.resolve(__dirname, '../postcss.config.js'),
                             }
                         }
-                    },
-                    'sass-loader'
+                    }
                 ]
             },
         ]
@@ -60,13 +56,13 @@ const prodConfig = { // 配置好后 npx webpack
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[name].chunk.css'
-        }),
+        })
     ],
     output: { // 为了防止浏览器缓存加入[contenthash],
         // 代码改变[contenthash]才会改变，否则不会改变
         filename: '[name].[contenthash].js', // 打包文件的文件名
         chunkFilename: '[name].[contenthash].chunk.js',
     }
-}
+};
 
-module.exports = prodConfig
+module.exports = prodConfig;

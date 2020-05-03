@@ -1,0 +1,275 @@
+@function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
+    @return $val * 1rpx;
+}
+@import "bar"; // 图片样式模块
+@import "button"; // 按钮样式模块
+
+@import "summary/flex"; // 布局样式模块
+@import "list"; // 列表样式模块
+
+@import "messTip"; // 消息提示样式模块
+@import "text"; // 文字样式模块
+@import "shadow"; // 阴影样式模块
+
+@import "badge"; // 标签样式模块
+@import "avatar"; // 头像样式模块
+@import "image"; // 图片样式模块
+@import "form"; // 模态框样式模块
+@import "summary/color"; // 颜色样式模块
+@import "summary/box"; // 颜色样式模块
+@import "summary/common"; // 颜色样式模块
+@import "card"; // 卡片样式模块
+
+page {
+    width: 100%;
+    height: 100%;
+}
+// 初始化
+body {
+    background-color: #f1f1f1;
+    font-size: rpx(28);
+    color: #333333;
+    font-family: Helvetica Neue, Helvetica, sans-serif;
+
+    view,
+    scroll-view,
+    swiper,
+    button,
+    input,
+    textarea,
+    label,
+    navigator,
+    image {
+        box-sizing: border-box;
+    }
+
+    .round {
+        border-radius: rpx(5000);
+    }
+
+    .radius {
+        border-radius: rpx(6);
+    }
+
+    .border-top {
+        border-top: 1px solid rgba(0, 0, 0, 0.2)
+    }
+}
+
+
+@mixin navList($width) { // 导航模块
+    width: $width;
+    padding: rpx(30);
+    border-radius: rpx(12);
+    margin: 0 2.5% rpx(40);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    &:after { // 阴影效果
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background-color: inherit;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: -10%;
+        border-radius: rpx(10);
+        opacity: 0.2;
+        transform: scale(0.9, 0.9);
+    }
+
+    .nav-title {
+        font-size: rpx(32);
+        font-weight: 300;
+
+        &:first-letter {
+            font-size: rpx(40);
+            margin-right: rpx(4);
+        }
+    }
+
+    .nav-name {
+        font-size: rpx(28);
+        text-transform: Capitalize;
+        margin-top: rpx(20);
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: rpx(40);
+            height: rpx(6);
+            background: #fff;
+            bottom: 0;
+            right: 0;
+            opacity: 0.5;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: rpx(100);
+            height: 1px;
+            background: #fff;
+            bottom: 0;
+            right: rpx(40);
+            opacity: 0.3;
+        }
+
+        &:first-letter {
+            font-weight: bold;
+            font-size: rpx(36);
+            margin-right: 1px;
+        }
+    }
+
+    text { // 图标
+        position: absolute;
+        right: rpx(30);
+        top: rpx(30);
+        font-size: rpx(42);
+        width: rpx(60);
+        height: rpx(60);
+        text-align: center;
+        line-height: rpx(60);
+    }
+}
+/* #ifdef MP-WEIXIN */
+.nav-list { // 导航模块
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .nav-li {
+        @include navList(36%);
+    }
+    .nav-li-fill {
+        @include navList(100%);
+    }
+}
+/* #endif */
+
+/* #ifdef H5 */
+.nav-list { // 导航模块
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .nav-li {
+        @include navList(45%);
+    }
+    .nav-li-fill {
+        @include navList(100%);
+    }
+}
+
+/* #endif */
+.solid,
+.solid-top,
+.solid-right,
+.solid-bottom,
+.solid-left,
+.solids,
+.solids-top,
+.solids-right,
+.solids-bottom,
+.solids-left,
+.dashed,
+.dashed-top,
+.dashed-right,
+.dashed-bottom,
+.dashed-left {
+    position: relative;
+}
+
+.solid::after,
+.solid-top::after,
+.solid-right::after,
+.solid-bottom::after,
+.solid-left::after,
+.solids::after,
+.solids-top::after,
+.solids-right::after,
+.solids-bottom::after,
+.solids-left::after,
+.dashed::after,
+.dashed-top::after,
+.dashed-right::after,
+.dashed-bottom::after,
+.dashed-left::after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.solid::after {
+    border: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-top::after {
+    border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-right::after {
+    border-right: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-bottom::after {
+    border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solid-left::after {
+    border-left: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.solids::after {
+    border: 8rpx solid #eee;
+}
+
+.solids-top::after {
+    border-top: 8rpx solid #eee;
+}
+
+.solids-right::after {
+    border-right: 8rpx solid #eee;
+}
+
+.solids-bottom::after {
+    border-bottom: 8rpx solid #eee;
+}
+
+.solids-left::after {
+    border-left: 8rpx solid #eee;
+}
+
+/* -- 虚线 -- */
+.dashed::after {
+    border: 1rpx dashed #ddd;
+}
+
+.dashed-top::after {
+    border-top: 1rpx dashed #ddd;
+}
+
+.dashed-right::after {
+    border-right: 1rpx dashed #ddd;
+}
+
+.dashed-bottom::after {
+    border-bottom: 1rpx dashed #ddd;
+}
+
+.dashed-left::after {
+    border-left: 1rpx dashed #ddd;
+}

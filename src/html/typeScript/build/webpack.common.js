@@ -12,7 +12,7 @@ function resolve(dir) {
 const commonConfig = { // 配置好后 npx webpack
     entry: { // 上面是简写
         // lodash: './src/lodash.js',
-        main1: './src/index.js',
+        main1: './src/index.ts',
         // sub: './src/index.js'
     },
     output: { // 输出到bundle/bundle.js
@@ -23,7 +23,7 @@ const commonConfig = { // 配置好后 npx webpack
     },
     resolve: {
         // extensions: ['.js', '.vue', '.json'], // 可以导入的时候忽略的拓展名范围
-        extensions: ['.js', '.json', '.vue', '.scss', '.css'], // 省略文件名后缀
+        extensions: ['.js', '.json', '.vue', 'ts', 'tsx'], // 省略文件名后缀
         alias: {
             '@': resolve('src'),
             zj: resolve('src/components'),
@@ -33,23 +33,28 @@ const commonConfig = { // 配置好后 npx webpack
     },
     module: { // loader的顺序从下到上，从右到左
         rules: [
-            // {
-            //     test: /\.js$/,
-            //     exclude: /node_modules/, // 排除在外
-            //     loader: 'babel-loader', // 使用babel-loader把es6语法转成es5语法
-            //     options: {
-            //         presets: [['@babel/preset-env', {
-            //             // targets: {
-            //             //     chrome: '67' // 此版本中的浏览器不需要转es5语法
-            //             // },
-            //             // 弥补低版本浏览器不支持转es5语法
-            //             // 使用下面这个属性，不需要 import '@babel/polyfill'
-            //             // 他会根据使用es6的情况只代码使用到的es6语法
-            //             useBuiltIns: 'usage',
-            //             // corejs: 3
-            //         }]]
-            //     }
-            // },
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/, // 排除在外
+                loader: 'ts-loader', // 使用babel-loader把es6语法转成es5语法
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/, // 排除在外
+                loader: 'babel-loader', // 使用babel-loader把es6语法转成es5语法
+                options: {
+                    presets: [['@babel/preset-env', {
+                        // targets: {
+                        //     chrome: '67' // 此版本中的浏览器不需要转es5语法
+                        // },
+                        // 弥补低版本浏览器不支持转es5语法
+                        // 使用下面这个属性，不需要 import '@babel/polyfill'
+                        // 他会根据使用es6的情况只代码使用到的es6语法
+                        useBuiltIns: 'usage',
+                        // corejs: 3
+                    }]]
+                }
+            },
             {
                 test: /\.(jpg|png|gif)$/,
                 use: { // 把图片变成base64，适合小图片
@@ -72,11 +77,11 @@ const commonConfig = { // 配置好后 npx webpack
     ],
     optimization: { // treeshaking在开发环境下未使用的js仍然存在，但提示只使用了某一个
         usedExports: true,
-        // runtimeChunk: { // 老版本的webpack会由于manifest造成因为没改代码
-        //     // 也会让contenthash改变, 配置上runtimeChunk会把manifest造成的
-        //     // 不同js代码单独抽离出来（抽离的文件runtime.js）
-        //     name: 'runtime'
-        // },
+        runtimeChunk: { // 老版本的webpack会由于manifest造成因为没改代码
+            // 也会让contenthash改变, 配置上runtimeChunk会把manifest造成的
+            // 不同js代码单独抽离出来（抽离的文件runtime.js）
+            name: 'runtime'
+        },
         // // production下不需要 // 在mode: 'development'配置Tree Shaking
         // splitChunks: { // 默认配置即可 代码分割
         //     chunks: 'all',

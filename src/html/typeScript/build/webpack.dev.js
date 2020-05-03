@@ -13,7 +13,7 @@ const devConfig = { // 配置好后 npx webpack
         contentBase: './dist',
         open: true, // 自动打开浏览器
         port: 9999,
-        // historyApiFallback: false,
+        historyApiFallback: false,
         // hot: true,
         // hotOnly: true, // 浏览器不刷新
         proxy: { // 跨域代理
@@ -45,6 +45,7 @@ const devConfig = { // 配置好后 npx webpack
                             modules: false // css模块化
                         }
                     },
+                    'sass-loader',
                     {
                         loader: 'postcss-loader', // css厂商前缀 npm i postcss-loader -D 配合 autoprefixer 插件
                         options: {
@@ -52,8 +53,7 @@ const devConfig = { // 配置好后 npx webpack
                                 path: path.resolve(__dirname, '../postcss.config.js'),
                             }
                         }
-                    },
-                    'sass-loader',
+                    }
                 ]
             },
             { // 支持vue文件的处理

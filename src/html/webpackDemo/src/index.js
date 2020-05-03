@@ -1,3 +1,13 @@
-import {randomNum} from './toolUtils'
-console.log(randomNum(12,3213))
-import '@/common/css/summary/color.scss'
+import Vue from '../../js/vue.js'
+import '@/common/css/main.scss'
+
+var app = new Vue({
+    el: '#app',
+    data() {
+        return {
+            num: 1,
+            timer: null,
+            textImg: ''
+        }
+    },
+})

@@ -1,0 +1,27 @@
+<html>
+<head>
+
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+
+    ajax('http://xx4.longxx.cn/xx4-65/jiawenhao/api/getluodi1api.php', function (response) {
+        console.log(response)
+    });
+
+    function ajax(url, callback) {
+        var jsonp = document.createElement('script');
+        jsonp.type = 'text/javascript';
+        jsonp.src = url + '?callbackName=callback';
+        callback = function (response) {
+            callback(response);
+        };
+        document.getElementsByTagName('head')[0].appendChild(jsonp);
+    }
+</script>
+</html>

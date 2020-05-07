@@ -1,24 +1,24 @@
 @function rpx($val) { // 解决rpx在webstrom格式化加空格的问题
     @return $val * 1rpx;
 }
-@import "bar"; // 图片样式模块
-@import "button"; // 按钮样式模块
+@import "../bar"; // 图片样式模块
+@import "../button"; // 按钮样式模块
 
-@import "summary/flex"; // 布局样式模块
-@import "list"; // 列表样式模块
+@import "flex"; // 布局样式模块
+@import "../list"; // 列表样式模块
 
-@import "messTip"; // 消息提示样式模块
-@import "text"; // 文字样式模块
-@import "shadow"; // 阴影样式模块
+@import "../messTip"; // 消息提示样式模块
+@import "../text"; // 文字样式模块
+@import "../shadow"; // 阴影样式模块
 
-@import "badge"; // 标签样式模块
-@import "avatar"; // 头像样式模块
-@import "image"; // 图片样式模块
-@import "form"; // 模态框样式模块
-@import "summary/color"; // 颜色样式模块
-@import "summary/box"; // 颜色样式模块
-@import "summary/common"; // 颜色样式模块
-@import "card"; // 卡片样式模块
+@import "../badge"; // 标签样式模块
+@import "../avatar"; // 头像样式模块
+@import "../image"; // 图片样式模块
+@import "../form"; // 模态框样式模块
+@import "color"; // 颜色样式模块
+@import "box"; // 颜色样式模块
+@import "common"; // 颜色样式模块
+@import "../card"; // 卡片样式模块
 
 page {
     width: 100%;

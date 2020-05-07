@@ -320,7 +320,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { margin: 0px
 .text-bold { font-weight: bold; }
 .text-center { text-align: center; }
 [class*="animation-"] { animation-duration: 0.5s; animation-timing-function: ease-out; animation-fill-mode: both; }
-.capmcz { border-width: 8px; border-style: solid; border-color: rgb(0, 129, 255) rgb(255, 255, 255) rgb(0, 129, 255) rgb(0, 129, 255); transition: all 0.5s ease 0s; border-radius: 50%; overflow: hidden; width: 8rem; height: 8rem; animation: 2s ease-in-out 0s infinite normal none running kcqwmgzh; }
+.capmcz { border-width: 8px; border-style: solid;
+    border-color: rgb(0, 129, 255) rgb(255, 255, 255) rgb(0, 129, 255) rgb(0, 129, 255);
+    transition: all 0.5s ease 0s; border-radius: 50%;
+    overflow: hidden; width: 8rem; height: 8rem; animation: 2s ease-in-out 0s infinite normal none running kcqwmgzh; }
 #review_boxs {height: 72%; overflow: hidden; }
 .daoztx { background-color: rgb(255, 255, 255); border-radius: 6px; position: fixed; width: 96%; top: 1%; left: 2%; box-shadow: rgb(170, 170, 170) 1px 1px 4px; z-index: 6666; }
 .daoz_top { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }

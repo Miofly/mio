@@ -3,7 +3,6 @@
  * 2020-03-15 wenju
  * http://www.mescroll.com
  */
-import {ui} from 'mioJs/uniapp'
 
 export default function MeScroll(options, isScrollBody) {
     const me = this
@@ -229,7 +228,6 @@ MeScroll.prototype.touchmoveEvent = function (e) {
         // 可下拉的条件
         if (!me.inTouchend && !me.isDownScrolling && !me.optDown.isLock && (!me.isUpScrolling || (me.isUpScrolling &&
             me.optUp.isBoth))) {
-
             // 下拉的角度是否在配置的范围内
             const angle = me.getAngle(me.lastPoint, curPoint) // 两点之间的角度,区间 [0,90]
             if (angle < me.optDown.minAngle) return // 如果小于配置的角度,则不往下执行下拉刷新
@@ -250,23 +248,15 @@ MeScroll.prototype.touchmoveEvent = function (e) {
 
             // 下拉距离  < 指定距离
             if (me.downHight < me.optDown.offset) {
-
                 if (me.movetype !== 1) {
                     me.movetype = 1 // 加入标记,保证只执行一次
                     me.optDown.inOffset && me.optDown.inOffset(me) // 进入指定距离范围内那一刻的回调,只执行一次
                     me.isMoveDown = true // 标记下拉区域高度改变,在touchend重置回来
                 }
                 me.downHight += diff * me.optDown.inOffsetRate // 越往下,高度变化越小
-                setTimeout(() => {
-                    ui.showToast('这里是否触发4')
-                }, 100)
                 // 指定距离  <= 下拉距离
             } else {
-
                 if (me.movetype !== 2) {
-                    setTimeout(() => {
-                        ui.showToast('这里是否触发55')
-                    }, 500)
                     me.movetype = 2 // 加入标记,保证只执行一次
                     me.optDown.outOffset && me.optDown.outOffset(me) // 下拉超过指定距离那一刻的回调,只执行一次
                     me.isMoveDown = true // 标记下拉区域高度改变,在touchend重置回来
@@ -274,9 +264,6 @@ MeScroll.prototype.touchmoveEvent = function (e) {
                 if (diff > 0) { // 向下拉
                     me.downHight += Math.round(diff * me.optDown.outOffsetRate) // 越往下,高度变化越小
                 } else { // 向上收
-                    setTimeout(() => {
-                        ui.showToast('这里是否触发777')
-                    }, 900)
                     me.downHight += diff // 向上收回高度,则向上滑多少收多少高度
                 }
             }

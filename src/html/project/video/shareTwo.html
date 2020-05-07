@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/box.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/color.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/flex.css"/>
+	<link rel="stylesheet" type="text/css" href="../../css/text.css"/>
+	<script type="text/javascript" src="../../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
+	<script type="text/javascript" src="../../js/canvans.js"></script>
+	<script>
+        (function (doc, win) { // 移动端适配
+            var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                dpr = 1,
+                scale = 1 / dpr,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var metaEl = doc.createElement('meta');
+            metaEl.name = 'viewport';
+            metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+            docEl.firstElementChild.appendChild(metaEl);
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 375) {
+                    width = 375 * dpr;
+                }
+                // 乘以100，px : rem = 100 : 1
+                docEl.style.fontSize = 100 * (width / 375) + 'px';
+            };
+            recalc()
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem">
+<div>
+	<div id="modal" class="bg-white padding-xl text-lg text-center padding-bottom-ten-five"
+		 style="border-radius: 1rem;width: 80%;position: relative;top:-90%;left: 10%;border: 1px solid red;
+animation: shake 2s 2 linear;z-index: 11;opacity: 0;transition: 1s">
+		<p class="text-center text-blue text-bold margin-bottom text-xxl"><b id="gxn">恭喜您</b></p>
+		<p class="text-center text-xl hideMes">获得五一福利金</p>
+		<p class="margin-top-xl text-red margin-right hideMes"><b id="money" class="text-bold"
+																  style="font-size: 1.5rem"></b></p>
+		<p class="text-lg text-center margin-top hideMes" id="mess"><span class="text-red text-lg">领取要求：</span>只需您分享到微信群</p>
+		<p class="margin-top-xl hideMess">完成后钱自动存到您的微信钱包</p>
+		<p class="margin-top-xl margin-bottom-xl" id="tempText">红包还剩
+			<b class="text-red margin-top-xl" id="sx"></b>
+		<p class="margin-top hideMess" style="margin-bottom: 10%">先到先得，领完为止，马上去分享领取</p>
+		<div style="position: absolute;bottom: 0;left: 0;border-radius: 1rem;
+	border-top-left-radius: 0;border-top-right-radius: 0;" class="bg-red full-width padding-top-bottom-xl text-xxl">
+			长按屏幕发送到微信群
+		</div>
+	</div>
+	<div style="position: fixed;bottom: 0;width: 100%;text-align: center;z-index: 9999">
+		<img style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center;position: relative;
+    top: 7rem;" src="../img/zhiwen.png">
+		<div style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center" class="capmcz"></div>
+		<h1 style="font-size: 0.15rem;color: #449AFA;margin-bottom: 8%">长按屏幕分享</h1>
+	</div>
+</div>
+</body>
+</html>

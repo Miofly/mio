@@ -12,8 +12,8 @@ function resolve(dir) {
 const commonConfig = { // 配置好后 npx webpack
     entry: { // 上面是简写
         // lodash: './src/lodash.js',
-        main1: './src/index.js',
-        // sub: './src/index.js'
+        // myVue: './src/index.js',
+        sub: './src/main.js'
     },
     output: { // 输出到bundle/bundle.js
         // publicPath: 'https://localhost:8080//', // 类似base_url
@@ -33,23 +33,23 @@ const commonConfig = { // 配置好后 npx webpack
     },
     module: { // loader的顺序从下到上，从右到左
         rules: [
-            // {
-            //     test: /\.js$/,
-            //     exclude: /node_modules/, // 排除在外
-            //     loader: 'babel-loader', // 使用babel-loader把es6语法转成es5语法
-            //     options: {
-            //         presets: [['@babel/preset-env', {
-            //             // targets: {
-            //             //     chrome: '67' // 此版本中的浏览器不需要转es5语法
-            //             // },
-            //             // 弥补低版本浏览器不支持转es5语法
-            //             // 使用下面这个属性，不需要 import '@babel/polyfill'
-            //             // 他会根据使用es6的情况只代码使用到的es6语法
-            //             useBuiltIns: 'usage',
-            //             // corejs: 3
-            //         }]]
-            //     }
-            // },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/, // 排除在外
+                loader: 'babel-loader', // 使用babel-loader把es6语法转成es5语法
+                options: {
+                    presets: [['@babel/preset-env', {
+                        // targets: {
+                        //     chrome: '67' // 此版本中的浏览器不需要转es5语法
+                        // },
+                        // 弥补低版本浏览器不支持转es5语法
+                        // 使用下面这个属性，不需要 import '@babel/polyfill'
+                        // 他会根据使用es6的情况只代码使用到的es6语法
+                        // useBuiltIns: 'usage',
+                        // corejs: 3
+                    }]]
+                }
+            },
             {
                 test: /\.(jpg|png|gif)$/,
                 use: { // 把图片变成base64，适合小图片
@@ -68,7 +68,7 @@ const commonConfig = { // 配置好后 npx webpack
         new HtmlWebpackPlugin({ // 打包后自动生成一个HTML文件，并把打包生成的js自动引入到这个html文件中
             template: './src/index.html' // 以index.html为模板打包
         }),
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin(), // 清除之前打包的文件
     ],
     optimization: { // treeshaking在开发环境下未使用的js仍然存在，但提示只使用了某一个
         usedExports: true,

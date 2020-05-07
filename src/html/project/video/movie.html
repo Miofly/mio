@@ -33,6 +33,11 @@
             win.addEventListener(resizeEvt, recalc, false);
         })(document, window);
 	</script>
+	<style>
+		.mio-modal-mask { position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px;
+			background: rgba(0, 0, 0, 0.6); z-index: 88; transition: all 0.3s ease-in-out 0s;
+			opacity: 1; visibility: visible; }
+	</style>
 </head>
 <body style="font-size: 0.05rem;">
 <div id="app" class="bg-black">
@@ -108,8 +113,24 @@
 					v-for="(page, index) in tvInfos.pages" :key="index"><span>{{page.num}}</span></li>
 			</ul>
 
-			<div style="margin-top: 0.16rem;width:0.60rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(236,202,112,1);line-height:0.21rem;">
-				{{recommend}}
+			<div style="margin-top: 0.16rem;width:100%;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(236,202,112,1);line-height:0.21rem;">
+				<div class="fl">{{recommend}}</div>
+				<div class="fr" @click="ewmCode">
+					<img src="../../img/phone.png" style="width: 0.15rem">
+					点击获取更多精彩片源
+				</div>
+			</div>
+
+			<div v-if="ewmCodeStatus" class="mio-modal-mask">
+
+			</div>
+			<div v-if="ewmCodeStatus" style="position: fixed;z-index: 99;transition: 1s;top: 20%;left: 0;text-align: center">
+				<div style="width: 70%;margin: 0 auto;position: relative">
+					<img src="../../img/erweima.png">
+					<div @click="ewmCodeStatus=false" style="margin-top: 0.4rem">
+						<img src="../../img/guanbi.png" style="width: 0.5rem;">
+					</div>
+				</div>
 			</div>
 
 			<!--横向-->
@@ -145,7 +166,6 @@
 								<p>{{tj.rate}} <b>分</b></p>
 							</div>
 						</div>
-
 					</li>
 				</ul>
 			</div>
@@ -157,6 +177,7 @@
         el: '#app',
         data() {
             return {
+                ewmCodeStatus: false,
                 muted: true,
                 autoplay: false,
                 bfImg: '../../img/bofag.png',
@@ -376,6 +397,9 @@
             this.videoId = this.tvInfos.currentSrc.num // 加载默认视频
         },
         methods: {
+            ewmCode () {
+				this.ewmCodeStatus = true
+            },
             endFn() {
                 console.log(21312)
             },

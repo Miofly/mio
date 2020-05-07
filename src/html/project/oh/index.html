@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow:hidden!important;">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script src="js/vue.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 375) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                    }
+                    var html = document.getElementsByTagName('html')[0];
+                    var settedFs = settingFs = parseInt(100 * (clientWidth / 375));
+                    var whileCount = 0;
+                    while (true) {
+                        var realFs = parseInt(window.getComputedStyle(html).fontSize);
+                        var delta = realFs - settedFs;
+                        //不相等
+                        if (Math.abs(delta) >= 1) {
+                            if (delta > 0)
+                                settingFs--;
+                            else
+                                settingFs++;
+                            html.setAttribute('style', 'font-size:' + settingFs + 'px!important');
+                        } else
+                            break;
+                        if (whileCount++ > 100)
+                            break
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem;background: rgb(253, 206, 195);overflow:hidden!important;" class="full-width-height">
+<div id="app" class="full-width-height">
+	<div v-if="indexStatus" class="full-width-height">
+		<div>
+			<img :src="index">
+		</div>
+		<div @click="zfanFn"
+			 style="animation:scale-upOne 2s infinite linear;position: fixed;text-align: center;left: 0;bottom: 3%;width: 100%;">
+			<img :src="zfan" style="width: 2.23rem;height: 0.5rem">
+		</div>
+	</div>
+	<div v-if="indexStatusTwo">
+		<div style="position: relative">
+			<div style="width: 100%">
+				<img :src="xh">
+			</div>
+			<div @click="checkFlower(index)" v-for="(flower, index) in flowers" :key="index"
+				 style="position: fixed;border-radius: 0.2rem;z-index: 999999999"
+				 :style="{'top': flower.itop, 'left': flower.ileft, border: bgIndex==index ? '' : '2px solid white', color: bgIndex==index ? '#ee3f4d' : 'white'}">
+				<img style="width: 1.14rem;height: 1.14rem;border-radius: 0.2rem" :src="flower.src"
+					 :style="{border: bgIndex==index ? '4px solid #ee3f4d' : '4px solid transparent',
+					 width: bgIndex==index ? '1.22rem' : '1.14rem',height: bgIndex==index ? '1.22rem' : '1.14rem'}">
+				<span style="width:0.60rem;height:0.28rem;font-size:0.20rem;font-weight:600;position: fixed;"
+					  :style="{'top': flower.stop, 'left': flower.sleft}">{{flower.name}}</span>
+			</div>
+			<div style="position: fixed;top: 4.5rem;left: 0;width: 100%;text-align: center;z-index: 9999">
+				<img :src="wzThree" style="width: 70%">
+			</div>
+			<div style="position: fixed;bottom: 0;left: 0">
+				<img :src="huahua">
+			</div>
+		</div>
+	</div>
+	<div v-if="indexStatusThree" style="height: 100%;overflow-y: scroll;padding-bottom: 25%">
+		<img :src="bjThree">
+		<!--<img :src="wzThree">-->
+		<div @click="checkLang(index)" v-for="(lang, index) in langs" :key="index" style="width: 3rem;padding-bottom: 0.2rem;
+		margin: 0 auto;box-shadow: 0.08rem 0.08rem 0px #E8948E"
+			 :style="{background: bgIndexs==index ? '#EE5F5F' : '#FAAFA4'}">
+			<div style="width:2.82rem;font-size:0.15rem;color:rgba(255,255,255,1);padding-top: 0.2rem;
+			padding-left: 0.2rem;font-weight: 600;margin-top: 0.2rem">
+				{{lang.lang.replace(/\//g, '，')}}
+			</div>
+		</div>
+		<div style="position: fixed;bottom: 5%;left: 0;text-align: center;width: 100%">
+			<img @click="cxxhFn" :src="cxxh" style="height: 0.43rem;">
+			<img @click="schkFn" :src="schk" style="height: 0.43rem;width: 1.97rem;margin-left: 0.12rem">
+		</div>
+	</div>
+	<div v-if="modalStatus" class="bg-white padding-xl text-lg text-center"
+		 style="border-radius: 1rem;width: 80%;position: fixed;top:40%;left: 10%;border: 1px solid white;
+animation: shake 2s 2 linear;z-index: 11;transition: 1s;color: rgb(254, 82, 25)">
+		请选择您对母亲的祝福语！
+	</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                cxxh: '../../img/mother/cxxh.png',
+                schk: '../../img/mother/schk.png',
+                bgImg: '../../img/mother/bgOne.png',
+                huahua: '../../img/mother/huahua@2x.png',
+                index: '../../img/mother/index.png',
+                zfan: '../../img/mother/zfan.png',
+                xh: '../../img/mother/bjSecond.png',
+                bjThree: '../../img/mother/bjThree.png',
+                wzThree: '../../img/mother/wzThree.png',
+                indexStatus: true,
+                indexStatusTwo: false,
+                indexStatusThree: false,
+                modalStatus: false,
+                bgIndex: -1,
+                bgIndexs: -1,
+                flowers: [
+                    {
+                        src: '../../img/mother/hua1@2x.png',
+                        name: '康乃馨',
+                        itop: '0.84rem',
+                        ileft: '0.63rem',
+                        stop: '2.08rem',
+                        sleft: '0.89rem'
+                    },
+                    {
+                        src: '../../img/mother/hua2@2x.png',
+                        name: '百合花',
+                        itop: '0.84rem',
+                        ileft: '2.03rem',
+                        stop: '2.08rem',
+                        sleft: '2.31rem'
+                    },
+                    {
+                        src: '../../img/mother/hua3@2x.png',
+                        name: '长寿花',
+                        itop: '2.67rem',
+                        ileft: '0.63rem',
+                        stop: '3.91rem',
+                        sleft: '0.89rem'
+                    },
+                    {
+                        src: '../../img/mother/hua4@2x.png',
+                        name: '玫瑰花',
+                        itop: '2.67rem',
+                        ileft: '2.03rem',
+                        stop: '3.91rem',
+                        sleft: '2.31rem'
+                    },
+                ],
+                langs: [
+                    {lang: '将关怀编织成一缕风/为妈妈轻舞飞扬/将祝福采集成一首诗/为妈妈轻轻吟唱/祝妈妈母亲节快乐，身体健康。'},
+                    {lang: '一句谢谢/表不完我对您的感激/永远爱你/述不尽我对您的爱意/母亲节，祝愿您健康快乐每一天！'},
+                    {lang: '是你，十月怀胎给了我生命/是你，在我困难时给我温暖的拥抱/妈妈，我爱你/母亲节到了/祝你幸福安康！'},
+                    {lang: '给您送一束花/送去儿女对你的挂念/给您道一声祝福/送去儿女对你诚挚的爱/母亲节到了/愿母亲健康平安，幸福快乐。'},
+                    {lang: '母爱就是一杯茶/清新沁肺爱无价/母爱就是一杯水/清澈透明得安慰/祝福妈妈母亲节快乐/我深深地爱着您！'},
+                    {lang: '母亲，是您最美的面孔/伴我拼搏争成功/母亲，是您最美的笑容/伴我生命去追梦/母亲节即将来临/祝母亲安康长寿，欢欣无比！'},
+                    {lang: '母亲的爱/一生相伴的和蔼慈祥/母亲的爱/成长路上的殷切期盼/母亲节祝福我们的母亲/身体安康，幸福久长。'},
+                    {lang: '走遍天涯海角/您在的地方才是永远的家/看遍人情冷暖/您给的关心才是不求回报的奉献/母亲节  愿妈妈健康幸福常相伴笑口常开喜笑颜！'},
+                    {lang: '是您给予我灿烂美好的生命/是您教会我做人的道理/是你用丰满的羽翼呵护我成长。母亲节到了/祝您幸福安康，笑口常开！'},
+                    {lang: '有一种爱，伟大而平凡/如润物春雨，似拂面和风/有一份情，无私而博大/绵绵不断，情谊深长/这就是母爱/妈妈，祝您母亲节快乐！'}
+                ]
+            }
+        },
+        methods: {
+            zfanFn() {
+                this.indexStatus = false
+                this.indexStatusTwo = true
+            },
+            checkFlower(index) {
+                this.bgIndex = index
+                setTimeout(() => {
+                    this.indexStatusTwo = false
+                    this.indexStatusThree = true
+                }, 500)
+            },
+            checkLang(index) {
+                this.bgIndexs = index
+            },
+            cxxhFn() {
+                this.indexStatusTwo = true
+                this.indexStatusThree = false
+                this.bgIndex = -1
+                this.bgIndexs = -1
+            },
+            schkFn() {
+                if (this.bgIndexs == -1) {
+                    this.modalStatus = true
+                    setTimeout(() => {
+                        this.modalStatus = false
+                    }, 1000)
+                } else { // 跳转
+                    var lang = this.bgIndexs + 1
+                    var name = this.bgIndex + 1
+                    console.log(name)
+                    window.location.href = 'http://192.168.3.99:8888/mio/src/html/project/oh/share.html?lang= ' + encodeURI(lang) + '&name= ' + encodeURI(name) + ''
+                }
+
+            },
+        },
+    })
+</script>
+</body>
+</html>

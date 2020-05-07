@@ -160,5 +160,5 @@
 </script>
 
 <style lang='scss'>
-    @import "common/css/main.scss";
+    @import "common/css/summary/main";
 </style>

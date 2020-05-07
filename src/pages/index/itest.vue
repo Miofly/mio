@@ -16,13 +16,13 @@
                     {
                         content: '苹果也疯狂！iPhone XR来到小米价，刷新售价底线'
                     },
-					{
+                    {
                         content: '“5号电池一出”，充电宝没用了，所有手机通用，行千里不关机'
                     },
-					{
+                    {
                         content: '小米10一出手就高配置，小米9难及十分之一，友商都汗颜'
                     },
-					{
+                    {
                         content: 'iPhone XR2性能曝光，A13处理器+后置双摄'
                     }
                 ],
@@ -50,8 +50,7 @@
 		margin-top: 10px;
 		display: block;
 		width: 100%;
-		height: 20px;
-	// 控制高度以达到控制显示条数的目的 overflow: hidden;
+		height: 20px; // 控制高度以达到控制显示条数的目的 overflow: hidden;
 	}
 
 	.notice_top {

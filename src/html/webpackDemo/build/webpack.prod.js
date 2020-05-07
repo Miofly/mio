@@ -1,13 +1,12 @@
 const path = require('path')
+const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // 不支持热更新，在线上环境使用
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // 压缩css生成的代码
-const glob = require('glob')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const PurifyCssPlugin = require('purifycss-webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const prodConfig = { // 配置好后 npx webpack
-    mode: 'production', // development 不压缩 production 默认是被压缩
+    mode: 'production', // development  production
     devtool: 'cheap-module-source-map', // production 生成环境
     module: {
         rules: [
@@ -49,6 +48,12 @@ const prodConfig = { // 配置好后 npx webpack
                     'sass-loader'
                 ]
             },
+            { // 支持vue文件的处理
+                test: /\.vue$/,
+                use: {
+                    loader: 'vue-loader' // npm install vue-loader -D
+                }
+            },
         ]
     },
     optimization: {
@@ -57,10 +62,14 @@ const prodConfig = { // 配置好后 npx webpack
         })]
     },
     plugins: [
+        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[name].chunk.css'
         }),
+        // new PurgecssPlugin({ // 去除没用到的css
+        //     paths: glob.sync(path.join(__dirname, '../src/index.html')) // src下所有的html
+        // }),
     ],
     output: { // 为了防止浏览器缓存加入[contenthash],
         // 代码改变[contenthash]才会改变，否则不会改变

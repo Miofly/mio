@@ -22,7 +22,7 @@
 	<script src="js/vue.js"></script>
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
-	<script type="text/javascript" src="js/canvans.js"></script>
+	<script type="text/javascript" src="js/cavanas.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -65,13 +65,12 @@
 	<div id="qrcode" style="display: none"></div>
 	<img id='imgOne' class="ewmbox">
 	<div style="display: block">
-		<img :src="bgImg" style="width: 100%">
+		<img :src="bgImg">
 		<p style="position: fixed;left: 0.54rem;top: 1.51rem;font-size:0.18rem;color:rgba(255,255,255,1)">
 			亲爱的妈妈：
 		</p>
 		<p style="position: fixed;left: 0.54rem;top: 1.75rem;line-height:0.27rem;width:2.58rem;
-		height:2.15rem;font-size:0.16rem;font-weight:500;color:rgba(255,255,255,1);">
-			{{lang}}
+		height:2.15rem;font-size:0.16rem;font-weight:500;color:rgba(255,255,255,1);" v-html="lang">
 		</p>
 		<div style="">
 			<img style="width: 0.66rem;position: fixed;left: 0.64rem;bottom: 0.65rem;" :src="dianan">
@@ -85,70 +84,56 @@
 	</div>
 </div>
 <script>
-	var lang = getUrlParam('lang').trim()
+
+    var lang = getUrlParam('lang').trim()
+    var name = getUrlParam('name').trim()
+
+	var num = lang + name
+	console.log(num)
 
     $('#qrcode').qrcode({
         text: 'http://www.baidu.com'
     });
     var canvas = $('#qrcode').find('canvas').get(0);
     $('#imgOne').attr('src', canvas.toDataURL('image/jpg'));
-    if (getUrlParam('name') == 1) {
-        var r = '../../img/mother/bgOnes.png';
-        imgHc()
-    }
-    if (getUrlParam('name') == 2) {
-        var r = '../../img/mother/bgTwos.png';
-        imgHc()
-    }
-    if (getUrlParam('name') == 3) {
-        var r = '../../img/mother/bgThrees.png';
-        imgHc()
-    }
-    if (getUrlParam('name') == 4) {
-        var r = '../../img/mother/bgFours.png';
-        imgHc()
-    }
 
-    function imgHc() {
-        //合成的二维码图片
-        var imgurl = $('#imgOne').attr('src')
-        var imgTwo = '../../img/mother/wz' + lang  + '.png'
-        convertImgToBase64(imgurl, imgTwo, function (base64Img) {
-            var conf = {
-                id: "img",
-                //合成背景图宽高和实际图片宽高一样
-                imgdata: {src: r, width: 750, height: 1334},
-                //size为二维码大小 left为离左边的距离 top为离上边的距离
-                ewmdata: {
-                    src: imgurl,
-                    size: 165,
-                    left: 295,
-                    top: 995
-                },
-                txdata: {
-                    src: base64Img,
-                    iscircle: true,
-                    size: 0,
-                    left: 650,
-                    top: 148
-                },
-                imgdataOne: {
-                    src: imgTwo,
-                },
-                stringdata: [
-                    {
-                        str: '',
-                        iscent: false,
-                        font: "bold 40px Arial",
-                        fillStyle: "#000000",
-                        left: 148,
-                        top: 185
-                    }
-                ]
-            };
-            createPic(conf);
-        })
-    }
+    var r = '../../img/mother/'+ num +'.png';
+
+    //合成的二维码图片
+    var imgurl = $('#imgOne').attr('src')
+    convertImgToBase64(imgurl, function (base64Img) {
+        var conf = {
+            id: "img",
+            //合成背景图宽高和实际图片宽高一样
+            imgdata: {src: r, width: 750, height: 1334},
+            //size为二维码大小 left为离左边的距离 top为离上边的距离
+            ewmdata: {
+                src: imgurl,
+                size: 165,
+                left: 295,
+                top: 995
+            },
+            txdata: {
+                src: base64Img,
+                iscircle: true,
+                size: 0,
+                left: 650,
+                top: 148
+            },
+            stringdata: [
+                {
+                    str: '',
+                    iscent: false,
+                    font: "bold 40px Arial",
+                    fillStyle: "#000000",
+                    left: 148,
+                    top: 185
+                }
+            ]
+        };
+        createPic(conf);
+    })
+
     function getUrlParam(name) { // 获取地址栏参数
         var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg) // 匹配目标参数
@@ -165,22 +150,22 @@
                 dianan: '../../img/mother/dianan@2x.png',
                 yuan: '../../img/mother/yuan@2x.png',
                 wz: '../../img/mother/wz11.png',
-				lang: '',
+                lang: '',
                 langs: [
-                    {lang: '将关怀编织成一缕风，为妈妈轻舞飞扬，将祝福采集成一首诗，为妈妈轻轻吟唱，祝妈妈母亲节快乐，身体健康。'},
-                    {lang: '一句谢谢，表不完我对您的感激，永远爱你，述不尽我对您的爱意，母亲节，祝愿您健康快乐每一天！'},
-                    {lang: '是你，十月怀胎给了我生命，是你，在我困难时给我温暖的拥抱，妈妈，我爱你，母亲节到了，祝你幸福安康！'},
-                    {lang: '给您送一束花，送去儿女对你的挂念，给您道一声祝福，送去儿女对你诚挚的爱，母亲节到了，愿母亲健康平安，幸福快乐。'},
-                    {lang: '母爱就是一杯茶，清新沁肺爱无价，母爱就是一杯水，清澈透明得安慰，祝福妈妈母亲节快乐，我深深地爱着您！'},
-                    {lang: '母亲，是您最美的面孔，伴我拼搏争成功，母亲，是您最美的笑容，伴我生命去追梦，母亲节即将来临，祝母亲安康长寿，欢欣无比！'},
-                    {lang: '母亲的爱，一生相伴的和蔼慈祥，母亲的爱，成长路上的殷切期盼，母亲节祝福我们的母亲，身体安康，幸福久长。'},
-                    {lang: '走遍天涯海角，您在的地方才是永远的家，看遍人情冷暖，您给的关心才是不求回报的奉献，母亲节  愿妈妈健康幸福常相伴笑口常开喜笑颜！'},
-                    {lang: '是您给予我灿烂美好的生命，是您教会我做人的道理，是你用丰满的羽翼呵护我成长。母亲节到了，祝您幸福安康，笑口常开！'},
-                    {lang: '有一种爱，伟大而平凡，如润物春雨，似拂面和风，有一份情，无私而博大，绵绵不断，情谊深长，这就是母爱，妈妈，祝您母亲节快乐！'}
+                      {lang: '将关怀编织成一缕风<br>为妈妈轻舞飞扬<br>将祝福采集成一首诗<br>为妈妈轻轻吟唱<br>祝妈妈母亲节快乐，身体健康。'},
+                      {lang: '一句谢谢<br>表不完我对您的感激<br>永远爱你<br>述不尽我对您的爱意<br>母亲节，祝愿您健康快乐每一天！'},
+                      {lang: '是你，十月怀胎给了我生命<br>是你，在我困难时给我温暖的拥抱<br>妈妈，我爱你<br>母亲节到了<br>祝你幸福安康！'},
+                      {lang: '给您送一束花<br>送去儿女对你的挂念<br>给您道一声祝福<br>送去儿女对你诚挚的爱<br>母亲节到了<br>愿母亲健康平安，幸福快乐。'},
+                      {lang: '母爱就是一杯茶<br>清新沁肺爱无价<br>母爱就是一杯水<br>清澈透明得安慰<br>祝福妈妈母亲节快乐<br>我深深地爱着您！'},
+                      {lang: '母亲，是您最美的面孔<br>伴我拼搏争成功<br>母亲，是您最美的笑容<br>伴我生命去追梦<br>母亲节即将来临<br>祝母亲安康长寿，欢欣无比！'},
+                      {lang: '母亲的爱<br>一生相伴的和蔼慈祥<br>母亲的爱<br>成长路上的殷切期盼<br>母亲节祝福我们的母亲<br>身体安康，幸福久长。'},
+                      {lang: '走遍天涯海角<br>您在的地方才是永远的家<br>看遍人情冷暖<br>您给的关心才是不求回报的奉献<br>母亲节  愿妈妈健康幸福常相伴笑口常开喜笑颜！'},
+                      {lang: '是您给予我灿烂美好的生命<br>是您教会我做人的道理<br>是你用丰满的羽翼呵护我成长。母亲节到了<br>祝您幸福安康，笑口常开！'},
+                      {lang: '有一种爱，伟大而平凡<br>如润物春雨，似拂面和风<br>有一份情，无私而博大<br>绵绵不断，情谊深长<br>这就是母爱<br>妈妈，祝您母亲节快乐！'}
                 ]
             }
         },
-		created () {
+        created() {
             this.lang = this.langs[lang - 1].lang
             if (getUrlParam('name') == 1) {
                 this.bgImg = '../../img/mother/beijing4.png';
@@ -197,7 +182,7 @@
             document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
                 evt.preventDefault()
             }, {passive: false})
-		},
+        },
         methods: {},
     })
 </script>

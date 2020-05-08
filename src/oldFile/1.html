@@ -1,94 +1,122 @@
-<style>
-	 
 
-	    </style>
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>免费生成二维码带logo，用Jquery前端合成</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="免费生车工 二维码 带logo 中间有logo图 支持中文">
+	<meta name="author" content="">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="css/function.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="shortcut icon" href="css/bitbug_favicon.ico">
+	<link rel="apple-touch-icon" href="./images/xnzsicon-57X57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="./images/xnzsicon-72X72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="./images/xnzsicon-114X114.png" />
 
-主体：
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+	queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file://
+	-->
+	<!--[if lt IE 9]>
+	<script src="./script/respond.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?b31d4810d7626d16351945cd10e5c1eb";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+	</script>
+</head>
+<body>
+<style type="text/css">
+	p{
+		text-align: center;
+		margin: 20px;}
+	.demo{width:300px;  text-align: center;}
+	.demo p{line-height:30px}
+	.input{
+		background: #fff;
+		display: block;
+		width: 100%;
+		padding: 8px 0;
+		border: 2px solid #e1e1e1;
+		margin-bottom: 20px;
+		font-weight: normal;
+		text-indent: 43px;
+		outline: 0;
+		font-size: 1.25em;
+		margin: 5px;
+		height:30px;
+	}
+	.action input{
+		margin: 5px;
+	}
 
-<div align="center"> 
-	        <h3>图片+文字合成</h3>
-	        <img src="../html/img/xtx/1.jpg" width="300"> 
-	        <img src="../html/img/xtx/11.jpg" width="110"> 
-	        <img src="../html/img/xtx/10.jpg" width="146"> 
-	       
-	<div style="position: absolute;left: 800px;top: 100px;width: 300px;padding: 10px;border: 1px solid #EEEEEE;">
-		           <strong>文字：</strong>
-		           
-		<div style="padding: 10px 0;">用户名：中国好</div>
-		           
-		<div>Tel：18068763980</div>
-		       
+	div.line1 div{
+		float:left;
+</style>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/cropbox.js"></script>
+<script type="text/javascript" src="js/qrFreeTool.js"></script>
+
+<p>免费二维码生成器带logo图可js调用支持微信浏览器</p>
+<p><a href='http://blog.csdn.net/xnzsxnzs/article/details/52332699'>开发者调用文档</a></p>
+<div  class='line1' style="position: relative; clear:both;text-align: center;margin: 20px;">
+	<div class="container" style="display:inline-block;">
+		<div class="imageBox" onmouseup="">
+			<div class="thumbBox"></div>
+			<div class="spinner" style="display: none">Loading...</div>
+		</div>
+
+
+		<!--<butten id="upload">上传</butten>
+		<div class="server"></div>-->
+
+		<div class="demo">
+			<p>点右键保存二维码图片</p>
+			<input type="file" id="file" style="float:left; ">
+			<input type="button" id="btnCrop" value="确定裁切图片" style="float: right">
+			<input type="button" id="btnZoomIn" value="+" style="float: right;width:30px;">
+			<input type="button" id="btnZoomOut" value="-" style="float: right;width:30px;">
+			<p><input type="text" class="input" id="mytxt" value=""  oninput='queryQr()' placeholder="输入网址或内容"> </p>
+			<p><input type="text" class="input" id="myqrsize" value=""  oninput='queryQr()' placeholder="输入码的大小，默认300px"> </p>
+		</div>
 	</div>
-	     
-</div>
-     
-<div id="imgBox" align="center" style="margin: 10px;">
-	        <input type="button" value="一键合成" οnclick="hecheng()">
-	     
+
+
+	<div id="showqr" style="z-index:99999;top:0px;text-align: center;display:inline-block;"><img  id="logoimg" src="" style="display:none"/></div>
+	<div class="cropped" style="display:none"></div>
 </div>
 
- 
+<div class="action" style="text-align: center;">
+</div>
+<div  style="position: relative; clear:both; text-align: center;margin: 20px;">
 
-js部分：
-
-<script>
-    function hecheng() {
-        draw(function () {
-            document.getElementById('imgBox').innerHTML = '<p style="padding:10px 0">合成图片成功！可以鼠标另存图片查看我是否是一张图片~~！</p><img src="' + base64[0] + '" width="300">';
-        })
-    }
-
-    var data = ['images/bg.png', 'images/himg.png',
-        'images/QR.png'], base64 = [];
-    var position = [[0, 64, 216, 184, 184], [0, 763, 1005, 800, 840]]; //position[0]为left值，position[1]为top值（图片相对位置），依次为图片1-图片3、文字1-文字2
-    var size = [[750, 110, 146], [1334, 110, 146]];//size[0]为width值，size[1]为height值（图片相对大小），依次为图片1-图片3
-    var text = ['中国好', '18068763980'];//文字内容
-    function draw(fn) {
-        var c = document.createElement('canvas'), ctx = c
-            .getContext('2d'), len = data.length;
-        //背景图宽高（第一张为背景图）
-        c.width = size[0][0];
-        c.height = size[1][0];
-        ctx.rect(0, 0, c.width, c.height);
-        ctx.fillStyle = '#fff';
-        ctx.fill();
-
-        function drawing(n) {
-            if (n < len) {
-                var img = new Image;
-                img.src = data[n];
-                if (n == 0) {
-                    img.onload = function () {
-                        ctx.drawImage(img, position[0][n], position[1][n], size[0][n], size[1][n]);//(img_name,left,top,width,height)
-                        ctx.font = "25px microsoft yahei";//设置画笔的字体大小和格式
-                        ctx.fillStyle = "rgba(0,0,0,1)";//设置字体的颜色
-                        ctx.fillText(text[0], position[0][len], position[1][len]);//将文字信息画在画布上，按照x,y的坐标，在手机上坐标不是很准确
-                        ctx.fillText(text[1], position[0][len + 1], position[1][len + 1]);
-                        drawing(n + 1);//递归
-                    }
-                } else if (n == 1) {
-                    img.onload = function () {
-                        ctx.drawImage(img, position[0][n], position[1][n], size[0][n], size[1][n]);
-                        drawing(n + 1);//递归
-                    }
-                } else {
-                    img.onload = function () {
-                        ctx.drawImage(img, position[0][n], position[1][n], size[0][n], size[1][n]);
-                        drawing(n + 1);//递归
-                    }
-                }
-
-            } else {
-                //保存生成作品图片
-                base64.push(c.toDataURL("image/jpeg", 0.8));
-                //alert(JSON.stringify(base64));
-                fn();
-            }
-        }
-
-        drawing(0);
-    }
+	<p>只要在页面上插入如下代码即可，注意里面的配置，如果需要有logo，就必须配置“二维码中间的本地图片路径“，图片必须是网站域名下的，不可以跨域。</p>
+	<textarea name="priceDes" class="_ipt" id="priceDes" maxlength="1000" cols="100%" rows="12" value="" placeholder="输入说明文字" style=" font-size:18px; color:000000;    width: 100%;">
+<div id="showqr" style="z-index:99999;top:0px;text-align: center;"><img  id="logoimg" src="" style="display:none"/></div>
+<script language="javascript">
+var myqrsize="300";//二维码的大小：100-600
+var LiftOrRight="right";//二维码位于左上角或者右上角，right表示右上角，空，表示左上角
+var myqrtop="10";//二维码距离顶部的高度百分比
+var myqrlogimgsrc="";//二维码中间的本地图片路径,这里必须有
+var defautQrimgsize="1";//展示大二维码图=1，小图=0
+var myurl=""//你希望生成二维码内容，空，默认生成当前地址的二维码。
+document.write("<script id='qrfromaazjcn' src='https://images.aazj.cn/js/qrload.js'><\/script>");
 </script>
-————————————————
-版权声明：本文为CSDN博主「溪雪」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/qq_42617840/article/details/85706931
+</textarea>
+
+</div>
+<div class="foot" style="position: relative; clear:both; text-align: center;margin: 50px;">版权@HUMI NET HANGZHOU </div>
+
+</body>
+
+</html>

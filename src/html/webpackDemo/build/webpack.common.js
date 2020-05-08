@@ -16,7 +16,7 @@ const commonConfig = { // 配置好后 npx webpack
         sub: './src/main.js'
     },
     output: { // 输出到bundle/bundle.js
-        // publicPath: 'https://localhost:8080//', // 类似base_url
+        // publicPath: 'http://192.168.3.99:8888/mio/src/html/', // 类似base_url
         filename: '[name].js', // 打包文件的文件名 这样entry可以配置两个入口js 入口文件走这里
         chunkFilename: '[name].chunk.js', // index.js里又引入的js走这里
         // path: path.resolve(__dirname, './dist') //  __dirname指webpack.config.js文件的当前路径
@@ -28,7 +28,7 @@ const commonConfig = { // 配置好后 npx webpack
             '@': resolve('src'),
             zj: resolve('src/components'),
             mioJs: resolve('src/common/js'),
-            json: resolve('src/static/mockJson')
+            json: resolve('src/static/mockJson'),
         }
     },
     module: { // loader的顺序从下到上，从右到左

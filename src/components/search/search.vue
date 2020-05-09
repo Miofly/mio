@@ -81,7 +81,7 @@
 </template>
 
 <script>
-    import {tu} from 'mioJs/toolUtils'
+    import {tu} from '@/common/js/toolUtils'
     export default {
         props: { // String Number Boolean Array Object Function || validator (value) {}
             avatarShow: { // 是否显示头像

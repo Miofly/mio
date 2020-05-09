@@ -6,7 +6,7 @@ const webpack = require('webpack')
 // }
 
 const devConfig = { // 配置好后 npx webpack
-    mode: 'development', // development 不压缩 production 默认是被压缩
+    mode: 'development',
     // sourceMap 是一个映射关系，便于快捷定位文件错误位置
     devtool: 'cheap-module-eval-source-map', // development 开发环境最优配置
     devServer: { // 可以开启一个web服务器， 不生成dist目录，放到内存中

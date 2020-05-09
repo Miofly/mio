@@ -10,12 +10,26 @@ function resolve(dir) {
 }
 
 module.exports = {
-    publicPath: './',
+    publicPath: './', // 部署应用包时的基本 URL
     transpileDependencies: ['uni-simple-router'],
     configureWebpack: config => {
-        if (process.env.NODE_ENV === 'production') { // 生产环境不输出日志
-            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+        if (process.env.NODE_ENV === 'production') {
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true // 生产环境不输出日志
+        } else { // 开发环境配置
+
         }
+    },
+    chainWebpack: config => {
+        // 配置快捷访问文件夹
+        config.resolve.alias
+            .set('@', resolve('src'))
+            .set('zj', resolve('src/components'))
+            .set('mioJs', resolve('src/common/js'))
+            .set('json', resolve('src/static/mockJson'))
+        // 配置uni-router
+        config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
+            ROUTES: JSON.stringify(tfPages.routes)
+        }])
     },
     devServer: { // 测试环境跨域处理
         proxy: {
@@ -63,17 +77,5 @@ module.exports = {
                 }
             }
         }
-    },
-    chainWebpack: config => {
-        // 配置快捷访问文件夹
-        config.resolve.alias
-            .set('@', resolve('src'))
-            .set('zj', resolve('src/components'))
-            .set('mioJs', resolve('src/common/js'))
-            .set('json', resolve('src/static/mockJson'))
-        // 配置uni-router
-        config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
-            ROUTES: JSON.stringify(tfPages.routes)
-        }])
     },
 }

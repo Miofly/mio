@@ -29,86 +29,86 @@
 					</view>
 				</view>
 
-				<view v-else class="cu-card article" style="margin-top: 1%">
-					<view class="cu-item shadow" style="padding-bottom: 0">
-						<view class="title text-center">
-							<view class="text-cut" style="font-weight: normal;font-size: 40rpx">请输入身份证号码</view>
-						</view>
-					</view>
-				</view>
-				<view class="cu-list menu sm-border card-menu margin-bottom-xl">
-					<view class="cu-item arrow" @tap="copyStr(regionPlace)">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">地址信息：
-									<text class="text-black"></text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<view class="cu-item arrow">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">出生年月：
-									<text class="text-black">{{birthYear}}年{{birthMonth}}月{{birthday}}日</text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<view class="cu-item arrow">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">周岁：
-									<text class="text-black">{{age}}岁</text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<view class="cu-item arrow">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">星座：
-									<text class="text-black">{{constellation}}座</text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<view class="cu-item arrow">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">性别：
-									<text class="text-black">{{sex%2 == 0 ? '女': '男'}}</text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<view class="cu-item arrow">
-						<view class="content padding-tb-sm">
-							<view>
-								<text class="fa fa-phone text-blue margin-right-sm"></text>
-								<text class="text-grey">生肖：
-									<text class="text-black">{{zodiac}}</text>
-								</text>
-							</view>
-						</view>
-					</view>
-					<button open-type="share" style="background: white;border: none!important;border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;border-top-left-radius: 0;
-            border-top-right-radius: 0;"
-							class="cu-item share arrow">
-						<view class="content">
-							<view>
-								<text class="fa fa-share text-blue margin-right-sm"></text>
-								<text class="text-grey">分享给朋友</text>
-							</view>
-						</view>
-					</button>
-				</view>
+				<!--<view v-else class="cu-card article" style="margin-top: 1%">-->
+					<!--<view class="cu-item shadow" style="padding-bottom: 0">-->
+						<!--<view class="title text-center">-->
+							<!--<view class="text-cut" style="font-weight: normal;font-size: 40rpx">请输入身份证号码</view>-->
+						<!--</view>-->
+					<!--</view>-->
+				<!--</view>-->
+				<!--<view class="cu-list menu sm-border card-menu margin-bottom-xl">-->
+					<!--<view class="cu-item arrow" @tap="copyStr(regionPlace)">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">地址信息：-->
+									<!--<text class="text-black"></text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="cu-item arrow">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">出生年月：-->
+									<!--<text class="text-black">{{birthYear}}年{{birthMonth}}月{{birthday}}日</text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="cu-item arrow">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">周岁：-->
+									<!--<text class="text-black">{{age}}岁</text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="cu-item arrow">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">星座：-->
+									<!--<text class="text-black">{{constellation}}座</text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="cu-item arrow">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">性别：-->
+									<!--<text class="text-black">{{sex%2 == 0 ? '女': '男'}}</text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="cu-item arrow">-->
+						<!--<view class="content padding-tb-sm">-->
+							<!--<view>-->
+								<!--<text class="fa fa-phone text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">生肖：-->
+									<!--<text class="text-black">{{zodiac}}</text>-->
+								<!--</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<button open-type="share" style="background: white;border: none!important;border-bottom-left-radius: 0;-->
+            <!--border-bottom-right-radius: 0;border-top-left-radius: 0;-->
+            <!--border-top-right-radius: 0;"-->
+							<!--class="cu-item share arrow">-->
+						<!--<view class="content">-->
+							<!--<view>-->
+								<!--<text class="fa fa-share text-blue margin-right-sm"></text>-->
+								<!--<text class="text-grey">分享给朋友</text>-->
+							<!--</view>-->
+						<!--</view>-->
+					<!--</button>-->
+				<!--</view>-->
 			</template>
 			<template v-slot:detail>
 				<scroll-view style="height: 85%" scroll-y="true">

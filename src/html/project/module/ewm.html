@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="overflow:hidden!important;">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
@@ -18,8 +18,9 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<script src="../../js/common/vue.js"></script>
-	<script src="../../js/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -57,21 +58,25 @@
         })(document, window);
 	</script>
 </head>
-<body style="font-size: 0.05rem;">
-<div id="app" class="full-width-height">
-
+<body style="font-size: 0.05rem">
+<div id="app">
+	<div id="showqr">
+		<img id="logoimg" src='http://localhost:8888/mio/src/html/img/xtx/1.jpg' style="display:none"/>
+	</div>
 </div>
+<script src="http://localhost:8888/mio/src/html/js/common/ewm.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
         data() {
             return {
-
-            }
+			}
         },
-        methods: {
-
-        },
+		created () {
+            qraa({ewmSize: 320, logo: 'http://localhost:8888/mio/src/html/img/xtx/1.jpg',
+                url: 'http://www.baidu.com', logoSize: 'default'})
+		},
+        methods: {},
     })
 </script>
 </body>

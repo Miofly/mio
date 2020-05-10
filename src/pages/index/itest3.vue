@@ -16,7 +16,7 @@
 						</view>
 
 						<view v-show="false" class="action">
-							<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+							<button :class="['cu-btn', 'bg-blue', 'shadow']" >
 								操作
 							</button>
 						</view>
@@ -39,7 +39,7 @@
 							</view>
 
 							<view v-show="false" class="action">
-								<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+								<button :class="['cu-btn', 'bg-blue', 'shadow']">
 									操作
 								</button>
 							</view>

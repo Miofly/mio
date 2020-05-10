@@ -11,11 +11,12 @@
 </template>
 
 <script>
-	import chart from 'zj/chart/lineChart'
+	// #ifdef H5
+    import chart from 'zj/chart/lineChart'
     export default {
-	    components: {
-	        chart
-	    },
+        components: {
+            chart
+        },
         data() {
             return {
                 xDataOne: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
@@ -25,4 +26,6 @@
             }
         },
     }
+	// #endif
+
 </script>

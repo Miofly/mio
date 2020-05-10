@@ -35,7 +35,6 @@ const ui = {
             data: params,
         }).then(res => { // 调用成功
             uni.hideLoading()
-            // console.log(res)
             success(res)
         }).catch(err => {
             // console.log(err)

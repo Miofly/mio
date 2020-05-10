@@ -73,7 +73,7 @@
                     this.$store.state.indexPage = data.indexPage
                 })
             },
-            autoUpdate: function () {
+            autoUpdate: function () { // 自动更新
                 var self = this
                 // 获取小程序更新机制兼容
                 if (wx.canIUse('getUpdateManager')) {
@@ -117,10 +117,7 @@
                     })
                 }
             },
-            /**
-             * 下载小程序新版本并重启应用
-             */
-            downLoadAndUpdate: function (updateManager) {
+            downLoadAndUpdate: function (updateManager) { // 下载小程序新版本并重启应用
                 var self = this
                 wx.showLoading()
                 // 静默下载更新小程序新版本

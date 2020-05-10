@@ -6,6 +6,7 @@
 </template>
 
 <script>
+	// #ifdef H5
     import {Chart} from 'highcharts-vue'
 
     export default {
@@ -191,6 +192,8 @@
         }
 
     }
+	// #endif
+
 </script>
 
 <style>

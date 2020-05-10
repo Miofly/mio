@@ -68,9 +68,9 @@
                 </view>
             </view>
             <!--#ifdef MP-WEIXIN-->
-            <ad unit-id="adunit-35711c1e83d8593c" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
-            <ad unit-id="adunit-f199c3512f32503a" ad-type="video" ad-theme="black"></ad>
-            <ad unit-id="adunit-25b59fd8185c8f72" ad-intervals="30"></ad>
+            <!--<ad unit-id="adunit-35711c1e83d8593c" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>-->
+            <!--<ad unit-id="adunit-f199c3512f32503a" ad-type="video" ad-theme="black"></ad>-->
+            <!--<ad unit-id="adunit-25b59fd8185c8f72" ad-intervals="30"></ad>-->
             <!--#endif-->
         </scroll-view>
 

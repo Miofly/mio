@@ -92,8 +92,7 @@
             "scope.userLocation" : {
                 "desc" : "演示定位能力"
             }
-        },
-        "navigateToMiniProgramAppIdList" : [ "wx161b6221791a7340", "wx2de5f627b0461a70","wx1fcf825366c41614", "wx8adbdb6a661538f6"  ]
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

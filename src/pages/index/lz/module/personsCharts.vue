@@ -26,24 +26,25 @@
 </template>
 
 <script>
+	// #ifdef H5
     import {Chart} from 'highcharts-vue'
-	import {
-	    commonPost
-	} from '@/api'
+    import {
+        commonPost
+    } from '@/api'
     export default {
         components: {
             highcharts: Chart
         },
-		async mounted () {
-			const dataOne = await commonPost('/my/member-click-trend')
-			const dataTwo = await commonPost('/my/member-seven-click-trend\n')
-			this.dataOneList = dataOne.data.list
-			this.total_clickOne = dataOne.data.total_click
-			this.dataTwoList = dataTwo.data.list
-			this.total_clickTwo = dataTwo.data.total_click
-			console.log(this.dataOneList)
-			console.log(this.dataTwoList)
-		},
+        async mounted () {
+            const dataOne = await commonPost('/my/member-click-trend')
+            const dataTwo = await commonPost('/my/member-seven-click-trend\n')
+            this.dataOneList = dataOne.data.list
+            this.total_clickOne = dataOne.data.total_click
+            this.dataTwoList = dataTwo.data.list
+            this.total_clickTwo = dataTwo.data.total_click
+            console.log(this.dataOneList)
+            console.log(this.dataTwoList)
+        },
         data() {
             return {
                 dataOneList: [],
@@ -56,16 +57,16 @@
                 total_clickTwo: 0,
             }
         },
-		methods: {
-		},
-		computed: {
+        methods: {
+        },
+        computed: {
             chartOptions: function () {
                 for (let i = 0; i < this.dataOneList.length; i++) {
                     this.dataOneHour.push(this.dataOneList[i].trans_hour)
                     this.dataOneClick.push(this.dataOneList[i].effective_click_total)
                 }
 
-				return {
+                return {
                     chart: {
                         type: 'areaspline',
                         backgroundColor: '#eee', // 背景色通明
@@ -146,7 +147,7 @@
                         }],
                     legend: {
                         enabled: false
-					},
+                    },
                     /* 是否显示版权信息 */credits: {enabled: false},
                     /* 导出功能模块 */exporting: {enabled: false}
                 }
@@ -246,9 +247,11 @@
                     /* 导出功能模块 */exporting: {enabled: false}
                 }
             }
-		},
-
+        },
     }
+    // #endif
+
+
 </script>
 
 <style>

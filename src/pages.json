@@ -8,6 +8,122 @@
             }
         },
         {
+            "path": "pages/index/tool/toolIndex",
+            "style": {},
+            "name": "toolIndex"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/animalDiscern",
+            "style": {},
+            "name": "animalDiscern"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/characterRecognition",
+            "style": {},
+            "name": "characterRecognition"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/commonImg",
+            "style": {},
+            "name": "commonImg"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/dishIdentification",
+            "style": {},
+            "name": "dishIdentification"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/faceRecognition",
+            "style": {},
+            "name": "faceRecognition"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/fruitAndVegetableIdentification",
+            "style": {},
+            "name": "fruitAndVegetableIdentification"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/landmarkIdentification",
+            "style": {},
+            "name": "landmarkIdentification"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/modelRecognition",
+            "style": {},
+            "name": "modelRecognition"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/plantDiscern",
+            "style": {},
+            "name": "plantDiscern"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/textSpot",
+            "style": {},
+            "name": "textSpot"
+        },
+        {
+            "path": "pages/index/tool/aiSpot/translate",
+            "style": {},
+            "name": "translate"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/dream",
+            "style": {},
+            "name": "dream"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/heightAndWeight",
+            "style": {},
+            "name": "heightAndWeight"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/idCard",
+            "style": {},
+            "name": "idCard"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/phone",
+            "style": {},
+            "name": "phone"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/phoneInformation",
+            "style": {},
+            "name": "phoneInformation"
+        },
+        {
+            "path": "pages/index/tool/smallTolls/zipCode",
+            "style": {},
+            "name": "zipCode"
+        },
+        {
+            "path": "pages/index/tool/other/bjx",
+            "style": {},
+            "name": "bjx"
+        },
+        {
+            "path": "pages/index/tool/other/dzg",
+            "style": {},
+            "name": "dzg"
+        },
+        {
+            "path": "pages/index/tool/other/familyName",
+            "style": {},
+            "name": "familyName"
+        },
+        {
+            "path": "pages/index/tool/other/history",
+            "style": {},
+            "name": "history"
+        },
+        {
+            "path": "pages/index/tool/other/szj",
+            "style": {},
+            "name": "szj"
+        },
+
+        {
             "path": "pages/index/song/song",
             "style": {},
             "name": "song"
@@ -55,7 +171,9 @@
         {
             "path": "pages/index/itest",
             "name": "itest",
-            "style": {}
+            "style": {
+                "navigationBarTitleText": "主页"
+            }
         },
         {
             "path": "pages/index/chart/chartHome",
@@ -271,8 +389,8 @@
     "globalStyle": {
         "navigationBarTextStyle": "black",
         "navigationBarBackgroundColor": "#F8F8F8",
-        "backgroundColor": "#F8F8F8",
-        "navigationStyle": "custom"
+        "backgroundColor": "#F8F8F8"
+//        "navigationStyle": "custom"
     },
     "condition": {
         // 模式配置，仅开发期间生效
@@ -281,7 +399,7 @@
         "list": [
             {
                 "name": "test",
-                "path": "pages/index/song/song"
+                "path": "pages/index/itest"
             },
             {
                 "name": "list",

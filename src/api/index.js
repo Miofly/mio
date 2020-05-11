@@ -9,9 +9,12 @@ const navJsonData = () => ajax({url: 'static/mockJson/navJson.json'}) // 导航�
 const listJsonData = () => ajax({url: 'static/mockJson/listJson.json'}) // 导航模块数据
 const dbJsonData = (type, index = 0, count = 3) => ajax({
     sourceAxios: instanceOne,
-    // url: `https://movie.douban.com/j/search_subjects?type=movie&tag=${type}&sort=time&page_limit=${count}&page_start=${index}`,
-    // url: `https://douban.uieee.com/v2/movie/${type}?start=${index}&count=${count}`,
+    // #ifdef MP-WEIXIN
+    url: `https://movie.douban.com/j/search_subjects?type=movie&tag=${type}&sort=time&page_limit=${count}&page_start=${index}`,
+    // #endif
+    // #ifdef H5
     url: `/db/j/search_subjects?type=movie&tag=${type}&sort=time&page_limit=${count}&page_start=${index * count}`,
+    // #endif
     // cancelBefore: true,
     getHeader: {
         'Content-Type': 'json'
@@ -30,6 +33,7 @@ const publicPost = (url, data) => ajax({
 })
 
 const publicGet = (url) => ajax({
+    sourceAxios: instanceOne,
     url: url,
     getHeader: {
         'Content-Type': 'json'

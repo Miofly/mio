@@ -51,7 +51,7 @@
             </view>
 
             <!--热门搜索-->
-            <view class="keyword-block">
+            <view v-if="hotStatus" class="keyword-block">
                 <view class="keyword-list-header">
                     <view>热门搜索</view>
                     <view>
@@ -67,6 +67,10 @@
                     <view>当前搜热门搜索已隐藏</view>
                 </view>
             </view>
+
+			<view v-if="oldKeywordList.length == 0" class="margin-top-xl text-center">
+				请在输入框输入要搜索的内容
+			</view>
             <!--#ifdef MP-WEIXIN-->
             <!--<ad unit-id="adunit-35711c1e83d8593c" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>-->
             <!--<ad unit-id="adunit-f199c3512f32503a" ad-type="video" ad-theme="black"></ad>-->
@@ -116,13 +120,29 @@
                 },
                 required: false
             },
+            hisKeys: { // // 历史搜索的key值
+                type: String,
+                default: 'hisKeys',
+                required: false
+            },
+            hotStatus: { // 热门搜索是否显示
+                type: Boolean,
+                default: true,
+                required: false
+            },
+            ssBackIndex: { // 搜索完是否回到首页
+                type: Boolean,
+                default: false,
+                required: false
+            },
+
+
         },
         data () {
             return {
                 indexShow: true, // 显示热门历史搜索模块
                 searchListShow: false, // 显示热门历史搜索模块
                 oldKeywordList: [], // 历史搜索信息
-                hisKeys: 'hisKeys', // 历史搜索的key值
                 keyword: '', // 搜索关键字
                 forbid: '', // 热门搜索开关
                 backSwitch: true, // 头像与返回按钮显示切换
@@ -220,25 +240,50 @@
                 })
             },
             realTimeInput: tu.debounce(function (key) { // 实时输入搜索
-                this.indexShow = false
-                if (key.trim() != '') { // eslint-disable-line
-                    this.saveKeyword(key.trim())
-                    this.searchListShow = false
-                    this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
-                }
+                if (this.ssBackIndex) {
+                    this.indexShow = true
+                    if (key.trim() != '') { // eslint-disable-line
+                        this.saveKeyword(key.trim())
+                        this.searchListShow = false
+                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                    }
+                } else {
+                    this.indexShow = false
+                    if (key.trim() != '') { // eslint-disable-line
+                        this.saveKeyword(key.trim())
+                        this.searchListShow = false
+                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                    }
+				}
+
             }, 2000),
             // 执行搜索
             doSearch: tu.throttle(function (key) {
-                this.indexShow = false
-                if (this.keyword !== key.trim() && key.trim() != '') { // eslint-disable-line
-                    this.keyword = key.trim()
-                    this.saveKeyword(this.keyword)
-                    this.searchListShow = false
-                    this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+
+                if (this.ssBackIndex) {
+                    this.indexShow = true
+                    if (this.keyword !== key.trim() && key.trim() != '') { // eslint-disable-line
+                        this.keyword = key.trim()
+                        this.saveKeyword(this.keyword)
+                        this.searchListShow = false
+                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                    } else {
+                        this.searchListShow = false
+                        console.log('搜索内容为空或者与上次一致')
+                    }
                 } else {
-                    this.searchListShow = false
-                    console.log('搜索内容为空或者与上次一致')
-                }
+                    this.indexShow = false
+                    if (this.keyword !== key.trim() && key.trim() != '') { // eslint-disable-line
+                        this.keyword = key.trim()
+                        this.saveKeyword(this.keyword)
+                        this.searchListShow = false
+                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                    } else {
+                        this.searchListShow = false
+                        console.log('搜索内容为空或者与上次一致')
+                    }
+				}
+
             }, 2000),
         },
     }

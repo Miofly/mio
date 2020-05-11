@@ -2,12 +2,17 @@
 ajax请求函数模块
 返回值: promise对象(异步返回的数据是: response.data)
  */
-// import axios from '@/common/js/utils/uni-axios'
+
+// #ifdef MP-WEIXIN
+import axios from '@/common/js/utils/uni-axios'
+// #endif
+// #ifdef H5
 import axios from 'axios'
+// #endif
 // 默认配置
 axios.defaults.baseURL = '' // 优先级比axios实例要低
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-
+axios.defaults.withCredentials = true // 允许axios请求携带cookie等凭证
 // 创建一个axios实例 ==> instanceOne
 const instanceOne = axios.create()
 instanceOne.defaults.baseURL = '' // 实例的baseurl

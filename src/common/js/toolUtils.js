@@ -2,6 +2,142 @@ import ClipboardJS from 'mioJs/utils/clipboard.min.js'
 import {ui} from 'mioJs/uniapp'
 
 const tu = {
+
+    arrChange (a, b) { // 两个数组相减，大数组中去除小数组含有的项
+        for (let i = 0; i < b.length; i++) {
+            for (let j = 0; j < a.length; j++) {
+                if (a[ j ] === b[ i ]) { // 如果是id相同的，那么a[ j ].id === b[ i ].id
+                    a.splice(j, 1)
+                    j = j - 1
+                }
+            }
+        }
+        return a
+    },
+    judgeType (obj) { // 判断数据类型
+        let class2type = {};
+        'Array Date RegExp Object Error'.split(' ').forEach(e =>
+            class2type['[object ' + e + ']'] = e.toLowerCase()
+        )
+        if (obj == null) return String(obj)
+        return typeof obj === 'object' ? class2type[Object.prototype.toString.call(obj)] || 'object' : typeof obj
+    },
+    getSpecialDays(y) { // 判断是否是余年
+        if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))
+            return 29;
+        return 28;
+    },
+    getShengXiao(birth) { // 生肖计算
+        birth += '';
+        var len = birth.length;
+        if (len < 4 && len != 2) {
+            return "";
+        }
+        if (len == 2) {
+            birth - 0 > 30 ? birth = '19' + birth : birth = '20' + birth;
+        }
+        var year = (new Date(birth)).getFullYear();
+        var arr = ['猴', '鸡', '狗', '猪', '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊'];
+        return /^\d{4}$/.test(year) ? arr[year % 12] : "";
+    },
+    getAstro(m, d) { // 星座计算 getAstro(parseInt('09'), 26)
+        return "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2);
+    },
+    getAge(strBirthday) { // 根据出生日期算出年龄 getAge('1995-09-26')
+        let returnAge;
+        let strBirthdayArr = strBirthday.split("-");
+        let birthYear = strBirthdayArr[0];
+        let birthMonth = strBirthdayArr[1];
+        let birthDay = strBirthdayArr[2];
+
+        let d = new Date();
+        let nowYear = d.getFullYear();
+        let nowMonth = d.getMonth() + 1;
+        let nowDay = d.getDate();
+
+        if (nowYear == birthYear) {
+            returnAge = 0;//同年 则为0岁
+        } else {
+            var ageDiff = nowYear - birthYear; //年之差
+            if (ageDiff > 0) {
+                if (nowMonth == birthMonth) {
+                    var dayDiff = nowDay - birthDay;//日之差
+                    if (dayDiff < 0) {
+                        returnAge = ageDiff - 1;
+                    } else {
+                        returnAge = ageDiff;
+                    }
+                } else {
+                    var monthDiff = nowMonth - birthMonth;//月之差
+                    if (monthDiff < 0) {
+                        returnAge = ageDiff - 1;
+                    } else {
+                        returnAge = ageDiff;
+                    }
+                }
+            } else {
+                returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
+            }
+        }
+
+        return returnAge;//返回周岁年龄
+    },
+    isArrayFn(value) { // 判断是否是数组
+        if (typeof Array.isArray === "function") {
+            return Array.isArray(value);
+        } else {
+            return Object.prototype.toString.call(value) === "[object Array]";
+        }
+    },
+    /* 返回随机数 第二个参数为true则变成整数
+       commonUtil.mathRandom(),             100以内的整数
+       commonUtil.mathRandom(100, false),    100以内的两位小数
+       commonUtil.mathRandom(10, false, 4),   10以内的4位小数
+    */
+    mathRandom(num, ifint, decimal) {
+        if (num === undefined) num = 100
+        if (ifint === undefined) ifint = true
+        if (decimal === undefined) decimal = 2
+        let number = (Math.random() * num).toFixed(decimal)
+        if (ifint) number = Math.round(number)
+        return number
+    },
+    arrDelBlank(arrDelBlank) { // 去除空数组
+        for (let i = 0; i < arrDelBlank.length; i++) {
+            if (arrDelBlank[i] === '' || arrDelBlank[i] === null || typeof (arrDelBlank[i]) === 'undefined') {
+                arrDelBlank.splice(i, 1)
+                i = i - 1
+            }
+        }
+        return arrDelBlank
+    },
+    // 删除指定位置字符(字符串从0开始数， index代表删除的位置)
+    delSpecifiedLocation (str, index) {
+        return str.substr(0, index) + str.substr(index + 1)
+    },
+    delSpecifiedLocationOne (str, index) {
+        return str.substring(0, index) + str.substring(index + 1)
+    },
+    delSpecifiedLocationTwo (str, index) {
+        return str.slice(0, index) + str.slice(index + 1)
+    },
+    // 为字符串插入字符 其中soure为原字符串,start为将要插入字符的位置，newStr为要插入的字符
+    insertStr (soure, start, newStr) {
+        return soure.substring(0, start) + newStr + soure.substring(start)
+    },
+    isNumStr (str) { // 检测字符串是否全为数字
+        let n = 0
+        for (let i = 0; i < str.length; i++) {
+            n = str.charCodeAt(i)
+            if (n < 48 || n > 57) {
+                return false
+            }
+        }
+        return true
+    },
+    delSpecifiedLocation (str, index) { // 删除指定位置字符(字符串从0开始数， index代表删除的位置)
+        return str.substr(0, index) + str.substr(index + 1)
+    },
     back () {
         window.history.back()
     },
@@ -295,6 +431,7 @@ const tu = {
         if (r != null) return unescape(r[2])
         return null // 返回参数值
     }
+
 }
 
 export {

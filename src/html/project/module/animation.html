@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/animation.css"/>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 375) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                    }
+                    var html = document.getElementsByTagName('html')[0];
+                    var settedFs = settingFs = parseInt(100 * (clientWidth / 375));
+                    var whileCount = 0;
+                    while (true) {
+                        var realFs = parseInt(window.getComputedStyle(html).fontSize);
+                        var delta = realFs - settedFs;
+                        //不相等
+                        if (Math.abs(delta) >= 1) {
+                            if (delta > 0)
+                                settingFs--;
+                            else
+                                settingFs++;
+                            html.setAttribute('style', 'font-size:' + settingFs + 'px!important');
+                        } else
+                            break;
+                        if (whileCount++ > 100)
+                            break
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem">
+<div id="app" class="margin-top-ten">
+	<div style="height: 1rem;width: 1rem;-webkit-animation: rotate 2s linear 0s infinite alternate;-o-animation: rotate 2s linear 0s infinite alternate;animation: rotate 2s linear 0s infinite alternate;" class="bg-blue margin-center padding-top" >
+
+	</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        methods: {},
+    })
+</script>
+</body>
+</html>

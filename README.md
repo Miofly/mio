@@ -1,4 +1,4 @@
-# MIO
+# MIO  -- 准备重构成 ts + vue3 请期待 
 uniapp 项目模块 --- 完全 vue 模式开发
 
 ## 可以的话点一个 Star 吧

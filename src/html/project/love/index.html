@@ -18,10 +18,10 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://192.168.3.193:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -59,50 +59,24 @@
         })(document, window);
 	</script>
 </head>
-<body style="font-size: 0.05rem" class="bg-gradual-blue">
+<body style="font-size: 0.05rem">
 <div id="app">
-	<div id="showqr" >
-		<img id="logoimg" src='http://192.168.3.193:8888/mio/src/html/img/xtx/1.jpg' style="display:none"/>
-	</div>
-
-	<div id="imgOne"></div>
+	<ul>
+		<li v-for="(item, index) in list" :key="index">{{item}}</li>
+	</ul>
 </div>
-<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/ewm.js"></script>
-<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/canvas.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
         data() {
             return {
-            }
-        },
-        created () {
-            qraa({ewmSize: 95, logo: 'http://192.168.3.193:8888/mio/src/html/img/xtx/1.jpg',
-                url: 'http://www.baidu.com', logoSize: 'default', isShow: false})
+                lists: [
+                    23213, 213,213,321,321,3,123,21,321,3,123,12,312,3,213,12,3,123,
+				]
+			}
         },
         methods: {},
     })
-
-	var imgLists = [
-        {src: '../../img/mother/bgOnes.png', left: 0, top: 0, width: 750, height: 1334},
-        {src: $('#qrAnonymous').attr('src'), left: 292, top: 993, width: 170, height: 170},
-        {src: '../../img/mother/wz1.png', left: 100, top: 300, width: 470, height: 370},
-    ]
-    var canvas = document.createElement('canvas')
-    canvas.width = 750;
-    canvas.height = 1334; // 这是canvas的宽高
-    var ctx = canvas.getContext('2d')
-
-	ctx.fillStyle = 'red' // 设置文字的填充颜色
-	ctx.font = "50px serif";
-	var row = [];
-	row.push(textCanvas('这/是/问子', '/'));
-
-    ctx.rect(0, 0, 750, 1334); // 这是图片的宽高
-    ctx.fill();
-
-    drawing(0, $('#imgOne'), true, 100);
-
 </script>
 </body>
 </html>

@@ -18,10 +18,12 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/share.css"/>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/ewm.js"></script>
+	<script type="text/javascript" src="js/canvas.js"></script>
+
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -59,20 +61,92 @@
         })(document, window);
 	</script>
 </head>
-<body style="font-size: 0.05rem" class="bg-black">
+<body style="font-size: 0.05rem;background: url('http://192.168.3.193:8888/mio/src/html/img/qq/background.png') no-repeat;background-size: 100% 100%;">
 <div id="app">
-	<div>
+	<div id="showqr">
+		<img id="logoimg" src='http://192.168.3.193:8888/mio/src/html/img/qq/logo.png' style="display:none"/>
+	</div>
 
+	<div v-if="!modalStatus" style="position: fixed;left: 0;top: 30%;text-align: center;width: 100%;"
+		 :style="{animation: animationStyle}">
+		<img style="width: 3.2rem;height: 1.68rem" :src="modal">
+	</div>
+
+	<div v-if="modalStatus" style="
+	animation: shake 2s linear 0s 2 alternate;position: fixed;left: 0;top: 15%;text-align: center;width: 100%">
+		<img style="width: 2.86rem;height: 4.19rem;top: 20%;" :src="modalOne">
+	</div>
+
+	<div id="imgOne" style="position: fixed;bottom: 0;left: 0;opacity: 0.001;z-index: 99999999999"></div>
+
+	<div v-if="!modalStatus" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.17rem;z-index: 2">
+		<img style="width: 1.10rem;height: 1.10rem" :src="fingerprint">
+	</div>
+	<div v-if="!modalStatus" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.21rem;z-index: 1;">
+		<img style="-webkit-animation: scale-up 0.9s linear 0s infinite alternate;
+		animation: scale-up 0.9s linear 0s infinite alternate;width: 1.09rem;height: 1.08rem" :src="transparent">
+	</div>
+	<div v-if="!modalStatus" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 0.63rem;">
+		<div style="display: inline-block;width:2.88rem;height:0.45rem;font-size:0.32rem;font-weight:600;color:rgba(255,255,255,1);">
+			长按屏幕分享微信群
+		</div>
 	</div>
 </div>
 <script>
     var app = new Vue({
         el: '#app',
         data() {
-            return {}
+            return {
+                modalStatus: false,
+                fingerprint: '../../img/qq/fingerprint.png',
+                transparent: '../../img/qq/transparent.png',
+                modal: '../../img/qq/Tips1.png',
+                modalOne: '../../img/qq/code@2x.png',
+                num: 1,
+                animationStyle: 'shake 2s linear 0s 1'
+            }
         },
-        methods: {},
+        mounted() {
+            qraa({
+                ewmSize: 522, logo: 'http://192.168.3.193:8888/mio/src/html/img/qq/logo.png',
+                url: 'http://www.baidu.com', logoSize: 'default', isShow: false
+            })
+            document.addEventListener('visibilitychange', this.handleVisiable)
+
+        },
+        destroyed() {
+            document.removeEventListener('visibilitychange', this.handleVisiable)
+        },
+        methods: {
+            handleVisiable(e) { // 监听页面离开事件
+                this.num = this.num + 1
+                if (e.target.visibilityState === 'visible' && this.num == 3) { // 第一次离开
+                    this.modal = '../../img/qq/Tips2.png'
+                    this.animationStyle = 'shake2 2s linear 0s 1'
+                }
+                if (e.target.visibilityState === 'visible' && this.num == 5) { //
+                    this.modal = '../../img/qq/Tips3.png'
+                    this.animationStyle = 'shake 2s linear 0s 1'
+                }
+                if (e.target.visibilityState === 'visible' && this.num == 7) { //
+                    this.modalStatus = true
+                }
+            },
+        },
     })
+    var imgLists = [
+        {src: '../../img/qq/group3.png', left: 0, top: 0, width: 662, height: 878},
+        {src: $('#qrAnonymous').attr('src'), left: 70, top: 215, width: 522, height: 522},
+    ]
+    var canvas = document.createElement('canvas')
+    canvas.width = 662;
+    canvas.height = 878; // 这是canvas的宽高
+    var ctx = canvas.getContext('2d')
+    ctx.fillStyle = 'transparent' // 设置文字的填充颜色
+    ctx.rect(0, 0, 662, 878); // 这是图片的宽高
+    ctx.fill();
+    drawing(0, $('#imgOne'), false, 100);
+
 </script>
 </body>
 </html>

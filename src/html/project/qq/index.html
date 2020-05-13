@@ -18,10 +18,8 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://192.168.3.193:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script type="text/javascript" src="js/vue.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -135,7 +133,7 @@
 
 		</div>
 
-		<div style="position: fixed;bottom: 0.2rem;width: 100%;left: 0;text-align: center;">
+		<div @click="sqjq" style="position: fixed;bottom: 0.2rem;width: 100%;left: 0;text-align: center;">
 			<div style="width:2.87rem;background:rgba(0,210,255,1);border-radius:0.06rem;
 			height:0.46rem;line-height: 0.46rem;display: inline-block;font-size:0.16rem;color:rgba(255,255,255,1);">
 				申请加群
@@ -168,7 +166,11 @@
                 info: '本群创建于2016年08月27日<br>群里气氛活跃，单身小姐姐极多。分享后免费进去，永不踢人。群里小姐姐每天3场直播哦～'
             }
         },
-        methods: {},
+        methods: {
+            sqjq () {
+                window.location.href = 'http://192.168.3.193:8888/mio/src/html/project/qq/share.html?_ijt=dlbvi3l7fvm4jp4pkbvr587ume'
+            },
+		},
     })
 </script>
 </body>

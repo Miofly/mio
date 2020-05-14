@@ -268,10 +268,12 @@
     }
 
 
+	var jgLists = ['../../img/love/520.png', '../../img/love/666.png', '../../img/love/1314.png', '../../img/love/888.png']
 
     var imgLists = [
         {src: newSrc, left: 0, top: 0, width: 750, height: 1314},
         {src: $('#qrAnonymous').attr('src'), left: 495, top: 1065, width: 163, height: 163},
+        {src: makeRandomArr(jgLists, 1), left: 210, top: 895, width: 310, height: 50},
     ]
     var canvas = document.createElement('canvas')
     canvas.width = 750;
@@ -291,6 +293,21 @@
     ctx.rect(0, 0, 750, 1334); // 这是图片的宽高
     ctx.fill();
     drawing(0, $('#imgOne'), true);
+
+    function makeRandomArr(arrList, num) { // 随机取出数组元素
+        if (num > arrList.length) {
+            num = arrList.length
+        }
+        const tempArr = arrList.slice(0)
+        const newArrList = []
+        for (var i = 0; i < num; i++) {
+            const random = Math.floor(Math.random() * (tempArr.length))
+            const arr = tempArr[random]
+            tempArr.splice(random, 1)
+            newArrList.push(arr)
+        }
+        return newArrList
+    }
 
     function drawing(n, el, showText = false, textLeft = 50) {
         var len = imgLists.length;

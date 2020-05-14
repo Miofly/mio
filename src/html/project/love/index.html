@@ -113,7 +113,7 @@
         data() {
             return {
                 bgIndex: [],
-                status: false,
+                status: true,
                 modalStatus: false,
 				scPoster: '../../img/love/secondary@2x.png',
                 sjImg: '../../img/love/Refresh@2x.png',
@@ -125,13 +125,13 @@
 				ts: '最多选择6个项目哟！',
                 lists: [
                     {id: 1, name: '陪过夜'},
-                    {id: 2, name: '假装情侣'},
-                    {id: 3, name: '穿情侣装'},
+                    {id: 2, name: '陪逛街'},
+                    {id: 3, name: '干农活'},
                     {id: 4, name: '抱抱你'},
                     {id: 5, name: '叫你起床'},
                     {id: 6, name: '冒充男朋友'},
                     {id: 7, name: '冒充女朋友'},
-                    {id: 8, name: '一起开黑'},
+                    {id: 8, name: '陪你打游戏'},
                     {id: 9, name: '吃好吃的'},
                     {id: 10, name: '哄你睡觉觉'},
                     {id: 11, name: '牵牵小手'},
@@ -139,12 +139,12 @@
                     {id: 13, name: '逗你开心'},
                     {id: 14, name: '帮你洗衣服'},
                     {id: 15, name: '给你做饭'},
-                    {id: 16, name: '向你告白'},
-                    {id: 17, name: '共进晚餐'},
+                    {id: 16, name: '帮你写论文'},
+                    {id: 17, name: '帮你带娃'},
                     {id: 18, name: '代打前任'},
                     {id: 19, name: '陪你唱歌'},
                     {id: 20, name: '跟你撒娇'},
-                    {id: 21, name: '抓娃娃'},
+                    {id: 21, name: '共进晚餐'},
                 ]
             }
         },
@@ -189,7 +189,6 @@
                 var arr = this.makeRandomArr(this.lists, 6)
                 for (let i = 0; i < arr.length; i++) {
 					this.bgIndex.push(arr[i].id)
-					console.log(this.bgIndex)
                 }
             },
             makeRandomArr(arrList, num) { // 随机取出数组元素

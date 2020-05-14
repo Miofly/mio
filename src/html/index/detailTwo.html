@@ -4,44 +4,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 	<title>Title</title>
-	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
-	<script type="text/javascript" src="../js/canvans.js"></script>
-	<script type="text/javascript" src="../js/indexTwo.js"></script>
-	<link rel="stylesheet" type="text/css" href="share.css"/>
+	<script type="text/javascript" src="../js/common/jquery-1.7.2.min.js"></script>
+	<!--<script type="text/javascript" src="../indexTwo.js"></script>-->
+	<!--<link rel="stylesheet" type="text/css" href="。。share.css"/>-->
 </head>
 <body style="overflow: hidden;background: #000">
+<div id="modal"
+	 style="border-radius: 10px;width: 90%;position: fixed;background: white;
+		 top:35%;left: 5%;border: 1px solid white;animation: shake 2s 2 linear;z-index: 11;
+		 opacity: 1;transition: 1s;color: black;display:block">
+	<div id="title" style="font-size: 7vw;text-align: center;color: blue;padding-top: 3vw">
+		温馨提示
+	</div>
+	<div style="border-bottom: 2px solid black;text-align: center;padding: 5vw 0">
+		请推送到群即可免费观看完整视频
+	</div>
+	<div id="ok" style="text-align: center;height: 7vh;line-height: 7vh;font-size: 5vw">
+		确定
+	</div>
+</div>
 
-	<div style="display: flex;justify-content: space-around">
-		<div>返回</div>
-		<div>关闭</div>
-	</div>
+<script>
 
-	<div id="qrcode" style="display: none"></div>
-	<img id='imgOne' class="ewmbox">
-	<div class="full-width">
-		<img style="position: fixed;width: 0.7rem;top: 2%;left: 4%;z-index: 9999999" src="../img/back.png" onclick="jumpAd()">
-	</div>
-	<div style="width: 100%;text-align: center;position: fixed;top: 10%;left: 0;">
-		<img style="width: 70%" src="../img/fenxiang.png">
-	</div>
-	<div id="modal" class="bg-white padding-xl text-lg text-center"
-		 style="border-radius: 1rem;width: 80%;position: fixed;top:40%;left: 10%;border: 1px solid white;animation: shake 2s 2 linear;z-index: 11;opacity: 0;transition: 1s;color: #862ff3">
-		<span id="fscg" style="color: red;font-size: 1.5rem"></span>
-		<span style="font-size: 1.0rem;line-height: 1.5rem" id="jx">请您长按屏幕分享视频至<br><span style="font-size: 1.3rem">
-			<span style="color: red;font-weight: bold">3</span>个微信群</span>
-			<br>
-			分享后立即观看VIP免费视频
-		</span>
-	</div>
-	<div style="position: fixed;bottom: 0;width: 100%;text-align: center;z-index: 9999;left: 0">
-		<img style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center;position: relative;top: 7.15rem;" src="../img/zhiwen.png">
-		<div style="display: block;transform: scale(0.7);margin: 0 auto;text-align: center" class="capmcz"></div>
-		<h1 style="font-size: 1.5rem;color: #449AFA;margin-bottom: 5%;margin-top: 5%">长按屏幕分享</h1>
-	</div>
-	<div style="opacity: 0.01;z-index: 9999;position: fixed;top: 0;left: 0">
-		<img id="img" style="width:100%">
-	</div>
+</script>
 </body>
-
 </html>

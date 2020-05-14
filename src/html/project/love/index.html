@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: hidden!important;">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
@@ -18,10 +18,10 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://192.168.3.193:8888/mio/src/html/index.css"/>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -58,24 +58,155 @@
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
 	</script>
+	<style>
+		@keyframes scale-up {
+			0% {
+				transform: scale(1)
+			}
+			100% {
+				transform: scale(1.1)
+			}
+		}
+	</style>
 </head>
-<body style="font-size: 0.05rem">
-<div id="app">
-	<ul>
-		<li v-for="(item, index) in list" :key="index">{{item}}</li>
-	</ul>
+<body style="font-size: 0.05rem;background: rgb(248, 236, 233);overflow: hidden!important;">
+<div id="app" style="height: 100%">
+	<div v-if="status">
+		<div>
+			<img :src="bgImg" style="width: 100%;position: fixed;top: 0.05rem;left: 0;text-align: center">
+		</div>
+		<div @click="status = false" style="animation: scale-up 1s linear 0s infinite alternate;position: fixed;left: 0;bottom: 0.5rem;width: 100%;text-align: center">
+			<img :src="main" style="width: 2.06rem;height: 0.68rem">
+		</div>
+	</div>
+
+	<div v-if="!status" style="height: 100%">
+		<div style="width: 100%;text-align: center">
+			<img :src="avatar" style="width: 1.24rem;height: 1.24rem">
+		</div>
+
+		<div style="width: 100%;text-align: center">
+			<span style="width:2.37rem;height:0.28rem;font-size:0.20rem;font-weight:500;color:rgba(0,0,0,1);">请选择你的1-6个出租项目</span>
+			<img @click="random" :src="sjImg" style="width: 0.66rem;height: 0.28rem;margin-left: 0.1rem;margin-top: -0.06rem;">
+		</div>
+
+		<div style="margin-top: 0.18rem;height: 63%;overflow-y: scroll;overflow-x: hidden">
+			<div @click="choiceBtn(index)" style="position: relative;float: left;margin-left: 0.08rem;margin-top: 0.18rem;" v-for="(item, index) in lists" :key="index">
+				<img :src="bgIndex.includes(index) ? '../../img/love/Button1@2x.png' : '../../img/love/Button2@2x.png'" style="width: 1.13rem;height: 0.48rem;">
+				<span style="position: absolute;top: 0.1rem;width:0.96rem;height:0.22rem;font-size:0.16rem;font-weight:600;"
+					  :style="{color: bgIndex.includes(index) ? 'white' : '#DD3333', left: item.name.length == 7 ? '0.12rem' : item.name.length == 3 ? '0.32rem' : item.name.length >= 5 ? '0.18rem' : '0.24rem'}"
+				>{{item.name}}</span>
+			</div>
+			<div style="position: fixed; bottom: 0rem;left: 0;width: 100%;text-align: center">
+				<img :src="scPoster" style="width: 2.06rem;height: 0.68rem" @click="chosen"></img>
+			</div>
+		</div>
+
+		<div v-if="modalStatus" style="position: fixed;top: 45%;width: 80%;left: 10%;background: white;border: 2px solid red;border-radius: 0.1rem;text-align: center;padding: 0.35rem 0;font-size: 0.2rem;font-weight: 600;">
+			{{ts}}
+		</div>
+	</div>
 </div>
 <script>
     var app = new Vue({
         el: '#app',
         data() {
             return {
+                bgIndex: [],
+                status: false,
+                modalStatus: false,
+				scPoster: '../../img/love/secondary@2x.png',
+                sjImg: '../../img/love/Refresh@2x.png',
+                avatar: '../../img/love/portrait@2x.png',
+                bgImg: '../../img/love/background@2x.png',
+                main: '../../img/love/main@2x.png',
+                colorBtn: '../../img/love/Button2@2x.png',
+                blackBtn: '../../img/love/Button1@2x.png',
+				ts: '最多选择6个项目哟！',
                 lists: [
-                    23213, 213,213,321,321,3,123,21,321,3,123,12,312,3,213,12,3,123,
-				]
-			}
+                    {id: 1, name: '陪过夜'},
+                    {id: 2, name: '假装情侣'},
+                    {id: 3, name: '穿情侣装'},
+                    {id: 4, name: '抱抱你'},
+                    {id: 5, name: '叫你起床'},
+                    {id: 6, name: '冒充男朋友'},
+                    {id: 7, name: '冒充女朋友'},
+                    {id: 8, name: '一起开黑'},
+                    {id: 9, name: '吃好吃的'},
+                    {id: 10, name: '哄你睡觉觉'},
+                    {id: 11, name: '牵牵小手'},
+                    {id: 12, name: '说情话撩你'},
+                    {id: 13, name: '逗你开心'},
+                    {id: 14, name: '帮你洗衣服'},
+                    {id: 15, name: '给你做饭'},
+                    {id: 16, name: '向你告白'},
+                    {id: 17, name: '共进晚餐'},
+                    {id: 18, name: '代打前任'},
+                    {id: 19, name: '陪你唱歌'},
+                    {id: 20, name: '跟你撒娇'},
+                    {id: 21, name: '抓娃娃'},
+                ]
+            }
         },
-        methods: {},
+        methods: {
+            choiceBtn(index) {
+
+                if (!this.bgIndex.includes(index)) {
+                    if (this.bgIndex.length >= 6) {
+                        this.ts = '最多选择6个项目哟！'
+                        this.modalStatus = true
+                        setTimeout(() => {
+                            this.modalStatus = false
+                        }, 1000)
+                        return;
+                    } else {
+                        this.bgIndex.push(index) // 不存在添加
+                    }
+                } else {
+                    this.bgIndex.indexOf(index) // 存在删除
+					console.log(this.bgIndex.indexOf(index))
+					this.bgIndex.splice(this.bgIndex.indexOf(index), 1)
+				}
+            },
+            chosen() {
+                if (this.bgIndex == 0) {
+                    this.ts = '请选择您的出租项目~'
+                    this.modalStatus = true
+                    setTimeout(() => {
+                        this.modalStatus = false
+                    }, 1000)
+					return
+                }
+				var arr = ''
+                for (let i = 0; i < this.bgIndex.length; i++) {
+					arr = arr + this.lists[this.bgIndex[i]].name + '/'
+                }
+                window.location.href = `http://192.168.3.193:8888/mio/src/html/project/love/share.html?arr=${arr}&num=${this.bgIndex.length}`
+
+            },
+            random() {
+                this.bgIndex = []
+                var arr = this.makeRandomArr(this.lists, 6)
+                for (let i = 0; i < arr.length; i++) {
+					this.bgIndex.push(arr[i].id)
+					console.log(this.bgIndex)
+                }
+            },
+            makeRandomArr(arrList, num) { // 随机取出数组元素
+                if (num > arrList.length) {
+                    num = arrList.length
+                }
+                const tempArr = arrList.slice(0)
+                const newArrList = []
+                for (var i = 0; i < num; i++) {
+                    const random = Math.floor(Math.random() * (tempArr.length - 1))
+                    const arr = tempArr[random]
+                    tempArr.splice(random, 1)
+                    newArrList.push(arr)
+                }
+                return newArrList
+            },
+        },
     })
 </script>
 </body>

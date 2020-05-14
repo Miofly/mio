@@ -18,10 +18,10 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://192.168.3.193:8888/mio/src/html/index.css"/>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/ewm.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -58,19 +58,464 @@
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
 	</script>
-</head>
-<body style="font-size: 0.05rem">
-<div id="app">
+	<style>
+		.mio-modal-mask {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.8);
+			z-index: 8;
+			transition: all 0.3s ease-in-out;
+			opacity: 1;
+		}
 
+		@keyframes shake {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+
+		@keyframes shake2 {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+
+		@keyframes scale-up {
+			0% {
+				transform: scale(1)
+			}
+			100% {
+				transform: scale(1.2)
+			}
+		}
+
+	</style>
+</head>
+<body style="font-size: 0.05rem;background: rgb(245, 185, 176)">
+<div id="app" style="height: 100%">
+
+
+	<div id="showqr">
+		<img id="logoimg" src="http://192.168.3.193:8888/mio/src/html/img/xtx/1.jpg" style="display:none"/>
+	</div>
+
+
+	<div v-if="status" class="mio-modal-mask"></div>
+
+	<div v-if="status" style="position: fixed;left: 0;top: 25%;text-align: center;width: 100%;z-index: 10;" :style="{animation: animationStyle}">
+		<img style="width: 2.98rem;height: 1.31rem;top: 20%;" :src="modalOne">
+	</div>
+
+	<div v-if="status" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.17rem;z-index: 13">
+		<img style="width: 1.10rem;height: 1.10rem" :src="fingerprint">
+	</div>
+	<div v-if="status" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.21rem;z-index: 12;">
+		<img style="-webkit-animation: scale-up 0.9s linear 0s infinite alternate;
+		animation: scale-up 0.9s linear 0s infinite alternate;width: 1.09rem;height: 1.08rem" :src="transparent">
+	</div>
+	<div v-if="status" style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 0.63rem;z-index: 11;">
+		<div style="display: inline-block;width:2.88rem;height:0.45rem;font-size:0.32rem;font-weight:600;color:rgba(255,255,255,1);">
+			长按屏幕分享微信群
+		</div>
+	</div>
+
+	<div id="imgOne"
+		 :style="{opacity: tm ? '0.03' : '1', position: tm ? 'fixed' : 'relative'}"
+		 style="z-index: 9999999999;top: 0;left: 0;"
+	></div>
 </div>
 <script>
+
     var app = new Vue({
         el: '#app',
         data() {
-            return {}
+            return {
+                tm: true,
+                status: true,
+                modalOne: '../../img/love/Tips@2x.png',
+                fingerprint: '../../img/love/fingerprint@2x.png',
+                transparent: '../../img/love/transparent@2x.png',
+                num: 1,
+                animationStyle: 'shake 2s linear 0s 1'
+			}
         },
-        methods: {},
+        created() {
+            qraa({
+                ewmSize: 95, logo: 'http://192.168.3.16:8888/mio/src/html/img/xtx/1.jpg',
+                url: 'http://www.baidu.com', logoSize: 'default', isShow: false
+            })
+        },
+		mounted () {
+            document.addEventListener('visibilitychange', this.handleVisiable)
+		},
+        destroyed() {
+            document.removeEventListener('visibilitychange', this.handleVisiable)
+        },
+        methods: {
+            handleVisiable(e) { // 监听页面离开事件
+                this.num = this.num + 1
+                if (e.target.visibilityState === 'visible' && this.num == 3) { // 第一次离开
+                    this.modalOne = '../../img/love/Tips2@2x.png'
+                    this.animationStyle = 'shake2 2s linear 0s 2'
+                }
+                if (e.target.visibilityState === 'visible' && this.num == 5) { //
+                    this.status = false
+					this.tm = false
+                }
+            },
+        },
     })
+
+
+    var num = getUrlParam('num')
+	var newSrc;
+    if (num == 1) {
+        newSrc = '../../img/love/poster1.png'
+    }
+    if (num == 2) {
+        newSrc = '../../img/love/poster2.png'
+    }
+    if (num == 3) {
+        newSrc = '../../img/love/poster3.png'
+    }
+    if (num == 4) {
+        newSrc = '../../img/love/poster4.png'
+    }
+    if (num == 5) {
+        newSrc = '../../img/love/poster5.png'
+    }
+    if (num == 6) {
+        newSrc = '../../img/love/poster6.png'
+    }
+
+
+
+    var imgLists = [
+        {src: newSrc, left: 0, top: 0, width: 750, height: 1314},
+        {src: $('#qrAnonymous').attr('src'), left: 495, top: 1065, width: 163, height: 163},
+    ]
+    var canvas = document.createElement('canvas')
+    canvas.width = 750;
+    canvas.height = 1314; // 这是canvas的宽高
+    var ctx = canvas.getContext('2d')
+    ctx.fillStyle = 'white' // 设置文字的填充颜色
+	if (num == 1) {
+        ctx.font = "50px bold serif";
+	} else {
+        ctx.font = "35px bold serif";
+	}
+    var row = [];
+
+    var text = getUrlParam('arr')
+
+    row.push(textCanvas(text, '/'));
+    ctx.rect(0, 0, 750, 1334); // 这是图片的宽高
+    ctx.fill();
+    drawing(0, $('#imgOne'), true);
+
+    function drawing(n, el, showText = false, textLeft = 50) {
+        var len = imgLists.length;
+
+        if (n < len) {
+            var img = new Image();
+            img.crossOrigin = 'Anonymous'; // 解决跨域
+            img.src = imgLists[n].src;
+            img.onload = function () {
+                ctx.drawImage(img, imgLists[n].left, imgLists[n].top, imgLists[n].width, imgLists[n].height);
+                drawing(n + 1, el); // 递归
+
+                if (showText) {
+                    console.log(num)
+                    if (num == 6) {
+                        var leftLength = ''
+                        var leftLength1 = ''
+                        for (var b = 0; b < row.length; b++) {
+
+							if (row[b].length == 3) {
+                                leftLength = 182
+                                leftLength1 = 465
+							}
+                            if (row[b].length == 4) {
+                                leftLength = 170
+                                leftLength1 = 450
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 150
+                                leftLength1 = 430
+                            }
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength, 585);
+                            }
+                            if (b == 2) {
+                                ctx.fillText(row[b], leftLength, 705);
+                            }
+                            if (b == 3) {
+                                ctx.fillText(row[b], leftLength, 825);
+                            }
+                            if (b == 4) {
+                                ctx.fillText(row[b], leftLength1, 585);
+                            }
+                            if (b == 5) {
+                                ctx.fillText(row[b], leftLength1, 705);
+                            }
+                            if (b == 6) {
+                                ctx.fillText(row[b], leftLength1, 825);
+                            }
+                        }
+                    }
+                    if (num == 5) {
+                        var leftLength = ''
+                        var leftLength1 = ''
+                        var leftLength2 = ''
+                        for (var b = 0; b < row.length; b++) {
+
+                            if (row[b].length == 3) {
+                                leftLength = 182
+                                leftLength1 = 465
+                                leftLength2 = 322
+                            }
+                            if (row[b].length == 4) {
+                                leftLength = 170
+                                leftLength1 = 450
+                                leftLength2 = 305
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 150
+                                leftLength1 = 430
+                                leftLength2 = 290
+                            }
+
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength2, 585);
+                            }
+                            if (b == 2) {
+                                ctx.fillText(row[b], leftLength, 710);
+                            }
+                            if (b == 3) {
+                                ctx.fillText(row[b], leftLength, 830);
+                            }
+                            if (b == 4) {
+                                ctx.fillText(row[b], leftLength1, 830);
+                            }
+                            if (b == 5) {
+                                ctx.fillText(row[b], leftLength1, 710);
+                            }
+                        }
+                    }
+                    if (num == 4) {
+                        var leftLength = ''
+                        var leftLength1 = ''
+                        for (var b = 0; b < row.length; b++) {
+                            if (row[b].length == 3) {
+                                leftLength = 185
+                                leftLength1 = 465
+                            }
+                            if (row[b].length == 4) {
+                                leftLength = 170
+                                leftLength1 = 450
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 147
+                                leftLength1 = 430
+                            }
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength, 635);
+                            }
+                            if (b == 2) {
+                                ctx.fillText(row[b], leftLength1, 635);
+                            }
+                            if (b == 3) {
+                                ctx.fillText(row[b], leftLength, 773);
+                            }
+                            if (b == 4) {
+                                ctx.fillText(row[b], leftLength1, 773);
+                            }
+                        }
+                    }
+                    if (num == 3) {
+                        var leftLength = ''
+                        var leftLength1 = ''
+                        var leftLength2 = ''
+                        for (var b = 0; b < row.length; b++) {
+
+                            if (row[b].length == 3) {
+                                leftLength = 465
+                                leftLength1 = 180
+                                leftLength2 = 320
+                            }
+                            if (row[b].length == 4) {
+                                leftLength = 450
+                                leftLength1 = 165
+                                leftLength2 = 305
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 430
+                                leftLength1 = 150
+                                leftLength2 = 290
+                            }
+
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength2, 645);
+                            }
+                            if (b == 2) {
+                                ctx.fillText(row[b], leftLength, 780);
+                            }
+                            if (b == 3) {
+                                ctx.fillText(row[b], leftLength1, 780);
+                            }
+                        }
+                    }
+                    if (num == 2) {
+                        var leftLength = ''
+                        var leftLength1 = ''
+                        for (var b = 0; b < row.length; b++) {
+                            if (row[b].length == 3) {
+                                leftLength = 180
+                                leftLength1 = 460
+                            }
+                            if (row[b].length == 4) {
+                                leftLength = 162
+                                leftLength1 = 445
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 148
+                                leftLength1 = 430
+                            }
+
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength, 705);
+                            }
+                            if (b == 2) {
+                                ctx.fillText(row[b], leftLength1, 705);
+                            }
+                        }
+                    }
+                    if (num == 1) {
+                        var leftLength = ''
+                        for (var b = 0; b < row.length; b++) {
+                            if (row[b].length == 3) {
+                                leftLength = 300
+                            }
+                            if (row[b].length == 4) {
+                                leftLength = 270
+                            }
+                            if (row[b].length >= 5) {
+                                leftLength = 250
+                            }
+                            if (b == 1) {
+                                ctx.fillText(row[b], leftLength, 720);
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            convertCanvasToImage(canvas, el);
+        }
+    }
+
+    function convertCanvasToImage(canvas, el) {
+        var hc_image = new Image();
+        hc_image.src = canvas.toDataURL("image/png");
+        el.html(hc_image);
+    }
+
+    function textCanvas(text, symbol) { // canvas文字换行
+        var temp = "";
+        var chr = text.split(symbol);
+        for (var a = 0; a < chr.length; a++) {
+            row.push(temp);
+            temp = "";
+            temp += chr[a];
+        }
+        return temp
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg) // 匹配目标参数
+        if (r != null) return decodeURI(r[2])
+        return null // 返回参数值
+    }
 </script>
 </body>
 </html>

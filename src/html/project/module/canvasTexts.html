@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/mio/src/html/index.css"/>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/vue.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 375) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                    }
+                    var html = document.getElementsByTagName('html')[0];
+                    var settedFs = settingFs = parseInt(100 * (clientWidth / 375));
+                    var whileCount = 0;
+                    while (true) {
+                        var realFs = parseInt(window.getComputedStyle(html).fontSize);
+                        var delta = realFs - settedFs;
+                        //不相等
+                        if (Math.abs(delta) >= 1) {
+                            if (delta > 0)
+                                settingFs--;
+                            else
+                                settingFs++;
+                            html.setAttribute('style', 'font-size:' + settingFs + 'px!important');
+                        } else
+                            break;
+                        if (whileCount++ > 100)
+                            break
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem" class="bg-gradual-blue">
+<div id="app">
+	<div id="imgOne"></div>
+</div>
+<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/ewm.js"></script>
+<script type="text/javascript" src="http://localhost:8888/mio/src/html/js/common/canvas.js"></script>
+<script>
+    var canvas = document.createElement('canvas')
+    canvas.width = 750;
+    canvas.height = 1334; // 这是canvas的宽高
+
+    var ctx = canvas.getContext('2d')
+    ctx.fillStyle = 'red' // 设置文字的填充颜色
+    ctx.font = "50px serif";
+
+    var row = [];
+    row.push(textCanvas('将关怀编织成一缕风/为妈妈轻舞飞扬/将祝福采集成一首诗/为妈妈轻轻吟唱/祝妈妈母亲节快乐/身体健康。', '/'));
+
+    for (var b = 0; b < row.length; b++) {
+        ctx.fillText(row[b], 50, 100 + b * 50);
+    }
+    convertCanvasToImage(canvas, $('#imgOne'))
+</script>
+</body>
+</html>

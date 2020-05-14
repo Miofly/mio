@@ -111,10 +111,6 @@ const tu = {
         }
         return arrDelBlank
     },
-    // 删除指定位置字符(字符串从0开始数， index代表删除的位置)
-    delSpecifiedLocation (str, index) {
-        return str.substr(0, index) + str.substr(index + 1)
-    },
     delSpecifiedLocationOne (str, index) {
         return str.substring(0, index) + str.substring(index + 1)
     },

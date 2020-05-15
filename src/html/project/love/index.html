@@ -18,10 +18,9 @@
 	<meta name=description content="">
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
-	<link rel="stylesheet" type="text/css" href="http://192.168.3.193:8888/mio/src/html/index.css"/>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/vue.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="http://192.168.3.193:8888/mio/src/html/js/common/htmlToolUtils.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script type="text/javascript" src="js/common/vue.js"></script>
+	<script type="text/javascript" src="js/common/jquery-1.7.2.min.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -94,7 +93,8 @@
 			<div @click="choiceBtn(index)" style="position: relative;float: left;margin-left: 0.08rem;margin-top: 0.18rem;" v-for="(item, index) in lists" :key="index">
 				<img :src="bgIndex.includes(index) ? '../../img/love/Button1@2x.png' : '../../img/love/Button2@2x.png'" style="width: 1.13rem;height: 0.48rem;">
 				<span style="position: absolute;top: 0.1rem;width:0.96rem;height:0.22rem;font-size:0.16rem;font-weight:600;"
-					  :style="{color: bgIndex.includes(index) ? 'white' : '#DD3333', left: item.name.length == 7 ? '0.12rem' : item.name.length == 3 ? '0.32rem' : item.name.length >= 5 ? '0.18rem' : '0.24rem'}"
+					  :style="{color: bgIndex.includes(index) ? 'white' : '#DD3333', left: item.name.length == 7 ? '0.12rem' : item.name.length == 3 ?
+					  '0.32rem' : item.name.length >= 5 ? '0.18rem' : '0.24rem'}"
 				>{{item.name}}</span>
 			</div>
 			<div style="position: fixed; bottom: 0rem;left: 0;width: 100%;text-align: center">

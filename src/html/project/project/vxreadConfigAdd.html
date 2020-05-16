@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://ja.bigliang.cn/wxTask/vxreadconfig/vxreadConfigAdd.action -->
+<html style=""
+	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!--
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+	 -->
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+	<meta name="author" content="Coderthemes">
+	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+	<title>四海传媒</title>
+	<link href="./css/select2.css" rel="stylesheet" type="text/css">
+	<link href="./css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="./css/multi-select.css" rel="stylesheet" type="text/css">
+	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/core.css" rel="stylesheet" type="text/css">
+	<link href="./css/icons.css" rel="stylesheet" type="text/css">
+	<link href="./css/components.css" rel="stylesheet" type="text/css">
+	<link href="./css/pages.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu.css" rel="stylesheet" type="text/css">
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
+	<script src="./js/modernizr.min.js"></script>
+	<style type="text/css">
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding-top: 50px;
+		}
+
+		.fs-fixed-top {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			width: 100%;
+			height: 50px;
+			line-height: 48px;
+			text-align: center;
+			background-color: #fff;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.fs-fixed-top .title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.demo-content {
+			height: 200px;
+		}
+
+		.back-btn {
+			position: absolute;
+			left: 12px;
+			top: 15px;
+			z-index: 1000;
+			font-size: 0;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			line-height: 1;
+		}
+
+		.back-btn img {
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+		}
+
+		#addForm input {
+			touch-action: none;
+		}
+
+		.minInput {
+		}
+
+		.maxInput {
+		}
+	</style>
+</head>
+<body class="fixed-left widescreen">
+<div class="fs-fixed-top">
+	<a href="http://ja.bigliang.cn/wxTask/dashboard/planList.action" class="back-btn">
+		<img src="./img/back.png">
+	</a>
+	<p class="title">方案配置</p>
+</div>
+<div id="wrapper">
+	<div class="content-page" style="margin-left:0px;">
+		<!-- Start content -->
+		<div class="content"
+			 style="margin-bottom:0px;margin-top:0px;padding-top:10px;padding-left:0px;padding-right:0px;">
+			<div class="container" style="padding-left:10px;padding-right:10px;">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form id="addForm" class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-md-2 control-label">名称：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="configName" name="configName" class="form-control" type="text"
+												   placeholder="方案名称，必填">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">是否机器人：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<div class="checkbox checkbox-primary">
+												<input id="configType" name="configType" value="1" type="checkbox">
+												<label for="configType">是</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">备注：</label>
+										<div class="col-md-10">
+											<input id="note" name="note" class="form-control" type="text"
+												   placeholder="备注">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">浏览量：</label>
+										<div class="col-md-10">
+											<input id="minNum" class="form-control" type="number" placeholder="时段最小浏览量"
+												   style="width:46%;display:inline-block">----
+											<input id="maxNum" class="form-control" type="number" placeholder="时段最大浏览量"
+												   style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<button type="button" onclick="setHourValue();"
+												class="btn btn-warning waves-effect waves-light" style="width:100%">一键设置
+										</button>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">1点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h01Min" name="h01Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h01Max" name="h01Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">2点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h02Min" name="h02Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h02Max" name="h02Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">3点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h03Min" name="h03Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h03Max" name="h03Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">4点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h04Min" name="h04Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h04Max" name="h04Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">5点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h05Min" name="h05Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h05Max" name="h05Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">6点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h06Min" name="h06Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h06Max" name="h06Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">7点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h07Min" name="h07Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h07Max" name="h07Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">8点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h08Min" name="h08Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h08Max" name="h08Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">9点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h09Min" name="h09Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h09Max" name="h09Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">10点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h10Min" name="h10Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h10Max" name="h10Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">11点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h11Min" name="h11Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h11Max" name="h11Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">12点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h12Min" name="h12Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h12Max" name="h12Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">13点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h13Min" name="h13Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h13Max" name="h13Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">14点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h14Min" name="h14Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h14Max" name="h14Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">15点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h15Min" name="h15Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h15Max" name="h15Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">16点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h16Min" name="h16Min" class="form-control minInput" type="number"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h16Max" name="h16Max" class="form-control maxInput" type="number"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">17点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h17Min" name="h17Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h17Max" name="h17Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">18点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h18Min" name="h18Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h18Max" name="h18Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">19点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h19Min" name="h19Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h19Max" name="h19Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">20点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h20Min" name="h20Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h20Max" name="h20Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">21点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h21Min" name="h21Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h21Max" name="h21Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">22点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h22Min" name="h22Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h22Max" name="h22Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">23点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h23Min" name="h23Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h23Max" name="h23Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">24点：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="h24Min" name="h24Min" class="form-control minInput" type="text"
+												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
+											<input id="h24Max" name="h24Max" class="form-control maxInput" type="text"
+												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">浏览量：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="readMax" name="readMax" class="form-control" type="text"
+												   placeholder="总浏览量">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<button type="button" onclick="doSave();"
+													class="btn btn-info waves-effect waves-light" style="width:100%">保存
+											</button>
+										</div>
+									</div>
+								</form>
+							</div> <!-- panel-body -->
+						</div> <!-- panel -->
+					</div> <!-- col -->
+				</div> <!-- End row -->
+			</div> <!-- container -->
+		</div> <!-- content -->
+	</div>
+</div>
+<script>
+    var resizefunc = [];
+</script>
+
+<!-- jQuery  -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/detect.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.slimscroll.js"></script>
+<script src="./js/jquery.blockUI.js"></script>
+<!--
+<script src="assets/js/waves.js"></script>
+ -->
+<script src="./js/wow.min.js"></script>
+<script src="./js/jquery.nicescroll.js"></script>
+<script src="./js/jquery.scrollTo.min.js"></script>
+<script src="./js/jquery.app.js"></script>
+<script src="./js/image.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/ajaxfileupload.js"></script>
+<script src="./js/sweetalert.min.js"></script>
+<script src="./js/select2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="./js/jquery.quicksearch.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+    });
+
+    function doSave() {
+        var configName = $("#configName").val();
+        if (checkParameterIsEmpty(configName)) {
+            toast("请输入方案名称", 1000);
+            return;
+        }
+        var note = $("#note").val();
+        var readMax = $("#readMax").val();
+        if (checkParameterIsEmpty(readMax)) {
+            toast("请输入总浏览量", 1000);
+            return;
+        }
+        var formData = new FormData($("#addForm")[0]);
+        swal({
+            title: "保存确认",
+            text: "确认保存模板配置吗?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+        }, function () {
+            $(".confirm").prop("disabled", true);
+            $.ajax({
+                url: "/wxTask/vxreadconfig/saveVxreadConfig.action",
+                type: 'POST',
+                dataType: 'json',
+                data: formData,
+                cache: false,//上传文件无需缓存
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (data) {
+                    if (data.code == 200) {
+                        swal.close();
+                        //保存成功，跳转至详情页面
+                        toast("保存成功", 1000);
+                        window.location.href = '/wxTask/dashboard/planList.action';
+                    } else {
+                        swal.close();
+                        toast(data.message, 1000);
+                        return;
+                    }
+                },
+                error: function () {
+                    swal("系统异常！");
+                }
+            });
+
+        });
+    }
+
+    function setHourValue() {
+        var minNum = $("#minNum").val();
+        if (checkParameterIsEmpty(minNum)) {
+            swal("请输入时段最小浏览量");
+            return;
+        }
+        var maxNum = $("#maxNum").val();
+        if (checkParameterIsEmpty(maxNum)) {
+            swal("请输入时段最大浏览量");
+            return;
+        }
+        $(".form-control.minInput").each(function (i, n) {
+            $(this).val(minNum);
+        });
+
+        $(".form-control.maxInput").each(function (i, n) {
+            $(this).val(maxNum);
+        });
+
+    }
+
+    //检查值是否为空；空：返回true；不为空返回false
+    function checkParameterIsEmpty(parameter) {
+        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -4,7 +4,6 @@
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 	<!--
 	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 	 -->
@@ -122,26 +121,26 @@
 										<label class="col-md-2 control-label">名称：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="configName" name="configName" class="form-control" type="text"
+											<input id="name" name="name" class="form-control" type="text"
 												   placeholder="方案名称，必填">
 										</div>
 									</div>
 
-									<div class="form-group">
-										<label class="col-md-2 control-label">是否机器人：<span
-												style="color:red;">*</span></label>
-										<div class="col-md-10">
-											<div class="checkbox checkbox-primary">
-												<input id="configType" name="configType" value="1" type="checkbox">
-												<label for="configType">是</label>
-											</div>
-										</div>
-									</div>
+									<!--<div class="form-group">-->
+									<!--<label class="col-md-2 control-label">是否机器人：<span-->
+									<!--style="color:red;">*</span></label>-->
+									<!--<div class="col-md-10">-->
+									<!--<div class="checkbox checkbox-primary">-->
+									<!--<input id="configType" name="configType" value="1" type="checkbox">-->
+									<!--<label for="configType">是</label>-->
+									<!--</div>-->
+									<!--</div>-->
+									<!--</div>-->
 
 									<div class="form-group">
 										<label class="col-md-2 control-label">备注：</label>
 										<div class="col-md-10">
-											<input id="note" name="note" class="form-control" type="text"
+											<input id="remark" name="remark" class="form-control" type="text"
 												   placeholder="备注">
 										</div>
 									</div>
@@ -403,7 +402,7 @@
 										<label class="col-md-2 control-label">浏览量：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="readMax" name="readMax" class="form-control" type="text"
+											<input id="total_uv" name="total_uv" class="form-control" type="text"
 												   placeholder="总浏览量">
 										</div>
 									</div>
@@ -453,18 +452,17 @@
     });
 
     function doSave() {
-        var configName = $("#configName").val();
-        if (checkParameterIsEmpty(configName)) {
+        var name = $("#name").val();
+        if (checkParameterIsEmpty(name)) {
             toast("请输入方案名称", 1000);
             return;
         }
-        var note = $("#note").val();
-        var readMax = $("#readMax").val();
-        if (checkParameterIsEmpty(readMax)) {
+        var remark = $("#remark").val();
+        var total_uv = $("#total_uv").val();
+        if (checkParameterIsEmpty(total_uv)) {
             toast("请输入总浏览量", 1000);
             return;
         }
-        var formData = new FormData($("#addForm")[0]);
         swal({
             title: "保存确认",
             text: "确认保存模板配置吗?",
@@ -476,28 +474,36 @@
             closeOnConfirm: false
         }, function () {
             $(".confirm").prop("disabled", true);
+
             $.ajax({
-                url: "/wxTask/vxreadconfig/saveVxreadConfig.action",
-                type: 'POST',
-                dataType: 'json',
-                data: formData,
-                cache: false,//上传文件无需缓存
-                processData: false,//用于对data参数进行序列化处理 这里必须false
-                contentType: false, //必须
+                async: true,
+                type: "POST",
+                url: "http://shangliang.52eja.com:443/api/task/programme-save",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "JSON",
+                data: {
+                    name: name, remark: remark, total_uv: total_uv,phone_type: 1,
+                    hour_state_uv: JSON.stringify([{"min_uv_1":1,"max_uv_1":5},{"min_uv_2":1,"max_uv_2":5},{"min_uv_3":1,"max_uv_3":5},{"min_uv_4":1,"max_uv_4":5},{"min_uv_5":1,"max_uv_5":5},{"min_uv_6":1,"max_uv_6":5},{"min_uv_7":1,"max_uv_7":5},{"min_uv_8":1,"max_uv_8":5},{"min_uv_9":1,"max_uv_9":5},{"min_uv_10":1,"max_uv_10":5},{"min_uv_11":1,"max_uv_11":5},{"min_uv_12":1,"max_uv_12":5},{"min_uv_13":1,"max_uv_13":5},{"min_uv_14":1,"max_uv_14":5},{"min_uv_15":1,"max_uv_15":5},{"min_uv_16":1,"max_uv_16":5},{"min_uv_17":1,"max_uv_17":5},{"min_uv_18":1,"max_uv_18":5},{"min_uv_19":1,"max_uv_19":5},{"min_uv_20":1,"max_uv_20":5},{"min_uv_21":1,"max_uv_21":5},{"min_uv_22":1,"max_uv_22":5},{"min_uv_23":1,"max_uv_23":5},{"min_uv_24":1,"max_uv_24":5}])
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
+                },
                 success: function (data) {
                     if (data.code == 200) {
                         swal.close();
-                        //保存成功，跳转至详情页面
-                        toast("保存成功", 1000);
-                        window.location.href = '/wxTask/dashboard/planList.action';
+                        console.log(data.data)
                     } else {
-                        swal.close();
                         toast(data.message, 1000);
+                        setTimeout(() => {
+                            if (data.code == 403) {
+                                window.location.href = 'login.html'
+                            }
+                        }, 1000)
                         return;
                     }
                 },
                 error: function () {
-                    swal("系统异常！");
+                    toast("系统异常！", 1000);
                 }
             });
 

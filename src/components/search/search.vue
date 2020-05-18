@@ -12,8 +12,7 @@
 
             <view class="search-form round">
                 <text class="fa fa-search"></text>
-                <!-- @blur="InputBlur"
-                -->
+                <!-- @blur="InputBlur"-->
                 <input v-model="keyword" @focus="inputFocus"
                        @input="realTimeInput(keyword)"
                        :adjust-position="false" type="text"

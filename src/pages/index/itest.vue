@@ -1,70 +1,60 @@
 <template>
-	<vue-seamless-scroll :data="listData"  :class-option="optionHover" class="seamless-warp ">
-		<ul class="item">
-			<li v-for="item in listData">
-				<span class="title" v-text="item.title"></span>
-				<span class="date" v-text="item.date"></span>
-			</li>
-		</ul>
-	</vue-seamless-scroll>
+	<view>
+		<!--.test>view>view>view{height: 100%;}-->
+		<search class="test" @parentFun="questionListFn" style="height: 100%;">
+			<template v-slot:content>
+				<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
+					<view v-for="(item, index) in
+						[{name: '列表一', icon: 'video-camera'},
+						{name: '列表一', icon: 'user'},
+						{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
+						<view class="content padding-tb-sm">
+							<view>
+								<text class="fa text-blue width-lg" :class="['fa-' + item.icon]"></text>
+								<text class="margin-left">{{ item.name }}</text>
+							</view>
+						</view>
+						<view v-show="false" class="action">
+							<button :class="['cu-btn', 'bg-blue', 'shadow']" >
+								操作
+							</button>
+						</view>
+						<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+					</view>
+				</view>
+			</template>
+			<template v-slot:detail>
+				<scroll-view style="height: 85%" scroll-y="true" >
+					<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
+						<view v-for="(item, index) in
+							[{name: '列表11一', icon: 'video-camera'},
+							{name: '列表一', icon: 'user'},
+							{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
+							<view class="content padding-tb-sm">
+								<view>
+									<text class="fa text-blue width-lg" :class="['fa-' + item.icon]"></text>
+									<text class="margin-left">{{ item.name }}</text>
+								</view>
+							</view>
+							<view v-show="false" class="action">
+								<button :class="['cu-btn', 'bg-blue', 'shadow']">
+									操作
+								</button>
+							</view>
+							<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+						</view>
+					</view>
+					<loadMore :status="loadStatus = 1"></loadMore>
+				</scroll-view>
+			</template>
+		</search>
+	</view>
 </template>
 
 <script>
-    import vueSeamlessScroll from 'vue-seamless-scroll'
 
-    export default {
-        components: {
-            vueSeamlessScroll
-        },
-        computed: {
-            optionHover () {
-                return {
-                    hoverStop: true, // 鼠标悬停停止滚动
-                    direction: [0, 1][0], // 向下/上滚动
-                    step: 0.5, // 滚动速度
-                    // singleHeight: 20, // 滚动单行
-					// waitTime:2500 单行停顿时间
-                }
-            }
-        },
-        data() {
-            return {
-                listData: [{
-                    'title': '无缝滚动第一行无缝滚动第一行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第二行无缝滚动第二行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第三行无缝滚动第三行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第四行无缝滚动第四行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第五行无缝滚动第五行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第六行无缝滚动第六行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第七行无缝滚动第七行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第八行无缝滚动第八行',
-                    'date': '2017-12-16'
-                }, {
-                    'title': '无缝滚动第九行无缝滚动第九行',
-                    'date': '2017-12-16'
-                }]
-            }
-        }
-    }
 </script>
 
-<style lang="scss" scoped>
-	.seamless-warp {
-		height: 229rpx;
-		overflow: hidden;
-	}
+<style>
+
 </style>

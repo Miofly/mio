@@ -203,8 +203,10 @@
             success: function (data) {
                 if (data.code == 200) {
                     toast("注册成功", 1000);
+                    setTimeout(() => {
+                        window.location.href = "login.html";
+                    }, 1000)
                     //保存成功，跳转至详情页面
-                    window.location.href = "login.html";
                 } else {
                     toast(data.message, 1000);
                     return;
@@ -213,10 +215,10 @@
             error: function () {
                 toast("系统异常", 1000);
             }
-        });
+        })
     }
 
-    //检查值是否为空；空：返回true；不为空返回false
+    // 检查值是否为空；空：返回true；不为空返回false
     function checkParameterIsEmpty(parameter) {
         if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
             return true;
@@ -224,8 +226,6 @@
             return false;
         }
     }
-
 </script>
-
 </body>
 </html>

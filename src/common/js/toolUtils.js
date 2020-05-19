@@ -6,7 +6,7 @@ const tu = {
     arrChange (a, b) { // 两个数组相减，大数组中去除小数组含有的项
         for (let i = 0; i < b.length; i++) {
             for (let j = 0; j < a.length; j++) {
-                if (a[ j ] === b[ i ]) { // 如果是id相同的，那么a[ j ].id === b[ i ].id
+                if (a[j] === b[i]) { // 如果是id相同的，那么a[ j ].id === b[ i ].id
                     a.splice(j, 1)
                     j = j - 1
                 }
@@ -15,7 +15,7 @@ const tu = {
         return a
     },
     judgeType (obj) { // 判断数据类型
-        let class2type = {};
+        const class2type = {}
         'Array Date RegExp Object Error'.split(' ').forEach(e =>
             class2type['[object ' + e + ']'] = e.toLowerCase()
         )
@@ -23,70 +23,69 @@ const tu = {
         return typeof obj === 'object' ? class2type[Object.prototype.toString.call(obj)] || 'object' : typeof obj
     },
     getSpecialDays(y) { // 判断是否是余年
-        if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))
-            return 29;
-        return 28;
+        if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) { return 29 }
+        return 28
     },
     getShengXiao(birth) { // 生肖计算
-        birth += '';
-        var len = birth.length;
+        birth += ''
+        var len = birth.length
         if (len < 4 && len != 2) {
-            return "";
+            return ''
         }
         if (len == 2) {
-            birth - 0 > 30 ? birth = '19' + birth : birth = '20' + birth;
+            birth - 0 > 30 ? birth = '19' + birth : birth = '20' + birth
         }
-        var year = (new Date(birth)).getFullYear();
-        var arr = ['猴', '鸡', '狗', '猪', '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊'];
-        return /^\d{4}$/.test(year) ? arr[year % 12] : "";
+        var year = (new Date(birth)).getFullYear()
+        var arr = ['猴', '鸡', '狗', '猪', '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊']
+        return /^\d{4}$/.test(year) ? arr[year % 12] : ''
     },
     getAstro(m, d) { // 星座计算 getAstro(parseInt('09'), 26)
-        return "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2);
+        return '魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯'.substr(m * 2 - (d < '102223444433'.charAt(m - 1) - -19) * 2, 2)
     },
     getAge(strBirthday) { // 根据出生日期算出年龄 getAge('1995-09-26')
-        let returnAge;
-        let strBirthdayArr = strBirthday.split("-");
-        let birthYear = strBirthdayArr[0];
-        let birthMonth = strBirthdayArr[1];
-        let birthDay = strBirthdayArr[2];
+        let returnAge
+        const strBirthdayArr = strBirthday.split('-')
+        const birthYear = strBirthdayArr[0]
+        const birthMonth = strBirthdayArr[1]
+        const birthDay = strBirthdayArr[2]
 
-        let d = new Date();
-        let nowYear = d.getFullYear();
-        let nowMonth = d.getMonth() + 1;
-        let nowDay = d.getDate();
+        const d = new Date()
+        const nowYear = d.getFullYear()
+        const nowMonth = d.getMonth() + 1
+        const nowDay = d.getDate()
 
         if (nowYear == birthYear) {
-            returnAge = 0;//同年 则为0岁
+            returnAge = 0// 同年 则为0岁
         } else {
-            var ageDiff = nowYear - birthYear; //年之差
+            var ageDiff = nowYear - birthYear // 年之差
             if (ageDiff > 0) {
                 if (nowMonth == birthMonth) {
-                    var dayDiff = nowDay - birthDay;//日之差
+                    var dayDiff = nowDay - birthDay// 日之差
                     if (dayDiff < 0) {
-                        returnAge = ageDiff - 1;
+                        returnAge = ageDiff - 1
                     } else {
-                        returnAge = ageDiff;
+                        returnAge = ageDiff
                     }
                 } else {
-                    var monthDiff = nowMonth - birthMonth;//月之差
+                    var monthDiff = nowMonth - birthMonth// 月之差
                     if (monthDiff < 0) {
-                        returnAge = ageDiff - 1;
+                        returnAge = ageDiff - 1
                     } else {
-                        returnAge = ageDiff;
+                        returnAge = ageDiff
                     }
                 }
             } else {
-                returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
+                returnAge = -1// 返回-1 表示出生日期输入错误 晚于今天
             }
         }
 
-        return returnAge;//返回周岁年龄
+        return returnAge// 返回周岁年龄
     },
     isArrayFn(value) { // 判断是否是数组
-        if (typeof Array.isArray === "function") {
-            return Array.isArray(value);
+        if (typeof Array.isArray === 'function') {
+            return Array.isArray(value)
         } else {
-            return Object.prototype.toString.call(value) === "[object Array]";
+            return Object.prototype.toString.call(value) === '[object Array]'
         }
     },
     /* 返回随机数 第二个参数为true则变成整数

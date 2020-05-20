@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!--
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+	 -->
+	<meta name="renderer" content="webkit">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+	<meta name="author" content="Coderthemes">
+	<title>四海传媒</title>
+	<link href="./css/select2.css" rel="stylesheet" type="text/css">
+	<link href="./css/select2-bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="./css/multi-select.css" rel="stylesheet" type="text/css">
+	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/core.css" rel="stylesheet" type="text/css">
+	<link href="./css/icons.css" rel="stylesheet" type="text/css">
+	<link href="./css/components.css" rel="stylesheet" type="text/css">
+	<link href="./css/pages.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu.css" rel="stylesheet" type="text/css">
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
+	<script src="./js/modernizr.min.js"></script>
+	<style type="text/css">
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding-top: 50px;
+		}
+
+		.fs-fixed-top {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			width: 100%;
+			height: 50px;
+			line-height: 48px;
+			text-align: center;
+			background-color: #fff;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.fs-fixed-top .title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.demo-content {
+			height: 200px;
+		}
+
+		.back-btn {
+			position: absolute;
+			left: 12px;
+			top: 15px;
+			z-index: 1000;
+			font-size: 0;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			line-height: 1;
+		}
+
+		.back-btn img {
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+		}
+
+		#addForm input {
+			touch-action: none;
+		}
+
+		.user-footer-chen {
+			background-color: #ffffff;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+			margin-left: -35px;
+			margin-right: -35px;
+			padding-left: 25px;
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+<body class="fixed-left">
+<div class="fs-fixed-top">
+	<a href="taskList.html" class="back-btn">
+		<img src="./img/back.png">
+	</a>
+	<p class="title">任务详情</p>
+</div>
+<div id="wrapper">
+	<div class="content-page" style="margin-left:0px;">
+		<!-- Start content -->
+		<div class="content"
+			 style="margin-bottom:0px;margin-top:0px;padding-top:10px;padding-left:0px;padding-right:0px;">
+			<div class="container" style="padding-left:10px;padding-right:10px;">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form id="addForm" class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-md-2 control-label">id：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input class="form-control"  type="text" id="uid" readonly/>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">名称：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input class="form-control"  type="text" id="title" readonly/>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">平台名称：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input class="form-control"  type="text" id="product_name" readonly/>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">方案名称：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input class="form-control"  type="text" id="programme_name" readonly/>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">url：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input class="form-control"  type="text" id="url" readonly/>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">真实浏览量：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="true_total_uv" name="total_uv" readonly class="form-control"
+												   type="text"
+												   placeholder="真实浏览量">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">总浏览量：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="total_uv" name="total_uv" readonly class="form-control"
+												   type="text"
+												   placeholder="总浏览量">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">比率：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="uv_completion" name="total_uv" readonly class="form-control"
+												   type="text"
+												   placeholder="比率">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-2 control-label">备注：<span
+												style="color:red;">*</span></label>
+										<div class="col-md-10">
+											<input id="remark" name="remark" readonly class="form-control" type="text"
+												   placeholder="备注">
+										</div>
+									</div>
+
+
+								</form>
+							</div> <!-- panel-body -->
+						</div> <!-- panel -->
+					</div> <!-- col -->
+				</div> <!-- End row -->
+			</div> <!-- container -->
+		</div> <!-- content -->
+	</div>
+</div>
+<div class="row user-footer-chen" style="position: fixed;bottom: 0;width: 100%;margin-left: 10px;padding-left: 0px;">
+	<div class="btn-group btn-group-justified m-b-5" style="margin-left:-10px;margin-bottom:0;height:50px;">
+		<a class="btn btn-danger waves-effect waves-light" role="button"
+		   onclick="deletePlan();">删除方案</a>
+	</div>
+</div>
+<script>
+    var resizefunc = [];
+</script>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/detect.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.slimscroll.js"></script>
+<script src="./js/jquery.blockUI.js"></script>
+<!--
+<script src="assets/js/waves.js"></script>
+ -->
+<script src="./js/wow.min.js"></script>
+<script src="./js/jquery.nicescroll.js"></script>
+<script src="./js/jquery.scrollTo.min.js"></script>
+<script src="./js/jquery.app.js"></script>
+<script src="./js/image.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/ajaxfileupload.js"></script>
+<script src="./js/sweetalert.min.js"></script>
+<script src="./js/select2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="./js/jquery.quicksearch.js"></script>
+<script type="text/javascript" src="./js/taskListDetail.js"></script>
+</body>
+</html>

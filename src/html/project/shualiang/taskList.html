@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)taskList.action -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -12,7 +11,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
 	<title>四海传媒</title>
 	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
 	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -119,10 +118,10 @@
 							<div class="fixed-table-body">
 								<div class="fixed-table-loading table table-bordered table-hover"
 									 style="top: 40px; display: none;">
-      <span class="loading-wrap">
-      <span class="loading-text">正在努力地加载数据中，请稍候</span>
-      <span class="animation-wrap"><span class="animation-dot"></span></span>
-      </span>
+      							<span class="loading-wrap">
+      							<span class="loading-text">正在努力地加载数据中，请稍候</span>
+      							<span class="animation-wrap"><span class="animation-dot"></span></span>
+      							</span>
 								</div>
 								<table id="dataTable" class="table table-bordered table-hover">
 									<tfoot style="display: none;">
@@ -167,42 +166,43 @@
 								</table>
 							</div>
 						</div>
-						<div class="fixed-table-pagination" style="display: none;">
-							<div class="pull- hidden pagination-detail">
-      <span class="pagination-info">
-      显示第 1 到第 0 条记录，总共 0 条记录
-      </span><span class="page-list" style="display: none;">每页显示 <span class="btn-group dropdown dropup">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-        <span class="page-size">
-        10
-        </span>
-        <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu"><li role="menuitem" class="active"><a href="taskList.action#">10</a></li></ul></span> 条记录</span>
-							</div>
-							<div class="pull-right pagination" style="display: none;">
-								<ul class="pagination">
-									<li class="page-item page-pre"><a class="page-link" aria-label="上一页"
-																	  href="javascript:void(0)">‹</a></li>
-									<li class="page-item page-next"><a class="page-link" aria-label="下一页"
-																	   href="javascript:void(0)">›</a></li>
-								</ul>
-							</div>
+						<!--<div class="fixed-table-pagination" style="display: none;">-->
+						<!--<div class="pull- hidden pagination-detail">-->
+						<!--<span class="pagination-info">显示第 1 到第 0 条记录，总共 0 条记录</span>-->
+						<!--<span class="page-list" style="display: none;">每页显示-->
+						<!--<span class="btn-group dropdown dropup">-->
+						<!--<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">-->
+						<!--<span class="page-size">-->
+						<!--10-->
+						<!--</span>-->
+						<!--<span class="caret"></span>-->
+						<!--</button>-->
+						<!--<ul class="dropdown-menu" role="menu"><li role="menuitem" class="active"><a href="taskList.action#">10</a></li></ul></span> 条记录</span>-->
+						<!--</div>-->
+						<div class="pull-right pagination" style="display: none;">
+							<ul class="pagination">
+								<li class="page-item page-pre"><a class="page-link" aria-label="上一页"
+																  href="javascript:void(0)">‹</a></li>
+								<li class="page-item page-next"><a class="page-link" aria-label="下一页"
+																   href="javascript:void(0)">›</a></li>
+							</ul>
 						</div>
 					</div>
-					<div class="clearfix"></div>
 				</div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
-	</div> <!-- End row -->
-	<div class="row user-footer-chen"
-		 style="position: fixed;bottom: 0;width: 100%;margin-left: 10px;padding-left: 0px;">
-		<div class="btn-group btn-group-justified m-b-5" style="margin-left:-10px;margin-bottom:0;height:50px;">
-			<a class="btn btn-primary waves-effect waves-light" role="button" onclick="doView();">任务详情</a>
-			<!-- <a class="btn btn-warning waves-effect waves-light" role="button" onclick="operateTask('pause');">暂停任务</a> -->
-			<a class="btn btn-warning waves-effect waves-light" role="button" onclick="operateTask(&#39;delete&#39;);">删除任务</a>
-		</div>
 	</div>
+</div> <!-- End row -->
+<div class="row user-footer-chen"
+	 style="position: fixed;bottom: 0;width: 100%;margin-left: 10px;padding-left: 0px;">
+	<div class="btn-group btn-group-justified m-b-5" style="margin-left:-10px;margin-bottom:0;height:50px;">
+		<a class="btn btn-primary waves-effect waves-light" role="button" onclick="doView();">任务详情</a>
+		<!-- <a class="btn btn-warning waves-effect waves-light" role="button" onclick="operateTask('pause');">暂停任务</a> -->
+		<a class="btn btn-warning waves-effect waves-light" role="button"
+		   onclick="operateTask(&#39;delete&#39;);">删除任务</a>
+	</div>
+</div>
 </div>
 <script>
     var resizefunc = [];
@@ -224,214 +224,13 @@
 <script src="./js/jquery.app.js"></script>
 <script src="./js/common.js"></script>
 <script src="./js/sweetalert.min.js"></script>
+
+<!--<script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>-->
+<!--<script src="https://unpkg.com/bootstrap-table@1.15.3/dist/locale/bootstrap-table-zh-CN.min.js"></script>-->
+
 <script src="./js/bootstrap-table.min.js"></script>
 <script src="./js/bootstrap-table-zh-CN.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-
-        $('#dataTable').bootstrapTable({
-            url: "http://shangliang.52eja.com:443/api/task/task-list",
-            method: 'post',
-            pagination: true,   //是否显示分页
-            sidePagination: 'server', //分页方式：'client'客户端分页，'server'服务端分页，默认值：'client'
-            queryParamsType: 'notLimit',
-            uniqueId: 'id', //唯一标识字段
-            paginationDetailHAlign: 'hidden',
-            dataType: "JSON",
-            queryParams: function (params) {
-                var temp = {
-                    page: params.pageNumber,
-                    per_page: params.pageSize,
-                };
-                return temp;
-            },
-            columns: [
-                {
-                    title: '#', align: 'center', formatter: function (value, row, index, field) {
-                        return '<input type="radio" name="taskId" value="' + row.id + '"/>';
-                    }
-                },
-                {field: 'id', title: '编号', align: 'center'},
-                {field: 'configName', title: '模板', align: 'center'},
-                {
-                    field: 'readCur', title: '浏览量', align: 'center',
-                    formatter: function (value, row, index, field) {
-                        var show = row.readCur + "/" + row.readMax;
-                        return show;
-                    }
-                },
-                {field: 'createTime', title: '发布时间', align: 'center'}
-            ],
-            ajaxOptions: {
-                headers: {"Authorization": localStorage.getItem('TOKEN_KEY_SL')}
-            },
-            onLoadSuccess: function (data) {
-                console.log(data)
-                if (data.code == 200) {
-                    console.log(data.data)
-
-                    $('#dataTable').bootstrapTable('load', data.data.list.data);
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-                $("#selectAll").prop("checked", false);
-            },
-
-        });
-    });
-
-    function doView() {
-        var taskId = $('input[name="taskId"]:checked').val();
-        if (checkParameterIsEmpty(taskId)) {
-            toast("请选择一个任务", 1000);
-            return;
-        }
-        window.location.href = "taskDetail.html?taskId=" + taskId;
-        /* var value=[];
-		$('input[name="taskId"]:checked').each(function(){
-			value.push($(this).val());
-		});
-		if(value.length > 1 || value.length == 0){
-			toast("请选择一个任务",1000);
-			return;
-		}
-		var taskId = value[0];
-		window.location.href = "/wxTask/vxreadtask/taskDetail.action?taskId="+taskId; */
-    }
-
-    function selectAll() {
-        var flag = $("#selectAll").prop("checked");
-        if (flag) {
-            $('input[name="taskId"]').each(function () {
-                $(this).prop("checked", true);
-            });
-        } else {
-            $('input[name="taskId"]').each(function () {
-                $(this).prop("checked", false);
-            });
-        }
-    }
-
-    function operateTask(flag) {
-        var taskId = $('input[name="taskId"]:checked').val();
-        if (checkParameterIsEmpty(taskId)) {
-            toast("请选择一个任务", 1000);
-            return;
-        }
-        var title = "删除任务确认";
-        var message = "确认删除选中的任务吗?";
-        swal({
-            title: title,
-            text: message,
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            closeOnConfirm: false
-        }, function () {
-            $(".confirm").prop("disabled", true);
-            $.ajax({
-                async: true,
-                type: "POST",
-                url: "http://shangliang.52eja.com:443/api/task/task-del",
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                data: {
-                    taskId: taskId,
-                    flag: 'delete'
-                },
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-                },
-                dataType: "JSON",
-                success: function (data) {
-                    if (data.code == 200) {
-                        swal.close();
-                        //保存成功，跳转至详情页面
-                        toast("操作成功", 1000);
-                        window.location.reload();
-                    } else {
-                        swal.close();
-                        toast(data.message, 1000);
-                        if (data.code == 403) {
-                            setTimeout(() => {
-                                window.location.href = 'login.html'
-                            }, 2000)
-                        }
-                        return;
-                    }
-                },
-                error: function () {
-                    swal("系统异常！");
-                }
-            });
-        });
-        /* var value=[];
-		$('input[name="taskId"]:checked').each(function(){
-			value.push($(this).val());
-		});
-		if(value.length == 0){
-			toast("请至少选择一个任务",1000);
-			return;
-		}
-		var title = "删除任务确认";
-		var message = "确认删除选中的任务吗?";
-		swal({
-			title: title,
-			text: message,
-			type: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "确定",
-			cancelButtonText: "取消",
-			closeOnConfirm: false
-		}, function(){
-			$(".confirm").prop("disabled",true);
-			$.ajax({
-				async : true,
-				type : "POST",
-				url : "/wxTask/vxreadtask/operateTask.action",
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				data : {
-					taskId : value,
-					flag : 'delete'
-				},
-				dataType : "JSON",
-				success : function(data){
-					if(data.code == 200){
-						swal.close();
-						//保存成功，跳转至详情页面
-						toast("操作成功",1000);
-						window.location.reload();
-					}else{
-						swal.close();
-						toast(data.message,1000);
-						return;
-					}
-				},
-				error : function(){
-					swal("系统异常！");
-				}
-			});
-		}); */
-    }
-
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
-
+<script src="./js/taskList.js"></script>
 
 </body>
 </html>

@@ -8,6 +8,49 @@
             }
         },
         {
+            "path": "pages/index/movie/dm",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "dm"
+        },
+        {
+            "path": "pages/index/movie/dy",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "dy"
+        },
+        {
+            "path": "pages/index/movie/lxj",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lxj"
+        },
+        {
+            "path": "pages/index/movie/mvIndex",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "mvIndex"
+        },
+        {
+            "path": "pages/index/movie/mvHome",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "mvHome"
+        },
+        {
+            "path": "pages/index/movie/zy",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "zy"
+        },
+
+        {
             "path": "pages/index/tool/toolIndex",
             "style": {},
             "name": "toolIndex"

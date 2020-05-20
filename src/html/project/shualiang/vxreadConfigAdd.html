@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0064)http://ja.bigliang.cn/wxTask/vxreadconfig/vxreadConfigAdd.action -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -11,7 +10,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
 	<title>四海传媒</title>
 	<link href="./css/select2.css" rel="stylesheet" type="text/css">
 	<link href="./css/select2-bootstrap.css" rel="stylesheet" type="text/css">
@@ -101,7 +100,7 @@
 </head>
 <body class="fixed-left widescreen">
 <div class="fs-fixed-top">
-	<a href="http://ja.bigliang.cn/wxTask/dashboard/planList.action" class="back-btn">
+	<a href="planList.html" class="back-btn">
 		<img src="./img/back.png">
 	</a>
 	<p class="title">方案配置</p>
@@ -138,34 +137,56 @@
 									<!--</div>-->
 
 									<div class="form-group">
-										<label class="col-md-2 control-label">备注：</label>
+										<label class="col-md-2 control-label">备注：<span
+												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="remark" name="remark" class="form-control" type="text"
 												   placeholder="备注">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-2 control-label">浏览量：</label>
+										<label class="col-md-2 control-label">浏览量：<span
+												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="minNum" class="form-control" type="number" placeholder="时段最小浏览量"
-												   style="width:46%;display:inline-block">----
-											<input id="maxNum" class="form-control" type="number" placeholder="时段最大浏览量"
-												   style="width:46%;display:inline-block">
+											<input id="total_uv" name="total_uv" readonly class="form-control"
+												   type="text"
+												   placeholder="总浏览量">
 										</div>
 									</div>
-									<div class="form-group">
-										<button type="button" onclick="setHourValue();"
-												class="btn btn-warning waves-effect waves-light" style="width:100%">一键设置
-										</button>
-									</div>
+									<!--<div class="form-group">-->
+									<!--<label class="col-md-2 control-label">浏览量：</label>-->
+									<!--<div class="col-md-10">-->
+									<!--<input id="minNum" class="form-control" type="number" placeholder="时段最小浏览量"-->
+									<!--style="width:45%;display:inline-block">&#45;&#45;&#45;&#45;-->
+									<!--<input id="maxNum" class="form-control" type="number" placeholder="时段最大浏览量"-->
+									<!--style="width:45%;display:inline-block">-->
+									<!--</div>-->
+									<!--</div>-->
+									<!--<div class="form-group">-->
+									<!--<button type="button" onclick="setHourValue();"-->
+									<!--class="btn btn-warning waves-effect waves-light" style="width:100%">一键设置-->
+									<!--</button>-->
+									<!--</div>-->
 									<div class="form-group">
 										<label class="col-md-2 control-label">1点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h01Min" name="h01Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h01Max" name="h01Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="4"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<!--<select id="sle01" name="programme_id" style="width:45%;display:inline-block" class="select2 form-control programme_id">-->
+											<!--<option value="1">Android</option>-->
+											<!--<option value="2">IOS</option>-->
+											<!--</select>-->
+											<!--<form id="sle01">-->
+											<!--<label><input name="Fruit" type="radio" value="1" />Android </label>-->
+											<!--<label><input name="Fruit" type="radio" value="2" />IOS </label>-->
+											<!--</form>-->
+											<!--<form >-->
+											<div style="width:40%;display:inline-block" id="sle01">
+												<label><input type="radio" name="type01" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type01" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -173,9 +194,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h02Min" name="h02Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h02Max" name="h02Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle02">
+												<label><input type="radio" name="type02" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type02" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -183,9 +207,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h03Min" name="h03Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h03Max" name="h03Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle03">
+												<label><input type="radio" name="type03" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type03" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -193,9 +220,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h04Min" name="h04Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h04Max" name="h04Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle04">
+												<label><input type="radio" name="type04" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type04" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -203,9 +233,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h05Min" name="h05Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h05Max" name="h05Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle05">
+												<label><input type="radio" name="type05" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type05" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -213,9 +246,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h06Min" name="h06Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h06Max" name="h06Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle06">
+												<label><input type="radio" name="type06" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type06" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -223,9 +259,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h07Min" name="h07Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h07Max" name="h07Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle07">
+												<label><input type="radio" name="type07" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type07" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -233,9 +272,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h08Min" name="h08Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h08Max" name="h08Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle08">
+												<label><input type="radio" name="type08" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type08" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -243,9 +285,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h09Min" name="h09Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h09Max" name="h09Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle09">
+												<label><input type="radio" name="type09" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type09" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -253,9 +298,12 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h10Min" name="h10Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h10Max" name="h10Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle10">
+												<label><input type="radio" name="type10" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type10" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -263,49 +311,64 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h11Min" name="h11Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h11Max" name="h11Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle11">
+												<label><input type="radio" name="type11" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type11" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">12点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h12Min" name="h12Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h12Max" name="h12Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h12Min" name="h12Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle12">
+												<label><input type="radio" name="type12" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type12" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">13点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h13Min" name="h13Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h13Max" name="h13Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h13Min" name="h13Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle13">
+												<label><input type="radio" name="type13" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type13" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">14点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h14Min" name="h14Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h14Max" name="h14Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h14Min" name="h14Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle14">
+												<label><input type="radio" name="type14" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type14" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">15点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h15Min" name="h15Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h15Max" name="h15Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h15Min" name="h15Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle15">
+												<label><input type="radio" name="type15" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type15" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -313,99 +376,119 @@
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
 											<input id="h16Min" name="h16Min" class="form-control minInput" type="number"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h16Max" name="h16Max" class="form-control maxInput" type="number"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle16">
+												<label><input type="radio" name="type16" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type16" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">17点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h17Min" name="h17Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h17Max" name="h17Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h17Min" name="h17Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle17">
+												<label><input type="radio" name="type17" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type17" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">18点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h18Min" name="h18Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h18Max" name="h18Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h18Min" name="h18Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle18">
+												<label><input type="radio" name="type18" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type18" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">19点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h19Min" name="h19Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h19Max" name="h19Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h19Min" name="h19Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle19">
+												<label><input type="radio" name="type19" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type19" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">20点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h20Min" name="h20Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h20Max" name="h20Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h20Min" name="h20Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle20">
+												<label><input type="radio" name="type20" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type20" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">21点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h21Min" name="h21Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h21Max" name="h21Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h21Min" name="h21Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle21">
+												<label><input type="radio" name="type21" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type21" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">22点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h22Min" name="h22Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h22Max" name="h22Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h22Min" name="h22Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle22">
+												<label><input type="radio" name="type22" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type22" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">23点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h23Min" name="h23Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h23Max" name="h23Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h23Min" name="h23Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle23">
+												<label><input type="radio" name="type23" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type23" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 control-label">24点：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<input id="h24Min" name="h24Min" class="form-control minInput" type="text"
-												   placeholder="该时段最小浏览量" style="width:46%;display:inline-block">----
-											<input id="h24Max" name="h24Max" class="form-control maxInput" type="text"
-												   placeholder="该时段最大浏览量" style="width:46%;display:inline-block">
+											<input id="h24Min" name="h24Min" class="form-control minInput" type="number"
+												   maxlength="1000"
+												   placeholder="该时段浏览量" style="width:35%;display:inline-block"> 手机类型：
+											<div style="width:40%;display:inline-block" id="sle24">
+												<label><input type="radio" name="type24" value="1" checked/>Android </label>
+												<label style="margin-left: 10px"><input type="radio" name="type24" value="2" />IOS </label>
+											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-md-2 control-label">浏览量：<span
-												style="color:red;">*</span></label>
-										<div class="col-md-10">
-											<input id="total_uv" name="total_uv" class="form-control" type="text"
-												   placeholder="总浏览量">
-										</div>
-									</div>
+
 									<div class="form-group">
 										<div class="col-md-12">
 											<button type="button" onclick="doSave();"
@@ -447,100 +530,7 @@
 <script src="./js/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="./js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="./js/jquery.quicksearch.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-    });
-
-    function doSave() {
-        var name = $("#name").val();
-        if (checkParameterIsEmpty(name)) {
-            toast("请输入方案名称", 1000);
-            return;
-        }
-        var remark = $("#remark").val();
-        var total_uv = $("#total_uv").val();
-        if (checkParameterIsEmpty(total_uv)) {
-            toast("请输入总浏览量", 1000);
-            return;
-        }
-        swal({
-            title: "保存确认",
-            text: "确认保存模板配置吗?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            closeOnConfirm: false
-        }, function () {
-            $(".confirm").prop("disabled", true);
-
-            $.ajax({
-                async: true,
-                type: "POST",
-                url: "http://shangliang.52eja.com:443/api/task/programme-save",
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                dataType: "JSON",
-                data: {
-                    name: name, remark: remark, total_uv: total_uv,phone_type: 1,
-                    hour_state_uv: JSON.stringify([{"min_uv_1":1,"max_uv_1":5},{"min_uv_2":1,"max_uv_2":5},{"min_uv_3":1,"max_uv_3":5},{"min_uv_4":1,"max_uv_4":5},{"min_uv_5":1,"max_uv_5":5},{"min_uv_6":1,"max_uv_6":5},{"min_uv_7":1,"max_uv_7":5},{"min_uv_8":1,"max_uv_8":5},{"min_uv_9":1,"max_uv_9":5},{"min_uv_10":1,"max_uv_10":5},{"min_uv_11":1,"max_uv_11":5},{"min_uv_12":1,"max_uv_12":5},{"min_uv_13":1,"max_uv_13":5},{"min_uv_14":1,"max_uv_14":5},{"min_uv_15":1,"max_uv_15":5},{"min_uv_16":1,"max_uv_16":5},{"min_uv_17":1,"max_uv_17":5},{"min_uv_18":1,"max_uv_18":5},{"min_uv_19":1,"max_uv_19":5},{"min_uv_20":1,"max_uv_20":5},{"min_uv_21":1,"max_uv_21":5},{"min_uv_22":1,"max_uv_22":5},{"min_uv_23":1,"max_uv_23":5},{"min_uv_24":1,"max_uv_24":5}])
-                },
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-                        swal.close();
-                        console.log(data.data)
-                    } else {
-                        toast(data.message, 1000);
-                        setTimeout(() => {
-                            if (data.code == 403) {
-                                window.location.href = 'login.html'
-                            }
-                        }, 1000)
-                        return;
-                    }
-                },
-                error: function () {
-                    toast("系统异常！", 1000);
-                }
-            });
-
-        });
-    }
-
-    function setHourValue() {
-        var minNum = $("#minNum").val();
-        if (checkParameterIsEmpty(minNum)) {
-            swal("请输入时段最小浏览量");
-            return;
-        }
-        var maxNum = $("#maxNum").val();
-        if (checkParameterIsEmpty(maxNum)) {
-            swal("请输入时段最大浏览量");
-            return;
-        }
-        $(".form-control.minInput").each(function (i, n) {
-            $(this).val(minNum);
-        });
-
-        $(".form-control.maxInput").each(function (i, n) {
-            $(this).val(maxNum);
-        });
-
-    }
-
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-</script>
+<script type="text/javascript" src="./js/vxreadConfigAdd.js"></script>
 
 
 </body>

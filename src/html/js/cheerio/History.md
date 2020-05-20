@@ -595,7 +595,7 @@ Many thanks to the contributors that made this release happen: @ironchefpython a
 
 * Multiple selectors support: $('.apple, .orange'). Thanks @siddMahen!
 * Update package.json to always use latest cheerio-soupselect
-* Fix memory leak in index.js
+* Fix memory leak in commonsjs
 
 0.4.1 / 2011-12-19
 ==================

@@ -239,26 +239,26 @@
                 })
             },
             realTimeInput: tu.debounce(function (key) { // 实时输入搜索
+                console.log(21312123132)
                 if (this.ssBackIndex) {
                     this.indexShow = true
-                    if (key.trim() != '') { // eslint-disable-line
-                        this.saveKeyword(key.trim())
+                    if (this.keyword.trim() != '') { // eslint-disable-line
+                        this.saveKeyword(this.keyword.trim())
                         this.searchListShow = false
-                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                        this.$emit('parentFun', this.keyword.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
                     }
                 } else {
                     this.indexShow = false
-                    if (key.trim() != '') { // eslint-disable-line
-                        this.saveKeyword(key.trim())
+					console.log(this.keyword.trim())
+                    if (this.keyword.trim() != '') { // eslint-disable-line
+                        this.saveKeyword(this.keyword.trim())
                         this.searchListShow = false
-                        this.$emit('parentFun', key.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
+                        this.$emit('parentFun', this.keyword.trim()) // 子组件传值到父组件（父组件接收时的方法，传递的值）
                     }
 				}
-
             }, 2000),
             // 执行搜索
             doSearch: tu.throttle(function (key) {
-
                 if (this.ssBackIndex) {
                     this.indexShow = true
                     if (this.keyword !== key.trim() && key.trim() != '') { // eslint-disable-line
@@ -282,7 +282,6 @@
                         console.log('搜索内容为空或者与上次一致')
                     }
 				}
-
             }, 2000),
         },
     }

@@ -58,15 +58,15 @@ module.exports = {
                     '^/db': ''
                 }
             },
-            // '/lz': {
-            //     // target: "http://10.19.193.135:8870/ssyth",
-            //     target: 'http://new-lz-test.52eja.com/api',
-            //     changeOrigin: true, // 是否跨域
-            //     ws: true,
-            //     pathRewrite: {
-            //         '^/lz': ''
-            //     }
-            // },
+            '/mv': {
+                // target: "http://10.19.193.135:8870/ssyth",
+                target: 'http://123.0t038.cn/',
+                changeOrigin: true, // 是否跨域
+                ws: true,
+                pathRewrite: {
+                    '^/mv': ''
+                }
+            },
             '/lz': {
                 // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://api.lezhuan2020.cn/api',

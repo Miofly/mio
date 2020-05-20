@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)taskAdd.action -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -12,7 +11,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
 	<title>四海传媒</title>
 	<link href="./css/select2.css" rel="stylesheet" type="text/css">
 	<link href="./css/select2-bootstrap.css" rel="stylesheet" type="text/css">
@@ -110,9 +109,10 @@
 							<div class="panel-body">
 								<form class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-md-2 control-label">标题：</label>
+										<label class="col-md-2 control-label">标题：<span
+												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<textarea class="form-control" rows="3" readonly>点击右上角分享按钮分享到微信内进入链接缓慢向下拉，如果中间位置出现阅读全文请点击阅读全文拉到下一章的位置截图，如果没有直接拉到文章最底部截图</textarea>
+											<textarea class="form-control" id="title" rows="3" placeholder="请输入标题"></textarea>
 										</div>
 									</div>
 									<div class="form-group">
@@ -130,7 +130,7 @@
 											<select id="product_id" name="product_id" class="select2 form-control"
 													data-placeholder="请选择平台，必填">
 
-												<option value="">请选择产品</option>
+												<option value="0">其他</option>
 											</select>
 										</div>
 									</div>
@@ -141,32 +141,32 @@
 													  placeholder="用于标识（可选）"></textarea>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-md-2 control-label">关键字：</label>
-										<div class="col-md-10">
-											<textarea id="keywords" name="keywords" class="form-control" rows="3"
-													  placeholder="必填，如有多个关键字请用|隔开，如“展开全文|阅读全文”"></textarea>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-2 control-label">广告位置：</label>
-										<div class="col-md-10">
-											<select id="adv_pos_id"  name="adv_pos_id" class="select2 form-control">
-												<option value="">请选择广告位置</option>
-												<!--<option value="1">上</option>-->
-												<!--<option value="2">下</option>-->
-												<!--<option value="3">左</option>-->
-												<!--<option value="4">右</option>-->
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-2 control-label">广告点击率：</label>
-										<div class="col-md-10">
-											<input type="number" id="adv_click_radio" name="adv_click_radio" class="form-control"
-												   placeholder="广告点击率，0--100"/>
-										</div>
-									</div>
+									<!--<div class="form-group">-->
+										<!--<label class="col-md-2 control-label">关键字：</label>-->
+										<!--<div class="col-md-10">-->
+											<!--<textarea id="keywords" name="keywords" class="form-control" rows="3"-->
+													  <!--placeholder="必填，如有多个关键字请用|隔开，如“展开全文|阅读全文”"></textarea>-->
+										<!--</div>-->
+									<!--</div>-->
+									<!--<div class="form-group">-->
+										<!--<label class="col-md-2 control-label">广告位置：</label>-->
+										<!--<div class="col-md-10">-->
+											<!--<select id="adv_pos_id"  name="adv_pos_id" class="select2 form-control">-->
+												<!--<option value="">请选择广告位置</option>-->
+												<!--&lt;!&ndash;<option value="1">上</option>&ndash;&gt;-->
+												<!--&lt;!&ndash;<option value="2">下</option>&ndash;&gt;-->
+												<!--&lt;!&ndash;<option value="3">左</option>&ndash;&gt;-->
+												<!--&lt;!&ndash;<option value="4">右</option>&ndash;&gt;-->
+											<!--</select>-->
+										<!--</div>-->
+									<!--</div>-->
+									<!--<div class="form-group">-->
+										<!--<label class="col-md-2 control-label">广告点击率：</label>-->
+										<!--<div class="col-md-10">-->
+											<!--<input type="number" id="adv_click_radio" name="adv_click_radio" class="form-control"-->
+												   <!--placeholder="广告点击率，0&#45;&#45;100"/>-->
+										<!--</div>-->
+									<!--</div>-->
 									<div class="form-group" id="pointsTip" style="display:none">
 										<label class="col-md-12 control-label" style="color:red"></label>
 									</div>
@@ -174,10 +174,8 @@
 										<label class="col-md-2 control-label">方案：<span
 												style="color:red;">*</span></label>
 										<div class="col-md-10">
-											<select id="programme_id" name="programme_id" class="select2 form-control">
+											<select id="programme_id" name="programme_id" onchange="showTaskPoints();" class="select2 form-control">
 												<option value="">请选择方案</option>
-												<option value="1">11</option>
-
 											</select>
 										</div>
 									</div>
@@ -223,233 +221,7 @@
 <script src="./js/select2.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="./js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="./js/jquery.quicksearch.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/advertise-position-list",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    console.log(data.data.list)
-
-                    data.data.list.forEach(e=>{
-                        $("#adv_pos_id").append(`<option value="${e.id}">${e.adv_pos_name}</option>`)
-
-                    })
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/product-list",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    console.log(data.data.list)
-
-                    data.data.list.forEach(e=>{
-                        $("#product_id").append(`<option value="${e.id}">${e.product_name}</option>`)
-
-                    })
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/programme-list",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    console.log(data.data.list)
-
-                    data.data.list.forEach(e=>{
-                        $("#programme_id").append(`<option value="${e.id}">${e.adv_pos_name}</option>`)
-
-                    })
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-
-
-        jQuery(".select2").select2({
-            width: '100%'
-        });
-
-
-
-
-    });
-
-    function showTaskPoints() {
-        var programme_id = $("#programme_id").select2("val");
-        if (checkParameterIsEmpty(programme_id)) {
-            $("#pointsTip").css("display", "none");
-            return;
-        }
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "/wxTask/vxreadtask/getTaskPoints.action",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: {
-                programme_id: programme_id
-            },
-            dataType: "JSON",
-            success: function (data) {
-                if (data.code == 200) {
-                    //保存成功，跳转至详情页面
-                    $("#pointsTip label").text("本次即将扣除积分" + data.msg + "个，删除任务会返还未消耗的积分");
-                    $("#pointsTip").css("display", "block");
-                } else {
-                    toast(data.message, 1000);
-                    return;
-                }
-            },
-            error: function () {
-                swal("系统异常！");
-            }
-        });
-    }
-
-    function doSave() {
-        var url = $("#url").val();
-        if (checkParameterIsEmpty(url)) {
-            toast("请输入任务链接", 1000);
-            return;
-        }
-        var product_id = $("#product_id").select2("val");
-        if (checkParameterIsEmpty(product_id)) {
-            toast("请输入选择平台", 1000);
-            return;
-        }
-        var keywords = $("#keywords").val();
-        var remark = $("#remark").val();
-        var programme_id = $("#programme_id").select2("val");
-        if (checkParameterIsEmpty(programme_id)) {
-            toast("请选择方案", 1000);
-            return;
-        }
-        var adv_click_radio = $("#adv_click_radio").val();
-        var adv_pos_id = $("#adv_pos_id").select2("val");
-
-        console.log($("#adv_pos_id").val())
-
-        var taiId = "";
-        var taiName = "";
-        taiId = product_id.id;
-        taiName = product_id.text;
-        swal({
-            title: "发布确认",
-            text: "确认发布任务吗?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            closeOnConfirm: false
-        }, function () {
-            $(".confirm").prop("disabled", true);
-            $.ajax({
-                async: true,
-                type: "POST",
-                url: "http://shangliang.52eja.com:443/api/task/task-save",
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                data: {
-                    url: url,
-                    keywords: keywords,
-                    remark: remark,
-                    adv_pos_id: adv_pos_id,
-                    adv_click_radio: adv_click_radio,
-                    // taiId: taiId,
-                    // taiName: taiName,
-                    programme_id: programme_id,
-                    product_id: product_id
-                },
-                dataType: "JSON",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-                },
-                success: function (data) {
-                    if (data.code == 200) {
-                        swal.close();
-                        $("#url").val("");
-                        //保存成功，跳转至详情页面
-                        toast("发布成功", 1000);
-                    } else {
-                        swal.close();
-                        toast(data.message, 1000);
-                        return;
-                    }
-                },
-                error: function () {
-                    swal("系统异常！");
-                }
-            });
-        });
-    }
-
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
-
+<script type="text/javascript" src="./js/taskAdd.js"></script>
 
 <span role="status" aria-live="polite" class="select2-hidden-accessible"></span><span role="status" aria-live="polite"
 																					  class="select2-hidden-accessible"></span><span

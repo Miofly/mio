@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)http://ja.bigliang.cn/wxTask/dashboard/planList.action -->
 <html style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <!--
@@ -9,7 +8,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-        <link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
         <title>四海传媒</title>
         <link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
         <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -108,7 +107,7 @@
                                                 <th>创建时间</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbodyId">
 
                                         </tbody>
                                     </table>
@@ -142,53 +141,8 @@
         <script src="./js/jquery.nicescroll.js"></script>
         <script src="./js/jquery.scrollTo.min.js"></script>
         <script src="./js/jquery.app.js"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $.ajax({
-                    async: true,
-                    type: "POST",
-                    url: "http://shangliang.52eja.com:443/api/task/programme-list",
-                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    dataType: "JSON",
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-                    },
-                    success: function (data) {
-                        if (data.code == 200) {
-                            console.log(data.data)
-                        } else {
-                            toast(data.message, 1000);
-                            setTimeout(() => {
-                                if (data.code == 403) {
-                                    window.location.href = 'login.html'
-                                }
-                            }, 1000)
-                            return;
-                        }
-                    },
-                    error: function () {
-                        toast("系统异常！", 1000);
-                    }
-                });
-            });
+        <script src="./js/planList.js"></script>
 
-            function toDetail(value){
-            	window.location.href = "/wxTask/vxreadconfig/vxreadConfigDetail.action?configId="+value;
-            }
-
-            function addPlan(){
-            	window.location.href = "vxreadConfigAdd.html";
-            }
-
-          	//检查值是否为空；空：返回true；不为空返回false
-            function checkParameterIsEmpty(parameter){
-            	if(parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined){
-            		return true;
-            	}else{
-            		return false;
-            	}
-            }
-        </script>
 
 
 </body></html>

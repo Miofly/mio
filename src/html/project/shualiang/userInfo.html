@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)http://ja.bigliang.cn/wxTask/dashboard/userInfo.action -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -12,7 +11,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
 	<title>四海传媒</title>
 	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
 	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -97,11 +96,6 @@
 			<div class="panel panel-default">
 				<div class="panel-body" style="padding-top:10px;">
 					<div class="inbox-widget nicescroll" tabindex="5000" style="overflow: hidden; outline: none;">
-						<!--
-
-							state
-						-->
-
 						<div class="inbox-item">
 							<p class="inbox-item-author">用户账号</p>
 							<p id="username" class="inbox-item-date"
@@ -137,12 +131,12 @@
 						</div>
 					</div>
 					<div class="row" style="padding-top:10px;">
-						<div class="col-md-6 col-sm-6 col-xs-6" align="center" style="margin-bottom:5px;">
-							<button class="btn btn-warning waves-effect waves-light" onclick="showDetail();"
-									style="width:100%;">充值明细
-							</button>
-						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6" align="center">
+						<!--<div class="col-md-6 col-sm-6 col-xs-6" align="center" style="margin-bottom:5px;">-->
+							<!--<button class="btn btn-warning waves-effect waves-light" onclick="showDetail();"-->
+									<!--style="width:100%;">充值明细-->
+							<!--</button>-->
+						<!--</div>-->
+						<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:5px;">
 							<button class="btn btn-info waves-effect waves-light" onclick="changePassword();"
 									style="width:100%;">修改密码
 							</button>
@@ -172,12 +166,12 @@
 				<form id="passwordForm" class="form-horizontal" role="form">
 					<div class="form-group" style="padding:0px;margin:0px;">
 						<div class="col-md-12" style="padding:0px;margin:0px;">
-							<input type="password" id="old_password" class="form-control" placeholder="请输入原密码">
+							<input type="password" id="old_password" class="form-control" placeholder="请输入原密码" maxlength="16">
 						</div>
 					</div>
 					<div class="form-group" style="padding:0px;margin:0px;">
 						<div class="col-md-12" style="padding:0px;margin:0px;">
-							<input type="password" id="new_password" class="form-control" placeholder="请输入新密码">
+							<input type="password" id="new_password" class="form-control" placeholder="请输入新密码" maxlength="16">
 						</div>
 					</div>
 				</form>
@@ -259,173 +253,8 @@
 </div>
 <script src="./js/common.js"></script>
 <script src="./js/sweetalert.min.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/my/member-info",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    $('#id').html(data.data.id)
-                    $('#inviter_code').html(data.data.inviter_code)
-                    $('#mobile').html(data.data.mobile)
-                    $('#points').html(data.data.points)
-                    $('#qq').html(data.data.qq)
-                    $('#username').html(data.data.username)
-                    $('#wechat').html(data.data.wechat)
-                } else {
-                    toast(data.message, 1000);
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
+<script src="./js/userInfo.js"></script>
 
-    });
-
-    function changePassword() {
-        $("#passwordForm")[0].reset();
-        $("#paraAddBtn").click();
-    }
-
-    function setPay() {
-        $("#payForm")[0].reset();
-        $("#payBtn").click();
-    }
-
-    function loadMenu(url) {
-        $("#mainFrame").attr("src", url);
-    }
-
-    function showDetail() {
-        window.location.href = "showPointsDetail.html";
-    }
-
-    function logout() {
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/auth/log-out",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        window.location.href = 'login.html'
-                    }, 2000)
-                } else {
-                    toast(data.message, 1000);
-
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-    }
-
-    function updatePayInfo() {
-        var userName = $("#payTele").val();
-        var payAccount = $("#payAccount").val();
-        if (checkParameterIsEmpty(payAccount)) {
-            toast("请输入支付宝账号", 1000);
-            return;
-        }
-        var payName = $("#payName").val();
-        if (checkParameterIsEmpty(payName)) {
-            toast("请输入真实姓名", 1000);
-            return;
-        }
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "/wxTask/dashboard/updatePayInfo.action",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: {
-                userName: userName,
-                payAccount: payAccount,
-                payName: payName
-            },
-            dataType: "JSON",
-            success: function (data) {
-                if (data.code == 200) {
-                    window.location.reload();
-                } else {
-                    toast("设置失败", 1000);
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-    }
-
-    function doChange() {
-        var userName = $("#userName").val();
-        var old_password = $("#old_password").val();
-        if (checkParameterIsEmpty(old_password)) {
-            toast("请输入原密码", 1000);
-            return;
-        }
-        var new_password = $("#new_password").val();
-        if (checkParameterIsEmpty(new_password)) {
-            toast("请输入新密码", 1000);
-            return;
-        }
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/auth/forget",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: {
-                old_password: old_password,
-                new_password: new_password
-            },
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    toast("修改成功", 1000);
-                    $('#addArea').hide()
-                    $("#passwordAddBtn").click();
-                } else {
-                    toast(data.message, 1000);
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-    }
-
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* $("#menuHtml").load("menu.jsp"); */
-</script>
 
 
 </body>

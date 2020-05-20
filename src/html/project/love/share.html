@@ -19,9 +19,9 @@
 	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 	<title>Title</title>
 	<link rel="stylesheet" type="text/css" href="css/share.css"/>
-	<script type="text/javascript" src="js/common/vue.js"></script>
-	<script type="text/javascript" src="js/common/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/common/ewm.js"></script>
+	<script type="text/javascript" src="../../js/common/vue.js"></script>
+	<script type="text/javascript" src="../../js/common/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../../js/common/ewm.js"></script>
 	<script>
         (function (doc, win) {
             var docEl = doc.documentElement,
@@ -199,7 +199,7 @@
 	</div>
 
 	<div id="imgOne"
-		 :style="{opacity: tm ? '0.03' : '1', position: tm ? 'fixed' : 'relative'}"
+		 :style="{opacity: tm ? '1' : '1', position: tm ? 'fixed' : 'relative'}"
 		 style="z-index: 9999999999;top: 0;left: 0;"
 	></div>
 </div>
@@ -274,6 +274,7 @@
         {src: newSrc, left: 0, top: 0, width: 750, height: 1314},
         {src: $('#qrAnonymous').attr('src'), left: 495, top: 1065, width: 163, height: 163},
         {src: makeRandomArr(jgLists, 1), left: 210, top: 895, width: 310, height: 50},
+        // {src: '../../img/xtx/1.jpg', left: 210, top: 295, width: 310, height: 310},
     ]
     var canvas = document.createElement('canvas')
     canvas.width = 750;
@@ -292,7 +293,22 @@
     row.push(textCanvas(text, 'AAAA'));
     ctx.rect(0, 0, 750, 1334); // 这是图片的宽高
     ctx.fill();
-    drawing(0, $('#imgOne'), true);
+    // drawing(0, $('#imgOne'), true);
+
+    circleImg(ctx, '../../img/xtx/1.jpg', 210, 210, 210)
+
+    function circleImg(ctx, img, x, y, r) {
+        ctx.save();
+        var d =2 * r;
+        var cx = x + r;
+        var cy = y + r;
+        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+        ctx.clip();
+        ctx.drawImage(img, x, y, d, d);
+        ctx.restore();
+    }
+
+
 
     function makeRandomArr(arrList, num) { // 随机取出数组元素
         if (num > arrList.length) {

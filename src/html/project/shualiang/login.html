@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)main.html -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -12,7 +11,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-	<link rel="shortcut icon" href="http://ja.bigliang.cn/wxTask/assets/images/favicon_1.ico">
+
 
 	<title>四海传媒</title>
 	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
@@ -56,16 +55,15 @@
 		</div>
 
 		<div class="panel-body">
-			<form id="loginForm" class="form-horizontal m-t-20"
-				  action="http://ja.bigliang.cn/wxTask/changePassword.action" method="post">
+			<form id="loginForm" class="form-horizontal m-t-20"  method="post">
 				<div class="form-group">
 					<div class="col-xs-12">
-						<input class="form-control login" id="username" name="username" type="text" placeholder="请输入账号">
+						<input class="form-control login" id="username" name="username" type="text" placeholder="请输入账号" maxlength="20">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12">
-						<input class="form-control login" id="password" name="password" type="password"
+						<input class="form-control login" id="password" name="password" type="password" maxlength="16"
 							   placeholder="请输入登录密码">
 					</div>
 				</div>
@@ -103,56 +101,6 @@
 <script src="./js/jquery.scrollTo.min.js"></script>
 <script src="./js/jquery.app.js"></script>
 <script src="./js/common.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-    });
-
-    function login() {
-        var username = $("#username").val();
-        if (checkParameterIsEmpty(username)) {
-            toast("请输入账号", 1000);
-            return;
-        }
-        var password = $("#password").val();
-        if (checkParameterIsEmpty(password)) {
-            toast("请输入登录密码", 1000);
-            return;
-        }
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://shangliang.52eja.com:443/api/auth/login",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: {
-                username: username,
-                password: password
-            },
-            dataType: "JSON",
-            success: function (data) {
-                if (data.code == 200) {
-                    localStorage.setItem('TOKEN_KEY_SL', data.data.token)
-					window.location.href = 'main.html'
-                } else {
-                    toast(data.message, 1000);
-                    return;
-                }
-            },
-            error: function () {
-                swal("系统异常！");
-            }
-        });
-    }
-
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-</script>
-
+<script src="./js/commons.js"></script>
 </body>
 </html>

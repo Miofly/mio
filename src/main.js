@@ -12,6 +12,13 @@ import lz_team from './pages/index/lz/index/team'
 import lz_user from './pages/index/lz/index/user'
 import lz_rank from './pages/index/lz/index/rank'
 
+import dm from './pages/index/movie/dm'
+import dy from './pages/index/movie/dy'
+import mvIndex from './pages/index/movie/mvIndex'
+import lxj from './pages/index/movie/lxj'
+import zy from './pages/index/movie/zy'
+
+
 // import uView from '@/uView'
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
@@ -43,6 +50,13 @@ Vue.component('lz_index', lz_index)
 Vue.component('lz_team', lz_team)
 Vue.component('lz_user', lz_user)
 Vue.component('lz_rank', lz_rank)
+
+Vue.component('dm', dm)
+Vue.component('dy', dy)
+Vue.component('mvIndex', mvIndex)
+Vue.component('lxj', lxj)
+Vue.component('zy', zy)
+
 
 Vue.prototype.ColorList = colorData
 

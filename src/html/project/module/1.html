@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<style>
+		.marquee{overflow: hidden;height:25px;float:left;white-space:nowrap;font-size:12px;}
+	</style>
+	<title>用javascript实现文字无缝平滑循环横向滚动</title>
+</head>
+<body>
+<div id="scrolldv" class="marquee">
+	<span id="contentspan">新闻滚动字幕、新闻滚动字幕、新闻滚动字幕、新闻滚动字幕、新闻滚动字幕</span>
+</div>
+</body>
+<script type="text/javascript">
+    //获取滚动的内容长度
+    var contentLength=document.getElementById("contentspan").offsetWidth;
+    //遮罩层长度
+    document.getElementById("scrolldv").style.width=contentLength+"px";
+    //内容层长度
+    document.getElementById("contentspan").style.width=contentLength+"px";
+    //左留白
+    document.getElementById("contentspan").style.paddingLeft=contentLength+"px";
+    //右留白
+    document.getElementById("contentspan").style.paddingRight=contentLength+"px";
+    //滚动函数
+    function Marqpuee(){
+        if(scrolldv.scrollLeft>=2*contentLength){
+            scrolldv.scrollLeft=0;
+        }
+        else{
+            scrolldv.scrollLeft++;
+        }
+    }
+    //定时器
+    setInterval(Marqpuee,1);
+</script>
+</html>

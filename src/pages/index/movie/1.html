@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head><title>APP影院-全网最全视频库</title>
+
+	<meta name="keywords" content="免费电影-全网最全视频库-全网最全免费影院-免费影视-免费电视剧-免费影院"/>
+
+	<meta name="description" content="提供最新最快的影视资讯和在线播放-免费电影-全网最全视频库-全网最全免费影院-免费影视-免费电视剧-免费影院"/>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10"/>
+
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<link rel="shortcut icon" href="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/favicon.ico"/>
+
+	<link rel="stylesheet" href="https://cdn.wyteam.net/webapps/maccms/template/blueghost/css/app.css" type="text/css"/>
+
+	<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.wyteam.net/webapps/maccms/static/js/home.js"></script>
+
+	<script>var maccms = {"path": "", "mid": "", "url": "app.movie", "wapurl": "app.movie", "mob_status": "0"};</script>
+	<!--[if lt IE 9]>
+	<script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+	<!-- <script type="text/javascript" src="/template/blueghost/js/b-loading.js"></script> -->
+</head>
+
+<body>
+<div class="container">
+	<div class="row">
+		<div class="stui-header__top clearfix">
+			<div class="stui-header__logo"><a class="logo" href="/"></a></div>
+
+			<div class="stui-header__type"> &nbsp;</div>
+
+			<div class="stui-header__search">
+				<form id="search" name="search" method="GET" action="/index.php/vod/search.html"
+					  onSubmit="return qrsearch();"><input type="text" id="wd" name="wd" class="mac_wd form-control"
+														   value="" placeholder="请输入影片名..."/>
+					<button class="submit" id="searchbutton" type="submit" name="submit"></button>
+
+				</form>
+
+			</div>
+
+			<ul class="stui-header__user hidden-xs">
+				<!--<li>			<a href="/index.php/gbook/index.html" title="留言反馈"><img src="/template/blueghost/img/icon_gbook.png" width="28" /></a>		</li>-->
+
+				<!-- <li>			<img src="/template/blueghost/img/icon_code.png" width="28" />			<div class="dropdown">				<img src="/template/blueghost/img/ewm.jpg" width="120" />				<p class="margin-0">关注微信公众号</p>			</div>		</li> -->
+
+			</ul>
+
+		</div>
+
+		<div class="stui-header__menu clearfix"><span class="more hidden-xs">今日更新“218”部影片</span>
+			<ul class="clearfix">
+				<li class="active"><a href="/">首页</a></li>
+
+				<li><a href="/index.php/vod/type/id/1.html">电影</a></li>
+
+				<li><a href="/index.php/vod/type/id/2.html">连续剧</a></li>
+
+				<li><a href="/index.php/vod/type/id/3.html">综艺</a></li>
+
+				<li><a href="/index.php/vod/type/id/4.html">动漫</a></li>
+
+				<li><a href="/index.php/art/type/id/5.html">资讯</a></li>
+				<!--<li ><a href="/index.php/topic/index.html">专题</a></li>-->
+			</ul>
+
+		</div>
+
+		<ul id="partial-view"></ul>
+		<!-- 列表 -->
+		<div class="stui-pannel clearfix">
+			<div class="stui-pannel__head clearfix"><a class="text-muted pull-right"
+													   href="/index.php/vod/show/id/1.html">更多 ></a> <span
+					class="hidden-sm hidden-xs pull-right">						                        <a
+					href="/index.php/vod/show/id/6.html" class="text-muted">动作片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/7.html" class="text-muted">喜剧片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/8.html" class="text-muted">爱情片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/9.html" class="text-muted">科幻片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/10.html" class="text-muted">恐怖片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/11.html" class="text-muted">剧情片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/12.html" class="text-muted">战争片</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/20.html" class="text-muted">纪录片</a> <span class="split-line"></span>                        											</span>
+				<h3 class="title"> 当月最热电影 </h3>
+			</div>
+
+			<ul class="stui-vodlist clearfix">
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290378.html"
+					   title="倩女幽魂：人间情"
+					   data-original="http://qnoss3.lanlanlife.com/63f8ea17392bc1de36aa83ce06d82bc0_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">1280P</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290378.html" title="倩女幽魂：人间情">倩女幽魂：人间情</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290286.html" title="民间奇异志"
+					   data-original="http://qnoss1.lanlanlife.com/204ba24c33b6fcb587182edb6dc5b54d_383x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">1080P</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290286.html"
+													   title="民间奇异志">民间奇异志</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/196837.html" title="结婚七年"
+					   data-original="https://puui.qpic.cn/vcover_vt_pic/0/913dae9ke64y237t1464894183.jpg/220">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">超清720P</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/196837.html"
+													   title="结婚七年">结婚七年</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290285.html"
+					   title="降龙大师之捉妖榜"
+					   data-original="http://qnoss1.lanlanlife.com/d0c1fb003716c45b7498f506c509883d_404x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290285.html" title="降龙大师之捉妖榜">降龙大师之捉妖榜</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289546.html" title="惊天营救"
+					   data-original="http://qnoss1.lanlanlife.com/431d8373f6f4a642322d3e2a97ab8d8e_399x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289546.html"
+													   title="惊天营救">惊天营救</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/277434.html" title="天·火"
+					   data-original="http://qnoss2.lanlanlife.com/98067d0eefba918e1f3ae6c3c49cb74e_376x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/277434.html" title="天·火">天·火</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290009.html" title="狼鹰"
+					   data-original="http://qnoss1.lanlanlife.com/6950aef42cfa67e88e448a328cd6fba0_261x195.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290009.html" title="狼鹰">狼鹰</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/286897.html"
+					   title="鬼吹灯之龙岭迷窟"
+					   data-original="http://qnoss1.lanlanlife.com/a15bcee79928697557a60f8111d85189_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/286897.html" title="鬼吹灯之龙岭迷窟">鬼吹灯之龙岭迷窟</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/277428.html" title="误杀"
+					   data-original="http://qnoss.lanlanlife.com/94b8526ca52c693f8848c31bfe489cee_377x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/277428.html" title="误杀">误杀</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/237510.html"
+					   title="复仇者联盟4：终局之战"
+					   data-original="http://qnoss3.lanlanlife.com/c896333ebf28af92e1200c209304434f_397x267.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">中英字幕1080P</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/237510.html"
+													   title="复仇者联盟4：终局之战">复仇者联盟4：终局之战</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290248.html"
+					   title="人妖阿发 痴人三部曲"
+					   data-original="http://qnoss2.lanlanlife.com/b62d05d1bfeedfb7c78c6c984850c622_385x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290248.html" title="人妖阿发 痴人三部曲">人妖阿发
+						痴人三部曲</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/280125.html" title="拆弹英雄"
+					   data-original="http://qnoss1.lanlanlife.com/fbc843b57387b4e4cf5a68929d22bc8a_236x180.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/280125.html"
+													   title="拆弹英雄">拆弹英雄</a></h4>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="stui-pannel clearfix">
+			<div class="stui-pannel__head clearfix"><a class="text-muted pull-right"
+													   href="/index.php/vod/show/id/2.html">更多 ></a> <span
+					class="hidden-sm hidden-xs pull-right">						                        <a
+					href="/index.php/vod/show/id/13.html" class="text-muted">国产剧</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/14.html" class="text-muted">港台剧</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/15.html" class="text-muted">日韩剧</a> <span class="split-line"></span>                                                <a
+					href="/index.php/vod/show/id/16.html" class="text-muted">欧美剧</a> <span class="split-line"></span>                        											</span>
+				<h3 class="title"> 当月最热连续剧 </h3>
+			</div>
+
+			<ul class="stui-vodlist clearfix">
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290640.html" title="韫色过浓"
+					   data-original="http://qnoss2.lanlanlife.com/ae73dda9a23a51b8ba0cb08fe2174ea0_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">22+彩蛋02</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290640.html"
+													   title="韫色过浓">韫色过浓</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/286806.html" title="龙岭迷窟"
+					   data-original="http://qnoss.lanlanlife.com/c75dbee3eab84169ede29479cc1719a1_377x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">完结</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/286806.html"
+													   title="龙岭迷窟">龙岭迷窟</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289418.html" title="天醒之路"
+					   data-original="http://qnoss2.lanlanlife.com/8b88deec3627ce282ec211c81172e967_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">48（33-48替换）</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289418.html"
+													   title="天醒之路">天醒之路</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/287469.html" title="清平乐"
+					   data-original="http://qnoss.lanlanlife.com/d12fcb22ed9fae1ec2ef58eb67fb3a90_404x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第70集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/287469.html" title="清平乐">清平乐</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/287794.html"
+					   title="全世界最好的你"
+					   data-original="http://qnoss.lanlanlife.com/2cb881c6d464b14d4eabb6593b724864_404x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第24集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/287794.html" title="全世界最好的你">全世界最好的你</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/287798.html"
+					   title="致我们甜甜的小美满"
+					   data-original="http://qnoss.lanlanlife.com/73bb4d5995f83984b85cdd25893d17cd_378x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">27+番外（23-27替换）</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/287798.html" title="致我们甜甜的小美满">致我们甜甜的小美满</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290783.html" title="秋蝉"
+					   data-original="http://qnoss2.lanlanlife.com/c5330478ae135e5a5a429eb48f793c4c_384x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第29集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290783.html" title="秋蝉">秋蝉</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/288282.html" title="猎狐"
+					   data-original="http://qnoss1.lanlanlife.com/82a97b340b42f0761479e6b590079c51_383x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第44集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/288282.html" title="猎狐">猎狐</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/287232.html"
+					   title="楼下女友请签收"
+					   data-original="http://qnoss3.lanlanlife.com/a070547a22aea0549e375b854b7edf0e_216x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">完结</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/287232.html" title="楼下女友请签收">楼下女友请签收</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289041.html" title="长安少年行"
+					   data-original="http://qnoss1.lanlanlife.com/515ff1333cd5462631db165ec0545796_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">完结</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289041.html"
+													   title="长安少年行">长安少年行</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/171442.html" title="唐砖"
+					   data-original="http://qnoss.lanlanlife.com/48b0904ed47d586b0ff39311d434b687_236x180.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">完结</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/171442.html" title="唐砖">唐砖</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/285907.html" title="民国奇探"
+					   data-original="http://qnoss1.lanlanlife.com/fe52934dfb8605e6df69b7fd7be6f57b_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">36集全</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/285907.html"
+													   title="民国奇探">民国奇探</a></h4>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="stui-pannel clearfix">
+			<div class="stui-pannel__head clearfix"><a class="text-muted pull-right"
+													   href="/index.php/vod/show/id/3.html">更多 ></a> <span
+					class="hidden-sm hidden-xs pull-right">																	</span>
+				<h3 class="title"> 当月最热综艺 </h3>
+			</div>
+
+			<ul class="stui-vodlist clearfix">
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290450.html"
+					   title="向往的生活第四季"
+					   data-original="http://qnoss3.lanlanlife.com/1936f753375e8ec4086e47e07340684c_360x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200515期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290450.html" title="向往的生活第四季">向往的生活第四季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/282156.html"
+					   title="王牌对王牌第五季"
+					   data-original="http://qnoss.lanlanlife.com/196ccfaac235cff8dd9d4b5b5ee122f5_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200508期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/282156.html" title="王牌对王牌第五季">王牌对王牌第五季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/291543.html"
+					   title="极限挑战第六季"
+					   data-original="http://qnoss.lanlanlife.com/be7e5d50b3224eaf3933158a04549c5f_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200517期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/291543.html" title="极限挑战第六季">极限挑战第六季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289211.html"
+					   title="创造营2020"
+					   data-original="http://qnoss1.lanlanlife.com/f86fb4bd73779886f6eee8d7c9a29cc1_380x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至20200517</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289211.html" title="创造营2020">创造营2020</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290576.html"
+					   title="向往的生活第四季VIP加长版"
+					   data-original="http://qnoss3.lanlanlife.com/1936f753375e8ec4086e47e07340684c_360x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至20200517</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290576.html"
+													   title="向往的生活第四季VIP加长版">向往的生活第四季VIP加长版</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290463.html"
+					   title="向往的生活第四季会员Pl"
+					   data-original="http://qnoss3.lanlanlife.com/1936f753375e8ec4086e47e07340684c_360x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200509期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290463.html"
+													   title="向往的生活第四季会员Pl">向往的生活第四季会员Pl</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290020.html"
+					   title="拜托了冰箱第六季"
+					   data-original="http://qnoss3.lanlanlife.com/f36e72ba00a48ab60b46796e404b75d2_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200519期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290020.html" title="拜托了冰箱第六季">拜托了冰箱第六季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/207422.html" title="快乐大本营"
+					   data-original="http://qnoss.lanlanlife.com/b5be350427a2ac72a71312a4098995ab_364x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至20200517</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/207422.html"
+													   title="快乐大本营">快乐大本营</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290455.html"
+					   title="向往的生活第四季会员Plus版"
+					   data-original="http://qnoss3.lanlanlife.com/1936f753375e8ec4086e47e07340684c_360x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至20200516</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290455.html"
+													   title="向往的生活第四季会员Plus版">向往的生活第四季会员Plus版</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/291587.html"
+					   title="极限挑战 第六季"
+					   data-original="http://qnoss2.lanlanlife.com/921a8b921f3ac4d06d5c167d9983b09f_201x140.png">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">20200517</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/291587.html" title="极限挑战 第六季">极限挑战
+						第六季</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/284729.html"
+					   title="青春有你第二季"
+					   data-original="http://qnoss2.lanlanlife.com/2a3ac97710417dbf5f7765ee62bdddbb_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第20200516期</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/284729.html" title="青春有你第二季">青春有你第二季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/282924.html" title="朋友请听好"
+					   data-original="http://qnoss3.lanlanlife.com/2118cc39a2f407603dacc268f27d29f5_377x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">20200519</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/282924.html"
+													   title="朋友请听好">朋友请听好</a></h4>
+
+				</li>
+
+			</ul>
+
+		</div>
+
+		<div class="stui-pannel clearfix">
+			<div class="stui-pannel__head clearfix"><a class="text-muted pull-right"
+													   href="/index.php/vod/show/id/4.html">更多 ></a> <span
+					class="hidden-sm hidden-xs pull-right">																	</span>
+				<h3 class="title"> 当月最热动漫 </h3>
+			</div>
+
+			<ul class="stui-vodlist clearfix">
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289511.html"
+					   title="一人之下第三季"
+					   data-original="http://qnoss1.lanlanlife.com/8f5a128ea77f4d2eb995730932692fb2_382x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">08</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289511.html" title="一人之下第三季">一人之下第三季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/230599.html"
+					   title="斗罗大陆第1季"
+					   data-original="http://qnoss1.lanlanlife.com/9486b30a834092d0abb31d4af1018bb6_580x420.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至104集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/230599.html" title="斗罗大陆第1季">斗罗大陆第1季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/255004.html"
+					   title="斗罗大陆动画版/斗罗大陆第1季"
+					   data-original="http://qnoss1.lanlanlife.com/9486b30a834092d0abb31d4af1018bb6_580x420.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第104集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/255004.html"
+													   title="斗罗大陆动画版/斗罗大陆第1季">斗罗大陆动画版/斗罗大陆第1季</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/210503.html" title="斗罗大陆"
+					   data-original="http://qnoss3.lanlanlife.com/3c1b94b8c7f98c2f9172161187bff1fe_405x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">103</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/210503.html"
+													   title="斗罗大陆">斗罗大陆</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/287442.html"
+					   title="用我的手指搅乱吧~打烊后仅剩二人的沙龙~"
+					   data-original="http://qnoss2.lanlanlife.com/3c4f1607808b9715d2b76790c5c0fd11_387x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第04集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/287442.html"
+													   title="用我的手指搅乱吧~打烊后仅剩二人的沙龙~">用我的手指搅乱吧~打烊后仅剩二人的沙龙~</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/290717.html" title="星辰变第二季"
+					   data-original="http://qnoss1.lanlanlife.com/504db005e4f8c75950bfb5140c4b6e44_396x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">04/16</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/290717.html"
+													   title="星辰变第二季">星辰变第二季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/176392.html"
+					   title="斗罗大陆 第1季"
+					   data-original="http://qnoss2.lanlanlife.com/19609bdb2d2eae30fd28e2f090724f00_1080x770.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新到104集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/176392.html" title="斗罗大陆 第1季">斗罗大陆
+						第1季</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/140051.html" title="海贼王"
+					   data-original="http://qnoss.lanlanlife.com/704718bca969487317ba72d9a2772f5d_350x250.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">929</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/140051.html" title="海贼王">海贼王</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/289633.html" title="百妖谱"
+					   data-original="http://qnoss1.lanlanlife.com/48233bfc8d92e4965c6ef9914677abcd_360x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">第05集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/289633.html" title="百妖谱">百妖谱</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/274964.html" title="冰雪奇缘2"
+					   data-original="http://qnoss1.lanlanlife.com/ae8ac47a7aa6bc9b7aba2002469b92b2_380x266.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">中英双字</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/274964.html"
+													   title="冰雪奇缘2">冰雪奇缘2</a></h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/277458.html" title="武庚纪第三季"
+					   data-original="http://qnoss2.lanlanlife.com/791e59bd4877bd48f9d5faf1545ac630_379x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">更新至21集</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/277458.html"
+													   title="武庚纪第三季">武庚纪第三季</a>
+					</h4>
+
+				</li>
+
+				<li class="stui-vodlist__item">
+					<a class="stui-vodlist__thumb lazyload" href="/index.php/vod/detail/id/270284.html" title="天气之子"
+					   data-original="http://qnoss1.lanlanlife.com/bbd5f44788430511cbe60a4ce1c16fe4_377x270.jpg">
+						<span class="play hidden-xs"></span>
+						<span class="pic-text text-right">HD</span>
+					</a>
+					<h4 class="stui-vodlist__title"><a href="/index.php/vod/detail/id/270284.html"
+													   title="天气之子">天气之子</a></h4>
+
+				</li>
+
+			</ul>
+
+		</div>
+		<!-- end 列表 -->             <!-- 友链 -->
+		<div class="stui-pannel clearfix">
+			<div class="stui-pannel__head clearfix"><h3 class="title"> 友情链接 </h3></div>
+
+			<ul class="stui-link__text col-pd clearfix">
+				<li><a class="text-muted" href="https://dingdian.org.cn" title="顶点小说" target="_blank">顶点小说</a></li>
+
+				<li><a class="text-muted" href="https://www.wenyamh.com" title="温雅漫画" target="_blank">温雅漫画</a></li>
+
+				<li><a class="text-muted" href="https://iptv.xiner.store" title="网络电视" target="_blank">网络电视</a></li>
+
+				<li><a class="text-muted" href="https://shuwulou.xiner.store" title="书屋楼" target="_blank">书屋楼</a></li>
+
+			</ul>
+
+		</div>
+		<!-- end 友链 -->
+	</div>
+
+</div>
+<!--手机底部导航-->
+<div class="foornav">
+	<ul>
+		<li><a href="/index.php/vod/type/id/1.html"><span><img
+				src="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/video.png"/>电影</span></a>
+		</li>
+
+		<li><a href="/index.php/vod/type/id/2.html"><span><img
+				src="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/dianshi.png"/>连续剧</span></a>
+		</li>
+
+		<li class="active"><a href="/"><span><img
+				src="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/index.png"/>首页</span></a>
+		</li>
+
+		<li><a href="/index.php/vod/type/id/3.html"><span><img
+				src="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/dianshiju.png"/>综艺</span></a>
+		</li>
+
+		<li><a href="/index.php/vod/type/id/4.html"><span><img
+				src="https://cdn.wyteam.net/webapps/maccms/template/blueghost/img/gouwu.png"/>动漫</span></a>
+		</li>
+
+	</ul>
+
+</div>
+<!-- 广告  -->
+<!--<div class="container">	<div class="stui-pannel ad-b clearfix">		<div class="col-pd">			<a class="hidden-xs" target="_blank" href="#"><img class="img-xs" src="/template/blueghost/ads/img/ad1.jpg"/></a>			<a class="visible-xs" target="_blank" href="#"><img class="img-xs" src="/template/blueghost/ads/img/ad2.jpg"/></a>		</div>		</div></div>-->
+<!-- end 广告  -->
+<div class="stui-foot clearfix"><p><a href="/">返回首页</a> <span class="split-line"></span>
+	<!--		<a href="javascript:scroll(0, 0)">返回顶部</a>--> <a href="/gbook.html">留言求片</a></p>
+	<div class="hidden-xs fo-t"><p>本站只提供WEB页面服务，不提供影片录制和储存服务，不承担任何由于内容的合法性及健康性所引起的争议和法律责任。</p>
+		<p>
+			若本站收录内容无意侵犯了贵公司权益，请联系wenyabg@gmail.com，我们将尽快处理相关内容。</p>
+		<p>
+			<script>document.write(window.location.protocol + "//" + window.location.host);</script>
+			<span class="split-line"></span><a id="powered_by_wenyateam2">Powered by APP影院</a></p>
+
+	</div>
+
+	<div class="visible-xs fo-t1"><p>本站只提供WEB页面服务，不提供影片录制和储存服务</p>
+		<p>
+			若本站收录内容侵犯了贵公司权益请联系wenyabg@gmail.com&nbsp;移除相关内容</p>
+		<p><a id="powered_by_wenyateam">Powered by APP影院</a></p>
+	</div>
+
+</div>
+
+<div class="hide"></div>
+
+<script src="https://cdn.wyteam.net/lib/jquery_lazyload/jquery.lazyload.min.js" type="text/javascript"
+		charset="utf-8"></script>
+
+<script type="text/javascript">    $(".lazyload").each(function () {
+    $(this).attr("data-original", $(this).attr("data-original").replace(/[ ]/g, "").replace(/[\r\n]/g, ""));
+});
+$(".lazyload").lazyload({
+    effect: "fadeIn", threshold: 200, failurelimit: 15, skip_invisible: false
+})
+;</script>
+
+<script>eval(function (p, a, c, k, e, r) {
+    e = function (c) {
+        return c.toString(a)
+    };
+    if (!''.replace(/^/, String)) {
+        while (c--) r[e(c)] = k[c] || e(c);
+        k = [function (e) {
+            return r[e]
+        }];
+        e = function () {
+            return '\\w+'
+        };
+        c = 1
+    }
+    ;
+    while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
+    return p
+}('2.3(\'<0 4=\\"5/6\\" 7=\\"9-8\\" a=\\"b://1.c.d/1.e\\"></0>\');', 15, 15, 'script|common|document|writeln|type|text|javascript|charset||utf|src|https|wyteam|net|js'.split('|'), 0, {}));</script>
+
+</body>
+
+</html>

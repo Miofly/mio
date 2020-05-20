@@ -1,10 +1,10 @@
 <template>
 	<view style="height: 100%">
-		<dy v-if="PageCur==='mv_dy'"></dy>
-		<lxj v-if="PageCur==='mv_lxj'"></lxj>
-		<mvIndex v-if="PageCur==='mv_index'"></mvIndex>
-		<zy v-if="PageCur==='mv_zy'"></zy>
-		<dm v-if="PageCur==='mv_dm'"></dm>
+		<dy v-if="PageCur==='dy'"></dy>
+		<lxj v-if="PageCur==='lxj'"></lxj>
+		<mvIndex v-if="PageCur==='mvIndex'"></mvIndex>
+		<zy v-if="PageCur==='zy'"></zy>
+		<dm v-if="PageCur==='dm'"></dm>
 
 		<view class="cu-bar tabbar bg-white foot">
 			<view @click="NavChange" class="action" data-cur="dy">
@@ -47,7 +47,7 @@
     export default {
         data() {
             return {
-                PageCur: 'mv_Index'
+                PageCur: 'Index'
             }
         },
         onLoad() {

@@ -132,9 +132,9 @@ jQuery(document).ready(function ($) {
             hh01 + hh02 + hh03 + hh04 + hh05 + hh06 + hh07 + hh08 + hh09 + hh10 + hh11 + hh12 + hh13 + hh14 + hh15 + hh16 + hh17 + hh18 + hh19 + hh20 + hh21 + hh22 + hh23 +hh24
         )
 
-        if ($('#total_uv').val() > 1000) {
-            toast("一小时的总浏览量必须小于等于1000", 1000);
-        }
+        // if ($('#total_uv').val() > 1000) {
+        //     toast("一小时的总浏览量必须小于等于1000", 1000);
+        // }
     })
 
 });
@@ -161,10 +161,10 @@ function doSave() {
         return;
     }
 
-    if (total_uv > 1000) {
-        toast("一小时的总浏览量必须小于等于1000", 1000);
-        return;
-    }
+    // if (total_uv > 1000) {
+    //     toast("一小时的总浏览量必须小于等于1000", 1000);
+    //     return;
+    // }
 
     swal({
         title: "保存确认",

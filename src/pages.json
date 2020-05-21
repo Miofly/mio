@@ -15,6 +15,13 @@
             "name": "dm"
         },
         {
+            "path": "pages/index/movie/movieDetail",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "movieDetail"
+        },
+        {
             "path": "pages/index/movie/dy",
             "style": {
                 "navigationStyle": "custom"

@@ -145,14 +145,10 @@
     }
 
     function shakeTong() {
-
         if (!$('#tong').hasClass('shake1')) {
-
             clearTimeout(t)
             audioAutoPlay("mp3");
-
             $('#tong').addClass('shake1')
-
             setTimeout(function () {
                 $('#mb').css('display', 'block')
                 $('#getQian').css('display', 'block')

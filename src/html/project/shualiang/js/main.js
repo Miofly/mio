@@ -13,11 +13,39 @@ jQuery(document).ready(function ($) {
 
     var MyMar = setInterval(Marquee, speed)
     demo.onmouseover = function () {
-        clearInterval(MyMar)
+        // clearInterval(MyMar)
     }
     demo.onmouseout = function () {
         MyMar = setInterval(Marquee, speed)
     }
+
+    // 公告
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://shangliang.52eja.com:443/api/config/notice-list",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        dataType: "JSON",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
+        },
+        success: function (data) {
+            if (data.code == 200) {
+                $('.announcement').html(data.data.data[0].content)
+            } else {
+                toast(data.message, 1000);
+                setTimeout(() => {
+                    if (data.code == 403) {
+                        window.location.href = 'login.html'
+                    }
+                }, 1000)
+                return;
+            }
+        },
+        error: function () {
+            toast("系统异常！", 1000);
+        }
+    });
 
     $.ajax({
         async: true,

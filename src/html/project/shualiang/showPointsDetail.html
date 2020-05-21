@@ -74,7 +74,7 @@
     </head>
     <body class="fixed-left widescreen">
     	<div class="fs-fixed-top">
-	        <a href="pointsAdd.action" class="back-btn">
+	        <a href="userInfo.html" class="back-btn">
 	            <img src="./img/back.png">
 	        </a>
 	        <p class="title">充值记录（只显示最近30次）</p>
@@ -86,15 +86,17 @@
                     <div class="panel panel-default">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <table class="table table-striped">
-                                    <tbody style="text-align:center">
-                                    	<tr>
-                                            <th style="width:30%;text-align:center">类型</th>
-                                            <th style="width:20%;text-align:center">积分</th>
-                                            <th style="width:50%;text-align:center">操作时间</th>
-                                        </tr>
+                                <table class="table table-striped" style="margin-left: 10px">
+									<thead >
+									<tr>
+										<th>操作</th>
+										<th>积分</th>
+										<th>时间</th>
+									</tr>
+									</thead>
+									<tbody id="tbodyId">
 
-                                    </tbody>
+									</tbody>
                                 </table>
                             </div>
                         </div>
@@ -122,15 +124,56 @@
         <script src="./js/jquery.app.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-            	var action = '';
-            	var flag = '';
-            	var year = '';
-            	var applyId = '';
-            	var userCode = '';
-            	var url = '/wxTask/' + action + "?flag="+flag+"&year="+year+"&applyId="+applyId+"&userCode="+userCode;
-            	if(!checkParameterIsEmpty(action)){
-            		loadMenu(url);
-            	}
+
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    url: "http://shangliang.52eja.com:443/api/my/paycheck-points-list",
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    dataType: "JSON",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            console.log(data.data)
+
+                            var list = data.data.list
+                            console.log(list)
+                            var html = ''
+                            $.each(list, function (key, val) {
+                                html += '<tr onclick="tzDetail('+ list[key].id +')">' +
+                                    '<td>' + list[key].action + '</td>' +
+                                    '<td>' + list[key].points + '</td>' +
+                                    '<td>' + list[key].trans_time + '</td>' +
+                                    '</tr>'
+
+                            })
+
+                            $('#tbodyId').append(html)
+                        } else {
+                            toast(data.message, 1000);
+                            setTimeout(() => {
+                                if (data.code == 403) {
+                                    window.location.href = 'login.html'
+                                }
+                            }, 1000)
+                            return;
+                        }
+                    },
+                    error: function () {
+                        toast("系统异常！", 1000);
+                    }
+                });
+            	// var action = '';
+            	// var flag = '';
+            	// var year = '';
+            	// var applyId = '';
+            	// var userCode = '';
+            	// var url = '/wxTask/' + action + "?flag="+flag+"&year="+year+"&applyId="+applyId+"&userCode="+userCode;
+            	// if(!checkParameterIsEmpty(action)){
+            	// 	loadMenu(url);
+            	// }
             });
 
             function loadMenu(url){

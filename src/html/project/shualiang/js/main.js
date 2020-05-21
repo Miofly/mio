@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    clearInterval(MyMar)
     //横向滚动 需要设置div的宽度
     var speed = 30
     marquePic2.innerHTML = marquePic1.innerHTML
@@ -13,7 +14,7 @@ jQuery(document).ready(function ($) {
 
     var MyMar = setInterval(Marquee, speed)
     demo.onmouseover = function () {
-        // clearInterval(MyMar)
+        clearInterval(MyMar)
     }
     demo.onmouseout = function () {
         MyMar = setInterval(Marquee, speed)
@@ -92,3 +93,7 @@ jQuery(document).ready(function ($) {
     //     }
     // });
 });
+
+function pointsAdd() {
+    window.location.href = "pointsAdd.html";
+}

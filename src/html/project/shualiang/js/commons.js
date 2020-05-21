@@ -156,6 +156,3 @@ function doView() {
     window.location.href = "/wxTask/dashboard/pointsList.action";
 }
 
-function pointsAdd() {
-    window.location.href = "pointsAdd.html";
-}

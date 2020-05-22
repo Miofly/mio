@@ -18,21 +18,33 @@
 			</view>
 		</view>
 		<view class="padding" style="background: rgb(30, 40, 40);">
-			<view class="fl">
+			<view class="fl" style="width: 30%">
 				<image :src="img" mode="scaleToFill" style="height: 350rpx;width: 240rpx"
 					   :class="[false?'cu-avatar':'', false?'round': '']"></image>
 			</view>
-			<view class="fl margin-left">
+			<view class="fl margin-left" style="width: 65%">
 				<view>{{title}}</view>
-				<view>
-					<view>{{type}}</view>
-					<view>{{address == null ? '未知' : address}}</view>
-					<view>{{time == null ? '未知' : time}}</view>
+				<view class="">
+					<view class="fl margin-right-lg">{{type}}</view>
+					<view class="fl margin-right-lg">{{address == null ? '未知' : address}}</view>
+					<view class="fl margin-right-lg">{{time == null ? '未知' : time}}</view>
 				</view>
+				<view style="clear: both"></view>
 				<view>{{status}}</view>
+				<view>{{people}}</view>
+				<view>{{director}}</view>
 				<view>
-
+					<button class="cu-btn" :class="[['bg-orange', 'line-blue', 'line-blue lines-blue'][0],
+					        ['sm', 'lg', ''][2], true ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+					        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+						立即播放
+					</button>
 				</view>
+			</view>
+			<view style="clear: both"></view>
+			<view>
+				<view>剧情介绍</view>
+				<view>{{descRes.trim()}}</view>
 			</view>
 		</view>
 	</view>
@@ -58,7 +70,7 @@
             }
         },
         async onLoad () {
-            const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/getPlayInfo.php?url=/index.php/vod/detail/id/140051.html')
+            const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=/index.php/vod/detail/id/140051.html')
             this.address = data.address
             this.descRes = data.descRes
             this.director = data.director

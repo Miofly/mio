@@ -169,6 +169,13 @@ function selectAll() {
 
 function operateTask(flag) {
     var taskId = $("#dataTable").bootstrapTable('getSelections')
+    var arr = []
+    for (let i = 0; i < taskId.length; i++) {
+        arr.push(taskId[i].id)
+    }
+
+    var arrStr = arr.join(',')
+    console.log(arrStr)
     if (taskId.length == 0) {
 
         toast("请选择一个任务", 1000);
@@ -195,7 +202,7 @@ function operateTask(flag) {
             url: "http://shangliang.52eja.com:443/api/task/task-del",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: {
-                id: taskId[0].id,
+                id: arrStr,
             },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));

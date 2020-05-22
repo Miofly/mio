@@ -49,17 +49,8 @@
 	        }
 	    },
         async onLoad () {
-			const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/getPlayInfo.php?url=/index.php/vod/detail/id/140051.html')
-            this.address = data.address
-            this.descRes = data.descRes
-            this.director = data.director
-            this.img = data.img
-            this.people = data.people
-            this.playHref = data.playHref
-            this.status = data.status
-            this.time = data.time
-            this.title = data.title
-            this.type = data.type
+			const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=/index.php/vod/play/id/196837/sid/1/nid/1.html')
+          	console.log(data)
         },
 	}
 </script>

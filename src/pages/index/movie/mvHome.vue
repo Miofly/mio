@@ -6,33 +6,33 @@
 		<zy v-if="PageCur==='zy'"></zy>
 		<dm v-if="PageCur==='dm'"></dm>
 
-		<view class="cu-bar tabbar bg-white foot">
+		<view class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
 			<view @click="NavChange" class="action" data-cur="dy">
 				<view class="fa-cu-image">
-					<image :src="'/static/tabbar/dy' + [PageCur=='dy'?'_blue_cur':''] + '.png'"></image>
+					<image :src="'/static/images/movie/dy' + [PageCur=='dy'?'_blue_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='dy'?'text-blue':'text-gray'">电影</view>
 			</view>
 			<view @click="NavChange" class="action" data-cur="lxj">
 				<view class="fa-cu-image">
-					<image :src="'/static/tabbar/lxj' + [PageCur=='lxj'?'_blue_cur':''] + '.png'"></image>
+					<image :src="'/static/images/movie/lxj' + [PageCur=='lxj'?'_blue_cur':''] + '.png'"></image>
 				</view>
 				<view :class="PageCur=='lxj'?'text-blue':'text-gray'">连续剧</view>
 			</view>
 			<view @click="NavChange" class="action text-gray add-action" data-cur="mvIndex">
-				<button class="cu-btn fa-plus fa bg-blue shadow"></button>
+				<button class="cu-btn fa-home fa bg-black shadow"></button>
 				<view :class="PageCur=='index'?'text-blue':'text-gray'">首页</view>
 			</view>
 			<view @click="NavChange" class="action" data-cur="zy">
 				<view class="fa-cu-image">
-					<image :src="'/static/tabbar/zy' + [PageCur=='zy'?'_blue_cur':''] + '.png'"></image>
+					<image :src="'/static/images/movie/zy' + [PageCur=='zy'?'_blue_cur':''] + '.png'"></image>
 					<view class="cu-tag badge">99</view>
 				</view>
 				<view :class="PageCur=='zy'?'text-blue':'text-gray'">综艺</view>
 			</view>
 			<view @click="NavChange" class="action" data-cur="dm">
 				<view class="fa-cu-image">
-					<image :src="'/static/tabbar/dm' + [PageCur=='dm'?'_blue_cur':''] + '.png'"></image>
+					<image :src="'/static/images/movie/dm' + [PageCur=='dm'?'_blue_cur':''] + '.png'"></image>
 					<view class="cu-tag badge">99</view>
 				</view>
 				<view :class="PageCur=='dm'?'text-blue':'text-gray'">动漫</view>

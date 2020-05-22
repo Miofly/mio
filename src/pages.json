@@ -22,6 +22,20 @@
             "name": "movieDetail"
         },
         {
+            "path": "pages/index/movie/mvSearch",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "mvSearch"
+        },
+        {
+            "path": "pages/index/movie/moviePlay",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "moviePlay"
+        },
+        {
             "path": "pages/index/movie/dy",
             "style": {
                 "navigationStyle": "custom"

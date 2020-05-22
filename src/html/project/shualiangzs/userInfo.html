@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html style=""
+	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!--
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+	 -->
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+	<meta name="author" content="Coderthemes">
+
+	<title>个人中心</title>
+	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/core.css" rel="stylesheet" type="text/css">
+	<link href="./css/icons.css" rel="stylesheet" type="text/css">
+	<link href="./css/components.css" rel="stylesheet" type="text/css">
+	<link href="./css/pages.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu.css" rel="stylesheet" type="text/css">
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
+	<script src="./js/modernizr.min.js"></script>
+	<style type="text/css">
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding-top: 50px;
+		}
+
+		.fs-fixed-top {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			width: 100%;
+			height: 50px;
+			line-height: 48px;
+			text-align: center;
+			background-color: #fff;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.fs-fixed-top .title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.demo-content {
+			height: 200px;
+		}
+
+		.back-btn {
+			position: absolute;
+			left: 12px;
+			top: 15px;
+			z-index: 1000;
+			font-size: 0;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			line-height: 1;
+		}
+
+		.back-btn img {
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+		}
+
+	</style>
+</head>
+<body class="fixed-left widescreen">
+<div class="fs-fixed-top">
+	<a href="main.html" class="back-btn">
+		<img src="img/back.png">
+	</a>
+	<p class="title">个人中心</p>
+</div>
+<div id="wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body" style="padding-top:10px;">
+					<div class="inbox-widget nicescroll" tabindex="5000" style="overflow: hidden; outline: none;">
+						<div class="inbox-item">
+							<p class="inbox-item-author">用户账号</p>
+							<p id="username" class="inbox-item-date"
+							   style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">用户ID</p>
+							<p id="id" class="inbox-item-date" style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">积分</p>
+							<p id="points" class="inbox-item-date"
+							   style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">邀请码</p>
+							<p id="inviter_code" class="inbox-item-date"
+							   style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">手机号码</p>
+							<p id="mobile" class="inbox-item-date"
+							   style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">QQ号码</p>
+							<p id="qq" class="inbox-item-date" style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+						<div class="inbox-item">
+							<p class="inbox-item-author">微信</p>
+							<p id="wechat" class="inbox-item-date"
+							   style="color:black;font-size:14px;margin-top:9px;"></p>
+						</div>
+					</div>
+					<div class="row" style="padding-top:10px;">
+						<div class="col-md-6 col-sm-6 col-xs-6" align="center" style="margin-bottom:5px;">
+							<button class="btn btn-warning waves-effect waves-light" onclick="showDetail();"
+									style="width:100%;">充值明细
+							</button>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6" style="margin-bottom:5px;">
+							<button class="btn btn-info waves-effect waves-light" onclick="changePassword();"
+									style="width:100%;">修改密码
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:5px;">
+							<button class="btn btn-danger w-md waves-effect waves-light" onclick="logout();"
+									style="width:100%;height:40px;">退出登录
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- End row -->
+</div>
+<button type="button" id="paraAddBtn" style="display:none" data-toggle="modal" data-target="#addArea">增加</button>
+<div id="addArea" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+	 aria-hidden="true" style="display: none">
+	<div class="modal-dialog" style="margin-left:10%;margin_right:10%;width:80%;padding-top:200px;">
+		<div class="modal-content" style="padding:10px;">
+			<div class="modal-header" align="center">
+				<h4 class="modal-title" id="custom-width-modalLabel">修改密码</h4>
+			</div>
+			<div class="modal-body" style="padding:0px;margin:0px;">
+				<form id="passwordForm" class="form-horizontal" role="form">
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input type="password" id="old_password" class="form-control" placeholder="请输入原密码" maxlength="16">
+						</div>
+					</div>
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input type="password" id="new_password" class="form-control" placeholder="请输入新密码" maxlength="16">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" style="padding:0px;margin:0px;text-align:center">
+				<button type="button" onclick="doChange();">提交</button>&nbsp;&nbsp;&nbsp;
+				<button id="passwordAddBtn" type="button" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+<button type="button" id="payBtn" style="display:none" data-toggle="modal" data-target="#payArea">增加</button>
+<div id="payArea" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel"
+	 aria-hidden="true" style="display: none">
+	<div class="modal-dialog" style="margin-left:10%;margin_right:10%;width:80%;padding-top:200px;">
+		<div class="modal-content" style="padding:10px;">
+			<div class="modal-header" align="center">
+				<h4 class="modal-title" id="custom-width-modalLabel">填写支付宝信息</h4>
+			</div>
+			<div class="modal-body" style="padding:0px;margin:0px;">
+				<form id="payForm" class="form-horizontal" role="form">
+					<input id="payTele" type="hidden" value="Miofly123">
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input class="form-control" style="color:red;background-color:#fafafa;"
+								   value="请务必填写正确，信息错误会导致提现不成功。" readonly="">
+						</div>
+					</div>
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input type="text" id="payAccount" class="form-control" placeholder="请输入支付宝账号">
+						</div>
+					</div>
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input type="text" id="payName" class="form-control" placeholder="请输入真实姓名">
+						</div>
+					</div>
+					<div class="form-group" style="padding:0px;margin:0px;">
+						<div class="col-md-12" style="padding:0px;margin:0px;">
+							<input class="form-control" style="color:red;background-color:#fafafa;" readonly=""
+								   value="为确保账号资金安全，支付宝只能提交一次。">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer" style="padding:0px;margin:0px;text-align:center">
+				<button type="button" onclick="updatePayInfo();">提交</button>&nbsp;&nbsp;&nbsp;
+				<button id="payAddBtn" type="button" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var resizefunc = [];
+</script>
+
+<!-- jQuery  -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/detect.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.slimscroll.js"></script>
+<script src="./js/jquery.blockUI.js"></script>
+<!--
+<script src="assets/js/waves.js"></script>
+ -->
+<script src="./js/wow.min.js"></script>
+<script src="./js/jquery.nicescroll.js"></script>
+<script src="./js/jquery.scrollTo.min.js"></script>
+<script src="./js/jquery.app.js"></script>
+<div id="ascrail2000" class="nicescroll-rails"
+	 style="width: 7px; z-index: auto; cursor: default; position: absolute; top: 60px; left: 1831px; height: 246px; display: none; opacity: 0;">
+	<div style="position: relative; top: 0px; float: right; width: 5px; height: 0px; background-color: rgb(157, 158, 165); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 0px;"></div>
+</div>
+<div id="ascrail2000-hr" class="nicescroll-rails"
+	 style="height: 7px; z-index: auto; top: 299px; left: 20px; position: absolute; cursor: default; display: none; opacity: 0;">
+	<div style="position: relative; top: 0px; height: 5px; width: 0px; background-color: rgb(157, 158, 165); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 0px; left: 0px;"></div>
+</div>
+<script src="./js/common.js"></script>
+<script src="./js/sweetalert.min.js"></script>
+<script src="./js/userInfo.js"></script>
+
+
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
     clearInterval(MyMar)
     //横向滚动 需要设置div的宽度
-    var speed = 30
+    var speed = 20
     marquePic2.innerHTML = marquePic1.innerHTML
 
     function Marquee() {
@@ -32,7 +32,20 @@ jQuery(document).ready(function ($) {
         },
         success: function (data) {
             if (data.code == 200) {
-                $('.announcement').html(data.data.data[0].content)
+
+            // -->
+            //     $('.announcement').html(data.data.data[0].content)
+
+
+
+                var list = data.data.data
+                console.log(list)
+                var html = ''
+                $.each(list, function (key, val) {
+                    html += '<td class="announcement" style="color:red;padding-left: 120px">'+ list[key].content + '</td>'
+                })
+
+                $('.contentss').append(html)
             } else {
                 toast(data.message, 1000);
                 setTimeout(() => {
@@ -63,6 +76,11 @@ jQuery(document).ready(function ($) {
                 $('#myName').html(data.data.username)
             } else {
                 toast(data.message, 1000);
+                setTimeout(() => {
+                    if (data.code == 403) {
+                        window.location.href = 'login.html'
+                    }
+                }, 1000)
                 return;
             }
         },

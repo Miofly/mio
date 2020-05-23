@@ -76,6 +76,11 @@ jQuery(document).ready(function ($) {
                 $('#myName').html(data.data.username)
             } else {
                 toast(data.message, 1000);
+                setTimeout(() => {
+                    if (data.code == 403) {
+                        window.location.href = 'login.html'
+                    }
+                }, 1000)
                 return;
             }
         },

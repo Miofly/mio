@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
                 console.log(list)
                 var html = ''
                 $.each(list, function (key, val) {
-                    html += '<tr onclick="tzDetail('+ list[key].id +')">' +
+                    html += '<tr>' +
                         '<td>' + list[key].action + '</td>' +
                         '<td>' + list[key].points + '</td>' +
                         '<td>' + list[key].trans_time + '</td>' +

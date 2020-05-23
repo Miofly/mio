@@ -1,8 +1,6 @@
 <template>
 	<view style="height: 100%;background: rgb(30, 40, 40);color: white">
 		<!--头部搜索-->
-		<mvHeader @parentFun="search"></mvHeader>
-
 		<scroll-view style="background: rgb(30, 40, 40);">
 			<!--当月最热电影-->
 			<view style="border-bottom:2px solid #2c2c36;" class="padding-bottom">
@@ -12,7 +10,7 @@
 				</view>
 
 				<view class="cu-list grid bg-black" :class="['col-' + 3,gridBorder?'':'no-border']">
-					<view v-for="(item, index) in appyys.slice(0, 12)" :key="index" class="padding-left-right-sm">
+					<view @tap="mvDetail(item.url)" v-for="(item, index) in appyys.slice(0, 12)" :key="index" class="padding-left-right-sm">
 						<view style="position: relative">
 							<image :src="item.img" mode="scaleToFill" style="height: 330rpx;"
 								   :class="[false?'cu-avatar':'', false?'round': '']"></image>
@@ -35,7 +33,7 @@
 				</view>
 
 				<view class="cu-list grid bg-black" :class="['col-' + 3,gridBorder?'':'no-border']">
-					<view v-for="(item, index) in appyys.slice(12, 24)" :key="index" class="padding-left-right-sm">
+					<view @tap="mvDetail(item.url)" v-for="(item, index) in appyys.slice(12, 24)" :key="index" class="padding-left-right-sm">
 						<view style="position: relative">
 							<image :src="item.img" mode="scaleToFill" style="height: 330rpx;"
 								   :class="[false?'cu-avatar':'', false?'round': '']"></image>
@@ -58,7 +56,7 @@
 				</view>
 
 				<view class="cu-list grid bg-black" :class="['col-' + 3,gridBorder?'':'no-border']">
-					<view v-for="(item, index) in appyys.slice(24, 36)" :key="index" class="padding-left-right-sm">
+					<view @tap="mvDetail(item.url)" v-for="(item, index) in appyys.slice(24, 36)" :key="index" class="padding-left-right-sm">
 						<view style="position: relative">
 							<image :src="item.img" mode="scaleToFill" style="height: 330rpx;"
 								   :class="[false?'cu-avatar':'', false?'round': '']"></image>
@@ -81,7 +79,7 @@
 				</view>
 
 				<view class="cu-list grid bg-black" :class="['col-' + 3,gridBorder?'':'no-border']">
-					<view v-for="(item, index) in appyys.slice(36, 48)" :key="index" class="padding-left-right-sm">
+					<view @tap="mvDetail(item.url)" v-for="(item, index) in appyys.slice(36, 48)" :key="index" class="padding-left-right-sm">
 						<view style="position: relative">
 							<image :src="item.img" mode="scaleToFill" style="height: 330rpx;z-index: 1"
 								   :class="[false?'cu-avatar':'', false?'round': '']"></image>
@@ -96,17 +94,8 @@
 				</view>
 			</view>
 
-			<view class="padding-bottom-thirty margin-left margin-top">
-				<view style="color: #ccc;font-size: 16px">友情链接</view>
-				<view class="margin-top-sm" style="color: #999999;font-size: 14px">
-					<view class="fl">顶点小说</view>
-					<view class="fl margin-left">顶点小说</view>
-					<view class="fl margin-left">顶点小说</view>
-					<view class="fl margin-left">顶点小说</view>
-					<view class="fl margin-left">顶点小说</view>
-				</view>
+			<mvFooter></mvFooter>
 
-			</view>
 		</scroll-view>
 	</view>
 </template>
@@ -115,7 +104,7 @@
     import {
         publicGet
     } from '@/api'
-
+	import {mapState} from 'vuex'
     const cheerio = require('cheerio')
 
 
@@ -127,12 +116,10 @@
             }
         },
         methods: {
-            async search(key) {
-                // this.ui.showLoading()
-              	// const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${key}&page=1`)
-                // uni.hideLoading()
-                this.$Router.push({name: 'mvSearch', params: {key: '1'}})
-            }
+            mvDetail (url) {
+                localStorage.setItem('ssUrl', url)
+				this.router.push({name: 'movieDetail'})
+            },
         },
         async mounted() {
             this.ui.showLoading()
@@ -143,13 +130,15 @@
             for (var i = 0; i < $('.stui-vodlist li').length; i++) {
                 this.appyys.push({
                     name: $('.stui-vodlist li').eq(i).children('a').attr('title').trim(),
-                    url: `https://app.movie/index.php/vod/play/id/${
-                        $('.stui-vodlist li').eq(i).children('a').attr('href').split('detail/id/')[1].replace('html', '')}/sid/1/nid/1.html`,
+                    url: $('.stui-vodlist li').eq(i).children('a').attr('href').trim(),
                     remark: $('.stui-vodlist li').eq(i).children().children('.pic-text').text().trim(),
                     img: $('.stui-vodlist li').eq(i).children('a').attr('data-original').trim(),
                 })
             }
         },
+		computed: {
+		    ...mapState(['ssUrl']),
+		},
     }
 </script>
 

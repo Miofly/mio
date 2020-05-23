@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://ja.bigliang.cn/wxTask/dashboard/myTeam.action -->
+<html style=""
+	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!--
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+	 -->
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+	<meta name="author" content="Coderthemes">
+
+	<title>我的团队</title>
+	<link href="./css/sweetalert.css" rel="stylesheet" type="text/css">
+	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./css/core.css" rel="stylesheet" type="text/css">
+	<link href="./css/icons.css" rel="stylesheet" type="text/css">
+	<link href="./css/components.css" rel="stylesheet" type="text/css">
+	<link href="./css/pages.css" rel="stylesheet" type="text/css">
+	<link href="./css/menu.css" rel="stylesheet" type="text/css">
+	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
+	<script src="./js/modernizr.min.js"></script>
+	<style type="text/css">
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body, html {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding-top: 50px;
+		}
+
+		.fs-fixed-top {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10000;
+			width: 100%;
+			height: 50px;
+			line-height: 48px;
+			text-align: center;
+			background-color: #fff;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.fs-fixed-top .title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		.demo-content {
+			height: 200px;
+		}
+
+		.back-btn {
+			position: absolute;
+			left: 12px;
+			top: 15px;
+			z-index: 1000;
+			font-size: 0;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			line-height: 1;
+		}
+
+		.back-btn img {
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+		}
+	</style>
+</head>
+<body class="fixed-left widescreen">
+<div class="fs-fixed-top">
+	<a href="sharePage.html" class="back-btn">
+		<img src="./img/back.png">
+	</a>
+	<p class="title">我的团队</p>
+</div>
+<div id="wrapper">
+	<!-- Start content -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<table class="table table-striped">
+							<tbody style="text-align:center">
+							<tr>
+								<th style="width:50%;text-align:center">用户名</th>
+								<th style="width:50%;text-align:center">手机号码</th>
+							</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- End row -->
+</div>
+<script>
+    var resizefunc = [];
+</script>
+
+<!-- jQuery  -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/detect.js"></script>
+<script src="./js/fastclick.js"></script>
+<script src="./js/jquery.slimscroll.js"></script>
+<script src="./js/jquery.blockUI.js"></script>
+<!--
+<script src="assets/js/waves.js"></script>
+ -->
+<script src="./js/wow.min.js"></script>
+<script src="./js/jquery.nicescroll.js"></script>
+<script src="./js/jquery.scrollTo.min.js"></script>
+<script src="./js/jquery.app.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        var action = '';
+        var flag = '';
+        var year = '';
+        var applyId = '';
+        var userCode = '';
+        var url = '/wxTask/' + action + "?flag=" + flag + "&year=" + year + "&applyId=" + applyId + "&userCode=" + userCode;
+        if (!checkParameterIsEmpty(action)) {
+            loadMenu(url);
+        }
+    });
+
+    function loadMenu(url) {
+        $("#mainFrame").attr("src", url);
+    }
+
+    //检查值是否为空；空：返回true；不为空返回false
+    function checkParameterIsEmpty(parameter) {
+        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* $("#menuHtml").load("menu.jsp"); */
+</script>
+
+
+</body>
+</html>

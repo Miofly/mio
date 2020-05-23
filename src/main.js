@@ -18,7 +18,6 @@ import mvIndex from './pages/index/movie/mvIndex'
 import lxj from './pages/index/movie/lxj'
 import zy from './pages/index/movie/zy'
 
-
 // import uView from '@/uView'
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex

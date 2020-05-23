@@ -273,26 +273,78 @@ function doSave() {
     });
 }
 
+function initradio(rName,rValue){
+    var rObj = document.getElementsByName(rName);
+
+    for(var i = 0;i < rObj.length;i++){
+        if(rObj[i].value == rValue){
+            rObj[i].checked =  'checked';
+        }
+    }
+}
+
 function setHourValue() {
     var minNum = $("#minNum").val();
     if (checkParameterIsEmpty(minNum)) {
-        swal("请输入时段最小浏览量");
+        swal("请输入时段浏览量");
         return;
     }
-    var maxNum = $("#maxNum").val();
-    if (checkParameterIsEmpty(maxNum)) {
-        swal("请输入时段最大浏览量");
-        return;
-    }
+
+    // var maxNum = $("#maxNum").val();
+    // if (checkParameterIsEmpty(maxNum)) {
+    //     swal("请输入时段最大浏览量");
+    //     return;
+    // }
     $(".form-control.minInput").each(function (i, n) {
         $(this).val(minNum);
     });
 
-    $(".form-control.maxInput").each(function (i, n) {
-        $(this).val(maxNum);
-    });
+    $('#total_uv').val(minNum*24)
+    // $(".form-control.maxInput").each(function (i, n) {
+    //     $(this).val(maxNum);
+    // });
 
 }
+
+function setType() {
+    var type = $('#yjszType input[name="yjszType"]:checked').val();
+    console.log(type)
+
+    initradio('type01', type)
+    initradio('type02', type)
+    initradio('type03', type)
+    initradio('type04', type)
+    initradio('type05', type)
+    initradio('type06', type)
+    initradio('type07', type)
+    initradio('type08', type)
+    initradio('type09', type)
+    initradio('type10', type)
+    initradio('type11', type)
+    initradio('type12', type)
+    initradio('type13', type)
+    initradio('type14', type)
+    initradio('type15', type)
+    initradio('type16', type)
+    initradio('type17', type)
+    initradio('type18', type)
+    initradio('type19', type)
+    initradio('type20', type)
+    initradio('type21', type)
+    initradio('type22', type)
+    initradio('type23', type)
+    initradio('type24', type)
+    // $(".form-control.minInput").each(function (i, n) {
+    //     $(this).val(minNum);
+    // });
+    //
+    // $('#total_uv').val(minNum*24)
+    // // $(".form-control.maxInput").each(function (i, n) {
+    // //     $(this).val(maxNum);
+    // // });
+
+}
+
 
 //检查值是否为空；空：返回true；不为空返回false
 function checkParameterIsEmpty(parameter) {

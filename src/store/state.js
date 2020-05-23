@@ -4,9 +4,14 @@
 export default {
     ggkz: true,
     indexData: ['moduleOne', 'moduleTwo', 'moduleThree', 'moduleFour', 'moduleFive'],
-    indexPage: '',
+    indexPage: 'mvIndex',
     indexControl: true,
     teamControl: true,
     userControl: true,
-    TOKEN_KEY: ''
+    TOKEN_KEY: '',
+    ssData: [],
+    ssKey: '',
+    sspage: 1,
+    ssUrl: '',
+    ssPlay: ''
 }

@@ -4,7 +4,7 @@
 export default {
     ggkz: true,
     indexData: ['moduleOne', 'moduleTwo', 'moduleThree', 'moduleFour', 'moduleFive'],
-    indexPage: 'mvIndex',
+    indexPage: '',
     indexControl: true,
     teamControl: true,
     userControl: true,

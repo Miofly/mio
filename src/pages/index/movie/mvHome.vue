@@ -1,6 +1,6 @@
 <template>
 	<view style="height:80%">
-		<mvHeader></mvHeader>
+		<movie-header></movie-header>
 
 		<dy v-if="PageCur==='dy'"></dy>
 		<lxj v-if="PageCur==='lxj'"></lxj>
@@ -41,48 +41,20 @@
 				<view :class="PageCur=='dm'?'text-mv-yellow':'text-gray'">动漫</view>
 			</view>
 		</view>
-
 	</view>
 </template>
 
 <script>
-    import {mapState} from 'vuex'
-
     export default {
         data() {
             return {
-                PageCur: 'Index'
+                PageCur: 'mvIndex'
             }
-        },
-        onLoad() {
-            console.log('onLoad：页面加载完成')
-            this.PageCur = this.$store.state.indexPage
-        },
-        onUnload() {
-            console.log('onUnload：页面卸载')
-        },
-        onShow() {
-            console.log('onShow：页面显示')
-        },
-        onHide() {
-            console.log('onHide：页面隐藏')
-        },
-        onReady() {
-            console.log('onReady：页面初次渲染完成')
-        },
-        onResize() {
-            console.log('onResize：页面尺寸发生变化')
-        },
-        onBackPress() {
-            console.log('onBackPress：页面返回')
         },
         methods: {
             NavChange(e) {
                 this.PageCur = e.currentTarget.dataset.cur
             }
-        },
-        computed: {
-            ...mapState(['indexData', 'indexPage']),
         },
     }
 </script>

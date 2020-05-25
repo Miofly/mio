@@ -94,7 +94,7 @@
 				</view>
 			</view>
 
-			<mvFooter></mvFooter>
+			<movie-footer></movie-footer>
 
 		</scroll-view>
 	</view>
@@ -112,19 +112,58 @@
         data() {
             return {
                 gridBorder: false,
-                appyys: []
+                appyys: [],
+				url: '',
+				timer: null
             }
         },
         methods: {
+            getStorage () {
+                var that = this
+                uni.getStorage({
+                    key: 'mvUrl',
+                    success: function (res) {
+                        console.log('获取成功', res.data)
+                        that.url = res.data
+                    },
+                    fail: function (err) {
+                        console.log(err)
+						setTimeout(() => {
+                            that.getStorage()
+                        }, 500)
+                    }
+                })
+            },
             mvDetail (url) {
                 localStorage.setItem('ssUrl', url)
 				this.router.push({name: 'movieDetail'})
             },
         },
         async mounted() {
+            // #ifdef MP-WEIXIN
+			this.getStorage()
+
+
+            this.ui.yunFun('getUrlData', {
+                url: 'http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php'
+            }, (res) => {
+                // console.log('得到的数据', res.result.body)
+                const data = res.result.body
+                const $ = cheerio.load(data, {_useHtmlParser2: true})
+                for (var i = 0; i < $('.stui-vodlist li').length; i++) {
+                    this.appyys.push({
+                        name: $('.stui-vodlist li').eq(i).children('a').attr('title').trim(),
+                        url: $('.stui-vodlist li').eq(i).children('a').attr('href').trim(),
+                        remark: $('.stui-vodlist li').eq(i).children().children('.pic-text').text().trim(),
+                        img: $('.stui-vodlist li').eq(i).children('a').attr('data-original').trim(),
+                    })
+                }
+            }, true, '..')
+            // #endif
+            // #ifdef H5
             this.ui.showLoading()
             const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php')
-			uni.hideLoading()
+            uni.hideLoading()
             const $ = cheerio.load(data, {_useHtmlParser2: true})
 
             for (var i = 0; i < $('.stui-vodlist li').length; i++) {
@@ -135,6 +174,8 @@
                     img: $('.stui-vodlist li').eq(i).children('a').attr('data-original').trim(),
                 })
             }
+            // #endif
+
         },
 		computed: {
 		    ...mapState(['ssUrl']),

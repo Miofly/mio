@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view class="padding-bottom-twenty margin-left margin-top">
+	<view style="background: rgb(30, 40, 40);">
+		<view class="padding-bottom-twenty margin-left margin-top" style="background: rgb(30, 40, 40);">
 			<view>
 				<view style="color: #ccc;font-size: 16px" class="margin-left">友情链接</view>
 				<view class="margin-top-sm" style="color: #999999;font-size: 14px">

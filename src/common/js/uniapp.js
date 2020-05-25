@@ -34,13 +34,43 @@ const ui = {
             name: name, // 云函数名称
             data: params,
         }).then(res => { // 调用成功
-            uni.hideLoading()
             success(res)
+            uni.hideLoading()
         }).catch(err => {
             // console.log(err)
-            uni.hideLoading()
             fail(err)
+            uni.hideLoading()
         })
+    },
+    storage (key, data) {
+        uni.setStorage({
+            key: key,
+            data: data,
+            success: function () {
+                console.log('存储成功', data)
+            },
+            fail: function (err) {
+                console.log(err)
+            }
+        })
+    },
+    storageSync (key, data) {
+        uni.setStorageSync(key, data)
+    },
+    getStorage (key) {
+        uni.getStorage({
+            key: key,
+            success: function (res) {
+                console.log('获取成功', res.data)
+                return res.data
+            },
+            fail: function (err) {
+                console.log(err)
+            }
+        })
+    },
+    getStorageSync (key) {
+        return uni.getStorageSync(key)
     },
 }
 

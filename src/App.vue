@@ -68,6 +68,7 @@
                 }, (res) => {
                     console.log('得到的数据', res.result.data[0].dataLists)
                     const data = res.result.data[0].dataLists
+                    this.ui.storage('mvUrl', data.mvUrl)
                     this.$store.state.ggkz = data.ggkz
                     this.$store.state.indexData = data.indexData
                     this.$store.state.indexPage = data.indexPage

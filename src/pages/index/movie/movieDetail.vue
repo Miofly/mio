@@ -1,7 +1,7 @@
 <template>
 	<view style="height: 100%;background: rgb(30, 40, 40);color: white">
 		<!--头部搜索-->
-		<mvHeader ref="head"></mvHeader>
+		<movie-header ref="head"></movie-header>
 		<view class="padding" style="background: rgb(30, 40, 40);">
 			<view class="fl" style="width: 30%">
 				<image :src="img" mode="scaleToFill" style="height: 350rpx;width: 240rpx"
@@ -37,7 +37,7 @@
 			</view>
 		</view>
 
-		<mvFooter></mvFooter>
+		<movie-footer></movie-footer>
 		<view class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
 
 			<view @click="NavChange" class="action" data-cur="dy">
@@ -118,7 +118,7 @@
                 this.router.push({name: 'mvHome'})
             },
             bfUrl() {
-                this.$store.state.ssPlay = this.playHref
+                localStorage.setItem('ssPlay', this.playHref)
 				this.router.push({name: 'moviePlay'})
             },
         },

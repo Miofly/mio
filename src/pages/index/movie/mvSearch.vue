@@ -1,6 +1,6 @@
 <template>
 	<view style="background: rgb(30, 30, 40)">
-		<mvHeader ref="head"></mvHeader>
+		<movie-header ref="head"></movie-header>
 		<view class="text-white padding">
 			<view>
 				<h3 class="margin-bottom" style="color: #ccc;">
@@ -53,7 +53,7 @@
 			</button>
 		</view>
 
-		<mvFooter></mvFooter>
+		<movie-footer></movie-footer>
 
 		<view class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
 
@@ -105,13 +105,10 @@
             }
         },
         onLoad(e) {
-            console.log(this.$store.state.ssData)
-            console.log(this.$store.state.ssKey)
-
             this.datas = this.$store.state.ssData.list
             this.page = this.$store.state.ssData.pageInfo.page
             this.pageTotal = this.$store.state.ssData.pageInfo.pageTotal
-            this.keyword = this.$store.state.ssKey
+            this.keyword = localStorage.getItem('sskey')
         },
         computed: {
             ...mapState(['ssData', 'ssKey', 'indexPage', 'sspage']),
@@ -149,10 +146,6 @@
                     this.$refs.head.doSearch()
                 }
             }, 1500),
-			clear () {
-			    this.$store.state.ssKey = ''
-				this.$store.state.sspage = 1
-			},
             mvDetail (url) {
                 localStorage.setItem('ssUrl', url)
                 this.router.push({name: 'movieDetail'})

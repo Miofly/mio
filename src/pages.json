@@ -59,7 +59,7 @@
         {
             "path": "pages/index/movie/mvHome",
             "style": {
-                "navigationStyle": "custom"
+//                "navigationStyle": "custom"
             },
             "name": "mvHome"
         },
@@ -463,13 +463,19 @@
         "list": [
             {
                 "name": "test",
-                "path": "pages/index/itest"
+                "path": "pages/index/movie/mvHome"
             },
             {
                 "name": "list",
                 "path": "pages/index/song/songList"
             }
         ]
+    },
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "movie-(.*)": "@/components/movie/movie-$1/movie-$1.vue"
+        }
     },
     "tabBar": {
         "color": "#7A7E83",

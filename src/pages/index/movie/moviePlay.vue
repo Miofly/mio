@@ -1,7 +1,15 @@
 <template>
 	<view style="background: rgb(30, 40, 40)">
-		<mvHeader ref="head"></mvHeader>
-		<view style="background: rgb(30, 40, 40);color: white">
+		<movie-header ref="head"></movie-header>
+		<video id="myVideo"
+			   class="full-width"
+			   poster="/static/images/movie/loading_wap3.gif"
+			   :src="playDz"
+			   @error="videoErrorCallback" autoplay="true" page-gesture="true" enable-play-gesture="true"
+			   vslide-gesture="true"
+			   :title="title" @timeupdate="playStatus"
+			   controls></video>
+		<view style="background: rgb(30, 40, 40);color: white" class="padding">
 			<view>
 				<span>{{title}}</span>
 				<span>{{time}}</span>
@@ -9,24 +17,38 @@
 			<view class="margin-top margin-bottom" style="color: #ccc">
 				<view class="fl margin-right-ten">{{type}}</view>
 				<view class="fl margin-right-ten">{{address == null ? '未知' : address}}</view>
-				<view class="fl margin-right-ten">{{time == null ? '未知' : time}}</view>
+				<view class="fl margin-right-ten" style="margin-top: 4rpx">{{time == null ? '未知' : time}}</view>
 			</view>
 			<view style="clear: both" class="padding-top"></view>
-			<view>
+			<view class="margin-bottom">
 				播放来源
 			</view>
-			<view v-for="(item, index) in playInfo" :key="index" style="color: white">
-				<view class="fl margin-left-sm">
-					<image src="/static/images/movie/play2.png" style="width: 15px;height: 15px"
-						   class="margin-top-sm"></image>
-					<span class="margin-left-sm">{{item.num}}</span>
+			<view @tap="switchPlay(index, item.num)" v-for="(item, index) in playInfo" :key="index"
+				  style="color: white;width: 160rpx;position: relative"
+				  class="fl text-center">
+				<button class="cu-btn text-center"
+						:class="[select_title == item.num ? 'my-bg-orange' : 'my-bg-gray',
+				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
+					<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+					{{item.num}}
+				</button>
+			</view>
+			<view style="clear: both"></view>
+			<view class="cu-list grid text-center" style="background: rgb(30, 40, 40)!important;"
+				  :class="['col-' + 3,false?'':'no-border']">
+				<view @tap="getPlay(item.href, index)" v-for="(item, index) in nowPlayInfo.data" :key="index"
+					  class="margin-top">
+					<button class="cu-btn" style="width: 100px" :class="[
+							nowNum == index ? 'my-bg-orange' : 'my-bg-gray',
+					        ['sm', 'lg', ''][2], false ? 'round' : '', false ? 'shadow' : '', false ? 'block' : '']">
+						{{item.title.length > 5 ? item.title.slice(0, 6) + '...' : item.title}}
+					</button>
 				</view>
 			</view>
 		</view>
 		<view style="clear: both"></view>
-		<mvFooter></mvFooter>
+		<movie-footer></movie-footer>
 		<view class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
-
 			<view @click="NavChange" class="action" data-cur="dy">
 				<view class="fa-cu-image">
 					<image :src="'/static/images/movie/movie' + [PageCur=='dy'?'1':''] + '.png'"></image>
@@ -72,6 +94,7 @@
     export default {
         data() {
             return {
+                bgIndex: -1,
                 address: '',
                 desc: '',
                 time: '',
@@ -80,21 +103,74 @@
                 type2: '',
                 PageCur: '',
                 playDz: '',
-                playInfo: []
+                select_title: '',
+                playInfo: [],
+				nowPlayInfo: [],
+				nowNum: 0,
+				tempNum: 0,
+				tempName: '',
             }
         },
+        methods: {
+            getPlay (href, index) {
+                this.nowNum = index
+                this.tempNum = index
+                console.log(href)
+                this.getPlayAll(href)
+            },
+            switchPlay (index, name) {
+                this.nowPlayInfo = []
+                if (name == this.tempName) {
+                    this.nowNum = this.tempNum
+                    setTimeout(() => {
+                        this.nowPlayInfo = this.playInfo[index]
+                        this.select_title = this.playInfo[index].num
+                    }, 300)
+                } else {
+                    this.nowNum = -1
+                    setTimeout(() => {
+                        this.nowPlayInfo = this.playInfo[index]
+                        this.select_title = this.playInfo[index].num
+                    }, 300)
+				}
+            },
+            videoErrorCallback() {
+                console.log('播放出错')
+            },
+            playStatus() {
+
+            },
+            NavChange(e) {
+                this.$store.state.indexPage = e.currentTarget.dataset.cur
+                this.router.push({name: 'mvHome'})
+            },
+			async getPlayAll (url) {
+                this.ui.showLoading()
+                const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}}`)
+				uni.hideLoading()
+                console.log(data)
+                this.address = data.address
+                this.desc = data.desc
+                this.time = data.time
+                this.title = data.title
+                this.type = data.type
+                this.type2 = data.type2
+                this.PageCur = data.PageCur
+                this.playDz = data.m3u8[0].replace(/\"/g, '')
+                this.playInfo = data.playInfo
+                this.bgIndex = data.playInfo
+                this.select_title = data.select_title
+                this.tempName = data.select_title
+
+                console.log(this.playInfo)
+
+                this.nowPlayInfo = this.playInfo.find((item) => {
+                    return item.num == this.select_title
+                })
+			},
+        },
         async onLoad() {
-            const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${this.$store.state.ssPlay}`)
-            console.log(data)
-            this.address = data.address
-            this.desc = data.desc
-            this.time = data.time
-            this.title = data.title
-            this.type = data.type
-            this.type2 = data.type2
-            this.PageCur = data.PageCur
-            this.playDz = data.m3u8[0]
-            this.playInfo = data.playInfo
+			this.getPlayAll(localStorage.getItem('ssPlay'))
         },
         computed: {
             ...mapState(['ssPlay']),
@@ -105,5 +181,13 @@
 <style>
 	page {
 		background: rgb(30, 40, 40)
+	}
+	.my-bg-gray {
+		background: rgb(46, 46, 58);
+		color: rgb(204, 204, 204);
+	}
+	.my-bg-orange {
+		background: rgb(255, 154, 20);
+		color: white
 	}
 </style>

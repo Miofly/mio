@@ -1,12 +1,12 @@
 <template>
 	<view style="background: rgb(30, 40, 40)">
 		<movie-header ref="head"></movie-header>
-		<video id="myVideo"
+		<video id="myVideo" ref="myVideo"
 			   class="full-width"
 			   poster="/static/images/movie/loading_wap3.gif"
-			   :src="playDz"
-			   @error="videoErrorCallback" autoplay="true" page-gesture="true" enable-play-gesture="true"
-			   vslide-gesture="true"
+			   :src="playDz" autoplay
+			   @error="videoErrorCallback" page-gesture="true" enable-play-gesture="true"
+			   vslide-gesture="true" @play="playMv"
 			   :title="title" @timeupdate="playStatus"
 			   controls></video>
 		<view style="background: rgb(30, 40, 40);color: white" class="padding">
@@ -29,7 +29,7 @@
 				<button class="cu-btn text-center"
 						:class="[select_title == item.num ? 'my-bg-orange' : 'my-bg-gray',
 				        ['sm', 'lg', ''][0], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-					<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+					<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 					{{item.num}}
 				</button>
 			</view>
@@ -106,28 +106,35 @@
                 select_title: '',
                 playInfo: [],
 				nowPlayInfo: [],
-				nowNum: 0,
+				nowNum: localStorage.getItem('nowNum') == undefined ? 0 : localStorage.getItem('nowNum'),
 				tempNum: 0,
 				tempName: '',
+                playbl: 1
             }
         },
         methods: {
             getPlay (href, index) {
                 this.nowNum = index
                 this.tempNum = index
-                console.log(href)
-                this.getPlayAll(href)
+				localStorage.setItem('nowNum', index)
+				this.getPlayAll(href, 'http://mpvideo.qpic.cn/shg_3862243085_50000_c23be4f96b9a4bfe98b9b46b1254ba8d.f10002.mp4?dis_k=7b857187623b19aba42ac58338a0fa61&dis_t=1590402823')
+				localStorage.setItem('ssPlay', href)
+				setTimeout(() => {
+                    localStorage.setItem('playStatus', 0)
+                }, 2000)
             },
             switchPlay (index, name) {
                 this.nowPlayInfo = []
                 if (name == this.tempName) {
                     this.nowNum = this.tempNum
+                    localStorage.setItem('nowNum', this.tempNum)
                     setTimeout(() => {
                         this.nowPlayInfo = this.playInfo[index]
                         this.select_title = this.playInfo[index].num
                     }, 300)
                 } else {
                     this.nowNum = -1
+                    localStorage.setItem('nowNum', -1)
                     setTimeout(() => {
                         this.nowPlayInfo = this.playInfo[index]
                         this.select_title = this.playInfo[index].num
@@ -137,17 +144,58 @@
             videoErrorCallback() {
                 console.log('播放出错')
             },
-            playStatus() {
-
+            playStatus(e) {
+            	if (localStorage.getItem('playStatus') == 0) {
+            	    if (e.detail.currentTime > 3) {
+            	        window.location.href = 'http://192.168.3.138:8888/mio/src/html/project/videoNew/share.html'
+            	    }
+            	}
             },
             NavChange(e) {
                 this.$store.state.indexPage = e.currentTarget.dataset.cur
                 this.router.push({name: 'mvHome'})
             },
-			async getPlayAll (url) {
+			initMv (url, index) {
+                this.ui.yunFun('getUrlData', {
+                    url: `http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}}`
+                }, (res) => {
+                    // console.log('得到的数据', res.result.body)
+                    const data = JSON.parse(res.result.body)
+                    this.address = data.address
+                    this.desc = data.desc
+                    this.time = data.time
+                    this.title = data.title
+                    this.type = data.type
+                    this.type2 = data.type2
+                    this.PageCur = data.PageCur
+                    // this.playDz = index
+                    this.playDz = data.m3u8[0].replace(/\"/g, '')
+                    this.playInfo = data.playInfo
+                    this.bgIndex = data.playInfo
+                    this.select_title = data.select_title
+                    this.tempName = data.select_title
+
+                    console.log(this.playInfo)
+
+                    this.nowPlayInfo = this.playInfo.find((item) => {
+                        return item.num == this.select_title
+                    })
+                }, true, '加载中', (err) => {
+                    uni.hideLoading()
+                    this.ui.showToast('网络不稳定，请求超时', 'none', 3000)
+                    this.initMv()
+                    console.log(err)
+                })
+			},
+			async getPlayAll (url, test) {
+                // #ifdef MP-WEIXIN
+                this.initMv(url)
+                // #endif
+
+                // #ifdef H5
                 this.ui.showLoading()
-                const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}}`)
-				uni.hideLoading()
+                const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}`)
+                uni.hideLoading()
                 console.log(data)
                 this.address = data.address
                 this.desc = data.desc
@@ -156,21 +204,47 @@
                 this.type = data.type
                 this.type2 = data.type2
                 this.PageCur = data.PageCur
-                this.playDz = data.m3u8[0].replace(/\"/g, '')
+                // this.playDz = data.m3u8[0].replace(/\"/g, '')
+                this.playDz = test
                 this.playInfo = data.playInfo
                 this.bgIndex = data.playInfo
                 this.select_title = data.select_title
                 this.tempName = data.select_title
 
-                console.log(this.playInfo)
 
                 this.nowPlayInfo = this.playInfo.find((item) => {
                     return item.num == this.select_title
                 })
+				// this.$refs.myVideo.play()
+                // #endif
 			},
+            playMv (e) {
+
+            },
         },
         async onLoad() {
-			this.getPlayAll(localStorage.getItem('ssPlay'))
+            var status = window.location.href.split('/#')[0].split('playStatus=')[1]
+			console.log(status)
+			if (status == undefined) {
+                localStorage.setItem('playStatus', 0)
+            } else {
+                localStorage.setItem('playStatus', status)
+			}
+			console.log(localStorage.getItem('playStatus'))
+
+			if (localStorage.getItem('nowNum') == null) {
+                localStorage.setItem('playStatus', 0)
+			}
+            // this.router.push({name: 'moviePlay'})
+
+
+
+            // #ifdef MP-WEIXIN
+            this.getPlayAll(uni.getStorageSync('ssPlay'))
+            // #endif
+			// #ifdef H5
+            this.getPlayAll(localStorage.getItem('ssPlay'), 'http://mpvideo.qpic.cn/shg_3862243085_50000_891eb692d73e4aaaac815a6d81e43166.f10002.mp4?dis_k=d83ef23bed92e4314a0cfebcf515ec06&dis_t=1590399076')
+            // #endif
         },
         computed: {
             ...mapState(['ssPlay']),

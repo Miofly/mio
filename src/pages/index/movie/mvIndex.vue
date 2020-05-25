@@ -135,15 +135,20 @@
                 })
             },
             mvDetail (url) {
+                // #ifdef MP-WEIXIN
+                this.ui.setStorage('ssUrl', url)
+                // #endif
+                // #ifdef H5
                 localStorage.setItem('ssUrl', url)
+                // #endif
 				this.router.push({name: 'movieDetail'})
             },
         },
         async mounted() {
+            localStorage.removeItem('nowNum')
+
             // #ifdef MP-WEIXIN
 			this.getStorage()
-
-
             this.ui.yunFun('getUrlData', {
                 url: 'http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php'
             }, (res) => {
@@ -158,7 +163,7 @@
                         img: $('.stui-vodlist li').eq(i).children('a').attr('data-original').trim(),
                     })
                 }
-            }, true, '..')
+            })
             // #endif
             // #ifdef H5
             this.ui.showLoading()

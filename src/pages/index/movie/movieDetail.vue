@@ -25,7 +25,7 @@
 				<view>
 					<button @tap="bfUrl" class="cu-btn margin-top-lg" :class="[['bg-orange', 'line-blue', 'line-blue lines-blue'][0],
 					        ['sm', 'lg', ''][2], true ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-						<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+						<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 						立即播放
 					</button>
 				</view>
@@ -98,6 +98,11 @@
             }
         },
         async onLoad(e) {
+            // #ifdef MP-WEIXIN
+            this.initMv()
+            // #endif
+
+            // #ifdef H5
             this.ui.showLoading()
             const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getPlayInfo.php?url=${localStorage.getItem('ssUrl')}`)
             uni.hideLoading()
@@ -111,6 +116,7 @@
             this.time = data.time
             this.title = data.title
             this.type = data.type
+            // #endif
         },
         methods: {
             NavChange(e) {
@@ -118,8 +124,36 @@
                 this.router.push({name: 'mvHome'})
             },
             bfUrl() {
+                // #ifdef MP-WEIXIN
+                this.ui.setStorage('ssPlay', this.playHref)
+                // #endif
+				// #ifdef H5
                 localStorage.setItem('ssPlay', this.playHref)
-				this.router.push({name: 'moviePlay'})
+                // #endif
+                this.router.push({name: 'moviePlay'})
+            },
+            initMv() {
+                this.ui.yunFun('getUrlData', {
+                    url: `http://123.0t038.cn/jin-61/0509gkl/515love/api/getPlayInfo.php?url=${uni.getStorageSync('ssUrl')}`
+                }, (res) => {
+                    console.log('得到的数据', res.result.body)
+                    const data = JSON.parse(res.result.body)
+                    this.address = data.address
+                    this.descRes = data.descRes
+                    this.director = data.director
+                    this.img = data.img
+                    this.people = data.people
+                    this.playHref = data.playHref
+                    this.status = data.status
+                    this.time = data.time
+                    this.title = data.title
+                    this.type = data.type
+                }, true, '加载中', (err) => {
+                    uni.hideLoading()
+                    this.ui.showToast('网络不稳定，请求超时', 'none', 3000)
+                    this.initMv()
+                    console.log(err)
+                })
             },
         },
 

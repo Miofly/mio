@@ -4,7 +4,7 @@
 		<view class="text-white padding">
 			<view>
 				<h3 class="margin-bottom" style="color: #ccc;">
-					与<b class="margin-left-sm margin-right-sm" style="color: #ff9f16;">{{keyword}}</b>相关的影片
+					与<span class="margin-left-sm margin-right-sm text-bold" style="color: #ff9f16;">{{keyword}}</span>相关的影片
 				</h3>
 				<span style="line-height: 50rpx;color: #ccc;" class="margin-top">请注意<span style="color: #ff9f16;">不要有错别字</span>，否则搜索不到<br>
 					若未找到您想搜索的影片，可
@@ -32,23 +32,23 @@
 
 		<view class="full-width text-center margin-top-lg margin-bottom">
 			<button @tap="backIndex" class="cu-btn" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-			        <text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+			        <text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 			    首页
 			</button>
 			<button @tap="beforePgae" class="cu-btn margin-left-sm" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-				<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+				<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 				上一页
 			</button>
 			<button class="cu-btn margin-left-sm" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-				<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+				<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 				{{page}} / {{pageTotal}}
 			</button>
 			<button @tap="nextPage" class="cu-btn margin-left-sm" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-				<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+				<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 				下一页
 			</button>
 			<button @tap="lastPage" class="cu-btn margin-left-sm" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
-				<text v-show="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
+				<text v-if="false" class="fa fa-wechat padding-right-twenty" :disabled=false></text>
 				尾页
 			</button>
 		</view>
@@ -105,10 +105,21 @@
             }
         },
         onLoad(e) {
-            this.datas = this.$store.state.ssData.list
-            this.page = this.$store.state.ssData.pageInfo.page
-            this.pageTotal = this.$store.state.ssData.pageInfo.pageTotal
+            // #ifdef MP-WEIXIN
+            var data = JSON.parse(uni.getStorageSync('ssData'))
+            this.datas = data.list
+            this.page = data.pageInfo.page
+            this.pageTotal = data.pageInfo.pageTotal
+            this.keyword = uni.getStorageSync('sskey')
+            // #endif
+
+            // #ifdef H5
+            var data = JSON.parse(localStorage.getItem('ssData'))
+            this.datas = data.list
+            this.page = data.pageInfo.page
+            this.pageTotal = data.pageInfo.pageTotal
             this.keyword = localStorage.getItem('sskey')
+            // #endif
         },
         computed: {
             ...mapState(['ssData', 'ssKey', 'indexPage', 'sspage']),
@@ -147,7 +158,12 @@
                 }
             }, 1500),
             mvDetail (url) {
+                // #ifdef MP-WEIXIN
+                uni.setStorageSync('ssUrl', url)
+                // #endif
+				// #ifdef H5
                 localStorage.setItem('ssUrl', url)
+                // #endif
                 this.router.push({name: 'movieDetail'})
             },
         },

@@ -14,7 +14,7 @@
 				   border-radius: 20px;text-indent: 2px;
 					   padding-left: 20rpx;font-size: 12px">
 			<text @tap="doSearchTwo()" class="fa fa-search fr"
-				  style="position: absolute;right: 30rpx;top: 14rpx;color: black"></text>
+				  style="position: absolute;right: 30rpx;top: 14rpx;color: black;z-index: 888"></text>
 		</view>
 	</view>
 </template>
@@ -34,37 +34,72 @@
                 keyword: localStorage.getItem('sskey'),
 				// #endif
 				// #ifdef MP-WEIXIN
-                keyword: this.ui.getStorage('sskey')
+                keyword: uni.getStorageSync('sskey')
 				// #endif
             }
         },
         methods: {
             realIpt(e) {
+                console.log(uni.getStorageSync('sskey'))
+                // #ifdef MP-WEIXIN
+                this.ui.setStorage('sskey', e.detail.value)
+                // #endif
+				// #ifdef H5
                 localStorage.setItem('sskey', e.detail.value)
+				// #endif
             },
             // 执行搜索
             doSearch: tu.throttle(async function () {
-                if (localStorage.getItem('sskey') != '') {
+				console.log(uni.getStorageSync('sskey'))
+                // #ifdef MP-WEIXIN
+                if (uni.getStorageSync('sskey') != '') {
                     // this.$emit('parentFun', this.keyword.trim())
                     this.ui.showLoading()
-                    const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${localStorage.getItem('sskey')}&page=${this.$store.state.sspage}`)
-                    this.$store.state.ssData = data
+                    const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${uni.getStorageSync('sskey')}&page=${this.$store.state.sspage}`)
+                    this.ui.setStorage('ssData', JSON.stringify(data))
                     uni.hideLoading()
                     // this.$Router.push({name: 'mvSearch', params: {key: '1'}})
                     this.router.push('/pages/index/movie/mvSearch')
                 }
+                // #endif
+
+                // #ifdef H5
+                if (localStorage.getItem('sskey') != '') {
+                    // this.$emit('parentFun', this.keyword.trim())
+                    this.ui.showLoading()
+                    const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${localStorage.getItem('sskey')}&page=${this.$store.state.sspage}`)
+                    localStorage.setItem('ssData', JSON.stringify(data))
+                    uni.hideLoading()
+                    // this.$Router.push({name: 'mvSearch', params: {key: '1'}})
+                    this.router.push('/pages/index/movie/mvSearch')
+                }
+                // #endif
             }, 2000),
             doSearchTwo: tu.throttle(async function () {
+                // #ifdef MP-WEIXIN
+                this.$store.state.sspage = 1
+                if (uni.getStorageSync('sskey') != '') {
+                    // this.$emit('parentFun', this.keyword.trim())
+                    this.ui.showLoading()
+                    const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${uni.getStorageSync('sskey')}&page=${this.$store.state.sspage}`)
+                   	this.ui.setStorage('ssData', JSON.stringify(data))
+                    uni.hideLoading()
+                    // this.$Router.push({name: 'mvSearch', params: {key: '1'}})
+                    this.router.push('/pages/index/movie/mvSearch')
+                }
+                // #endif
+                // #ifdef H5
                 this.$store.state.sspage = 1
                 if (localStorage.getItem('sskey') != '') {
                     // this.$emit('parentFun', this.keyword.trim())
                     this.ui.showLoading()
                     const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getDataInfo.php?keyword=${localStorage.getItem('sskey')}&page=${this.$store.state.sspage}`)
-                    this.$store.state.ssData = data
+                    localStorage.setItem('ssData', JSON.stringify(data))
                     uni.hideLoading()
                     // this.$Router.push({name: 'mvSearch', params: {key: '1'}})
                     this.router.push('/pages/index/movie/mvSearch')
                 }
+                // #endif
             }, 2000),
         },
         computed: {

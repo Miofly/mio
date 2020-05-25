@@ -59,7 +59,7 @@
         {
             "path": "pages/index/movie/mvHome",
             "style": {
-//                "navigationStyle": "custom"
+                "navigationStyle": "custom"
             },
             "name": "mvHome"
         },

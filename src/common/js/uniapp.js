@@ -24,6 +24,7 @@ const ui = {
     // 云函数请求统一封装
     yunFun (name, params, success, showToast = true, message = '正在玩命的加载中', fail = (err) => {
         this.showToast('请求失败', 'none')
+        uni.hideLoading()
         console.log(err)
         // this.yunError(err)
     }) {
@@ -39,10 +40,9 @@ const ui = {
         }).catch(err => {
             // console.log(err)
             fail(err)
-            uni.hideLoading()
         })
     },
-    storage (key, data) {
+    setStorage (key, data) {
         uni.setStorage({
             key: key,
             data: data,

@@ -8,7 +8,7 @@
 				</h3>
 				<span style="line-height: 50rpx;color: #ccc;" class="margin-top">请注意<span style="color: #ff9f16;">不要有错别字</span>，否则搜索不到<br>
 					若未找到您想搜索的影片，可
-					<span style="color: #ff9f16;">点击此处加群留言</span>
+					<span style="color: #ff9f16;" @tap="showImg" >点击此处加群留言</span>
 					，我们会及时添加。</span>
 			</view>
 		</view>
@@ -28,7 +28,7 @@
 			</view>
 		</view>
 
-		<view v-if="datas.length == 0" class="full-width text-center text-white text-lg">没有相关资源，点击联系管理员</view>
+		<view v-if="datas.length == 0" class="full-width text-center text-white text-lg" @tap="showImg" >没有相关资源，点击联系管理员</view>
 
 		<view class="full-width text-center margin-top-lg margin-bottom">
 			<button @tap="backIndex" class="cu-btn" style="background: rgb(46, 46, 58);color: #ccc;" :class="[['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
@@ -88,6 +88,14 @@
 				<view :class="PageCur=='dm'?'text-mv-yellow':'text-gray'">动漫</view>
 			</view>
 		</view>
+
+		<modal title="标题111" content="这是内容" @click="test" color="#999" :size="32" :maskClosable="false"
+			   :show="status" @cancel="status = false" shape="['circle', 'square'][1]"
+			   :button="[{text: '微信', type: ['green', 'default', 'primary', 'red', 'danger', 'warning', 'white', 'gray'][5], plain: true},
+				{text: '支付宝', plain: false}]" :custom="true">
+			<view class="fa fa-close fa-2x" style="position: absolute; top:20px;right: 10px;color: black" @tap="status = false"></view>
+			<image :src="src" mode="scaleToFill" :class="[false?'cu-avatar':'', false?'round': '']"></image>
+		</modal>
 	</view>
 </template>
 
@@ -101,7 +109,9 @@
                 PageCur: '',
                 datas: [],
                 keyword: '',
-				pageTotal: ''
+				pageTotal: '',
+                status: false,
+                src: localStorage.getItem('qrcode')
             }
         },
         onLoad(e) {
@@ -125,6 +135,9 @@
             ...mapState(['ssData', 'ssKey', 'indexPage', 'sspage']),
         },
         methods: {
+            showImg () {
+                this.status = true
+            },
             beforePgae: tu.throttle(function () {
                 if (this.$store.state.sspage !== 1) {
                     this.$store.state.sspage = this.$store.state.sspage - 1

@@ -1,7 +1,7 @@
 <template>
 	<view class="full-width flex justify-between align-center" style="height: 100rpx;background: black">
 		<view class="margin-left">
-			<view class="text-lg text-white">咕咚影院</view>
+			<view class="text-lg text-white">{{name}}</view>
 		</view>
 		<view class="margin-right" style="position: relative">
 			<input v-model="keyword"
@@ -29,6 +29,7 @@
     export default {
         data() {
             return {
+                name: localStorage.getItem('cinemaName'),
                 placeholder: '请输入影片名称',
 				// #ifdef H5
                 keyword: localStorage.getItem('sskey'),

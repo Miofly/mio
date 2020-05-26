@@ -1,10 +1,13 @@
 <script>
     import Vue from 'vue'
     import {mapState} from 'vuex'
-
+	import {
+        publicGet
+	} from '@/api'
     export default {
-        // #ifdef MP-WEIXIN
+
         onLaunch () {
+            // #ifdef MP-WEIXIN
             this.autoUpdate()
             console.log('onLaunch：初始化完成')
             if (!wx.cloud) { // 使用微信云函数
@@ -20,6 +23,7 @@
                 })
             }
             this.initData()
+            // #endif
             uni.getSystemInfo({
                 success: function (e) {
                     // #ifndef MP
@@ -49,8 +53,10 @@
                     // #endif
                 }
             })
+			// #ifdef H5
+			this.initData()
+			// #endif
         },
-        // #endif
         onShow () {
             // #ifdef MP-WEIXIN
             this.share()
@@ -61,6 +67,15 @@
             console.log('onHide：应用页面隐藏')
         },
         methods: {
+            // #ifdef H5
+            async initData () {
+				const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/getCinemaInfo.php')
+				localStorage.setItem('cinemaName', data.cinemaName)
+				localStorage.setItem('friend_link', JSON.stringify(data.friend_link))
+				localStorage.setItem('qrcode', data.qrcode)
+            },
+            // #endif
+            // #ifdef MP-WEIXIN
             initData () {
                 this.ui.yunFun('getDataPage', {
                     dbName: 'initDatas',
@@ -74,6 +89,7 @@
                     this.$store.state.indexPage = data.indexPage
                 })
             },
+            // #endif
             autoUpdate: function () { // 自动更新
                 var self = this
                 // 获取小程序更新机制兼容

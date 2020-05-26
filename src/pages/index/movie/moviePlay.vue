@@ -148,6 +148,7 @@
             	if (localStorage.getItem('playStatus') == 0) {
             	    if (e.detail.currentTime > 3) {
             	        window.location.href = 'http://192.168.3.138:8888/mio/src/html/project/videoNew/share.html'
+                        localStorage.setItem('playStatus', 1)
             	    }
             	}
             },
@@ -204,8 +205,8 @@
                 this.type = data.type
                 this.type2 = data.type2
                 this.PageCur = data.PageCur
-                // this.playDz = data.m3u8[0].replace(/\"/g, '')
-                this.playDz = test
+                this.playDz = data.m3u8[0].replace(/\"/g, '')
+                // this.playDz = test
                 this.playInfo = data.playInfo
                 this.bgIndex = data.playInfo
                 this.select_title = data.select_title
@@ -223,17 +224,18 @@
             },
         },
         async onLoad() {
-            var status = window.location.href.split('/#')[0].split('playStatus=')[1]
-			console.log(status)
-			if (status == undefined) {
-                localStorage.setItem('playStatus', 0)
-            } else {
-                localStorage.setItem('playStatus', status)
-			}
-			console.log(localStorage.getItem('playStatus'))
+            // var status = window.location.href.split('/#')[0].split('playStatus=')[1]
+			// console.log(status)
+			// if (status == undefined) {
+            //     localStorage.setItem('playStatus', 0)
+            // } else {
+            //     localStorage.setItem('playStatus', status)
+			// }
+			// console.log(localStorage.getItem('playStatus'))
 
 			if (localStorage.getItem('nowNum') == null) {
                 localStorage.setItem('playStatus', 0)
+                localStorage.setItem('nowNum', 0)
 			}
             // this.router.push({name: 'moviePlay'})
 

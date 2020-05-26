@@ -2,8 +2,19 @@ import ClipboardJS from 'mioJs/utils/clipboard.min.js'
 import {ui} from 'mioJs/uniapp'
 
 const tu = {
-
-    arrChange (a, b) { // 两个数组相减，大数组中去除小数组含有的项
+    isIos() {
+        var ua = navigator.userAgent.toLocaleLowerCase()
+        var u = navigator.userAgent
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // ios终端
+        return isIOS
+    },
+    isAndroid() {
+        var ua = navigator.userAgent.toLocaleLowerCase()
+        var u = navigator.userAgent
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 // g
+        return isAndroid
+    },
+    arrChange(a, b) { // 两个数组相减，大数组中去除小数组含有的项
         for (let i = 0; i < b.length; i++) {
             for (let j = 0; j < a.length; j++) {
                 if (a[j] === b[i]) { // 如果是id相同的，那么a[ j ].id === b[ i ].id
@@ -14,7 +25,7 @@ const tu = {
         }
         return a
     },
-    judgeType (obj) { // 判断数据类型
+    judgeType(obj) { // 判断数据类型
         const class2type = {}
         'Array Date RegExp Object Error'.split(' ').forEach(e =>
             class2type['[object ' + e + ']'] = e.toLowerCase()
@@ -23,7 +34,9 @@ const tu = {
         return typeof obj === 'object' ? class2type[Object.prototype.toString.call(obj)] || 'object' : typeof obj
     },
     getSpecialDays(y) { // 判断是否是余年
-        if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) { return 29 }
+        if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) {
+            return 29
+        }
         return 28
     },
     getShengXiao(birth) { // 生肖计算
@@ -110,17 +123,17 @@ const tu = {
         }
         return arrDelBlank
     },
-    delSpecifiedLocationOne (str, index) {
+    delSpecifiedLocationOne(str, index) {
         return str.substring(0, index) + str.substring(index + 1)
     },
-    delSpecifiedLocationTwo (str, index) {
+    delSpecifiedLocationTwo(str, index) {
         return str.slice(0, index) + str.slice(index + 1)
     },
     // 为字符串插入字符 其中soure为原字符串,start为将要插入字符的位置，newStr为要插入的字符
-    insertStr (soure, start, newStr) {
+    insertStr(soure, start, newStr) {
         return soure.substring(0, start) + newStr + soure.substring(start)
     },
-    isNumStr (str) { // 检测字符串是否全为数字
+    isNumStr(str) { // 检测字符串是否全为数字
         let n = 0
         for (let i = 0; i < str.length; i++) {
             n = str.charCodeAt(i)
@@ -130,22 +143,23 @@ const tu = {
         }
         return true
     },
-    delSpecifiedLocation (str, index) { // 删除指定位置字符(字符串从0开始数， index代表删除的位置)
+    delSpecifiedLocation(str, index) { // 删除指定位置字符(字符串从0开始数， index代表删除的位置)
         return str.substr(0, index) + str.substr(index + 1)
     },
-    back () {
+    back() {
         window.history.back()
     },
-    getUrlParmas () { // 得到当前网站地址？后面的语句
+    getUrlParmas() { // 得到当前网站地址？后面的语句
         return decodeURI(window.location.href.split('?')[1])
     },
-    getUrl () { // 得到当前网站地址
+    getUrl() { // 得到当前网站地址
         return window.location.href
     },
-    jumpWX () {
+    jumpWX() {
         window.location.replace('weixin://')
     },
-    loadAsyncScript(src, callback = function () {}) { // 同步加载js
+    loadAsyncScript(src, callback = function () {
+    }) { // 同步加载js
         const head = document.getElementsByTagName('head')[0]
         const script = document.createElement('script')
         script.setAttribute('type', 'text/javascript')

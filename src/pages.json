@@ -463,7 +463,7 @@
         "list": [
             {
                 "name": "test",
-                "path": "pages/index/movie/mvHome"
+                "path": "pages/index/itest"
             },
             {
                 "name": "list",

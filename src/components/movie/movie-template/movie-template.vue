@@ -201,7 +201,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 	page {
 		background: rgb(30, 40, 40);
 	}

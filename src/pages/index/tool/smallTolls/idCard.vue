@@ -13,7 +13,6 @@
 						</view>
 					</view>
 				</view>
-
 				<view v-else class="cu-card article" style="margin-top: 1%">
 					<view class="cu-item shadow" style="padding-bottom: 0">
 						<view class="title text-center">
@@ -103,6 +102,7 @@
 				</view>
 			</template>
 		</search>
+
 	</view>
 </template>
 
@@ -165,9 +165,7 @@
                     }
                 }, (res) => {
                     console.log('得到的数据', res.result.data)
-                    let datas = res.result.data
-                    let datasLength = res.result.data.length
-                    this.regionPlace = datas[0].place
+                    this.regionPlace = res.result.data[0].place
                 })
                 this.age = this.tu.getAge(this.birthYear + '-' + this.birthMonth + '-' + this.birthday)
                 this.constellation = this.tu.getAstro(parseInt(this.birthMonth), this.birthday)

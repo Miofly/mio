@@ -72,6 +72,11 @@ const ui = {
     getStorageSync (key) {
         return uni.getStorageSync(key)
     },
+    makePhone (phone) {
+        uni.makePhoneCall({
+            phoneNumber: phone
+        })
+    },
 }
 
 export {

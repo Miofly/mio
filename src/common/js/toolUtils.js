@@ -352,12 +352,14 @@ const tu = {
         return Array.from(new Set(arr))
     },
     getClipboardData(data, callback = (res) => {
+        console.log(res)
         if (res) {
             ui.showToast('复制成功')
         } else {
             ui.showToast('复制失败')
         }
     }) {
+        data = data.toString()
         // #ifdef APP-PLUS || MP
         uni.setClipboardData({
             data: data,
@@ -378,7 +380,6 @@ const tu = {
         // #endif
 
         // #ifdef H5
-        console.log(data, 213123)
         const event = window.event || {}
         const clipboard = new ClipboardJS('', {
             text: () => data

@@ -1,6 +1,5 @@
 <template>
 	<view class="nav-list">
-		<!---->
 		<router-link v-for="(item,index) in elements" :key="index" :to="'{name:'+item.url+'}'"
 					 class="nav-li" :class="'bg-'+item.color" :navType="item.isTab ? 'pushTab' : 'push'">
 			<view class="nav-title">{{ item.title }}</view>

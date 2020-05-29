@@ -199,10 +199,10 @@ function operateTask(flag) {
         $.ajax({
             async: true,
             type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/task-del",
+            url: "http://shangliang.52eja.com:443/api/task/task-one-key-del",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: {
-                id: arrStr,
+                ids: arrStr,
             },
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));

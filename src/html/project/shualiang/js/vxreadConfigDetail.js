@@ -70,31 +70,30 @@ jQuery(document).ready(function ($) {
                     // $('#sle23 input[name="type23"]').val(data.hour_state_uv_arr[22].os_type).attr("checked","checked");
                     // $('#sle24 input[name="type24"]').val(data.hour_state_uv_arr[23].os_type).attr("checked","checked");
 
-                    initradio('type01',data.hour_state_uv_arr[0].os_type);
-                    initradio('type02',data.hour_state_uv_arr[1].os_type);
-                    initradio('type03',data.hour_state_uv_arr[2].os_type);
-                    initradio('type04',data.hour_state_uv_arr[3].os_type);
-                    initradio('type05',data.hour_state_uv_arr[4].os_type);
-                    initradio('type06',data.hour_state_uv_arr[5].os_type);
-                    initradio('type07',data.hour_state_uv_arr[6].os_type);
-                    initradio('type08',data.hour_state_uv_arr[7].os_type);
-                    initradio('type09',data.hour_state_uv_arr[8].os_type);
-                    initradio('type10',data.hour_state_uv_arr[9].os_type);
-                    initradio('type11',data.hour_state_uv_arr[10].os_type);
-                    initradio('type12',data.hour_state_uv_arr[11].os_type);
-                    initradio('type13',data.hour_state_uv_arr[12].os_type);
-                    initradio('type14',data.hour_state_uv_arr[13].os_type);
-                    initradio('type15',data.hour_state_uv_arr[14].os_type);
-                    initradio('type16',data.hour_state_uv_arr[15].os_type);
-                    initradio('type17',data.hour_state_uv_arr[16].os_type);
-                    initradio('type18',data.hour_state_uv_arr[17].os_type);
-                    initradio('type19',data.hour_state_uv_arr[18].os_type);
-                    initradio('type20',data.hour_state_uv_arr[19].os_type);
-                    initradio('type21',data.hour_state_uv_arr[20].os_type);
-                    initradio('type22',data.hour_state_uv_arr[21].os_type);
-                    initradio('type23',data.hour_state_uv_arr[22].os_type);
-                    initradio('type24',data.hour_state_uv_arr[23].os_type);
-
+                    initradio('type01', data.hour_state_uv_arr[0].os_type);
+                    initradio('type02', data.hour_state_uv_arr[1].os_type);
+                    initradio('type03', data.hour_state_uv_arr[2].os_type);
+                    initradio('type04', data.hour_state_uv_arr[3].os_type);
+                    initradio('type05', data.hour_state_uv_arr[4].os_type);
+                    initradio('type06', data.hour_state_uv_arr[5].os_type);
+                    initradio('type07', data.hour_state_uv_arr[6].os_type);
+                    initradio('type08', data.hour_state_uv_arr[7].os_type);
+                    initradio('type09', data.hour_state_uv_arr[8].os_type);
+                    initradio('type10', data.hour_state_uv_arr[9].os_type);
+                    initradio('type11', data.hour_state_uv_arr[10].os_type);
+                    initradio('type12', data.hour_state_uv_arr[11].os_type);
+                    initradio('type13', data.hour_state_uv_arr[12].os_type);
+                    initradio('type14', data.hour_state_uv_arr[13].os_type);
+                    initradio('type15', data.hour_state_uv_arr[14].os_type);
+                    initradio('type16', data.hour_state_uv_arr[15].os_type);
+                    initradio('type17', data.hour_state_uv_arr[16].os_type);
+                    initradio('type18', data.hour_state_uv_arr[17].os_type);
+                    initradio('type19', data.hour_state_uv_arr[18].os_type);
+                    initradio('type20', data.hour_state_uv_arr[19].os_type);
+                    initradio('type21', data.hour_state_uv_arr[20].os_type);
+                    initradio('type22', data.hour_state_uv_arr[21].os_type);
+                    initradio('type23', data.hour_state_uv_arr[22].os_type);
+                    initradio('type24', data.hour_state_uv_arr[23].os_type);
                 }
             } else {
                 toast(data.message, 1000);
@@ -113,12 +112,12 @@ jQuery(document).ready(function ($) {
 
 });
 
-function initradio(rName,rValue){
+function initradio(rName, rValue) {
     var rObj = document.getElementsByName(rName);
 
-    for(var i = 0;i < rObj.length;i++){
-        if(rObj[i].value == rValue){
-            rObj[i].checked =  'checked';
+    for (var i = 0; i < rObj.length; i++) {
+        if (rObj[i].value == rValue) {
+            rObj[i].checked = 'checked';
         }
     }
 }

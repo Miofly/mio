@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="../../js/common/jquery-1.7.2.min.js"></script>
+
+</head>
+<body>
+<span id="aa">test11111111111111</span>
+<script>
+    window.onbeforeunload = function (e) {
+        var e = window.event || e;
+        $('#aa').html('12321312')
+        e.returnValue = ("确定离开当前页面吗？");
+
+    }
+</script>
+</body>
+</html>

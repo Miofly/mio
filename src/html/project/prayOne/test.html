@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>抽取灵签，查看我的本月运势</title>
+	<script src="<?=$skin_sys_global_url?>static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="<?=$skin_sys_global_url?>static/js/adaptive.js"></script>
+	<link rel="stylesheet" href="<?=$skin_sys_global_url?>static/css/cqyq.css"/>
+	<link rel="stylesheet" href="<?=$skin_sys_global_url?>static/css/index.css"/>
+	<link rel="stylesheet" href="<?=$skin_sys_global_url?>static/css/test.css"/>
+	<style type="text/css">
+		.bj_music {
+			opacity: 0;
+		}
+	</style>
+</head>
+<body>
+<div class="content_draw" style="background-image: url(<?=$skin_sys_global_url?>static/images/images24/5698.jpg);">
+	<audio src="<?=$skin_sys_global_url?>static/images/images24/467582.mp3" id="bjMusic" class="bj_music" autobuffer
+		   autoloop loop></audio>
+	<div class="draw_bucket" style="bottom: 1.3rem;">
+		<img src="<?=$skin_sys_global_url?>static/images/images24/qt.png" class="draw_img"
+			 style="width: 2rem; height: 6.15rem;"/>
+	</div>
+	<img id="draw_btn" class="shake1" style="width: 100%;position: absolute;bottom: 0.6rem; z-index: 99;"
+		 src="<?=$skin_sys_global_url?>static/images/images24/yaoyiyao.png"/>
+
+	<div class="draw_audio">
+		<audio src="<?=$skin_sys_global_url?>static/images/images24/shake_music.mp4" class="shakeMusic" autobuffer
+			   autoloop loop></audio>
+	</div>
+	<div class="draw_result">
+		<div class="draw_qian">
+			<img style="width: 95%;bottom: 4.8rem;position: absolute;"
+				 src="<?=$skin_sys_global_url?>static/images/images24/jieqian.png"/>
+		</div>
+	</div>
+</div>
+
+<script src="<?=$skin_sys_global_url?>static/js/jquery-1.11.1.min.js"></script>
+<script>
+    window.applyUrl = '/<?=__MULU__?>';
+    var smicon = new Array("☀", "⚡", "🌂", "🌟", "🍂", "🔥", "🎃", "📢", "📍", "🏀",
+		"🚗", "⛵", "🎧", "🎵", "㊙", "💦", "🔴", "👉", "👀", "🍇", "🕑", "🍎")
+    var sj = parseInt(Math.random() * smicon.length);
+    var sjnum = smicon[sj];
+    // var text = '求取我的<?=$mons?>月签'+sjnum
+    var text = '抽取灵签，查看我的本月运势' + sjnum
+    $('title').text(text);
+
+    function audioAutoPlay(id) {
+        var audio1 = document.getElementById(id);
+        audio1.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio1.play();
+        }, false);
+    }
+
+    audioAutoPlay("bjMusic");
+</script>
+<script>
+    $(function () {
+        // setTimeout(function() {
+        //   startDrawSign();
+        // }, 2000);
+
+        $("#draw_btn").click(function () {
+            startDrawSign();
+        });
+
+        $(".qian_img").click(function () {
+            var load = document.createElement("div");
+            load.setAttribute("class", "loadmore");
+            var loadcon = "<img src='<?=$skin_sys_global_url?>static/images/images24/load.png'>";
+            load.innerHTML = loadcon;
+            $("body").append(load);
+            window.location.href = "<?=$luodi_go?>";
+        });
+
+        function startDrawSign() {
+            $(".draw_bucket").show();
+            $(".draw_img").addClass("shake");
+            $(".shakeMusic")
+                .get(0)
+                .play();
+            setTimeout(function () {
+                showResult();
+            }, 2500);
+        }
+
+        function showResult() {
+            $(".draw_bucket").hide();
+            $(".draw_result").show();
+            $(".shakeMusic")
+                .get(0)
+                .pause();
+            setTimeout(function () {
+                window.location.href = "<?=$luodi_go?>";
+            }, 1500);
+        }
+
+        if (window.DeviceMotionEvent) {
+            window.addEventListener("devicemotion", deviceMotionHandler, false);
+        }
+        var SHAKE_THRESHOLD = 4000;
+        var last_update = 0;
+        var x,
+            y,
+            z,
+            last_x = 0,
+            last_y = 0,
+            last_z = 0;
+        var numshake = 0;
+
+        function deviceMotionHandler(eventData) {
+            var acceleration = eventData.accelerationIncludingGravity;
+            var curTime = new Date().getTime();
+            if (curTime - last_update > 10) {
+                var diffTime = curTime - last_update;
+                last_update = curTime;
+                x = acceleration.x;
+                y = acceleration.y;
+                z = acceleration.z;
+                var speed =
+                    (Math.abs(x + y + z - last_x - last_y - last_z) / diffTime) *
+                    10000;
+                if (speed > SHAKE_THRESHOLD) {
+                    if (numshake >= 1) {
+                        return;
+                    } else {
+                        if ($(".draw_result").css("display") == "block") {
+                            return;
+                        } else {
+                            startDrawSign();
+                            numshake++;
+                        }
+                    }
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+    });
+</script>

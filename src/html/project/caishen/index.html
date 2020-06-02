@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>抽取灵签，查看我的本月运势</title>
+	<script src="jquery.js"></script>
+	<script type="text/javascript" src="adaptive.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<body>
+<div>
+	<audio src="../../img/caishen/gy.mp3"
+	id="bjMusic" class="bj_music" autobuffer autoloop loop></audio>
+	<audio src="../../img/caishen/yaoqian.mp3" preload="auto" ref="audioSrc" id="mp3"></audio>
+	<!--蒙版-->
+	<div id="mb" style="display: none" class="mio-modal-mask"></div>
+	<div style="position: relative;">
+		<div style="position: fixed;top: 0;left: 0;width: 100%;text-align: center;">
+			<img style="width: 100%;height: 100%" src="../../img/caishen/setting.png">
+		</div>
+		<div style="position: fixed;top: 0;left: 0;width: 100%;text-align: center;">
+			<img class="xuanzhun" style="z-index: 1;width: 5.8rem;height:5.8rem" src="../../img/caishen/guang.png">
+		</div>
+		<div onclick="shakeTong()" id="gy" style="position: fixed;left: 0;width: 100%;text-align: center;top: 1.62rem;">
+			<img style="z-index: 2;width: 7.5rem;" src="../../img/caishen/Mammon.png" class="">
+		</div>
+
+		<div onclick="shakeTong()" id="tong"
+			 style="z-index: 7;position: fixed;bottom: 1.6rem;text-align: center;left: 0;width: 100%">
+			<img style="width: 1.84rem;height: 3.16rem;" src="../../img/caishen/download@2x.png">
+		</div>
+
+		<div onclick="shakeTong()" class="shake1"
+			 style="position: fixed;left: 0;width: 100%;text-align: center;bottom: 0.6rem;">
+			<img style="z-index: 1;width: 4.32rem;height: 1.02rem" src="../../img/caishen/sign@2x.png">
+		</div>
+	</div>
+	<!--抽签动画-->
+	<div id="getQian" style="position: fixed;left: 63%;top: 45%;width: 100%;transform: translate(-50%, -50%);
+	z-index: 999;animation: top_move 1.5s linear;display: none;" onclick="tz()">
+		<div>
+			<img src="../../img/caishen/light@2x.png" style="width: 5.56rem;height: 6.16rem">
+		</div>
+		<div style="margin-left: 0.55rem;margin-top: 0.8rem;">
+			<img src="../../img/caishen/button@2x.png" style="width: 4.48rem;height: 1.04rem">
+		</div>
+	</div>
+</div>
+<script>
+    function tz() {
+        window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/caishen/share.html'
+    }
+
+    if (window.DeviceMotionEvent) {
+        window.addEventListener("devicemotion", deviceMotionHandler, false);
+    }
+    var SHAKE_THRESHOLD = 4000;
+    var last_update = 0;
+    var x,
+        y,
+        z,
+        last_x = 0,
+        last_y = 0,
+        last_z = 0;
+    var numshake = 0;
+
+    audioAutoPlay("bjMusic");
+
+    var t = setTimeout(function () {
+        shakeTong()
+    }, 8000)
+
+    function deviceMotionHandler(eventData) {
+        var acceleration = eventData.accelerationIncludingGravity;
+        var curTime = new Date().getTime();
+        if (curTime - last_update > 10) {
+            var diffTime = curTime - last_update;
+            last_update = curTime;
+            x = acceleration.x;
+            y = acceleration.y;
+            z = acceleration.z;
+            var speed =
+                (Math.abs(x + y + z - last_x - last_y - last_z) / diffTime) *
+                10000;
+            if (speed > SHAKE_THRESHOLD) {
+                if (numshake >= 1) {
+                    return;
+                } else {
+                    shakeTong();
+                    numshake++;
+                }
+            }
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
+    }
+
+    function shakeTong() {
+        if (!$('#tong').hasClass('shake1')) {
+            clearTimeout(t)
+            audioAutoPlay("mp3");
+            $('#tong').addClass('shake1')
+            setTimeout(function () {
+                $('#mb').css('display', 'block')
+                $('#getQian').css('display', 'block')
+                $('#getQianBtn').css('display', 'block')
+                $(document).bind("click", tz);
+                $('#tong').removeClass('shake1')
+            }, 2000)
+
+            setTimeout(function () {
+                // tz()
+            }, 8000)
+        }
+    }
+
+    function audioAutoPlay(id) {
+        var audio1 = document.getElementById(id);
+        audio1.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            audio1.play();
+        }, false);
+    }
+</script>
+</body>
+</html>

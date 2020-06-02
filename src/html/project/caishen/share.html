@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta http-equiv=X-UA-Compatible content="ie=edge">
+	<meta name=apple-mobile-web-app-capable content=yes>
+	<meta name=apple-touch-fullscreen content=yes>
+	<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+	<meta name=format-detection content="telephone=no">
+	<meta name=format-detection content="email=no">
+	<meta name=renderer content=webkit>
+	<meta name=screen-orientation content=portrait>
+	<meta name=x5-orientation content=portrait>
+	<meta name=x5-fullscreen content=true>
+	<meta name=full-screen content=yes>
+	<meta name=keywords content="">
+	<meta name=description content="">
+	<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="css/share.css"/>
+	<script type="text/javascript" src="http://192.168.3.131:8888/mio/src/html/js/common/jquery-1.7.2.min.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 375) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                    }
+                    var html = document.getElementsByTagName('html')[0];
+                    var settedFs = settingFs = parseInt(100 * (clientWidth / 375));
+                    var whileCount = 0;
+                    while (true) {
+                        var realFs = parseInt(window.getComputedStyle(html).fontSize);
+                        var delta = realFs - settedFs;
+                        //不相等
+                        if (Math.abs(delta) >= 1) {
+                            if (delta > 0)
+                                settingFs--;
+                            else
+                                settingFs++;
+                            html.setAttribute('style', 'font-size:' + settingFs + 'px!important');
+                        } else
+                            break;
+                        if (whileCount++ > 100)
+                            break
+                    }
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem;" class="bg-white">
+<div>
+	<div style="height: 0.32rem;margin-top: 0.08rem;margin-left: 0.05rem">
+		<img style="height: 0.2rem" src="../../img/prayOne/back.png">
+		<span style="font-size: 0.2rem;color:rgb(255, 69, 0);display: block;margin-top: -0.24rem;margin-left: 0.15rem;" >返回</span>
+	</div>
+	<div style="position: relative;">
+		<img id="qianwen" src="../../img/prayOne/1@2x.png">
+		<img id="btn" src="../../img/prayOne/button@2x.png" onclick="zqyq()"
+			 style="width: 80%;height: 0.61rem;position: absolute;margin: 0 auto;left: 10%;bottom: 1.3%;text-align: center">
+	</div>
+
+	<div class="padding" style="position: relative">
+		<img src="../../img/prayOne/discern.png">
+		<img style="width: 1.26rem;height: 1.26rem;position: absolute;left: 0.41rem;bottom: 0.68rem" src="../../img/prayOne/ewm.png">
+	</div>
+
+	<div id="showbg" style="display: none">
+		<div id="mb" style="display: block" class="mio-modal-mask"></div>
+
+		<div onclick="" style="position: fixed;top: 0;right: 0;z-index: 2">
+			<img src="../../img/prayOne/click2@2x.png" style="width: 2.81rem;height: 1.70rem">
+		</div>
+
+		<div style="position: fixed;top: 15%;right: 0;z-index: 3;animation: shake 2s linear 0s 1">
+			<img id="shareImg" src="../../img/prayOne/pengyouquan@2x.png" style="width: 3.75rem;height: 3.92rem">
+		</div>
+	</div>
+
+</div>
+<script>
+    document.body.addEventListener('touchmove',bodyScroll,{passive: false});
+
+    $('#qianwen').attr('src', '../../img/prayOne/'+ randomNum(1, 15) +'@2x.png')
+
+    function zqyq() {
+        window.location.href = 'http://192.168.3.193:8888/mio/src/html/project/prayOne/index.html'
+    }
+
+    function share_tip(share_app_times, share_timeline_times) { // 分享处理
+        console.log('处理了吗')
+
+        if (share_timeline_times == -1) {
+            if (shareATimes == 1) {
+                $('#shareImg').attr('src', '../../img/prayOne/pengyouquan2@2x.png')
+                $('#shareImg').addClass('shakeTwo')
+            } else if (shareATimes == 2) {
+                document.body.removeEventListener('touchmove',bodyScroll,false);
+
+                $('#showbg').css('display', 'none')
+            }
+        }
+    }
+
+    var shareATimes = 0
+    var shareTTimes = 0
+    var hiddenProperty = 'hidden' in document ? 'hidden'
+        : 'webkitHidden' in document ? 'webkitHidden'
+            : 'mozHidden' in document ? 'mozHidden'
+                : null
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
+    var onVisibilityChange = function () {
+        if (!document[hiddenProperty]) {
+            window.show_time = Date.now()
+            if (show_time - hidden_time > 100) {
+                // if (show_time - hidden_time > 0) {
+                shareATimes += 1
+                if (shareATimes > 4) {
+                    shareTTimes += 1
+                    setTimeout(share_tip(shareATimes, shareTTimes), 100)
+                } else {
+                    setTimeout(share_tip(shareATimes, -1), 100)
+                }
+            } else {
+                console.log('分享失败')
+                // alert('分享失败')
+            }
+        } else {
+            window.hidden_time = Date.now()
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
+
+    function bodyScroll(event){
+        event.preventDefault();
+    }
+
+	function randomNum(min, max) { // 生成随机数 min<=num<=max
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+
+</script>
+</body>
+</html>

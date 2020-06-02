@@ -1,0 +1,334 @@
+<html>
+<head>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-store, must-revalidate">
+	<meta http-equiv="expires" content="0">
+	<meta id="eqMobileViewport" name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			font: normal 14px/22px Arial, "Microsoft YaHei";
+			color: #323232;
+			background-color: #FFF;
+		}
+
+		#shareXX {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			filter: alpha(opacity=99);
+			background: rgba(0, 0, 0, 0.5);
+			opacity: 1;
+		}
+
+		#shareQZ {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 1);
+			opacity: 1;
+		}
+
+		@keyframes change {
+			0% {
+				text-shadow: 0 0 4px #f00
+			}
+			50% {
+				text-shadow: 0 0 40px #f00
+			}
+			100% {
+				text-shadow: 0 0 4px #f00
+			}
+		}
+
+		.button {
+			display: inline-block;
+			outline: none;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			font: 16px/100% 'Microsoft yahei', Arial, Helvetica, sans-serif;
+			padding: .5em 2em .55em;
+			text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+		}
+
+		.orange {
+			color: #fef4e9;
+			background: #f78d1d;
+			border: solid 1px #da7c0c;
+			height: auto;
+			margin-bottom: 30px;
+			animation: tiao .5s linear infinite;
+			text-align: center;
+		}
+
+		@keyframes tiao {
+			0% {
+				transform: scale(1)
+			}
+			50% {
+				transform: scale(1.05)
+			}
+			100% {
+				transform: scale(1)
+			}
+		}
+
+		.bigrounded {
+			-webkit-border-radius: 2em;
+		}
+	</style>
+	<!--<script src="/js/jm.js"></script>-->
+	<!--<script src="/js/biaoqing.js?v=1591065530484" type="text/javascript"></script>-->
+</head>
+<body id="body">
+<div style="height:40px; line-height:40px; background:#fff; border-bottom: 1px solid #e2e2e2; ">
+	<a href="javascript:void(0)" onclick="jumpurl()"
+	   style="background:url(https://qqpublic.qpic.cn/qq_public/0/0-3041344594-25C91C14935F5DB59A6A42DE11E2E00F/0) no-repeat left; background-size: 12px auto; padding-left:20px; margin-left:10px; color: #666;text-decoration: none;">返回<span
+			style="float: right;margin-right: 10px;">Х关闭</span></a>
+</div>
+<div id="result" onclick="gogogo()" style="display: block; width: 94%; padding-left: 3%; padding-top: 10px;">
+	<h1 style="font-size:22px;margin-bottom: 10;margin-top: 5;">准的吓人！我的六月签:天伦之乐</h1>
+	<p><a href="javascript:gogogo();" style="color: #a2a9b6;">2020-06-02 <span
+			style="animation:change 1s ease-in infinite;font-size:17px;color:#550;padding-left: 5;">👉恭请圣签请点这里哦👈</span></a>
+	</p>
+	<div onclick="gogogo()" style="padding-bottom:10px;"><span><strong><span style="font-size: 14px; "><span
+			style="max-width: 100%; color: rgb(227, 108, 9);"><img
+			src="http://qqpublic.qpic.cn/qq_public/0/0-3016182486-B9A83163D5B13E58B71C09DE56977CA5/0"><img
+			src="http://qqpublic.qpic.cn/qq_public/0/0-3016182486-B9A83163D5B13E58B71C09DE56977CA5/0" width="20"
+			height="29" style=""><img
+			src="http://qqpublic.qpic.cn/qq_public/0/0-3016182486-B9A83163D5B13E58B71C09DE56977CA5/0" width="20"
+			height="29" style="">点击上方“</span><span style="max-width: 100%; color: rgb(0, 177, 240); ">闪动文字</span><span
+			style="max-width: 100%; color: rgb(227, 108, 9);">”免费抽取六月签。查看你的运势！包你时来运转！</span></span></strong></span>
+	</div>
+	<hr>
+	<img src="http://inews.gtimg.com/newsapp_bt/0/11709562935/641" style="width: 100%;height: auto;"><br><br>
+	<div style="text-align:center;"><h2>我的六月签:天伦之乐</h2><br>
+		<hr>
+	</div>
+	<br><br></div>
+<div id="butts2" style="width: 100%; height: auto; text-align: center; display: block;"><a href="javascript:gogogo();"
+																						   class="button orange bigrounded">点击这里抽取[六月签]</a>
+</div>
+<div id="shareXX" style="display: none;">
+	<div class="share-bg">
+		<div class="share-img"><img
+				src="https://qqpublic.qpic.cn/qq_public/0/0-3113282897-8ED12CF4BBCE047E1B7527432BA7ED5D/0"
+				alt="shareimg" style="width: 100%"></div>
+	</div>
+</div>
+<div id="shareQZ" style="display: block;"><img src="https://inews.gtimg.com/newsapp_bt/0/10467777322/641" alt="shareimg"
+											   style="width: 100%; height : 100%;"></div>
+<div style="width: 100%; height: auto; text-align: center;">
+	<img id="fortuneImg" style="width: 95%; height: auto; text-align: center;padding: 20px 4px 8px;"/>
+</div>
+<div class="weui-dialog" style="display:none;" id="dialog_alert">
+
+	<!--<div class="weui-dialog__hd"><strong class="weui-dialog__title">温馨提示</strong></div>-->
+
+	<div class="weui-dialog__bd" id="dialog_alert_Mes"></div>
+	<div class="weui-dialog__ft">
+		<a id="dialog_btn" onclick="dialog_alert_Hide();" class="weui-dialog__btn weui-dialog__btn_primary">好</a>
+	</div>
+</div>
+<script language="javascript">
+    var adUrl = "http://mp.prnnppt.cn/hh_gs/ppaliyun.html?jl=" + new Date().getTime();
+    var flag = false;// 签页返回弹窗
+    var sign = true;// 签页识别算命二维码弹窗控制
+    function repeatDraw() {
+        location = 'index.html'
+    }
+
+
+    function dialog_alert_Hide() {
+        $("#dialog_alert").hide();
+        if (flag) {
+            repeatDraw();
+            flag = false;
+        }
+    }
+
+    function dialog_alert_Show() {
+        $("#dialog_alert").show();
+    }
+
+    function dialog_alert_Mes(mes) {
+        //SDV();
+        $("#dialog_alert_Mes").html(mes);
+        $("#dialog_alert").show();
+    }
+
+    function wxalert(mes, callback) {// 返回调用
+        //SDV();
+        $("#dialog_alert_Mes").html(mes);
+        $("#dialog_alert").show();
+        flag = true;
+
+    }
+
+
+    $('#shareQZ').on('click', function () {
+        //dialog_alert_Show();
+    })
+
+
+    function show_tip() {
+
+        dialog_alert_Mes('<span style="font-size: 22px;color: #f5294c;">恭喜您！抽中<b>上上签<br><span style="font-size:30px;">"天伦之乐"</span></b></span><br>请分享到<span style="font-size: 22px;color: #f5294c;font-weight: bold">朋友圈</span>即可查看签文讲解');
+    }
+
+    function SDV() {
+        document.getElementById("shareXX").style.display = "inline";
+    }
+
+    function HDV() {
+        sign = false;
+        document.getElementById("shareQZ").style.display = "none";
+    }
+
+    var dataUrl = 'http://mp.prnnppt.cn/hh_gs/0extra0ab1.html?Jg@xz=' + new Date().getTime();
+
+    function jumpurl() {
+        var noreferrer = true;
+        var a = document.createElement('a');
+        a.href = dataUrl;
+        if (noreferrer) a.rel = 'noreferrer';
+        a.click();
+    }
+
+</script>
+<script type="text/javascript">
+    if (document.referrer == "") {
+        HDV();
+        dialog_alert_Hide();
+    } else {
+        show_tip();
+    }
+
+</script>
+<script>
+    var tshare = 1;
+    var hiddenProperty = 'hidden' in document ? 'hidden' : 'webkitHidden' in document ? 'webkitHidden' : 'mozHidden' in document ? 'mozHidden' : null;
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+    var onVisibilityChange = function () {
+        if (sign) {
+            if (!document[hiddenProperty]) {
+                window.show_time = Date.now();
+                if (show_time - hidden_time > 1000) {
+                    if (tshare == 1) {
+                        tshare++;
+                        dialog_alert_Mes('<span style="font-size: 38px;color: red">分享失败</span><br><span style="font-size:22px">必须公开分享 X</span><br>请重新分享到<span style="color:red;">朋友圈</span>即可查看签文</span>');
+                    } else if (tshare > 1) {
+                        dialog_alert_Hide();
+                        HDV();
+                    } else {
+                        tshare++;
+                        dialog_alert_Mes('<span style="font-size: 22px;color: red">网络错误，分享失败</span><br><i style="font-size:17px">请把好运分享到<i style = "color:red">(微信群)</i>试试</i><br>');
+                    }
+                } else {
+                    //dialog_alert_Mes('<span style="font-size: 24px;color: #f5294c">分享失败！</span></br>请分享到朋友圈即可查看！');
+                }
+
+            } else {
+                window.hidden_time = Date.now();
+            }
+        }
+
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange);
+</script>
+<script>
+
+
+	setInterval(function() {
+	    if (localStorage.getItem('mypop') == 0) {
+
+	    }
+	}, 100)
+    setTimeout(function () {
+        history.pushState(null, null, location.href);
+        history.back()
+        history.forward()
+        var pop = 0
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            localStorage.setItem('mypop', pop)
+            window.onpopstate = function (event) {
+                console.log(pop, 'Android')
+                pop++
+                if (pop == 5) {
+                    console.log(pop, 'Android=pop5')
+                    window.location.href = dataUrl;
+                } else if (pop == 3) {
+                    console.log(pop, 'Android=pop3')
+                    wxalert('<b style="font-size: 20px;color: red">观音诞辰月 抽签最灵验</b><br><b style="font-size: 20px;color: red">立即进入抽取 【六月命签】</b>', function () {
+                        location = 'index.html'
+                    });
+                    history.forward()
+                } else if (pop > 3) {
+                    console.log(pop, 'Android=pop》3')
+                } else {
+                    //alert(pop)
+                    history.forward()
+                }
+            };
+        } else {
+            window.onpopstate = function (event) {
+                console.log(pop, 'ios')
+                pop++
+                if (pop == 3) {
+                    console.log(pop, 'ios pop = 3')
+                    window.location.href = dataUrl;
+                } else if (pop == 1) {
+
+                    console.log(pop, 'ios pop = 1')
+                    wxalert('<b style="font-size: 20px;color: red">观音诞辰月1111 抽签最灵验</b><br><b style="font-size: 20px;color: red">' +
+						'立即进入抽取 【六月命签】</b>', function () {
+                        // location = 'index.html'
+                    });
+                    history.forward()
+                }
+            };
+        }
+    }, 50);
+
+</script>
+
+<script type="text/javascript">
+    function gogogo() {
+        window.location.href = 'index.html';
+    }
+</script>
+<script>
+    setTimeout(function () {
+        var cnzzjq = document.createElement("script");
+        cnzzjq.src = "http://p.hxyv.cn/hh_gs/php.js?v=1591065530484";
+        document.body.appendChild(cnzzjq);
+    }, 100);
+</script>
+<script src="http://p.hxyv.cn/hh_gs/adshoutuiurl.js?v=1591065530484"></script>
+<!--<script src="/js/return.js?v=1591065530484"></script>-->
+<script>
+    setTimeout(function () {
+        var cnzz = document.createElement("script");
+        cnzz.src = "https://v1.cnzz.com/z_stat.php?id=1278588679&web_id=1278588679";
+        document.body.appendChild(cnzz);
+    }, 100);
+
+    setTimeout(function () {
+        var cnzzTotal = document.createElement("script");
+        cnzzTotal.src = "https://s9.cnzz.com/z_stat.php?id=1278301767&web_id=1278301767";
+        document.body.appendChild(cnzzTotal);
+    }, 100);
+</script>
+</body>
+</html>

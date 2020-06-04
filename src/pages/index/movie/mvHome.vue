@@ -23,7 +23,8 @@
 				<view :class="PageCur=='lxj'?'text-mv-yellow':'text-gray'">连续剧</view>
 			</view>
 			<view @click="NavChange" class="action text-gray add-action" data-cur="mvIndex">
-				<button class="cu-btn fa-home fa bg-black shadow" :class="PageCur=='mvIndex'?'text-mv-yellow':'text-gray'"></button>
+				<button class="cu-btn fa-home fa bg-black shadow"
+						:class="PageCur=='mvIndex'?'text-mv-yellow':'text-gray'"></button>
 				<view :class="PageCur=='mvIndex'?'text-mv-yellow':'text-gray'">首页</view>
 			</view>
 			<view @click="NavChange" class="action" data-cur="zy">
@@ -45,16 +46,28 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         data() {
             return {
                 PageCur: 'mvIndex'
             }
         },
+        onShow() {
+            console.log(this.$store.state.indexPage)
+            if (this.$store.state.indexPage !== '') {
+                this.PageCur = this.$store.state.indexPage
+            } else {
+                this.PageCur = 'mvIndex'
+            }
+        },
+
         methods: {
             NavChange(e) {
                 this.PageCur = e.currentTarget.dataset.cur
             }
         },
+        ...mapState(['indexPage']),
     }
 </script>

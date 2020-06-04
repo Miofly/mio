@@ -111,7 +111,8 @@
                 keyword: '',
 				pageTotal: '',
                 status: false,
-                src: localStorage.getItem('qrcode')
+				page: '',
+                src: ''
             }
         },
         onLoad(e) {
@@ -124,6 +125,7 @@
             // #endif
 
             // #ifdef H5
+			this.src = localStorage.getItem('qrcode')
             var data = JSON.parse(localStorage.getItem('ssData'))
             this.datas = data.list
             this.page = data.pageInfo.page

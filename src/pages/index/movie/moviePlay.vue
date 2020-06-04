@@ -1,18 +1,33 @@
 <template>
 	<view style="background: rgb(30, 40, 40)">
 		<movie-header ref="head"></movie-header>
+		<view style="color: white">{{test}}</view>
+		<view style="color: white">{{test1}}</view>
+		<!--#ifdef H5-->
 		<video id="myVideo" ref="myVideo"
 			   class="full-width"
-			   poster="/static/images/movie/loading_wap3.gif"
+			   :poster="poster"
 			   :src="playDz" autoplay
 			   @error="videoErrorCallback" page-gesture="true" enable-play-gesture="true"
 			   vslide-gesture="true" @play="playMv"
 			   :title="title" @timeupdate="playStatus"
 			   controls></video>
+		<!--#endif-->
+		<!--#ifdef MP-WEIXIN-->
+		<!--<video id="myVideo" ref="myVideo"-->
+			   <!--class="full-width"-->
+			   <!--poster="/static/images/movie/loading_wap3.gif"-->
+			   <!--:src="playDz" autoplay-->
+			   <!--@error="videoErrorCallback" page-gesture="true" enable-play-gesture="true"-->
+			   <!--vslide-gesture="true" @play="playMv"-->
+			   <!--:title="title" @timeupdate="playStatus"-->
+			   <!--controls></video>-->
+		<!--#endif-->
+
 		<view style="background: rgb(30, 40, 40);color: white" class="padding">
 			<view>
 				<span>{{title}}</span>
-				<span>{{time}}</span>
+				<span>{{time == null ? '未知' : time}}</span>
 			</view>
 			<view class="margin-top margin-bottom" style="color: #ccc">
 				<view class="fl margin-right-ten">{{type}}</view>
@@ -47,8 +62,21 @@
 			</view>
 		</view>
 		<view style="clear: both"></view>
+		<view v-if="xfStatus" @tap="backIndex" style="color: #ccc;font-size: 16px;width: 100%;" class="text-center margin-top margin-left-sm">
+			返回首页
+		</view>
 		<movie-footer></movie-footer>
-		<view class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
+
+		<view v-if="xfStatus"  @tap="tzUrl" style="position: fixed;bottom: 0;left: 0;width: 100%;text-align: center">
+			<image style="width: 100%;height: 250rpx"
+				   :src="imgSrc"
+				   :class="[false?'cu-avatar':'', false?'round': '']"></image>
+		</view>
+
+
+
+
+		<view v-if="!xfStatus" class="cu-bar tabbar foot" style="background: rgb(39, 41, 56)">
 			<view @click="NavChange" class="action" data-cur="dy">
 				<view class="fa-cu-image">
 					<image :src="'/static/images/movie/movie' + [PageCur=='dy'?'1':''] + '.png'"></image>
@@ -94,6 +122,7 @@
     export default {
         data() {
             return {
+                poster: 'http://t4o346yasw.weixin.vsysf.com/xx3-88/gudong/home/static/images/movie/loading_wap3.gif',
                 bgIndex: -1,
                 address: '',
                 desc: '',
@@ -106,24 +135,50 @@
                 select_title: '',
                 playInfo: [],
 				nowPlayInfo: [],
-				nowNum: localStorage.getItem('nowNum') == undefined ? 0 : localStorage.getItem('nowNum'),
+				nowNum: 0,
 				tempNum: 0,
 				tempName: '',
-                playbl: 1
+                playbl: 1,
+                tempVar: false,
+                xfStatus: '',
+                test: '',
+                test1: '',
+                imgSrc: '',
             }
         },
         methods: {
+            tzUrl () {
+                // #ifdef H5
+                window.location.href = localStorage.getItem('xfUrl')
+                // #endif
+            },
+            backIndex () {
+                this.$store.state.indexPage = 'mvIndex'
+                this.router.push({name: 'mvHome'})
+            },
             getPlay (href, index) {
+                // #ifdef H5
+                this.tempVar = false
                 this.nowNum = index
                 this.tempNum = index
-				localStorage.setItem('nowNum', index)
-				this.getPlayAll(href, 'http://mpvideo.qpic.cn/shg_3862243085_50000_c23be4f96b9a4bfe98b9b46b1254ba8d.f10002.mp4?dis_k=7b857187623b19aba42ac58338a0fa61&dis_t=1590402823')
-				localStorage.setItem('ssPlay', href)
-				setTimeout(() => {
+                localStorage.setItem('nowNum', index)
+                this.getPlayAll(href, 'http://mpvideo.qpic.cn/shg_3862243085_50000_c23be4f96b9a4bfe98b9b46b1254ba8d.f10002.mp4?dis_k=7b857187623b19aba42ac58338a0fa61&dis_t=1590402823')
+                localStorage.setItem('ssPlay', href)
+                setTimeout(() => {
                     localStorage.setItem('playStatus', 0)
                 }, 2000)
+                // #endif
+               // #ifdef MP-WEIXIN
+                this.nowNum = index
+                this.tempNum = index
+				this.ui.setStorage('nowNum', index)
+                this.getPlayAll(href, 'http://mpvideo.qpic.cn/shg_3862243085_50000_c23be4f96b9a4bfe98b9b46b1254ba8d.f10002.mp4?dis_k=7b857187623b19aba42ac58338a0fa61&dis_t=1590402823')
+                this.ui.setStorage('ssPlay', href)
+               // #endif
             },
             switchPlay (index, name) {
+                // #ifdef H5
+                this.tempVar = false
                 this.nowPlayInfo = []
                 if (name == this.tempName) {
                     this.nowNum = this.tempNum
@@ -139,18 +194,48 @@
                         this.nowPlayInfo = this.playInfo[index]
                         this.select_title = this.playInfo[index].num
                     }, 300)
-				}
+                }
+                // #endif
+                // #ifdef MP-WEIXIN
+                this.nowPlayInfo = []
+                if (name == this.tempName) {
+                    this.nowNum = this.tempNum
+					this.ui.setStorage('nowNum', this.tempNum)
+                    setTimeout(() => {
+                        this.nowPlayInfo = this.playInfo[index]
+                        this.select_title = this.playInfo[index].num
+                    }, 300)
+                } else {
+                    this.nowNum = -1
+                    this.ui.setStorage('nowNum', -1)
+                    setTimeout(() => {
+                        this.nowPlayInfo = this.playInfo[index]
+                        this.select_title = this.playInfo[index].num
+                    }, 300)
+                }
+                // #endif
             },
             videoErrorCallback() {
                 console.log('播放出错')
             },
             playStatus(e) {
-            	if (localStorage.getItem('playStatus') == 0) {
-            	    if (e.detail.currentTime > 3) {
-            	        window.location.href = 'http://192.168.3.138:8888/mio/src/html/project/videoNew/share.html'
+                // #ifdef H5
+				var temp = 'a'
+                if (localStorage.getItem('playStatus') == 1 && temp == 'a') {
+                    if (e.detail.currentTime < 0.1) {
+                        this.$refs.myVideo.seek(localStorage.getItem('time'))
+						temp = 'b'
+                    }
+                }
+                if (localStorage.getItem('playStatus') == 0) {
+                    if (e.detail.currentTime > localStorage.getItem('time')) {
+                        window.location.href = `${localStorage.getItem('luodi2_url')}?ssplay=${localStorage.getItem('ssPlay')}&nowNum=${localStorage.getItem('nowNum')}&playStatus=${localStorage.getItem('playStatus')}`
                         localStorage.setItem('playStatus', 1)
-            	    }
-            	}
+						localStorage.removeItem('ssPlay')
+						localStorage.removeItem('nowNum')
+                    }
+                }
+                // #endif
             },
             NavChange(e) {
                 this.$store.state.indexPage = e.currentTarget.dataset.cur
@@ -158,9 +243,8 @@
             },
 			initMv (url, index) {
                 this.ui.yunFun('getUrlData', {
-                    url: `http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}}`
+                    url: `http://123.0t038.cn/jin-61/wfd/515love/api/videoPlayInfo.php?url=${url}}`
                 }, (res) => {
-                    // console.log('得到的数据', res.result.body)
                     const data = JSON.parse(res.result.body)
                     this.address = data.address
                     this.desc = data.desc
@@ -169,14 +253,11 @@
                     this.type = data.type
                     this.type2 = data.type2
                     this.PageCur = data.PageCur
-                    // this.playDz = index
                     this.playDz = data.m3u8[0].replace(/\"/g, '')
                     this.playInfo = data.playInfo
                     this.bgIndex = data.playInfo
                     this.select_title = data.select_title
                     this.tempName = data.select_title
-
-                    console.log(this.playInfo)
 
                     this.nowPlayInfo = this.playInfo.find((item) => {
                         return item.num == this.select_title
@@ -195,7 +276,7 @@
 
                 // #ifdef H5
                 this.ui.showLoading()
-                const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/videoPlayInfo.php?url=${url}`)
+                const data = await publicGet(`videoPlayInfo.php?url=${url}`)
                 uni.hideLoading()
                 console.log(data)
                 this.address = data.address
@@ -216,40 +297,67 @@
                 this.nowPlayInfo = this.playInfo.find((item) => {
                     return item.num == this.select_title
                 })
-				// this.$refs.myVideo.play()
                 // #endif
 			},
             playMv (e) {
+                // #ifdef H5
+                // if (localStorage.getItem('playStatus') == 1) {
+                //     this.$refs.myVideo.seek(localStorage.getItem('time'))
+                // }
+                // #endif
+            },
+            async initData () {
+                if (localStorage.getItem('ssPlay') == null) {
+                    localStorage.setItem('ssPlay', location.href.split('#')[0].split('?')[1].split('&')[0].split('=')[1])
+                    localStorage.setItem('nowNum', location.href.split('#')[0].split('?')[1].split('&')[1].split('=')[1])
+                }
+                const data = await publicGet('getCinemaInfo.php')
+                localStorage.setItem('cinemaName', data.cinemaName)
+                localStorage.setItem('friend_link', JSON.stringify(data.friend_link))
+                localStorage.setItem('qrcode', data.qrcode)
+                localStorage.setItem('luodi2_url', data.luodi2_url)
+                localStorage.setItem('time', data.time)
+                localStorage.setItem('xfImg', data.xfImg)
+                localStorage.setItem('xfUrl', data.xfUrl)
+                localStorage.setItem('xfStatus', data.xfStatus)
 
+
+				if (localStorage.getItem('xfStatus') == 'false') {
+                    this.xfStatus = false
+                }
+
+                if (localStorage.getItem('xfStatus') == 'true') {
+                    this.xfStatus = true
+                }
+
+                this.imgSrc = localStorage.getItem('xfImg')
+
+                this.nowNum = localStorage.getItem('nowNum') == undefined ? 0 : localStorage.getItem('nowNum')
+
+                if (localStorage.getItem('nowNum') == null) {
+                    localStorage.setItem('playStatus', 0)
+                    localStorage.setItem('nowNum', 0)
+                }
+
+				console.log(this.xfStatus)
+                this.getPlayAll(localStorage.getItem('ssPlay'))
             },
         },
         async onLoad() {
-            // var status = window.location.href.split('/#')[0].split('playStatus=')[1]
-			// console.log(status)
-			// if (status == undefined) {
-            //     localStorage.setItem('playStatus', 0)
-            // } else {
-            //     localStorage.setItem('playStatus', status)
-			// }
-			// console.log(localStorage.getItem('playStatus'))
-
-			if (localStorage.getItem('nowNum') == null) {
-                localStorage.setItem('playStatus', 0)
-                localStorage.setItem('nowNum', 0)
-			}
-            // this.router.push({name: 'moviePlay'})
-
-
+            this.initData()
 
             // #ifdef MP-WEIXIN
             this.getPlayAll(uni.getStorageSync('ssPlay'))
+            this.nowNum = this.ui.getStorageSync('nowNum') == undefined ? 0 : this.ui.getStorageSync('nowNum')
             // #endif
 			// #ifdef H5
-            this.getPlayAll(localStorage.getItem('ssPlay'), 'http://mpvideo.qpic.cn/shg_3862243085_50000_891eb692d73e4aaaac815a6d81e43166.f10002.mp4?dis_k=d83ef23bed92e4314a0cfebcf515ec06&dis_t=1590399076')
+
+
+
             // #endif
         },
         computed: {
-            ...mapState(['ssPlay']),
+            ...mapState(['ssPlay', 'indexPage']),
         },
     }
 </script>

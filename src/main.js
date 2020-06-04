@@ -12,11 +12,11 @@ import lz_team from './pages/index/lz/index/team'
 import lz_user from './pages/index/lz/index/user'
 import lz_rank from './pages/index/lz/index/rank'
 
-import dm from './pages/index/movie/dm'
-import dy from './pages/index/movie/dy'
-import mvIndex from './pages/index/movie/mvIndex'
-import lxj from './pages/index/movie/lxj'
-import zy from './pages/index/movie/zy'
+import dm from './pages/index/movieOld/dm'
+import dy from './pages/index/movieOld/dy'
+import mvIndex from './pages/index/movieOld/mvIndex'
+import lxj from './pages/index/movieOld/lxj'
+import zy from './pages/index/movieOld/zy'
 
 // import uView from '@/uView'
 import '@/common/css/module/font-awesome.css' // font-awesome图标

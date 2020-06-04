@@ -25,10 +25,10 @@
 		</div>
 		<div>
 			<span style="font-size:0.32rem;color:rgba(55,120,167,1);width: 1.48rem">抽签阅读</span>
-			<span style="font-size:0.32rem;color:rgba(153,153,153,1);margin-left: 0.09rem">昨天</span>
+			<span style="font-size:0.32rem;color:rgba(153,153,153,1);margin-left: 0.09rem" id="time"></span>
 		</div>
 		<div>
-			<img src="../../img/caishen/gzh.png">
+			<img style="width: 100%" src="../../img/caishen/gzh.png">
 		</div>
 	</div>
 
@@ -40,8 +40,8 @@
 	</div>
 
 	<div class="padding" style="position: relative">
-		<img style="width: 100%" src="../../img/prayOne/discern.png">
-		<img style="width: 2.6rem;position: absolute;left: 0.68rem;bottom: 1.28rem" src="../../img/prayOne/ewm.png">
+		<img style="width: 100%" src="../../img/caishen/discern.png">
+		<img style="width: 2.6rem;position: absolute;left: 0.68rem;bottom: 1.28rem" src="../../img/caishen/ewm.png">
 	</div>
 
 	<div id="showbg">
@@ -55,10 +55,11 @@
 			<img id="shareImg" src="../../img/caishen/character1@2x.png" style="width: 6.48rem;height: 3.96rem">
 		</div>
 	</div>
-
 </div>
 <script>
     document.body.addEventListener('touchmove', bodyScroll, {passive: false});
+
+    $('#time').html(new Date().toLocaleDateString().replace(/\//g, '-'))
 
     $('#qianwen').attr('src', '../../img/caishen/' + randomNum(1, 15) + '.png')
 
@@ -117,8 +118,6 @@
     function randomNum(min, max) { // 生成随机数 min<=num<=max
         return Math.floor(Math.random() * (max - min + 1)) + min
     }
-
-
 </script>
 </body>
 </html>

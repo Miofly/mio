@@ -29,7 +29,9 @@
             </view>
         </view>
 
-        <view style="margin-top: 13%;height: 100%" v-show="indexShow">
+		<view style="height: 10%"></view>
+
+        <view style="height: 90%" v-show="indexShow">
             <slot name="content"></slot>
         </view>
         <!--历史热门搜索-->

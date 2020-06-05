@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/css/reset.css"
+      rel="stylesheet"
+    />
+    <title></title>
+    <style>
+      .fenmian img {
+        width: 100%;
+        height: 180px !important;
+        object-fit: cover;
+        display: block;
+      }
+
+      .ad_position {
+        background: #ffffff;
+        padding: 2vw 0vw;
+      }
+
+      .ad-template-info {
+        border: none;
+      }
+
+      .bottom-one {
+        color: #ff4c41;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      #next-page,
+      #code_weima {
+        display: none;
+      }
+
+      /* luodi.css */
+      .head-top,
+      .content-article {
+        padding: 3vw 3vw 0;
+        padding-top: 60vh;
+      }
+
+      .html-content {
+        overflow: hidden;
+      }
+      .html-content * {
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .adz-title {
+        font-size: 20px;
+        font-family: PingFangSC;
+        color: #000;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      .see-more-box {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 15vw;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.6) 0%,
+          #fff 100%
+        );
+      }
+
+      .see-more-box .see-more {
+        padding-top: 4vw;
+        color: #0f9ffd;
+        text-align: center;
+      }
+
+      .see-more-box .see-more-arrow {
+        position: absolute;
+        top: 8vw;
+        display: block;
+        width: 100%;
+        height: 16px;
+        margin-top: 5px;
+        -webkit-animation: extandArrowFlow 1.2s ease infinite;
+        animation: extandArrowFlow 1.2s ease infinite;
+        background: url(https://zqz-up.oss-cn-beijing.aliyuncs.com/static/img/arrow_down_two.png)
+          no-repeat 50% / contain;
+      }
+
+      @keyframes extandArrowFlow {
+        0%,
+        100% {
+          margin-top: 5px;
+        }
+
+        50% {
+          margin-top: 10px;
+        }
+      }
+
+      .content-article {
+        position: relative;
+        padding-top: 4vw;
+        height: 14vh;
+        overflow: hidden;
+      }
+
+      .ad-list-title {
+        border-top: 15px solid #f2f2f2;
+        padding-top: 5vw;
+        padding-left: 3vw;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .ad-wrap-textlink {
+        padding: 0 3vw;
+        margin: 2vw 0;
+        color: #3ca9ff;
+        font-size: 16px;
+        text-overflow: -o-ellipsis-lastline;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+
+      .ad-wrap-textlink img {
+        width: 30px;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff !important;
+        overflow-x: hidden;
+        padding-bottom: 20vw;
+      }
+
+      .title_wrap {
+        padding: 15px;
+        border-bottom: 1px solid #e3e3e3;
+      }
+
+      .title_wrap .title_img {
+        width: 88px;
+        height: auto;
+      }
+
+      .ad-template-info {
+        padding: 2vw 0;
+        margin: 0 15px;
+        display: flex;
+        border-bottom: 1px solid #e3e3e3;
+        align-items: center;
+        font-size: 20px;
+      }
+
+      .no-border .ad-template-info {
+        border: 0;
+      }
+
+      .ad-template-info .item-left {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 4vw;
+      }
+
+      .ad-template-info .item-left .title {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        color: #404040;
+      }
+
+      .ad-template-info .item-left .item-extra {
+        display: flex;
+        align-items: center;
+      }
+
+      .ad-template-info .item-left .item-extra .read-date {
+        font-size: 12px;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        color: #aaa;
+      }
+
+      .ad-template-info .ad-img {
+        display: block;
+        width: 32%;
+        height: 80px;
+      }
+
+      .ad-template-info-big {
+        padding: 2vw 0;
+        margin: 0 15px;
+        display: flex;
+        border-bottom: 1px solid #e3e3e3;
+      }
+
+      .no-border .ad-template-info-big {
+        border: 0;
+      }
+
+      .ad-template-info-big .item-left {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        /* margin-right: 4vw; */
+      }
+
+      .ad-wrap-float {
+        margin: 3vw;
+      }
+
+      .ad-template-info-big .item-left .title {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+      }
+
+      .ad-template-info-big .item-left .item-extra {
+        display: flex;
+        align-items: center;
+      }
+
+      .ad-template-info-big .item-left .item-extra .read-date {
+        font-size: 12px;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        color: #aaa;
+      }
+
+      .ad-template-info-big .ad-img-big {
+        margin: 8px 0;
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .ad-template-3img {
+        padding: 2vw 0;
+        margin: 0 15px;
+        border-bottom: 1px solid #e3e3e3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .no-border .ad-template-3img {
+        border: 0;
+      }
+
+      .ad-template-3img .item-left {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 4vw;
+      }
+
+      .ad-template-3img .item-left .title {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+      }
+
+      .ad-template-3img .item-left .item-extra {
+        display: flex;
+        align-items: center;
+      }
+
+      .ad-template-3img .item-left .item-extra .read-date {
+        font-size: 12px;
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        color: #aaa;
+      }
+
+      .ad-template-3img .ad-img {
+        display: block;
+        width: 113px;
+        height: 80px;
+      }
+
+      .ad-template-3img .img_wrap {
+        display: flex;
+        justify-content: space-around;
+        margin: 5px 0;
+      }
+
+      .img_wrap .ad-img {
+        width: 113px;
+        height: 80px;
+        object-fit: cover;
+      }
+
+      .ad-wrap-float {
+        background: #fff;
+      }
+
+      #adBottom {
+        width: 100vw;
+        height: 20vw;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        display: none;
+      }
+
+      .ad-wrap-float img {
+        width: 100vw;
+        height: auto;
+      }
+
+      /*       .ad-wrap-float {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ad-wrap-float img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        } */
+
+      .ad-template-info .item-left .item-extra .type-tag {
+        border: 1px solid #e51314;
+        padding: 0 3px;
+        color: #e51314;
+        font-size: 12px;
+        margin-right: 5px;
+      }
+
+      .more-one {
+        display: block;
+        width: 94%;
+        background-color: #2196f3;
+        text-align: center;
+        color: #ffffff;
+        font-size: 18px;
+        height: 44px;
+        line-height: 44px;
+        border-radius: 44px;
+        margin: 6vw auto;
+        text-decoration: none;
+      }
+
+      .viewer-title {
+        display: none;
+      }
+
+      #galley img {
+        width: 100%;
+      }
+      .slide-new {
+        width: 100vw;
+        height: 20vw;
+        position: fixed;
+        bottom: -20vw;
+        left: 0;
+      }
+      .shake_new {
+        animation: move 3s 0s infinite;
+        -webkit-anima: move 3s 0s infinite;
+      }
+      @keyframes move {
+        0%,
+        65% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        70% {
+          -webkit-transform: rotate(6deg);
+          transform: rotate(6deg);
+        }
+        75% {
+          -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+        }
+        80% {
+          -webkit-transform: rotate(6deg);
+          transform: rotate(6deg);
+        }
+        85% {
+          -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+        }
+        90% {
+          -webkit-transform: rotate(6deg);
+          transform: rotate(6deg);
+        }
+        95% {
+          -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+      }
+      #adList2 .ad-wrap-float {
+        border-bottom: 1px solid #e3e3e3;
+        margin: 0vw 3vw;
+        padding: 2vw 0;
+      }
+      .wrap-title {
+        color: #eb0600;
+        margin-bottom: 6px;
+        font-size: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .ad-bottom-float,
+      .ad-bottom-float img {
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div id="galley">
+        <ul class="pictures">
+          <li><img data-original="http://jbp-api-test.you7h.com/storage/article_content/yAz5GyduwbnLRFvdfdmCzXZGS1w0QaOB1Z7HM4TH.jpeg" src="http://jbp-api-test.you7h.com/storage/article_content/yAz5GyduwbnLRFvdfdmCzXZGS1w0QaOB1Z7HM4TH.jpeg" alt="Cuo Na Lake"></li>
+        </ul>
+      </div> -->
+    <div class="head-top">
+      <!-- <div class="adz-title">__TITLE__</div> -->
+    </div>
+    <div id="adz-title"></div>
+    <div class="content-article">
+      <div class="html-content" id="conversation">
+        <div id="galley">
+          <!-- __CONTENT__ -->
+        </div>
+
+        <div class="see-more-box" id="more_btn">
+          <span id="see-more" class="see-more">点击展开全文>></span>
+          <!-- <div id="see-more-arrow" class="see-more-arrow"></div> -->
+        </div>
+      </div>
+    </div>
+    <div id="center-article"></div>
+
+    <div id="ad-center-title"></div>
+    <!--    <div class="ad-list-title">
+        <span class="title">相关推荐</span>
+    </div> -->
+    <div id="adBottom"></div>
+
+    <div class="ad_position">
+      <!-- 广告 -->
+      <div class="container">
+        <!-- adList -->
+        <div id="adList"></div>
+        <div id="adList1"></div>
+        <div id="adList2"></div>
+        <div id="adList3"></div>
+        <div id="adList4"></div>
+        <div id="adList5"></div>
+        <!-- template 用于广告列表 文字链 -->
+        <script id="ad-template-textlink" type="text/html">
+          <div class="ad-wrap-textlink" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <img src="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/img/shou.png" alt="">{{title}}
+          </div>
+        </script>
+        <!-- template 用于广告列表 单图 -->
+        <script id="ad-template" type="text/html">
+          <div class="ad-template-info" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <img class="ad-img" src="{{pics[0]}}" alt="">
+              <div class="item-left">
+                  <div class="title">{{title}}</div>
+             <!--      <div class="item-extra">
+                      <span class="type-tag">热</span>
+                      <div class="read-date">
+                          <span>浏览数：{{readNum}}</span>
+                          <span>{{date}}</span>
+                      </div>
+                  </div> -->
+              </div>
+          </div>
+        </script>
+        <!-- template 用于广告列表 大图 -->
+        <script id="ad-template-big" type="text/html">
+          <div class="ad-template-info-big" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <div class="item-left">
+                  <!-- <div class="title">{{title}}</div> -->
+                  <img class="ad-img-big" src="{{pics[0]}}" alt="">
+                  <!-- <div class="item-extra">
+                      <div class="read-date">
+                          <span>浏览数：{{readNum}}</span>
+                          <span>{{date}}</span>
+                      </div>
+                  </div> -->
+              </div>
+          </div>
+        </script>
+
+        <!-- 三图 -->
+        <script id="ad-template-3img" type="text/html">
+          <div class="ad-template-3img" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <div class="title">{{title}}</div>
+              <div class="img_wrap">
+                  {{each pics as value}}
+                  <img class="ad-img" src="{{value}}" alt="">
+                  {{/each}}
+              </div>
+
+              <div class="item-left">
+                  <div class="item-extra">
+                      <div class="read-date">
+                          <span>浏览数：{{readNum}}</span>
+                          <span>{{date}}</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </script>
+        <!-- template 悬浮广告用于文中 -->
+        <script id="ad-template-float" type="text/html">
+          <div class="ad-wrap-float" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <div class="wrap-title">{{title}}</div>
+              <img class="ad-img" src="{{pics[0]}}" alt="">
+          </div>
+        </script>
+        <!-- template 底部悬浮广告 -->
+        <script id="ad-bottom-float" type="text/html">
+          <div class="ad-bottom-float" onclick="Ad.adClick('{{links}}','{{ad_material_id}}','{{pid}}')">
+              <img class="ad-img" src="{{pics[0]}}" alt="">
+          </div>
+        </script>
+      </div>
+    </div>
+    <a class="more-one" id="see-more-back">
+      返回首页查看更多 &gt;&gt;
+    </a>
+  </body>
+  <script src="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/js/jquery3.4.0.min.ufo"></script>
+  <script src="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/js/lozad.min.js"></script>
+  <script src="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/js/EventEmitter.min.ufo"></script>
+  <script src="https://zqz-up.oss-cn-beijing.aliyuncs.com/static/js/art-template.ufo"></script>
+  <script>
+    /* 图片站位 懒加载*/
+    $(".html-content img").attr({
+      src:
+        "https://zqz-up.oss-cn-beijing.aliyuncs.com/static/img/placeholader.png",
+    });
+    var t = lozad(".html-content img", {
+      threshold: 0.1,
+      load: function (t) {
+        (t.src = t.getAttribute("data-src")),
+          (t.onload = function () {
+            this.style.height = "auto";
+          });
+      },
+    });
+    t.observe();
+
+    /* 点击显示更多 */
+    $(".see-more-box").click(function () {
+      $(".see-more-box").hide();
+      $(".content-article").css({ height: "auto", overflow: "auto" });
+      $("#adBottom").show();
+    });
+  </script>
+
+  <script>
+
+    var base_url_click = "http://eastern-nova.com/api/";  //用于点击
+
+    var base_url =
+      "https://1905658906400513.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/kylin/";
+    //  ?ad_position_id=33
+    var Ad = {
+      /**
+       * 判断元素是否在可视区
+       * 用于广告曝光率
+       */
+      isElementInViewport: function (el) {
+        if (typeof jQuery === "function" && el instanceof jQuery) {
+          el = el[0];
+        }
+
+        var rect = el.getBoundingClientRect();
+
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      },
+      /**
+       * 节流
+       */
+      throttle: function (func, wait, options) {
+        var context, args, result;
+        var timeout = null;
+        var previous = 0;
+        if (!options) options = {};
+        var later = function () {
+          previous = options.leading === false ? 0 : new Date().getTime();
+          timeout = null;
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        };
+        return function () {
+          var now = new Date().getTime();
+          if (!previous && options.leading === false) previous = now;
+          // 计算剩余时间
+          var remaining = wait - (now - previous);
+          context = this;
+          args = arguments;
+          if (remaining <= 0 || remaining > wait) {
+            if (timeout) {
+              clearTimeout(timeout);
+              timeout = null;
+            }
+            previous = now;
+            result = func.apply(context, args);
+            if (!timeout) context = args = null;
+          } else if (!timeout && options.trailing !== false) {
+            // options.trailing=true时，延时执行func函数
+            timeout = setTimeout(later, remaining);
+          }
+          return result;
+        };
+      },
+      /**
+       * 发送曝光接口
+       * positionId 广告位ID
+       * materialId 素材ID
+       */
+      sendMonter:function(positionId,materialId){
+        $.ajax({
+            type: "get",
+            url: base_url + "ad_show/?ad_position_id="+positionId+'&ad_material_id='+materialId,
+            success: function (res) {
+       
+            },
+            error: function (err) {
+              console.log(err);
+            },
+          });
+      },
+      /**
+       * 监测曝光率
+       * div 广告dom
+       * positionId 广告位ID
+       * materialId 素材ID
+       */
+      checkMonitor: function (div, positionId, materialId) {
+        var isInViewport = Ad.isElementInViewport(div);
+        if (isInViewport) {
+            Ad.sendMonter(positionId,materialId)
+          return;
+        }
+
+        var checkFun = Ad.throttle(function () {
+          if (Ad.isElementInViewport(div)) {
+            window.removeEventListener("scroll", checkFun, true);
+            Ad.sendMonter(positionId,materialId)
+          }
+        }, 200);
+
+        window.addEventListener("scroll", checkFun, true);
+      },
+      /**
+       * pid 广告位id
+       * templateId 模板script的id
+       * wrapDomId 插入广告模板的父级id
+       * adWrapClass 广告wrap的class 用于寻找被插入的广告
+       * data 拓展的数据
+       * @param {*} params
+       */
+      singleAd: function (params, callback) {
+        var pid = params.id,
+          templateId = params.templateId,
+          wrapDomId = params.wrapDomId,
+          adWrapClass = params.adWrapClass,
+          data = params.data || {};
+
+        Ad.fetchAd($.extend({ pid: pid }), function (err, res) {
+          callback && callback(res);
+          if (err) return;
+
+
+          res.data.links = res.data.links[0];
+          // res.data.links[Math.floor(Math.random() * res.data.links.length)];
+          //获取模板生成的html
+          var html = template(
+            templateId,
+            $.extend(res.data, {
+              pid: pid,
+              date: Ad.getDate(), //日期
+              readNum: Ad.random(100000, 500000), //阅读数
+            })
+          );
+          //插入模板生成的html
+          $("#" + wrapDomId).append(html);
+          // 查询被插入的广告 用于曝光监测
+          var currAd = $("#" + wrapDomId + " ." + adWrapClass + ":last")[0];
+          //启动广告曝光监测 传递 ad_position_id ad_material_id
+          // Ad.checkMonitor(currAd, res.monitorUrl);
+          Ad.checkMonitor(currAd, pid, res.data.ad_material_id);
+        });
+      },
+      /**
+       * 请求广告数据
+       * data 要传的数据 默认已经穿了ua 这里一般只传pid即可
+       * callback 获取数据回调 callback(err,res)
+       * 注意：此方法只获取数据，渲染方法需与该方法解耦
+       */
+      fetchAd: function (data, callback, complete) {
+        var data = data || {};
+        $.ajax({
+          type: "get",
+          url: base_url + "get_ad/?ad_position_id=" + data.id,
+          success: function (res) {
+            callback && callback(null, res);
+          },
+          error: function (err) {
+            callback && callback(err);
+          },
+          complete: function () {
+            complete && complete();
+          },
+        });
+      },
+      /**
+       * 点击跳转
+       * ad_material_id  传入广告ID
+       * clickUrl   跳转路径
+       */
+      adClick: function (clickUrl, ad_material_id, pid) {
+        $.ajax({
+          type: "post",
+          url: base_url_click + "charging",
+          data: { ad_material_id: ad_material_id, ad_position_id: pid },
+          success: function (res) {
+           
+          },
+          error: function (err) {
+            console.log(err);
+          },
+        });
+        location.href = clickUrl;
+      },
+      /**
+       * 获取年月日
+       */
+      getDate: function () {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        month = month < 10 ? "0" + month : month;
+        strDate = strDate < 10 ? "0" + strDate : strDate;
+        return year + "-" + month + "-" + strDate;
+      },
+      /**
+       * 获取范围随机数
+       */
+      random: function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      },
+    };
+
+    var adListIndex = 0;
+    var arr_Id = [
+      {
+        id: 3,
+        templateId: "ad-template",
+        wrapDomId: "adList",
+        adWrapClass: "ad-template-info",
+      },
+      {
+        id: 6,
+        templateId: "ad-template",
+        wrapDomId: "adList1",
+        adWrapClass: "ad-template-info",
+      },
+      {
+        id: 19,
+        templateId: "ad-template-float", //模板script的id
+        wrapDomId: "adList2", //插入广告模板的父级id
+        adWrapClass: "ad-wrap-float", //广告wrap的class 用于寻找被插入的广告
+      },
+      {
+        id: 20,
+        templateId: "ad-bottom-float", //模板script的id
+        wrapDomId: "adBottom", //插入广告模板的父级id
+        adWrapClass: "ad-bottom-float", //广告wrap的class 用于寻找被插入的广告
+      },
+      {
+        id: 7,
+        templateId: "ad-template",
+        wrapDomId: "adList2",
+        adWrapClass: "ad-template-info",
+      },
+      {
+        id: 8,
+        templateId: "ad-template",
+        wrapDomId: "adList2",
+        adWrapClass: "ad-template-info",
+      },
+      {
+        id: 9,
+        templateId: "ad-template",
+        wrapDomId: "adList2",
+        adWrapClass: "ad-template-info",
+      },
+      {
+        id: 10,
+        templateId: "ad-template",
+        wrapDomId: "adList2",
+        adWrapClass: "ad-template-info",
+      },
+
+      /*       {
+        id: 8,
+        templateId: "ad-template",
+        wrapDomId: "adList3",
+        adWrapClass: "ad-template-info",
+      },
+ */
+    ];
+
+
+    $(function () {
+      arr_Id.map(function (item, index) {
+        Ad.singleAd($.extend(item), function (res) {});
+      });
+    });
+  </script>
+</html>

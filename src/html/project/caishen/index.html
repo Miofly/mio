@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
 <body>
 <div>
-	<audio src="../../img/caishen/gy.mp3" id="bjMusic" class="bj_music" autobuffer autoloop loop></audio>
+	<audio src="../../img/caishen/gy.mp3" id="bjMusic" class="bj_music" autoplay autoloop loop></audio>
 	<audio src="../../img/caishen/yaoqian.mp3" preload="auto" id="mp3"></audio>
 	<!--蒙版-->
 	<div id="mb" style="display: none" class="mio-modal-mask"></div>
@@ -52,72 +52,34 @@
 	</div>
 </div>
 <script>
-    function tz() {
-        window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/caishen/share.html'
-    }
+	setTimeout(() => {
+        audioAutoPlay("bjMusic");
+	}, 110)
+    $('body').click(function () {
+        audioAutoPlay("bjMusic");
 
-    if (window.DeviceMotionEvent) {
-        window.addEventListener("devicemotion", deviceMotionHandler, false);
-    }
-    var SHAKE_THRESHOLD = 4000;
-    var last_update = 0;
-    var x,
-        y,
-        z,
-        last_x = 0,
-        last_y = 0,
-        last_z = 0;
-    var numshake = 0;
+    })
 
-    audioAutoPlay("bjMusic");
-
-    var t = setTimeout(function () {
-        shakeTong()
-    }, 8000)
-
-    function deviceMotionHandler(eventData) {
-        var acceleration = eventData.accelerationIncludingGravity;
-        var curTime = new Date().getTime();
-        if (curTime - last_update > 10) {
-            var diffTime = curTime - last_update;
-            last_update = curTime;
-            x = acceleration.x;
-            y = acceleration.y;
-            z = acceleration.z;
-            var speed =
-                (Math.abs(x + y + z - last_x - last_y - last_z) / diffTime) *
-                10000;
-            if (speed > SHAKE_THRESHOLD) {
-                if (numshake >= 1) {
-                    return;
-                } else {
-                    shakeTong();
-                    numshake++;
-                }
-            }
-            last_x = x;
-            last_y = y;
-            last_z = z;
-        }
-    }
 
     function shakeTong() {
-        if (!$('#tong').hasClass('shake1')) {
-            clearTimeout(t)
-            audioAutoPlay("mp3");
-            $('#tong').addClass('shake1')
-            setTimeout(function () {
-                $('#mb').css('display', 'block')
-                $('#getQian').css('display', 'block')
-                $('#getQianBtn').css('display', 'block')
-                $(document).bind("click", tz);
-                $('#tong').removeClass('shake1')
-            }, 2000)
 
-            setTimeout(function () {
-                // tz()
-            }, 8000)
-        }
+        // if (!$('#tong').hasClass('shake1')) {
+        // clearTimeout(t)
+        audioAutoPlay("mp3");
+        console.log(22)
+        // $('#tong').addClass('shake1')
+        // setTimeout(function () {
+        //     $('#mb').css('display', 'block')
+        //     $('#getQian').css('display', 'block')
+        //     $('#getQianBtn').css('display', 'block')
+        //     $(document).bind("click", tz);
+        //     $('#tong').removeClass('shake1')
+        // }, 2000)
+        //
+        // setTimeout(function () {
+        //     // tz()
+        // }, 8000)
+        // }
     }
 
     function audioAutoPlay(id) {
@@ -125,8 +87,60 @@
         audio1.play();
         document.addEventListener("WeixinJSBridgeReady", function () {
             audio1.play();
+            console.log(22222)
         }, false);
     }
+
+    // function tz() {
+    //     window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/caishen/share.html'
+    // }
+	//
+    // if (window.DeviceMotionEvent) {
+    //     window.addEventListener("devicemotion", deviceMotionHandler, false);
+    // }
+    // var SHAKE_THRESHOLD = 4000;
+    // var last_update = 0;
+    // var x,
+    //     y,
+    //     z,
+    //     last_x = 0,
+    //     last_y = 0,
+    //     last_z = 0;
+    // var numshake = 0;
+
+
+
+    // var t = setTimeout(function () {
+    //     shakeTong()
+    // }, 8000)
+
+    // function deviceMotionHandler(eventData) {
+    //     var acceleration = eventData.accelerationIncludingGravity;
+    //     var curTime = new Date().getTime();
+    //     if (curTime - last_update > 10) {
+    //         var diffTime = curTime - last_update;
+    //         last_update = curTime;
+    //         x = acceleration.x;
+    //         y = acceleration.y;
+    //         z = acceleration.z;
+    //         var speed =
+    //             (Math.abs(x + y + z - last_x - last_y - last_z) / diffTime) *
+    //             10000;
+    //         if (speed > SHAKE_THRESHOLD) {
+    //             if (numshake >= 1) {
+    //                 return;
+    //             } else {
+    //                 shakeTong();
+    //                 numshake++;
+    //             }
+    //         }
+    //         last_x = x;
+    //         last_y = y;
+    //         last_z = z;
+    //     }
+    // }
+	//
+
 </script>
 </body>
 </html>

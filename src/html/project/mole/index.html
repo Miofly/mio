@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>抽取灵签，查看我的本月运势</title>
+	<script src="jquery.js"></script>
+	<script type="text/javascript" src="adaptive.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<style>
+		input[type=radio] {
+			display: inline-block;
+			vertical-align: middle;
+			width: 20px;
+			height: 20px;
+			-webkit-appearance: none;
+			background-color: transparent;
+			border: 0;
+			outline: 0 !important;
+			line-height: 20px;
+			color: #d8d8d8;
+		}
+
+		input[type=radio]:after {
+
+			content: "";
+
+			display: block;
+
+			width: 20px;
+
+			height: 20px;
+
+			border-radius: 50%;
+
+			text-align: center;
+
+			line-height: 14px;
+
+			font-size: 16px;
+
+			color: #fff;
+
+			border: 3px solid #ddd;
+
+			background-color: #fff;
+
+			box-sizing: border-box;
+
+		}
+
+		input[type=radio]:checked:after {
+
+			content: "L";
+
+			transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
+
+			-webkit-transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
+
+			border-color: #099414;
+
+			background-color: #099414;
+
+		}
+
+	</style>
+<body style="background: rgb(212, 169, 126)">
+<div>
+	<div>
+		<img style="width: 100%" src="../../img/mole/background@2x.png">
+	</div>
+	<div style="width:90%;height:4.9rem;background:rgba(253,249,241,1);border-radius:0.22rem;
+	position: fixed;top: 33%;left: 5%;">
+		<!--<div style="width:5.56rem;height:0.72rem;font-size:0.74rem;color:rgba(205,43,52,1);">请选择痣所在位置</div>-->
+		<div style="text-align: center">请选择痣所在位置</div>
+		<div style="width:92%;height:1.06rem;background:rgba(246,234,223,1);border-radius:0.22rem;position: relative;left: 4%;
+		line-height: 1.06rem">
+			<span style="position: absolute;left: 10%;font-size:0.42rem;color:#CD2B34;">点击选择痣的位置</span>
+			<img src="../../img/mole/select.png"
+				 style="width: 0.62rem;height: 0.34rem;position: absolute;right: 0.4rem;top: 0.36rem;">
+		</div>
+		<div style="width: 100%;text-align: center">
+			<img src="../../img/mole/icon@2x.png" style="width: 4.76rem;height: 0.94rem">
+		</div>
+	</div>
+
+	<div style="width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;">
+		<form>
+			<div class="">
+				<label><input type="radio" name="radio2">这是radioA</label>
+			</div>
+			<div class="">
+				<label><input type="radio" value="111" name="radio2">这是radio2</label>
+			</div>
+			<div class="">
+				<label><input type="radio" value="222" name="radio2">这是radi22o2</label>
+			</div>
+		</form>
+	</div>
+
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>抽取灵签，查看我的本月运势</title>
+	<script src="jquery.js"></script>
+	<script type="text/javascript" src="adaptive.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/share.css"/>
+</head>
+<body style="font-size: 0.05rem;" class="bg-white">
+<div>
+	<div style="padding: 0.30rem">
+		<div style="margin-left: 0.05rem">
+			<img src="../../img/caishen/back.png">
+		</div>
+		<div style="font-size:0.46rem;color:rgba(0,0,0,1);height:0.78rem;">
+			恭喜你抽到的：六月灵签-上上签
+		</div>
+		<div>
+			<span style="font-size:0.32rem;color:rgba(55,120,167,1);width: 1.48rem">抽签阅读</span>
+			<span style="font-size:0.32rem;color:rgba(153,153,153,1);margin-left: 0.09rem" id="time"></span>
+		</div>
+		<div>
+			<img style="width: 100%" src="../../img/caishen/gzh.png">
+		</div>
+	</div>
+
+	<div style="position: relative;">
+		<img id="qianwen" style="width: 100%" src="../../img/caishen/1.png">
+		<img id="btn" src="../../img/caishen/icon@2x.png" onclick="zqyq()"
+			 style="animation: scale-upOne 2s linear 0s infinite alternate;
+			 width: 4.32rem;height: 1.02rem;position: absolute;margin: 0 auto;left: 21%;bottom: 2.5%;text-align: center">
+	</div>
+
+	<div class="padding" style="position: relative">
+		<img style="width: 100%" src="../../img/caishen/discern.png">
+		<img style="width: 2.6rem;position: absolute;left: 0.68rem;bottom: 1.28rem" src="../../img/caishen/ewm.png">
+	</div>
+
+	<div id="showbg">
+		<div id="mb" style="display: block" class="mio-modal-mask"></div>
+
+		<div onclick="" style="position: fixed;top: 0.5rem;right: 0.3rem;z-index: 12">
+			<img id="share" src="../../img/caishen/share1@2x.png" style="width: 6.2rem;height: 2.9rem">
+		</div>
+
+		<div style="position: fixed;top: 32%;right: 0;z-index: 3;animation: shake 2s linear 0s 1;text-align: center;width: 100%">
+			<img id="shareImg" src="../../img/caishen/character1@2x.png" style="width: 6.48rem;height: 3.96rem">
+		</div>
+	</div>
+</div>
+<script>
+    document.body.addEventListener('touchmove', bodyScroll, {passive: false});
+
+    $('#time').html(new Date().toLocaleDateString().replace(/\//g, '-'))
+
+    $('#qianwen').attr('src', '../../img/caishen/' + randomNum(1, 15) + '.png')
+
+    function zqyq() {
+        window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/caishen/index.html'
+    }
+
+    function share_tip(share_app_times, share_timeline_times) { // 分享处理
+        console.log('处理了吗')
+
+        if (share_timeline_times == -1) {
+            if (shareATimes == 1) {
+                $('#shareImg').attr('src', '../../img/caishen/character2@2x.png')
+                $('#share').attr('src', '../../img/caishen/share2@2x.png')
+                $('#shareImg').addClass('shakeTwo')
+            } else if (shareATimes == 2) {
+                document.body.removeEventListener('touchmove', bodyScroll, false);
+                $('#showbg').css('display', 'none')
+            }
+        }
+    }
+
+    var shareATimes = 0
+    var shareTTimes = 0
+    var hiddenProperty = 'hidden' in document ? 'hidden'
+        : 'webkitHidden' in document ? 'webkitHidden'
+            : 'mozHidden' in document ? 'mozHidden'
+                : null
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
+    var onVisibilityChange = function () {
+        if (!document[hiddenProperty]) {
+            window.show_time = Date.now()
+            // if (show_time - hidden_time > 100) {
+            // if (show_time - hidden_time > 0) {
+            shareATimes += 1
+            if (shareATimes > 4) {
+                shareTTimes += 1
+                setTimeout(share_tip(shareATimes, shareTTimes), 100)
+            } else {
+                setTimeout(share_tip(shareATimes, -1), 100)
+            }
+            // } else {
+            //     console.log('分享失败')
+            // alert('分享失败')
+            // }
+        } else {
+            window.hidden_time = Date.now()
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
+
+    function bodyScroll(event) {
+        event.preventDefault();
+    }
+
+    function randomNum(min, max) { // 生成随机数 min<=num<=max
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+</script>
+</body>
+</html>

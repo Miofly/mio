@@ -9,7 +9,7 @@
 	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 	<meta content="telephone=no" name="format-detection"/>
 	<meta content="email=no" name="format-detection"/>
-	<title>抽取灵签，查看我的本月运势</title>
+	<title>痣相占卜测运</title>
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="adaptive.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
@@ -17,89 +17,136 @@
 		input[type=radio] {
 			display: inline-block;
 			vertical-align: middle;
-			width: 20px;
-			height: 20px;
+			width: 25px;
+			height: 25px;
 			-webkit-appearance: none;
 			background-color: transparent;
 			border: 0;
 			outline: 0 !important;
 			line-height: 20px;
-			color: #d8d8d8;
+			color: black;
 		}
 
 		input[type=radio]:after {
-
 			content: "";
-
 			display: block;
-
 			width: 20px;
-
 			height: 20px;
-
 			border-radius: 50%;
-
 			text-align: center;
-
-			line-height: 14px;
-
-			font-size: 16px;
-
-			color: #fff;
-
-			border: 3px solid #ddd;
-
+			line-height: 20px;
+			font-size: 15px;
+			color: white;
+			border: 1px solid #ddd;
 			background-color: #fff;
-
 			box-sizing: border-box;
-
 		}
 
 		input[type=radio]:checked:after {
 			content: "L";
 			transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
 			-webkit-transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
-			border-color: #099414;
-			background-color: #099414;
+			border-color: #7bbfea;
+			background-color: #7bbfea;
 		}
 
 	</style>
 <body style="background: rgb(212, 169, 126)">
-<div>
+<div style="overflow-y: hidden!important;">
 	<div>
-		<img style="width: 100%" src="../../img/mole/background@2x.png">
+		<img style="width: 100%;" src="../../img/mole/background@2x.png">
 	</div>
 	<div style="width:90%;height:4.9rem;background:rgba(253,249,241,1);border-radius:0.22rem;
-	position: fixed;top: 33%;left: 5%;">
-		<!--<div style="width:5.56rem;height:0.72rem;font-size:0.74rem;color:rgba(205,43,52,1);">请选择痣所在位置</div>-->
-		<div style="text-align: center">请选择痣所在位置</div>
-		<div style="width:92%;height:1.06rem;background:rgba(246,234,223,1);border-radius:0.22rem;position: relative;left: 4%;
-		line-height: 1.06rem">
-			<span style="position: absolute;left: 10%;font-size:0.42rem;color:#CD2B34;">点击选择痣的位置</span>
+	position: fixed;top: 35%;left: 5%;">
+		<div style="width:100%;text-align: center;margin-top: 0.6rem">
+			<img src="../../img/mole/choice.png" style="width: 5.56rem;height: 0.72rem;">
+		</div>
+
+		<div onclick="showChoice()" style="width:92%;height:1.06rem;background:rgba(246,234,223,1);border-radius:0.22rem;position: relative;left: 4%;
+		line-height: 1.06rem;top: 0.46rem;">
+			<span style="position: absolute;left: 10%;font-size:0.42rem;color:#CD2B34;" id="moleName">点击选择痣的位置</span>
 			<img src="../../img/mole/select.png"
 				 style="width: 0.62rem;height: 0.34rem;position: absolute;right: 0.4rem;top: 0.36rem;">
 		</div>
-		<div style="width: 100%;text-align: center">
+		<div onclick="ljfx()" style="width: 100%;text-align: center;margin-top: 0.86rem;-webkit-animation: scale-upOne 2s linear 0s infinite alternate;-o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
 			<img src="../../img/mole/icon@2x.png" style="width: 4.76rem;height: 0.94rem">
 		</div>
 	</div>
-
-	<!--<div style="width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;">-->
-		<!--<form>-->
-			<!--<div class="">-->
-				<!--<label><input type="radio" name="radio2">这是radioA</label>-->
-			<!--</div>-->
-			<!--<div class="">-->
-				<!--<label><input type="radio" value="111" name="radio2">这是radio2</label>-->
-			<!--</div>-->
-			<!--<div class="">-->
-				<!--<label><input type="radio" value="222" name="radio2">这是radi22o2</label>-->
-			<!--</div>-->
-		<!--</form>-->
-	<!--</div>-->
 </div>
-<script>
+<div id="choiceDiv" style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;overflow-y: auto">
+	<form style="width: 100%" id="comment1s" >
 
+	</form>
+</div>
+
+<script>
+    var tempList = [
+        {name: '脸颊', val: '7'},
+        {name: '眉毛', val: '9'},
+        {name: '嘴角', val: '1'},
+        {name: '眼角', val: '2'},
+        {name: '嘴唇', val: '35'},
+        {name: '眉心', val: '40'},
+        {name: '眼眶', val: '36'},
+        {name: '鼻梁', val: '37'},
+        {name: '鼻尖', val: '38'},
+        {name: '颧骨', val: '39'},
+        {name: '额头', val: '6'},
+        {name: '耳朵', val: '4'},
+        {name: '鼻翼', val: '3'},
+        {name: '左下巴', val: '5'},
+        {name: '右下巴', val: '34'},
+        {name: '锁骨部分', val: '17'},
+        {name: '脖子', val: '8'},
+        {name: '胸部', val: '10'},
+        {name: '背部', val: '11'},
+        {name: '腹部', val: '13'},
+        {name: '腰部', val: '14'},
+        {name: '臀部', val: '15'},
+        {name: '肩部', val: '16'},
+        {name: '肚脐周围', val: '12'},
+        {name: '手腕', val: '21'},
+        {name: '手背', val: '22'},
+        {name: '手指', val: '24'},
+        {name: '手掌心', val: '23'},
+        {name: '上手臂', val: '18'},
+        {name: '下手臂', val: '19'},
+        {name: '胳膊肘', val: '20'},
+        {name: '腋下', val: '25'},
+        {name: '大腿', val: '26'},
+        {name: '小腿', val: '27'},
+        {name: '膝盖', val: '28'},
+        {name: '脚踝', val: '29'},
+        {name: '脚背', val: '31'},
+        {name: '脚趾', val: '33'},
+        {name: '脚后跟', val: '30'},
+        {name: '脚底板', val: '32'},
+    ]
+    $('#comment1s').html('')
+    var html = ''
+    $.each(tempList, function (key, val) {
+        html += '<div onclick="choiceMethod()" style="width: 100%;height: 0.8rem;border-bottom: 1px solid #eeeeee;line-height: 0.8rem;text-align: center">' +
+            '<label style="width: 100%;display: block;font-size: 0.3rem">' +
+            '<input type="radio" name="radio2" value="' + tempList[key].val + '" true_name="' + tempList[key].name + '">' + tempList[key].name + '</label></div>'
+    })
+    $('#comment1s').append(html)
+
+    function choiceMethod() {
+		$('#choiceDiv').hide(500)
+		$('#moleName').html($('input[name="radio2"]:checked').attr('true_name'))
+    }
+
+    function showChoice() {
+        $('#choiceDiv').show(500)
+    }
+
+    function ljfx() {
+        if ($('input[name="radio2"]:checked').val() == undefined) {
+            $('#choiceDiv').show(500)
+        } else {
+            console.log($('input[name="radio2"]:checked').val())
+		}
+    }
 </script>
 </body>
 </html>

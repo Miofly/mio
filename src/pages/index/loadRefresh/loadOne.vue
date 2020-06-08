@@ -63,21 +63,37 @@
         mixins: [MescrollMixin],
         data() {
             return {
-                downOption: {
+                downOption: { // 下拉刷新的配置参数
+                    use: true, // 是否启用下拉刷新
+                    auto: true, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
                     textInOffset: '下拉刷新',
                     textOutOffset: '释放更新',
-                    textLoading: '正在拼命的加载中 ...'
+                    textLoading: '正在拼命的加载中 ...',
+                    bgColor: 'transparent',
+                    textColor: 'gray',
+
                 },
-                // 上拉加载的常用配置
-                upOption: {
-                    use: true, // 是否启用上拉加载; 默认true
-                    auto: true, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
-                    noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
-                    empty: {
-                        tip: '暂无相关数据'
-                    },
+                upOption: { // 上拉加载的常用配置
+                    use: true, // 是否启用下拉刷新
+                    auto: true, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
+                    noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据
                     textLoading: '正在玩命的加载...',
-                    textNoMore: '我也是有底线的...'
+                    textNoMore: '我也是有底线的...',
+                    bgColor: 'transparent',
+                    textColor: 'gray',
+                    page: {
+                        num: 0,
+                        size: 10
+                    },
+					toTop: {
+                       	src: ''
+					},
+                    empty: {
+                        use: true,
+						icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1444001776,3669515325&fm=15&gp=0.jpg',
+                        tip: '暂无相关数据111',
+                        btnText: '这是按钮文字'
+                    },
                 },
                 dataLists: []
             }

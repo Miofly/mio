@@ -37,7 +37,7 @@
 			line-height: 20px;
 			font-size: 15px;
 			color: white;
-			border: 1px solid #ddd;
+			border: 2px solid #000;
 			background-color: #fff;
 			box-sizing: border-box;
 		}
@@ -75,8 +75,9 @@
 	</div>
 </div>
 <div id="choiceDiv"
-	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;overflow-y: auto">
-	<form style="width: 100%" id="comment1s">
+	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;
+	 overflow-y: auto;padding-top: 20px;padding-bottom: 20px">
+	<form style="width: 100%;height: 100%;overflow: auto" id="comment1s">
 
 	</form>
 </div>
@@ -127,8 +128,8 @@
     $('#comment1s').html('')
     var html = ''
     $.each(tempList, function (key, val) {
-        html += '<div onclick="choiceMethod()" style="width: 100%;height: 0.8rem;border-bottom: 1px solid #eeeeee;line-height: 0.8rem;text-align: center">' +
-            '<label style="width: 100%;display: block;font-size: 0.3rem">' +
+        html += '<div onclick="choiceMethod()" style="width: 100%;height: 1.2rem;border-bottom: 1px solid #eeeeee;line-height: 1.2rem;text-align: center">' +
+            '<label style="width: 100%;display: block;font-size: 0.5rem;font-weight: bold">' +
             '<input type="radio" name="radio2" value="' + tempList[key].val + '" true_name="' + tempList[key].name + '">' + tempList[key].name + '</label></div>'
     })
     $('#comment1s').append(html)

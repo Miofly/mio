@@ -11,10 +11,19 @@
 				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 					<view class="content padding-tb-sm">
 						<view class="padding-top-bottom">
-							<image :src="'https://images.weserv.nl/?url=' + item.cover"
-								   style="height: 200rpx;width: 200rpx"
-								   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
-							></image>
+							<!--<image :src="'https://images.weserv.nl/?url=' + item.cover"-->
+								   <!--style="height: 200rpx;width: 200rpx"-->
+								   <!--:mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"-->
+							<!--&gt;</image>-->
+
+							<imgLoad style="height: 200rpx;width: 200rpx" :scroll-top="scrollTop"
+									 :image-src="item.cover == undefined ?
+									 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' :
+									 'https://images.weserv.nl/?url=' + item.cover"
+									 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][3]">
+							</imgLoad>
+
+
 							<view class="padding-left-xl">
 								<view>
 									{{ item.title }}
@@ -63,6 +72,8 @@
         mixins: [MescrollMixin],
         data() {
             return {
+                scrollTop: 0,
+
                 downOption: { // 下拉刷新的配置参数
                     use: true, // 是否启用下拉刷新
                     auto: true, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
@@ -71,7 +82,6 @@
                     textLoading: '正在拼命的加载中 ...',
                     bgColor: 'transparent',
                     textColor: 'gray',
-
                 },
                 upOption: { // 上拉加载的常用配置
                     use: true, // 是否启用下拉刷新

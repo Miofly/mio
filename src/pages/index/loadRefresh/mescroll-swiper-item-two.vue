@@ -9,12 +9,16 @@
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<scroll-view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
-					<view class="padding-top-bottom">
-						<imgLoad mode="widthFix" :scroll-top="scrollTop"
+					<view class="padding-top-bottom" id="test">
+						<!--
+							scrollTop: 0 || newscroll(e) {this.scrollTop = e.detail.scrollTop}
+							>>> .spin-circle {background: url('@/static/images/common/loading1.gif') no-repeat center !important;}
+						-->
+						<imgLoad :scroll-top="scrollTop" style="width: 150rpx;height: 150rpx"
 								 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"
-								 loading-mode="spin-circle">
+								 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">
 						</imgLoad>
 
 						<view class="padding-left-xl">
@@ -33,9 +37,7 @@
 									{{item.author}}
 								</button>
 							</view>
-
 						</view>
-
 					</view>
 				</view>
 
@@ -45,7 +47,7 @@
 					</button>
 				</view>
 				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
-			</scroll-view>
+			</view>
 		</view>
 
 	</mescroll-uni>
@@ -89,7 +91,7 @@
                     },
                     toTop: {
                         src: 'http://img.htmlsucai.com/huyoucss/gotop.gif',
-                        offset: 500,
+                        offset: 1000,
                         duration: 100,
                     },
                     empty: {
@@ -108,7 +110,6 @@
         },
         methods: {
             newscroll(e) {
-                console.log(e.detail.scrollTop)
                 this.scrollTop = e.detail.scrollTop
             },
             /* 下拉刷新的回调 */

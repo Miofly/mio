@@ -141,7 +141,7 @@
 
 	/* 转圈 */
 	.spin-circle {
-		background: url('@/static/images/common/loading.gif') no-repeat center;
+		background: url('@/static/images/common/loading1.gif') no-repeat center;
 		background-size: 100rpx;
 	}
 

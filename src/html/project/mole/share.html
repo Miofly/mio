@@ -16,22 +16,71 @@
 </head>
 <body style="font-size: 0.05rem;" class="bg-white">
 <div>
-	<div>
-		<img src="">
+	<div style="padding: 0.30rem;">
+		<div onclick="location.href = 'http://www.baidu.com'" style="margin-left: 0.05rem">
+			<img src="../../img/mole/back.png">
+		</div>
+		<div style="font-size:0.46rem;color:rgba(0,0,0,1);height:0.78rem;">
+			恭喜你抽到的：六月灵签-上上签
+		</div>
+		<div>
+			<span onclick="location.href = 'http://www.baidu.com'" style="font-size:0.32rem;color:rgba(55,120,167,1);width: 1.48rem">抽签阅读</span>
+			<span style="font-size:0.32rem;color:rgba(153,153,153,1);margin-left: 0.09rem" id="time"></span>
+		</div>
+		<div>
+			<img style="width: 100%" src="../../img/mole/gzh.png">
+		</div>
+	</div>
+
+	<div style="position: relative;">
+		<img id="moleImg" style="width: 100%">
+		<img id="btn" src="../../img/mole/icon@2x.png" onclick="zqyq()"
+			 style="animation: scale-upOne 2s linear 0s infinite alternate;
+			 width: 4.76rem;height: 0.94rem;position: absolute;margin: 0 auto;left: 18%;bottom:8.5%;text-align: center">
+	</div>
+
+	<div class="padding" style="position: relative">
+		<img style="width: 100%" src="../../img/mole/discern.png">
+		<img style="width: 2.6rem;position: absolute;left: 0.68rem;bottom: 1.28rem" src="../../img/mole/ewm.png">
 	</div>
 
 	<div id="showqr">
-		<img id="logoimg" src='../../img/xtx/1.jpg' style="display:none"/>
+		<img id="logoimg" src='' style="display:none"/>
 	</div>
 
-	<div id="imgOne" style="position: fixed;bottom: 0"></div>
+	<div id="sum">
+		<div id="mb" style="display: block" class="mio-modal-mask"></div>
+
+		<div style="position: fixed;width: 100%;left: 0;text-align: center;top: 20%;z-index: 13">
+			<img id="shareImg" style="width: 6.48rem;height: 3.96rem;" class="shake1" src="../../img/mole/character2@2x.png">
+		</div>
+
+		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 2.34rem;z-index: 13">
+			<img style="width: 2.20rem;height: 2.20rem" src="../../img/mole/fingerprint.png">
+		</div>
+		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 2.50rem;z-index: 12;">
+			<img style="-webkit-animation: scale-up 0.9s linear 0s infinite alternate;
+		animation: scale-up 0.9s linear 0s infinite alternate;width: 2.0rem;height: 2.0rem" src="../../img/mole/transparent.png">
+		</div>
+		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.1rem;z-index: 11;">
+			<div style="display: inline-block;width:100%;height:0.45rem;font-size:0.5rem;font-weight:600;color:rgba(255,255,255,1);">
+				长按屏幕分享
+			</div>
+		</div>
+	</div>
+
+	<div id="imgOne" style="position: fixed;bottom: 0;opacity: 0.01;z-index: 101"></div>
 </div>
 <script type="text/javascript" src="../../js/common/ewm.js"></script>
 <script type="text/javascript" src="../../js/common/canvas.js"></script>
 <script>
     document.body.addEventListener('touchmove', bodyScroll, {passive: false});
 
+    $('#moleImg').attr('src', '../../img/mole/' + getUrlParam('num') +'@2x.png')
+
     qraa({ewmSize: 95, logo: '', url: 'http://www.baidu.com', logoSize: 'default', isShow: false})
+
+    $('#time').html(new Date().toLocaleDateString().replace(/\//g, '-'))
 
     var imgLists = [
         {src: '../../img/mole/diagrammatize@2x.png', left: 0, top: 0, width: 375, height: 667},
@@ -47,18 +96,18 @@
     drawing(0, $('#imgOne'), false, 100);
 
     function zqyq() {
-        window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/caishen/index.html'
+        window.location.href = 'http://192.168.3.172:8888/mio/src/html/project/mole/index.html'
     }
 
     function share_tip(share_app_times, share_timeline_times) { // 分享处理
         if (share_timeline_times == -1) {
             if (shareATimes == 1) {
-                $('#shareImg').attr('src', '../../img/caishen/character2@2x.png')
-                $('#share').attr('src', '../../img/caishen/share2@2x.png')
+                $('#shareImg').attr('src', '../../img/mole/character1@2x.png')
                 $('#shareImg').addClass('shakeTwo')
             } else if (shareATimes == 2) {
                 document.body.removeEventListener('touchmove', bodyScroll, false);
-                $('#showbg').css('display', 'none')
+                $('#sum').css('display', 'none')
+                $('#imgOne').css('display', 'none')
             }
         }
     }
@@ -92,8 +141,11 @@
         event.preventDefault()
     }
 
-    function randomNum(min, max) { // 生成随机数 min<=num<=max
-        return Math.floor(Math.random() * (max - min + 1)) + min
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg) // 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
     }
 </script>
 </body>

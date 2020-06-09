@@ -6,6 +6,14 @@ instanceOne.defaults.baseURL = '' // 实例的baseurl
 instanceOne.defaults.withCredentials = false // 实例的baseurl
 
 
+const goodGirlData = (type = 'Android', pageNum, pageSize) => ajax({
+    sourceAxios: instanceOne,
+    url: `https://gank.io/api/v2/data/category/GanHuo/type/${type}/page/${pageNum}/count/${pageSize}`,
+    getHeader: {
+        'Content-Type': 'json'
+    }
+})
+
 const navJsonData = () => ajax({url: 'static/mockJson/navJson.json'}) // 导航模块数据
 const listJsonData = () => ajax({url: 'static/mockJson/listJson.json'}) // 导航模块数据
 const dbJsonData = (type, index = 0, count = 3) => ajax({
@@ -61,6 +69,7 @@ const commonGet = (url) => ajax({
 
 
 export {
+    goodGirlData,
     publicGet,
     publicPost,
     commonGet,

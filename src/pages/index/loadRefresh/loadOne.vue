@@ -1,11 +1,11 @@
 <template>
-	<view>
+	<view class="full-width-height">
 		<view class="header bg-blue full-width"
 			  style="height: 180rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
 			固定在头部的内容
 		</view>
 		<mescroll-body ref="mescrollRef" top="180" bottom="0" :down="downOption" :up="upOption"
-					   @init="mescrollInit" @down="downCallback" @up="upCallback">
+					   @init="mescrollInit" @down="downCallback" @up="upCallback" @scroll="scroll">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
@@ -86,8 +86,10 @@
                         size: 10
                     },
 					toTop: {
-                       	src: ''
-					},
+                       	src: 'http://img.htmlsucai.com/huyoucss/gotop.gif',
+                        offset: 500,
+                        duration: 100,
+                    },
                     empty: {
                         use: true,
 						icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1444001776,3669515325&fm=15&gp=0.jpg',
@@ -99,6 +101,9 @@
             }
         },
         methods: {
+            scroll () {
+              console.log(1)
+            },
             downCallback() { // 下拉刷新的回调
                 this.mescroll.resetUpScroll() // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
                 // 若整个downCallback方法仅调用mescroll.resetUpScroll(),则downCallback方法可删 (mixins已默认)

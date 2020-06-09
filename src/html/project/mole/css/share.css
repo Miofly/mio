@@ -123,7 +123,7 @@ html {
     font-size: 100px;
 }
 
-.shake1 { animation: 0.5s ease 0s 4 normal none running shaken1; }
+/*.shake1 { animation: 0.5s ease 0s 4 normal none running shaken1; }*/
 .mio-modal-mask { position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; background: rgba(0, 0, 0, 0.89); z-index: 3; transition: all 0.3s ease-in-out 0s; }
 .xuanzhun {
     -webkit-transition-property: -webkit-transform;
@@ -136,7 +136,7 @@ html {
     animation: rotate 6s linear infinite;
 }
 .shake1 {
-    animation: shaken1 0.5s 4;
+    animation: shake 2s 1;
 }
 @keyframes rotate {
     0% {
@@ -289,5 +289,13 @@ html {
     100% {
         opacity: 1;
         transform: scale(1.0)
+    }
+}
+@keyframes scale-up {
+    0% {
+        transform: scale(1.0)
+    }
+    100% {
+        transform: scale(1.2)
     }
 }

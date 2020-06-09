@@ -57,7 +57,7 @@
 		<img style="width: 100%;" src="../../img/mole/background@2x.png">
 	</div>
 	<div style="width:90%;height:4.9rem;background:rgba(253,249,241,1);border-radius:0.22rem;
-	position: fixed;top: 35%;left: 5%;">
+	position: fixed;top: 40%;left: 5%;">
 		<div style="width:100%;text-align: center;margin-top: 0.6rem">
 			<img src="../../img/mole/choice.png" style="width: 5.56rem;height: 0.72rem;">
 		</div>
@@ -68,13 +68,15 @@
 			<img src="../../img/mole/select.png"
 				 style="width: 0.62rem;height: 0.34rem;position: absolute;right: 0.4rem;top: 0.36rem;">
 		</div>
-		<div onclick="ljfx()" style="width: 100%;text-align: center;margin-top: 0.86rem;-webkit-animation: scale-upOne 2s linear 0s infinite alternate;-o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
-			<img src="../../img/mole/icon@2x.png" style="width: 4.76rem;height: 0.94rem">
+		<div onclick="ljfx()"
+			 style="width: 100%;text-align: center;margin-top: 0.86rem;-webkit-animation: scale-upOne 2s linear 0s infinite alternate;-o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
+			<img src="../../img/mole/iconnew@2x.png" style="width: 4.76rem;height: 0.94rem">
 		</div>
 	</div>
 </div>
-<div id="choiceDiv" style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;overflow-y: auto">
-	<form style="width: 100%" id="comment1s" >
+<div id="choiceDiv"
+	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;overflow-y: auto">
+	<form style="width: 100%" id="comment1s">
 
 	</form>
 </div>
@@ -132,8 +134,8 @@
     $('#comment1s').append(html)
 
     function choiceMethod() {
-		$('#choiceDiv').hide(500)
-		$('#moleName').html($('input[name="radio2"]:checked').attr('true_name'))
+        $('#choiceDiv').hide(500)
+        $('#moleName').html($('input[name="radio2"]:checked').attr('true_name'))
     }
 
     function showChoice() {
@@ -144,8 +146,8 @@
         if ($('input[name="radio2"]:checked').val() == undefined) {
             $('#choiceDiv').show(500)
         } else {
-            console.log($('input[name="radio2"]:checked').val())
-		}
+			location.href = 'http://192.168.3.172:8888/mio/src/html/project/mole/share.html?num='+ $('input[name="radio2"]:checked').val() +''
+        }
     }
 </script>
 </body>

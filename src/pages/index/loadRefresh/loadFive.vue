@@ -22,26 +22,35 @@
 			</view>
 		</view>
 		<view class="padding">
-			<app-tabs v-model="tabIndex" :tabs="tabs" :fixed="false"></app-tabs>
-			<swiper :style="{height: height}" :current="tabIndex" @change="swiperChange">
+			<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
+			<swiper :style="{height: height}" :current="tabClick" @change="swiperChange">
 				<!--全部 -->
 				<swiper-item>
-					<mescroll-item :i="0" :index="tabIndex" :tabs="tabs"></mescroll-item>
+					<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
 				</swiper-item>
 
 				<!-- 奶粉 -->
 				<swiper-item>
-					<mescroll-item :i="1" :index="tabIndex" :tabs="tabs"></mescroll-item>
+					<mescroll-item :i="1" :index="tabClick" :tabs="tabLists"></mescroll-item>
 				</swiper-item>
 
 				<!-- 面膜 -->
 				<swiper-item>
-					<mescroll-item :i="2" :index="tabIndex" :tabs="tabs"></mescroll-item>
+					<mescroll-item :i="2" :index="tabClick" :tabs="tabLists"></mescroll-item>
 				</swiper-item>
 
 				<!-- 图书 -->
 				<swiper-item>
-					<mescroll-item :i="3" :index="tabIndex" :tabs="tabs"></mescroll-item>
+					<mescroll-item :i="3" :index="tabClick" :tabs="tabLists"></mescroll-item>
+				</swiper-item>
+
+				<!-- 图书 -->
+				<swiper-item>
+					<mescroll-item :i="4" :index="tabClick" :tabs="tabLists"></mescroll-item>
+				</swiper-item>
+
+				<swiper-item>
+					<mescroll-item :i="5" :index="tabClick" :tabs="tabLists"></mescroll-item>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -50,27 +59,40 @@
 </template>
 
 <script>
-    import MescrollItem from './mescroll-swiper-item.vue'
-    import AppTabs from 'zj/mescroll-uni/app-tabs.vue'
+    import MescrollItem from './mescroll-swiper-item-two'
+    import AppTabs from 'zj/mescroll-uni/app-tabs-two.vue'
 
     export default {
         components: {
             MescrollItem,
             AppTabs
         },
+        onPageScroll({scrollTop}) {
+            console.log(scrollTop)
+            // 传入scrollTop值并触发所有easy-loadimage组件下的滚动监听事件
+            // this.scrollTop = scrollTop
+        },
         data() {
             return {
                 height: '300px', // 需要固定swiper的高度
-                tabs: ['tabOne', 'tabTwo', 'tabThree', 'tabFour'],
-                tabIndex: 0 // 当前tab的下标
+                tabLists: [
+                    {name: '前端', type: 'frontend'},
+                    {name: '后端', type: 'backend'},
+                    {name: '安卓', type: 'Android'},
+                    {name: '苹果', type: 'iOS'},
+                    {name: 'Flutter', type: 'Flutter'},
+                    {name: '应用程序', type: 'app'},
+				],
+                tabClick: 0 // 当前tab的下标
             }
         },
         methods: {
             // 轮播菜单
             swiperChange(e) {
-                console.log('出发了吗')
-                this.tabIndex = e.detail.current
-            }
+                console.log('这里没有调用吗')
+                this.tabClick = e.detail.current
+                this.$refs.mytab.longClick(e.detail.current)
+            },
         },
         onLoad() {
             document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动

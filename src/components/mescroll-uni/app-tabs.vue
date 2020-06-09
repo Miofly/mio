@@ -38,6 +38,7 @@ tabs支持的数据格式： ['全部', '待付款'] 或 [{name:'全部'}, {name
 			},
 			tabClick(i) {
 				if (this.value != i) {
+				    console.log(i)
 					this.$emit('input', i)
 					this.$emit('change', i)
 				}

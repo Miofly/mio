@@ -5,26 +5,27 @@
 	只能用mescroll-uni,不能用mescroll-body
 	-->
 	<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
-				  :up="upOption" @init="mescrollInit"
+				  :up="upOption" @init="mescrollInit" @newscroll="newscroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+			<scroll-view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
 					<view class="padding-top-bottom">
-						<image :src="'https://images.weserv.nl/?url=' + item.url"
-							   style="height: 200rpx;width: 200rpx"
-							   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
-						></image>
+						<imgLoad mode="widthFix" :scroll-top="scrollTop"
+								 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"
+								 loading-mode="spin-circle">
+						</imgLoad>
+
 						<view class="padding-left-xl">
 							<view>
-								{{ item.desc }}
+								{{ item.title }}
 							</view>
 							<view class="inline">
 								<button class="cu-btn fl" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
 								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
 									<text v-show="true" class="fa fa-wechat padding-right-twenty"></text>
-									{{item.title}}
+									{{item.type}}
 								</button>
 								<button class="cu-btn fr" :class="[['bg-blue', 'line-blue', 'line-blue lines-blue'][0],
 								        ['sm', 'lg', ''][2], false ? 'round' : '', true ? 'shadow' : '', false ? 'block' : '']">
@@ -44,7 +45,7 @@
 					</button>
 				</view>
 				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
-			</view>
+			</scroll-view>
 		</view>
 
 	</mescroll-uni>
@@ -77,7 +78,7 @@
                 upOption: { // 上拉加载的常用配置
                     use: true, // 是否启用下拉刷新
                     auto: false, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
-                    noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据
+                    noMoreSize: 1, // 如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据
                     textLoading: '正在玩命的加载...',
                     textNoMore: '我也是有底线的...',
                     bgColor: 'transparent',
@@ -98,13 +99,18 @@
                         btnText: '这是按钮文字'
                     },
                 },
-                dataLists: []
+                dataLists: [],
+                scrollTop: 0
             }
         },
         mounted() {
             // this.mescroll.resetUpScroll()
         },
         methods: {
+            newscroll(e) {
+                console.log(e.detail.scrollTop)
+                this.scrollTop = e.detail.scrollTop
+            },
             /* 下拉刷新的回调 */
             downCallback() {
                 // 这里加载你想下拉刷新的数据, 比如刷新轮播数据
@@ -114,45 +120,37 @@
             },
             /* 上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
             async upCallback(page) {
-                console.log(page)
-                // 联网加载数据
-                // const keyword = this.tabs[this.i]
-                // apiSearch(page.num, page.size, keyword).then(curPageData => {
-                //     // 联网成功的回调,隐藏下拉刷新和上拉加载的状态;
-                //     this.mescroll.endSuccess(curPageData.length)
-                //     // 设置列表数据
-                //     if (page.num == 1) this.goods = [] // 如果是第一页需手动制空列表
-                //     this.goods = this.goods.concat(curPageData) // 追加新数据
-                // }).catch(() => {
-                //     // 联网失败, 结束加载
-                //     this.mescroll.endErr()
-                // })
+                const type = this.tabs[this.i].type
                 const pageNum = page.num // 页码, 默认从1开始
                 const pageSize = page.size // 页长, 默认每页10条
 
-                const data = await goodGirlData(pageNum, pageSize) // 默认数据
-                this.mescroll.endDownScroll()
+                console.log('数据类型：', type, '|', '页码：', pageNum, '|', '页长：', pageSize)
 
-                // 接口返回的当前页数据列表 (数组)
-                const curPageData = data.data
-                // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)
-                const curPageLen = curPageData.length
-                // 接口返回的总页数 (如列表有26个数据,每页10条,共3页; 则totalPage=3)
-                // const totalPage = data.xxx
-                // // 接口返回的总数据量(如列表有26个数据,每页10条,共3页; 则totalSize=26)
-                // const totalSize = data.xxx
-                // // 接口返回的是否有下一页 (true/false)
-                // const hasNext = data.xxx
-                // 设置列表数据
-                if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
-                this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
-                // 请求成功,隐藏加载状态
-                // 方法一(推荐): 后台接口有返回列表的总页数 totalPage
-                this.mescroll.endByPage(curPageLen, 3)
-                // 方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-                // this.mescroll.endBySize(curPageLen, totalSize);
-                // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-                // this.mescroll.endSuccess(curPageLen, hasNext);
+                setTimeout(async () => { // 延迟500毫秒获取数据
+                    const data = await goodGirlData(type, pageNum, pageSize) // 获取的数据
+
+                    const curPageData = data.data // 返回的当前页数据列表
+                    const curPageLen = curPageData.length // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)
+
+                    if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
+                    this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
+                    this.mescroll.endDownScroll()
+                    this.mescroll.endByPage(curPageLen, data.total_counts)
+                    // 接口返回的总页数 (如列表有26个数据,每页10条,共3页; 则totalPage=3)
+                    // const totalPage = data.xxx
+                    // // 接口返回的总数据量(如列表有26个数据,每页10条,共3页; 则totalSize=26)
+                    // const totalSize = data.xxx
+                    // // 接口返回的是否有下一页 (true/false)
+                    // const hasNext = data.xxx
+                    // 设置列表数据
+
+                    // 方法一(推荐): 后台接口有返回列表的总页数 totalPage
+                    // this.mescroll.endByPage(curPageLen, 3)
+                    // 方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+                    // this.mescroll.endBySize(curPageLen, totalSize);
+                    // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+                    // this.mescroll.endSuccess(curPageLen, hasNext);
+                }, 500)
             },
             // 点击空布局按钮的回调
             emptyClick() {
@@ -163,3 +161,7 @@
         }
     }
 </script>
+
+<style>
+
+</style>

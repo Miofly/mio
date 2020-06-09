@@ -54,7 +54,7 @@
                 }
             })
 			// #ifdef H5
-			this.initData()
+			// this.initData()
 			// #endif
         },
         onShow () {
@@ -81,7 +81,7 @@
                     dbName: 'initDatas',
                     pageSize: 100
                 }, (res) => {
-                    console.log('得到的数据', res.result.data[0].dataLists)
+                    // console.log('得到的数据', res.result.data[0].dataLists)
                     const data = res.result.data[0].dataLists
                     // this.ui.setStorage('mvUrl', data.mvUrl)
                     this.$store.state.ggkz = data.ggkz

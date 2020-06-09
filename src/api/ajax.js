@@ -103,7 +103,7 @@ function ajax ({
                 statusText: response.statusText
             }
             if (response.status === 200) {
-                console.log('获取数据成功', resMess)
+                console.log('获取数据成功', resMess.data)
                 resolve(response.data)
             } else {
                 console.log('请求失败', resMess)

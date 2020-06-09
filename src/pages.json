@@ -321,6 +321,11 @@
             "style": {}
         },
         {
+            "path": "pages/index/loadRefresh/loadFive",
+            "name": "loadFive",
+            "style": {}
+        },
+        {
             "path": "pages/index/lz/index/index",
             "name": "lz_index",
             "style": {

@@ -5,7 +5,8 @@
 						 :scroll-left="tabLeft">
 				<view class="longItem" :style='"width:"+isWidth+"px"' :data-index="index"
 					  :class="index===myTab?'click':''"
-					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">{{item.name}}
+					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">
+					{{item.name}}
 				</view>
 				<view class="underlineBox" :style='"transform:translateX("+isLeft+"px);width:"+isWidth+"px"'>
 					<view class="underline"></view>
@@ -35,7 +36,7 @@
                 isLeft: 0, // 导航栏下划线位置
                 isWidth: 0, // 每个导航栏占位
                 tabLeft: 0,
-				myTab: 0
+                myTab: 0
             }
         },
         created() {
@@ -71,40 +72,40 @@
     }
 </script>
 
-<style lang="scss">
+<style>
 	.navTabBox {
-		width: 100vw;
-		color: rgba(0, 0, 0, 0.50);
-		background: red;
+		width: 94vw;
+		color: black;
+		background: rgba(255, 255, 255, 1);
+	}
 
-		.click {
-			color: white;
-		}
+	.click {
+		color: red;
+	}
 
-		.longTab {
-			width: 100%;
+	.longTab {
+		width: 100%;
+	}
 
-			.longItem {
-				height: 90rpx;
-				display: inline-block;
-				line-height: 90rpx;
-				text-align: center;
-			}
+	.longItem {
+		height: 90rpx;
+		display: inline-block;
+		line-height: 90rpx;
+		text-align: center;
+	}
 
-			.underlineBox {
-				height: 3px;
-				width: 20%;
-				display: flex;
-				align-content: center;
-				justify-content: center;
-				transition: .5s;
+	.underlineBox {
+		height: 3px;
+		width: 20%;
+		display: flex;
+		align-content: center;
+		justify-content: center;
+		transition: .5s;
+	}
 
-				.underline {
-					width: 84rpx;
-					height: 4px;
-					background-color: white;
-				}
-			}
-		}
+	.underline {
+		width: 84rpx;
+		height: 4px;
+		background-color: white;
 	}
 </style>

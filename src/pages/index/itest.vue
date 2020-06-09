@@ -5,7 +5,6 @@
 					 loading-mode="spin-circle"></imgLoad>
 		</view>
 	</view>
-
 </template>
 
 <script>

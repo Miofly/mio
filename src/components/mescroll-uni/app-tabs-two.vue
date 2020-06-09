@@ -92,6 +92,7 @@
 		display: inline-block;
 		line-height: 90rpx;
 		text-align: center;
+		font-size: 14px;
 	}
 
 	.underlineBox {
@@ -106,6 +107,6 @@
 	.underline {
 		width: 84rpx;
 		height: 4px;
-		background-color: white;
+		background-color: red;
 	}
 </style>

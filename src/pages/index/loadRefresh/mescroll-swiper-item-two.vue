@@ -1,5 +1,5 @@
 <template>
-	<mescroll-uni ref="mescrollRef" height="100%" top="0" :down="downOption"
+	<mescroll-uni ref="mescrollRef" top="0" :down="downOption"
 				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->

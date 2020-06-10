@@ -328,6 +328,48 @@
             }
         },
         {
+            "path": "pages/index/loadRefresh/loadNew",
+            "name": "loadNew",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadNewOne",
+            "name": "loadNewOne",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadNewTwo",
+            "name": "loadNewTwo",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadNewThree",
+            "name": "loadNewThree",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadNewFour",
+            "name": "loadNewFour",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadNewFive",
+            "name": "loadNewFive",
+            "style": {
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "path": "pages/index/lz/index/index",
             "name": "lz_index",
             "style": {

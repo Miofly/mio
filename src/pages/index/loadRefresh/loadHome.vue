@@ -1,11 +1,17 @@
 <template>
 	<view class="nav-list">
 		<router-link v-for="(item,index) in [
+					{title: 'loadNew', name: 'loadNew~', icon: 'user', color: 'blue', url: 'loadNew'},
+                    {title: 'loadNewOne', name: 'loadNewOne~', icon: 'user', color: 'blue', url: 'loadNewOne'},
+                    {title: 'loadNewTwo', name: 'loadNewTwo~', icon: 'user', color: 'blue', url: 'loadNewTwo'},
+                    {title: 'loadNewThree', name: 'loadNewThree~', icon: 'user', color: 'blue', url: 'loadNewThree'},
+                    {title: 'loadNewFour', name: 'loadNewFour~', icon: 'user', color: 'blue', url: 'loadNewFour'},
+                    {title: 'loadNewFive', name: 'loadNewFive~', icon: 'user', color: 'blue', url: 'loadNewFive'},
                     {title: 'loadOne', name: 'loadOne~', icon: 'user', color: 'blue', url: 'loadOne'},
                     {title: 'loadTwo', name: 'loadTwo~', icon: 'user', color: 'blue', url: 'loadTwo'},
                     {title: 'loadThree', name: 'loadThree~', icon: 'user', color: 'blue', url: 'loadThree'},
                     {title: 'loadFour', name: 'loadFour~', icon: 'user', color: 'blue', url: 'loadFour'},
-                    {title: 'loadFive', name: 'loadFive~', icon: 'user', color: 'blue', url: 'loadFive'}
+                    {title: 'loadFive', name: 'loadFive~', icon: 'user', color: 'blue', url: 'loadFive'},
                 ]" :key="index" :to="'{name:'+item.url+'}'"
 					 class="nav-li" :class="'bg-'+item.color">
 			<view class="nav-title">{{ item.title }}</view>
@@ -16,9 +22,7 @@
 </template>
 
 <script>
-    export default {
-
-    }
+    export default {}
 </script>
 
 <style>

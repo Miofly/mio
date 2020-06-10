@@ -1,6 +1,6 @@
 <template>
 	<view class="easy-loadimage" :id="uid" style="width: 100%;height: 100%">
-		<image class="origin-img" :src="imageSrc" :mode="mode"
+		<image class="origin-img" :src="imageSrc" :mode="mode" @click="ui.showImg(imageSrc)"
 			   v-if="loadImg&&!isLoadError" v-show="showImg"
 			   :class="{'no-transition':!openTransition,'show-transition':showTransition&&openTransition}"
 			   @load="handleImgLoad" @error="handleImgError">

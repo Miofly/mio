@@ -13,76 +13,57 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="adaptive.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
-	<style>
-		input[type=radio] {
-			display: inline-block;
-			vertical-align: middle;
-			width: 25px;
-			height: 25px;
-			-webkit-appearance: none;
-			background-color: transparent;
-			border: 0;
-			outline: 0 !important;
-			line-height: 20px;
-			color: black;
-		}
-
-		input[type=radio]:after {
-			content: "";
-			display: block;
-			width: 20px;
-			height: 20px;
-			border-radius: 50%;
-			text-align: center;
-			line-height: 20px;
-			font-size: 15px;
-			color: white;
-			border: 2px solid #000;
-			background-color: #fff;
-			box-sizing: border-box;
-		}
-
-		input[type=radio]:checked:after {
-			content: "L";
-			transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
-			-webkit-transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
-			border-color: #7bbfea;
-			background-color: #7bbfea;
-		}
-
-	</style>
 <body style="background: rgb(212, 169, 126)">
-<div style="overflow-y: hidden!important;">
+<div style="overflow-y: hidden!important;position: relative;margin-bottom: 1rem;padding-bottom:1rem">
 	<div>
 		<img style="width: 100%;" src="../../img/mole/background@2x.png">
 	</div>
-	<div style="width:90%;height:4.9rem;background:rgba(253,249,241,1);border-radius:0.22rem;
-	position: fixed;top: 40%;left: 5%;">
-		<div style="width:100%;text-align: center;margin-top: 0.6rem">
+	<div style="width:90%;height:4.8rem;background:rgba(253,249,241,1);border-radius:0.22rem;
+	position: absolute;top: 40%;left: 5%;">
+		<div style="width:100%;text-align: center;margin-top: 0.3rem">
 			<img src="../../img/mole/choice.png" style="width: 5.56rem;height: 0.72rem;">
 		</div>
 
 		<div onclick="showChoice()" style="width:92%;height:1.06rem;background:rgba(246,234,223,1);border-radius:0.22rem;position: relative;left: 4%;
-		line-height: 1.06rem;top: 0.46rem;">
+		line-height: 1.06rem;top: 0.32rem;">
 			<span style="position: absolute;left: 10%;font-size:0.42rem;color:#CD2B34;" id="moleName">点击选择痣的位置</span>
 			<img src="../../img/mole/select.png"
 				 style="width: 0.62rem;height: 0.34rem;position: absolute;right: 0.4rem;top: 0.36rem;">
 		</div>
 		<div onclick="ljfx()"
-			 style="width: 100%;text-align: center;margin-top: 0.86rem;-webkit-animation: scale-upOne 2s linear 0s infinite alternate;-o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
+			 style="width: 100%;text-align: center;margin-top: 0.66rem;
+			 -webkit-animation: scale-upOne 2s linear 0s infinite alternate;
+			 -o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
 			<img src="../../img/mole/iconnew@2x.png" style="width: 4.76rem;height: 0.94rem">
 		</div>
+
+		<div style="text-align: center;margin-top: 0.2rem">
+			<span style="font-size:0.36rem;font-weight: bold">当前有<span style="color: #CD2B34" id="sjs"></span><span>正在在线解答</span></span>
+		</div>
+	</div>
+	<div style="position: absolute;bottom: 0rem;width: 90%;left: 5%;">
+		<img src="../../img/mole/text.png" style="width: 100%;height: 3.26rem">
 	</div>
 </div>
 <div id="choiceDiv"
 	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;
 	 overflow-y: auto;padding-top: 20px;padding-bottom: 20px">
 	<form style="width: 100%;height: 100%;overflow: auto" id="comment1s">
-
 	</form>
 </div>
 
+<div id="tpfx" style="position: fixed;top: 0;z-index: 9999;display: none;width: 100%;height: 100%">
+	<div class="mainbox"
+		 style="background-image: url(../../img/mole/bgfx.png);background-size: 100%;background-repeat: no-repeat;">
+		<div class="animation_box">
+			<img src="../../img/mole/ani_line.png" class="ani_img ani_line">
+		</div>
+		<img src="../../img/mole/ani_cir1.png" class="ani_img ani_cir1">
+		<img src="../../img/mole/ani_cir2.png" class="ani_img ani_cir2">
+	</div>
+</div>
 <script>
+	$('#sjs').html(randomNum(1111111,9999999))
     var tempList = [
         {name: '脸颊', val: '7'},
         {name: '眉毛', val: '9'},
@@ -147,8 +128,15 @@
         if ($('input[name="radio2"]:checked').val() == undefined) {
             $('#choiceDiv').show(500)
         } else {
-			location.href = 'http://192.168.3.172:8888/mio/src/html/project/mole/share.html?num='+ $('input[name="radio2"]:checked').val() +''
+            $('#tpfx').show(500)
+            setTimeout(function () {
+                location.href = 'http://192.168.3.149:8888/mio/src/html/project/mole/share.html?num=' + $('input[name="radio2"]:checked').val() + ''
+            }, 3000)
         }
+    }
+
+    function randomNum(min, max) { // 生成随机数 min<=num<=max
+        return Math.floor(Math.random() * (max - min + 1)) + min
     }
 </script>
 </body>

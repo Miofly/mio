@@ -49,7 +49,7 @@ MeScroll.prototype.extendDownScroll = function (optDown) {
         autoShowLoading: false, // 如果设置auto=true(在初始化完毕之后自动执行下拉刷新的回调),那么是否显示下拉刷新的进度; 默认false
         isLock: false, // 是否锁定下拉刷新,默认false;
         offset: 80, // 在列表顶部,下拉大于80px,松手即可触发下拉刷新的回调
-        startTop: 0, // scroll-view滚动到顶部时,此时的scroll-top不一定为0, 此值用于控制最大的误差
+        startTop: 100, // scroll-view滚动到顶部时,此时的scroll-top不一定为0, 此值用于控制最大的误差
         fps: 80, // 下拉节流 (值越大每秒刷新频率越高)
         inOffsetRate: 1, // 在列表顶部,下拉的距离小于offset时,改变下拉区域高度比例;值小于1且越接近0,高度变化越小,表现为越往下越难拉
         outOffsetRate: 0.2, // 在列表顶部,下拉的距离大于offset时,改变下拉区域高度比例;值小于1且越接近0,高度变化越小,表现为越往下越难拉
@@ -283,17 +283,9 @@ MeScroll.prototype.touchendEvent = function (e) {
     // 如果下拉区域高度已改变,则需重置回来
     if (this.isMoveDown) {
         if (this.downHight >= this.optDown.offset) {
-            setTimeout(() => {
-                // ui.showToast('这里是否触发3333')
-            }, 1000)
-
             // 符合触发刷新的条件
             this.triggerDownScroll()
         } else {
-            setTimeout(() => {
-                // ui.showToast('这里是否触发33')
-            }, 200)
-
             // 不符合的话 则重置
             this.downHight = 0
             this.optDown.endDownScroll && this.optDown.endDownScroll(this)
@@ -354,9 +346,6 @@ MeScroll.prototype.getAngle = function (p1, p2) {
 
 /* 触发下拉刷新 */
 MeScroll.prototype.triggerDownScroll = function () {
-    setTimeout(() => {
-        // ui.showToast('这里是否触发2')
-    }, 2000)
     if (this.optDown.beforeLoading && this.optDown.beforeLoading(this)) {
         // return true则处于完全自定义状态
     } else {
@@ -367,9 +356,6 @@ MeScroll.prototype.triggerDownScroll = function () {
 
 /* 显示下拉进度布局 */
 MeScroll.prototype.showDownScroll = function () {
-    setTimeout(() => {
-        // ui.showToast('这里是否触发1')
-    }, 2500)
     this.isDownScrolling = true // 标记下拉中
     if (this.optDown.native) {
         uni.startPullDownRefresh() // 系统自带的下拉刷新
@@ -389,9 +375,6 @@ MeScroll.prototype.onPullDownRefresh = function () {
 
 /* 结束下拉刷新 */
 MeScroll.prototype.endDownScroll = function () {
-    setTimeout(() => {
-        // ui.showToast('这里是否触发')
-    }, 3500)
     if (this.optDown.native) { // 结束原生下拉刷新
         this.isDownScrolling = false
         this.optDown.endDownScroll && this.optDown.endDownScroll(this)

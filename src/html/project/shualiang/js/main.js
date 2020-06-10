@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/config/notice-list",
+        url: "http://api.51sld.cn/api/config/notice-list",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -64,7 +64,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/my/member-info",
+        url: "http://api.51sld.cn/api/my/member-info",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
     // $.ajax({
     //     async: true,
     //     type: "POST",
-    //     url: "http://shangliang.52eja.com:443/api/my/system-info",
+    //     url: "http://api.51sld.cn/api/my/system-info",
     //     contentType: "application/x-www-form-urlencoded; charset=utf-8",
     //     dataType: "JSON",
     //     beforeSend: function (xhr) {

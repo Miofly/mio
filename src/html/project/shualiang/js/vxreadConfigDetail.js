@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/task/programme-info",
+        url: "http://api.51sld.cn/api/task/programme-info",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         data: {
@@ -145,7 +145,7 @@ function deletePlan() {
         $.ajax({
             async: true,
             type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/programme-del",
+            url: "http://api.51sld.cn/api/task/programme-del",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: {
                 id: localStorage.getItem('PLAN_ID')

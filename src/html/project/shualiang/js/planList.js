@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/task/programme-list",
+        url: "http://api.51sld.cn/api/task/programme-list",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {

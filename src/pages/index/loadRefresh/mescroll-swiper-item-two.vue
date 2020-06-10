@@ -1,11 +1,6 @@
 <template>
-	<!--
-	swiper中的transfrom会使fixed失效,此时用height="100%"固定高度;
-	swiper中无法触发mescroll-mixins.js的onPageScroll和onReachBottom方法,
-	只能用mescroll-uni,不能用mescroll-body
-	-->
-	<mescroll-uni ref="mescrollRef" height="40%" top="0" :down="downOption"
-				  :up="upOption" @init="mescrollInit" @newscroll="newscroll"
+	<mescroll-uni ref="mescrollRef" height="100%" top="0" :down="downOption"
+				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
@@ -15,8 +10,9 @@
 						<!--
 							scrollTop: 0 || newscroll(e) {this.scrollTop = e.detail.scrollTop}
 							>>> .spin-circle {background: url('@/static/images/common/loading1.gif') no-repeat center !important;}
+							>>> .easy-loadimage{width: 100%;}  >>> .origin-img{border-radius: 20rpx;}
 						-->
-						<imgLoad :scroll-top="scrollTop" style="width: 150rpx;height: 150rpx"
+						<imgLoad :scroll-top="scrollTop" mode="widthFix" style="width: 150rpx;height: 150rpx"
 								 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"
 								 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">
 						</imgLoad>
@@ -75,7 +71,6 @@
                     textLoading: '正在拼命的加载中 ...',
                     bgColor: 'transparent',
                     textColor: 'gray',
-
                 },
                 upOption: { // 上拉加载的常用配置
                     use: true, // 是否启用下拉刷新
@@ -100,6 +95,7 @@
                         tip: '暂无相关数据111',
                         btnText: '这是按钮文字'
                     },
+                    onScroll: true // 是否监听滚动事件
                 },
                 dataLists: [],
                 scrollTop: 0
@@ -109,8 +105,8 @@
             // this.mescroll.resetUpScroll()
         },
         methods: {
-            newscroll(e) {
-                this.scrollTop = e.detail.scrollTop
+            scroll(e) {
+                this.scrollTop = this.mescroll.scrollTop
             },
             /* 下拉刷新的回调 */
             downCallback() {
@@ -163,6 +159,3 @@
     }
 </script>
 
-<style>
-
-</style>

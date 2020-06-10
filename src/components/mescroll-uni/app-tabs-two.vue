@@ -66,7 +66,6 @@
                 this.isLeft = index * this.isWidth // 设置下划线位置
                 this.$emit('input', index)
                 this.$emit('change', index)// 设置swiper的第几页
-                // this.$parent.currentTab = index //设置swiper的第几页
             }
         }
     }

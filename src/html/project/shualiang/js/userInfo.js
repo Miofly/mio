@@ -2,7 +2,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/my/member-info",
+        url: "http://api.51sld.cn/api/my/member-info",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -56,7 +56,7 @@ function logout() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/auth/log-out",
+        url: "http://api.51sld.cn/api/auth/log-out",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -163,7 +163,7 @@ function doChange() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/auth/forget",
+        url: "http://api.51sld.cn/api/auth/forget",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data: {
             old_password: old_password,

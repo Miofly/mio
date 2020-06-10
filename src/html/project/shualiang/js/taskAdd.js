@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
     // $.ajax({
     //     async: true,
     //     type: "POST",
-    //     url: "http://shangliang.52eja.com:443/api/task/advertise-position-list",
+    //     url: "http://api.51sld.cn/api/task/advertise-position-list",
     //     contentType: "application/x-www-form-urlencoded; charset=utf-8",
     //     dataType: "JSON",
     //     beforeSend: function (xhr) {
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/task/product-list",
+        url: "http://api.51sld.cn/api/task/product-list",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -67,7 +67,7 @@ jQuery(document).ready(function ($) {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/task/programme-list",
+        url: "http://api.51sld.cn/api/task/programme-list",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -116,7 +116,7 @@ function showTaskPoints() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/my/system-info",
+        url: "http://api.51sld.cn/api/my/system-info",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {
@@ -185,7 +185,7 @@ function doSave() {
         $.ajax({
             async: true,
             type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/task-save",
+            url: "http://api.51sld.cn/api/task/task-save",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: {
                 title: title,

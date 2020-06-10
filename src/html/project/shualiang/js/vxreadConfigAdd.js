@@ -236,7 +236,7 @@ function doSave() {
         $.ajax({
             async: true,
             type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/programme-save",
+            url: "http://api.51sld.cn/api/task/programme-save",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "JSON",
             data: {

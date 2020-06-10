@@ -1,60 +1,81 @@
 <template>
 	<view style="overflow: hidden">
-		<!--#ifdef H5-->
-		<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
-			<view v-for="(item, index) in
+		<view class="header">Header</view>
+		<view class="scrollEle">
+			<!--#ifdef H5-->
+			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
+				<view v-for="(item, index) in
 				[{name: '列表一', icon: 'video-camera'},
 				{name: '列表一', icon: 'user'},
 				{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
-				<view class="content padding-tb-sm">
-					<view>
-						<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
-						<text>{{ item.name }}</text>
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
+							<text>{{ item.name }}</text>
+						</view>
 					</view>
-				</view>
 
-				<view v-show="false" class="action">
-					<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
-						操作
-					</button>
+					<view v-show="false" class="action">
+						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+							操作
+						</button>
+					</view>
+					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 				</view>
-				<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
+
+			<view class="padding">
+				<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
+				<swiper :current="tabClick" style="height: 250px" @change="swiperChange">
+					<swiper-item>
+						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+
+					<swiper-item>
+						<mescroll-item :i="1" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+
+					<swiper-item>
+						<mescroll-item :i="2" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+
+					<swiper-item>
+						<mescroll-item :i="3" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+
+					<swiper-item>
+						<mescroll-item :i="4" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+
+					<swiper-item>
+						<mescroll-item :i="5" :index="tabClick" :tabs="tabLists"></mescroll-item>
+					</swiper-item>
+				</swiper>
+			</view>
+
+			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
+				<view v-for="(item, index) in
+				[{name: '列表一', icon: 'video-camera'},
+				{name: '列表一', icon: 'user'},
+				{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
+							<text>{{ item.name }}</text>
+						</view>
+					</view>
+
+					<view v-show="false" class="action">
+						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
+							操作
+						</button>
+					</view>
+					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+				</view>
+			</view>
+			<!--#endif-->
 		</view>
-		<view class="padding">
-			<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
-			<swiper :style="{height: height}" :current="tabClick" @change="swiperChange">
-				<!--全部 -->
-				<swiper-item>
-					<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
 
-				<!-- 奶粉 -->
-				<swiper-item>
-					<mescroll-item :i="1" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
-
-				<!-- 面膜 -->
-				<swiper-item>
-					<mescroll-item :i="2" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
-
-				<!-- 图书 -->
-				<swiper-item>
-					<mescroll-item :i="3" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
-
-				<!-- 图书 -->
-				<swiper-item>
-					<mescroll-item :i="4" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
-
-				<swiper-item>
-					<mescroll-item :i="5" :index="tabClick" :tabs="tabLists"></mescroll-item>
-				</swiper-item>
-			</swiper>
-		</view>
-		<!--#endif-->
 	</view>
 </template>
 
@@ -67,14 +88,9 @@
             MescrollItem,
             AppTabs
         },
-        onPageScroll({scrollTop}) {
-            console.log(scrollTop)
-            // 传入scrollTop值并触发所有easy-loadimage组件下的滚动监听事件
-            // this.scrollTop = scrollTop
-        },
         data() {
             return {
-                height: '300px', // 需要固定swiper的高度
+                height: '1000px', // 需要固定swiper的高度
                 tabLists: [
                     {name: '前端', type: 'frontend'},
                     {name: '后端', type: 'backend'},
@@ -89,18 +105,47 @@
         methods: {
             // 轮播菜单
             swiperChange(e) {
-                console.log('这里没有调用吗')
                 this.tabClick = e.detail.current
                 this.$refs.mytab.longClick(e.detail.current)
             },
         },
         onLoad() {
-            document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
-                evt.preventDefault()
-            }, {passive: false})
+
+
+
+            // document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
+            //     evt.preventDefault()
+            // }, {passive: false})
             // 需要固定swiper的高度
             // this.height = uni.getSystemInfoSync().windowHeight + 'px'
-            console.log(this.height)
+            // console.log(this.height)
         }
     }
 </script>
+
+<style>
+	.header{
+		position: fixed;
+		width: 100vw;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		z-index: 3;
+	}
+
+	.header {
+		top: 0;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.scrollEle {
+		position: fixed;
+		/*width: 100vw;*/
+		top: 40px;
+		bottom: 40px;
+		z-index: 2;
+		/*background: #fff;*/
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+</style>

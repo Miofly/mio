@@ -68,7 +68,7 @@ function commons() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/auth/register",
+        url: "http://api.51sld.cn/api/auth/register",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data: {
             username: username,
@@ -121,7 +121,7 @@ function login() {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/api/auth/login",
+        url: "http://api.51sld.cn/api/auth/login",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data: {
             username: username,

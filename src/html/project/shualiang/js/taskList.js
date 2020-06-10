@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
 
     $('#dataTable').bootstrapTable({
-        url: "http://shangliang.52eja.com:443/api/task/task-list",
+        url: "http://api.51sld.cn/api/task/task-list",
         method: 'post',
         ajaxOptions: {
             headers: {"Authorization": localStorage.getItem('TOKEN_KEY_SL')}
@@ -108,7 +108,7 @@ function doView() {
     // $.ajax({
     //     async: true,
     //     type: "POST",
-    //     url: "http://shangliang.52eja.com:443/api/task/task-info",
+    //     url: "http://api.51sld.cn/api/task/task-info",
     //     contentType: "application/x-www-form-urlencoded; charset=utf-8",
     //     dataType: "JSON",
     //     data: {
@@ -199,7 +199,7 @@ function operateTask(flag) {
         $.ajax({
             async: true,
             type: "POST",
-            url: "http://shangliang.52eja.com:443/api/task/task-one-key-del",
+            url: "http://api.51sld.cn/api/task/task-one-key-del",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: {
                 ids: arrStr,

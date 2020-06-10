@@ -137,3 +137,149 @@ html {
         transform: scale(1.0)
     }
 }
+
+input[type=radio] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 0;
+    outline: 0 !important;
+    line-height: 20px;
+    color: black;
+}
+
+input[type=radio]:after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 15px;
+    font-size: 15px;
+    color: white;
+    border: 2px solid #000;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+input[type=radio]:checked:after {
+    content: "L";
+    transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
+    -webkit-transform: matrix(-0.766044, -0.642788, -0.642788, 0.766044, 0, 0);
+    border-color: #7bbfea;
+    background-color: #7bbfea;
+}
+
+.mainbox{
+    margin: 0 auto;
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    padding-top: 1px;
+    padding-bottom: 20px;
+}
+
+.order{
+    position: absolute;
+    z-index: 100;
+    display: block;
+    right: 0;
+    top: 0.8rem;
+    height: 30px;
+}
+
+.animation_box {
+    position: absolute;
+    left: 32%;
+    width: 36%;
+    height: 2.7rem;
+    top: 3.3rem;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.ani_img{
+    display: block;
+    position: absolute;
+}
+.ani_line{
+    width: 100%;
+}
+.ani_cir1 {
+    width: 42.925%;
+    left: 28.5375%;
+    top: 3rem;
+}
+.ani_cir2{
+    width: 45.9598%;
+    left: 27.0201%;
+    top: 3rem;
+}
+
+img.ani_cir1{
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation: rotates 3s linear infinite;
+}
+@keyframes rotates {
+    0%{
+        transform: rotate(360deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+img.ani_cir2{
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation: rotates_back 3s linear infinite;
+}
+@keyframes rotates_back {
+    0%{
+        transform: rotate(0deg) ;
+    }
+    100%{
+        transform: rotate(360deg) ;
+    }
+}
+
+img.ani_line{
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation: line_move 4s linear infinite;
+}
+@keyframes line_move{
+    0%{
+        top: 0;
+    }
+    50%{
+        top: 96%;
+    }
+    100%{
+        top: 0;
+    }
+}
+
+.getbtn{
+    text-align: center;
+    line-height: 50px;
+    border-radius: 25px;
+    color: #000;
+    font-size: 18px;
+    position: relative;
+    width: 90%;
+    left: 5%;
+    margin-top: 21.5rem;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00f2ec), color-stop(100%,#00bcf2));
+    background: -webkit-linear-gradient(top, #00f2ec 0%,#00bcf2 100%);
+    background: linear-gradient(to bottom, #00f2ec 0%,#00bcf2 100%);
+    font-weight: bold;
+}

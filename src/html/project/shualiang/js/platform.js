@@ -2,7 +2,7 @@ $(function () {
     $.ajax({
         async: true,
         type: "POST",
-        url: "http://shangliang.52eja.com:443/index-product-list",
+        url: "http://api.51sld.cn/index-product-list",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "JSON",
         beforeSend: function (xhr) {

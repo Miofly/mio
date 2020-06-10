@@ -1,31 +1,24 @@
 <template>
 	<view style="height: 100%">
-		<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
-			<imgLoad style="height: 180px" :scroll-top="scrollTop" :image-src="item.images[0]"
-					 loading-mode="spin-circle"></imgLoad>
-		</view>
+		<image :src="imgSrc" style="width: 100%" :class="[false?'cu-avatar':'', false?'round': '']"></image>
 	</view>
 </template>
 
 <script>
 	import {
-	    goodGirlData
+	    publicGet
 	} from '@/api'
     export default {
 	    async onLoad () {
-            const data = await goodGirlData('iOS', 1, 10) // 获取的数
-			this.dataLists = data.data
-	    },
+            // https://mp.weixin.qq.com/
+            const data = await publicGet('wx/s/spd-h3drTQB8dveGdX3D6Q') // 获取的数
+			this.imgSrc = data.split('property="og:image" content="')[1].split('<meta property="og:description"')[0].split('" />')[0]
+            console.log(this.imgSrc)
+        },
         data() {
             return {
-                scrollTop: 0,
-                dataLists: []
+               imgSrc: ''
             }
-        },
-        onPageScroll({scrollTop}) {
-            console.log(scrollTop)
-            // 传入scrollTop值并触发所有easy-loadimage组件下的滚动监听事件
-            this.scrollTop = scrollTop;
         },
     }
 </script>

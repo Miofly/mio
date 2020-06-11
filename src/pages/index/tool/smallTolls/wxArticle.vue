@@ -62,7 +62,7 @@
 
     export default {
         async onLoad() {
-            this.wechatGet('wx/s/37lypSFQ2DuWQC2TPyIIYA')
+            this.wechatGet('wx/s/spd-h3drTQB8dveGdX3D6Q')
         },
         data() {
             return {

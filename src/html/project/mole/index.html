@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="background: rgb(212, 169, 126)">
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -13,40 +13,37 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="adaptive.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
-<body style="background: rgb(212, 169, 126)">
-<div style="overflow-y: hidden!important;position: relative;margin-bottom: 1rem;padding-bottom:1rem">
-	<div>
-		<img style="width: 100%;" src="../../img/mole/background@2x.png">
-	</div>
-	<div style="width:90%;height:4.8rem;background:rgba(253,249,241,1);border-radius:0.22rem;
-	position: absolute;top: 40%;left: 5%;">
-		<div style="width:100%;text-align: center;margin-top: 0.3rem">
+<!--<body style="background: rgb(212, 169, 126)">-->
+<body style="background: url(../../img/mole/background@2x.png) no-repeat;background-size: 100% 100%;">
+<div style="overflow-y: hidden!important;position: relative;padding-bottom: 0.3rem;">
+	<div style="width:90%;height:6.2rem;background:rgba(253,249,241,1);border-radius:0.22rem;margin-top: 68%;margin-left: 5%;">
+		<div style="width:100%;text-align: center;padding-top: 0.7rem">
 			<img src="../../img/mole/choice.png" style="width: 5.56rem;height: 0.72rem;">
 		</div>
 
 		<div onclick="showChoice()" style="width:92%;height:1.06rem;background:rgba(246,234,223,1);border-radius:0.22rem;position: relative;left: 4%;
-		line-height: 1.06rem;top: 0.32rem;">
+		line-height: 1.06rem;top: 0.52rem;">
 			<span style="position: absolute;left: 10%;font-size:0.42rem;color:#CD2B34;" id="moleName">点击选择痣的位置</span>
 			<img src="../../img/mole/select.png"
 				 style="width: 0.62rem;height: 0.34rem;position: absolute;right: 0.4rem;top: 0.36rem;">
 		</div>
 		<div onclick="ljfx()"
-			 style="width: 100%;text-align: center;margin-top: 0.66rem;
+			 style="width: 100%;text-align: center;margin-top: 1.16rem;
 			 -webkit-animation: scale-upOne 2s linear 0s infinite alternate;
 			 -o-animation: scale-upOne 2s linear 0s infinite alternate;animation: scale-upOne 2s linear 0s infinite alternate;">
 			<img src="../../img/mole/iconnew@2x.png" style="width: 4.76rem;height: 0.94rem">
 		</div>
 
-		<div style="text-align: center;margin-top: 0.2rem">
+		<div style="text-align: center;margin-top: 0.4rem">
 			<span style="font-size:0.36rem;font-weight: bold">当前有<span style="color: #CD2B34" id="sjs"></span><span>正在在线解答</span></span>
 		</div>
 	</div>
-	<div style="position: absolute;bottom: 0rem;width: 90%;left: 5%;">
+	<div style="width: 90%;margin-left: 5%;margin-top: 0.8rem">
 		<img src="../../img/mole/text.png" style="width: 100%;height: 3.26rem">
 	</div>
 </div>
 <div id="choiceDiv"
-	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 20%;left: 5%;
+	 style="display: none;width:90%;height:8rem;background:rgba(255,255,255,1);border-radius:0.22rem;position: fixed;top: 25%;left: 5%;
 	 overflow-y: auto;padding-top: 20px;padding-bottom: 20px">
 	<form style="width: 100%;height: 100%;overflow: auto" id="comment1s">
 	</form>

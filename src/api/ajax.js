@@ -2,7 +2,7 @@
 ajax请求函数模块
 返回值: promise对象(异步返回的数据是: response.data)
  */
-
+import {ui} from 'mioJs/uniapp'
 // #ifdef MP-WEIXIN
 import axios from '@/common/js/utils/uni-axios'
 // #endif
@@ -30,7 +30,7 @@ function ajax ({
                    getHeader, // get请求默认请求头
                }) {
     return new Promise((resolve, reject) => {
-
+        ui.showLoading()
         // 处理method(转大写) 防止请求类型写成小写形式
         method = method.toUpperCase()
 
@@ -97,6 +97,7 @@ function ajax ({
         }
 
         promise.then(response => {
+            uni.hideLoading()
             const resMess = { // 封装返回成功的数据信息
                 data: response.data,
                 status: response.status,
@@ -109,8 +110,10 @@ function ajax ({
                 console.log('请求失败', resMess)
             }
         }).catch(err => { // 失败了调用reject()
+            uni.hideLoading()
             if (!errHandle) { // 全局错误的提示
                 console.log('请求出错')
+                ui.showToast('请求出错')
             }
             reject(err)
         })

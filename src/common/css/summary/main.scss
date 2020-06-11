@@ -43,13 +43,6 @@ body {
         box-sizing: border-box;
     }
 
-    .round {
-        border-radius: rpx(5000);
-    }
-
-    .radius {
-        border-radius: rpx(6);
-    }
 
     .border-top {
         border-top: 1px solid rgba(0, 0, 0, 0.2)
@@ -272,4 +265,17 @@ body {
 
 .dashed-left::after {
     border-left: 1rpx dashed #ddd;
+}
+
+
+.round {
+    border-radius: rpx(5000);
+}
+
+.radius {
+    border-radius: rpx(35);
+}
+
+.radius-sm {
+    border-radius: rpx(20);
 }

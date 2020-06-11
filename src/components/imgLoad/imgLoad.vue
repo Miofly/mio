@@ -1,5 +1,5 @@
 <template>
-	<view class="easy-loadimage" :id="uid" style="width: 100%;height: 100%">
+	<view class="easy-loadimage" :id="uid">
 		<image class="origin-img" :src="imageSrc" :mode="mode" @click="ui.showImg(imageSrc)"
 			   v-if="loadImg&&!isLoadError" v-show="showImg"
 			   :class="{'no-transition':!openTransition,'show-transition':showTransition&&openTransition}"
@@ -44,7 +44,13 @@
                 default() {
                     return uni.getSystemInfoSync().windowHeight
                 }
-            }
+            },
+			showAll: { // 是否显示全部图片
+			    type: Boolean,
+			    default: true,
+			    required: false
+			},
+
         },
         watch: {
             scrollTop(val) {
@@ -75,28 +81,20 @@
             handleImgError(e) {
                 this.isLoadError = true
             },
-            // onScroll(scrollTop) {
-            //     // 加载ing时才执行滚动监听判断是否可加载
-            //     // if (this.loadImg || this.isLoadError) return
-            //     const id = this.uid
-            //     const query = uni.createSelectorQuery().in(this)
-            //     query.select('#' + id).boundingClientRect(data => {
-            //         // if (!data) return
-            //         // if (data.top - this.viewHeight < 0) {
-            //             this.loadImg = true
-            //         // }
-            //     }).exec()
-            // },
             onScroll(scrollTop) {
                 // 加载ing时才执行滚动监听判断是否可加载
                 if (this.loadImg || this.isLoadError) return
                 const id = this.uid
                 const query = uni.createSelectorQuery().in(this)
                 query.select('#' + id).boundingClientRect(data => {
-                    if (!data) return
-                    if (data.top - this.viewHeight < 0) {
+                    if (this.showAll) {
                         this.loadImg = true
-                    }
+                    } else {
+                        if (!data) return
+                        if (data.top - this.viewHeight < 0) {
+                            this.loadImg = true
+                        }
+					}
                 }).exec()
             },
         },
@@ -114,8 +112,6 @@
 
 	/* 渐变过渡效果处理 */
 	image.origin-img {
-		width: 100%;
-		height: 100%;
 		opacity: 0.3;
 	}
 
@@ -142,7 +138,7 @@
 	/* 转圈 */
 	.spin-circle {
 		background: url('@/static/images/common/loading1.gif') no-repeat center;
-		background-size: 100rpx;
+		background-size: 100 rpx;
 	}
 
 	/* 动态灰色若隐若现 */
@@ -167,7 +163,7 @@
 	.skeleton-1 {
 		background-color: #e3e3e3;
 		background-image: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 80%);
-		background-size: 100rpx 100%;
+		background-size: 100 rpx 100%;
 		background-repeat: repeat-y;
 		background-position: 0 0;
 		animation: skeleton-1 .6s infinite;

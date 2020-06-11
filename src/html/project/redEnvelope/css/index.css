@@ -1,0 +1,167 @@
+* {
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+html {
+    -webkit-text-size-adjust: none;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+span {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: normal "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    sans-serif;
+    /* overflow-y: hidden; */
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a,
+img {
+    border: none;
+}
+
+a,
+button {
+    outline: none;
+    border: 0;
+}
+
+textarea,
+input,
+button,
+select {
+    outline: 0;
+}
+
+textarea {
+    overflow: auto;
+    resize: none;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+em,
+i,
+small,
+caption,
+th {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 100%;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:link,
+a:focus,
+button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    text-decoration: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: #333;
+    background-color: #fff;
+}
+
+html {
+    font-size: 100px;
+}
+
+@keyframes scale-upOne {
+    0% {
+        opacity: 1;
+        transform: scale(1)
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.0)
+    }
+}
+
+@keyframes line_move{
+    0%{
+        top: 0;
+    }
+    50%{
+        top: 96%;
+    }
+    100%{
+        top: 0;
+    }
+}
+
+.getbtn{
+    text-align: center;
+    line-height: 50px;
+    border-radius: 25px;
+    color: #000;
+    font-size: 18px;
+    position: relative;
+    width: 90%;
+    left: 5%;
+    margin-top: 21.5rem;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00f2ec), color-stop(100%,#00bcf2));
+    background: -webkit-linear-gradient(top, #00f2ec 0%,#00bcf2 100%);
+    background: linear-gradient(to bottom, #00f2ec 0%,#00bcf2 100%);
+    font-weight: bold;
+}

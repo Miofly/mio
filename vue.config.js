@@ -78,7 +78,7 @@ module.exports = {
             },
             '/wx': {
                 // target: "http://10.19.193.135:8870/ssyth",
-                target: 'https://mp.weixin.qq.com',
+                target: 'https://mp.weixin.qq.com/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
                 pathRewrite: {

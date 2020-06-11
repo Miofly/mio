@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<view class="header">Header</view>
+		<!--#ifdef H5-->
 		<view @touchmove="test" ref="scrollEle" class="scrollEle">
 			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 				<view v-for="(item, index) in
@@ -73,6 +74,8 @@
 				</view>
 			</view>
 		</view>
+		<!--#endif-->
+
 		<view class="footer">Footer</view>
 	</view>
 </template>

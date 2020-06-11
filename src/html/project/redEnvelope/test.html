@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body style="height: 100%">
+<div style="background: rgb(247, 247, 247);position: fixed;bottom: 0;left: 0;width: 100%">
+	<img src="img.png" style="width: 100%">
+</div>
+<script>
+
+
+    $('body').on('touchstart', function (e) {
+        console.log(e)
+        var x = e.originalEvent.targetTouches[0].pageX;
+
+    });
+
+
+
+
+</script>
+</body>
+</html>

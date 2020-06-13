@@ -9,170 +9,97 @@
 	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 	<meta content="telephone=no" name="format-detection"/>
 	<meta content="email=no" name="format-detection"/>
-	<title>痣相详解</title>
-	<script src="jquery.js"></script>
-	<script type="text/javascript" src="adaptive.js"></script>
+	<title>端午节</title>
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/adaptive.js"></script>
+	<script type="text/javascript" src="js/share.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/share.css"/>
-	<style>
-		.mhbbox_img img,.s_img img{ display: block; width: 100%; height: 100%; border-radius: 5px; }
-		.backto img{display:block;width:0.22rem;}
-		.show_list{ width: 100%; position: relative; height: 7rem; margin: 0; overflow: hidden; }
-		.show_list li{ height: 0.8rem; margin-left: 0.3rem; margin-right: 0.3rem; padding-top: 0.20rem; padding-bottom: 0.20rem; border-bottom: 1px solid #efefef; display: flex; justify-content: space-between; }
-		.user_infor{ flex: 1; display: flex; align-items: center;}
-		.money{font-size: 0.3rem;color: #040404;}
-		.head_img{ width: 0.74rem; height: 0.74rem; border-radius: 0.1rem; }
-		.user_name{ padding-left: 0.2rem;}
-		.user_name p{ font-size: 0.3rem; height: 0.42rem; }
-		.user_name span{ font-size: 0.26rem; height: 0.32rem; color:#848484; }
-	</style>
 </head>
 <body style="font-size: 0.05rem;" class="bg-white">
+<audio src="./img/gold.mp3" preload="auto" id="mp3"></audio>
 <div>
-	<div style="text-align: center">
-		<img src="../../img/redEnvelope/shang@2x.png" style="width: 100%">
+	<!--此处跳广告-->
+	<div style="position: fixed;left: 0.3rem;top: 0.5rem;z-index: 9999">
+		<img src="./img/back.png" style="width: 0.27rem;height: 0.43rem">
+	</div>
+	<div style="text-align: center" onclick="">
+		<img src="./img/shang@2x.png" style="width: 100%">
 		<h1 style="font-size:1.15rem;height: 1.61rem;font-weight:600;color:rgba(204,170,118,1);">100.00</h1>
-		<img src="../../img/redEnvelope/anniu@2x.png" style="width: 4.48rem;height: 1.13rem;
+		<img src="./img/anniu@2x.png" style="width: 4.48rem;height: 1.13rem;
 		animation: scale-upOne 2s linear 0s infinite alternate;">
 	</div>
+
+	<div id="sum" style="display: none">
+		<div id="mb" style="display: block" class="mio-modal-mask"></div>
+		<div style="position: fixed;top: 0;right: 0.5rem;z-index: 13">
+			<img style="width: 6.02rem;height: 1.83rem;" src="./img/wei@2x.png">
+		</div>
+
+		<div style="position: fixed;width: 100%;left: 0;text-align: center;top: 25%;z-index: 13">
+			<img id="shareImg" style="width: 5.81rem;height: 5.78rem;" class="shake" src="./img/jx.png">
+		</div>
+	</div>
+
 	<div class="show_list">
 		<ul id="demoDown"></ul>
 	</div>
 </div>
 <script>
-    var mians;
-    var mainbox;
-    var main = []; //所有数据
-    var mainheight; //高
-    var mainwidth; //宽
-    var speed = 1; //速度
-    var golddh = null;
-    var goldimg;
-    var imgwidth = 35; //金币大小宽度
-    start()
+    audioAutoPlay("mp3");
 
-    function start() {
-        $('body').append('<img id="goldimg" ' +
-            'src="http://allwebloction.yifutangvip.net/invite/assets/module1/icon1.png" />').append(
-            '<canvas id="canvas" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0"></canvas>');
-        $('#canvas').click(function () {
-            $('.btn2').click();
-        });
-        mainheight = $('#canvas').height(); //高
-        mainwidth = $('#canvas').width(); //宽
-        goldimg = document.getElementById("goldimg");
-        mians = document.getElementById("canvas");
-        mainbox = mians.getContext("2d");
-        $('#canvas').attr({
-            width: $(window).width(),
-            height: $(window).height()
-        });
-        // 开始动画   金币位置数据
-        for (var i = 0; i < 70; i++) {
-            main.push({
-                x: randomNum(50, mainwidth - 50),
-                y: randomNum(-800, 0),
-                direction: Math.round(Math.random()) ? 'left' : 'right', //左右方向
-                updown: 'down', //上下方向
-                jump: randomNum(30, 80), //到底跳跃
-                bottom: 0, //到底第几次
-                jumpspeed: randomNum(5, 10), //跳跃速度
-                downspeed: randomNum(15, 25), //下降速度
-                leftright: randomNum(10, 15) //左右跳跃幅度
-            });
-        }
-        playdh();
-    }
-
-    function playdh() {
-        clearInterval(golddh);
-        window.requestAnimationFrame(function () {
-
-            for (var i = 0; i < main.length; i++) {
-                var item = main[i];
-                item.direction == "left" ? item.x -= item.leftright / 10 : item.x += item.leftright / 10;
-                var thisspeed = item.bottom >= 1 ? item.jumpspeed : item.downspeed;
-
-                if (item.y >= mainheight - imgwidth) {
-                    //金币到底到底
-
-                    if (item.bottom == 0) {
-                        // 第一次到底 反向
-                        item.bottom = 1; //增加到底次输
-                        item.updown = 'up';
-                    }
-                    if (item.bottom == 2) {
-                        main.splice(i, 1);
-                        if (main.length == 0) {
-                            clearInterval(golddh);
-                            $('#goldimg').remove();
-                            $('#canvas').remove();
-                        }
-                    }
-                }
-
-                if (item.bottom == 1) {
-                    item.jump -= 3;
-                    // console.log(item.jump)
-                    if (item.jump <= 0) {
-                        // 反向到底
-                        item.updown = 'down';
-                        item.bottom = 2;
-                    }
-                }
-                item.updown == "down" ? item.y += thisspeed : item.y -= thisspeed;
-            }
-            mainbox.clearRect(0, 0, mainwidth, mainheight);
-            draw(main);
-        });
-    }
-
-    function draw(e) {
-        for (var i = 0; i < e.length; i++) {
-            var item = e[i];
-            mainbox.drawImage(goldimg, item.x, item.y, imgwidth, imgwidth);
-        }
-        playdh();
-    }
-
-    function randomNum(minNum, maxNum) {
-        // 随机数
-        switch (arguments.length) {
-            case 1:
-                return parseInt(Math.random() * minNum + 1, 10);
-                break;
-            case 2:
-                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-                break;
-            default:
-                return 0;
-                break;
-        }
-    }
-
-
-    var mList=[{mimg:'../../img/xtx/1.jpg',mname:"次日图捏"},{mimg:'../../img/xtx/2.jpg',mname:"laneud"},{mimg:'../../img/xtx/3.jpg',mname:"开诶女聪明"},{mimg:'../../img/xtx/4.jpg',mname:"奥Y他们"},{mimg:'../../img/xtx/5.jpg',mname:"拉开日~"},{mimg:'../../img/xtx/6.jpg',mname:"NFHEY楷模"},{mimg:'../../img/xtx/7.jpg',mname:"默默的爱"},{mimg:'../../img/xtx/8.jpg',mname:"本田销售"},{mimg:'../../img/xtx/9.jpg',mname:"小妞儿"},{mimg:'../../img/xtx/10.jpg',mname:"MK-星图"},{mimg:'../../img/xtx/11.jpg',mname:"猪猪侠"},{mimg:'../../img/xtx/12.jpg',mname:"宝贝"},{mimg:'../../img/xtx/13.jpg',mname:"左左妈妈"},{mimg:'../../img/xtx/14.jpg',mname:"大量收号"},{mimg:'../../img/xtx/15.jpg',mname:"吃遍天下无敌手"},{mimg:'../../img/xtx/16.jpg',mname:"情归何处"},{mimg:'../../img/xtx/17.jpg',mname:"小亮儿奶奶"},{mimg:'../../img/xtx/18.jpg',mname:"柳暗花明"},{mimg:'../../img/xtx/19.jpg',mname:"pangeOne"},{mimg:'../../img/xtx/20.jpg',mname:"周.."}]
-    for(var i=0; i<mList.length; i++){
+    var mList = [{mimg: '../../img/xtx/1.jpg', mname: "love girl"}, {
+        mimg: '../../img/xtx/2.jpg',
+        mname: "laneud"
+    }, {mimg: '../../img/xtx/3.jpg', mname: "胡歌的小迷妹"}, {
+        mimg: '../../img/xtx/4.jpg',
+        mname: "奥Y他们"
+    }, {mimg: '../../img/xtx/5.jpg', mname: "拉开日~"}, {
+        mimg: '../../img/xtx/6.jpg',
+        mname: "NFHEY楷模"
+    }, {mimg: '../../img/xtx/7.jpg', mname: "默默的爱"}, {
+        mimg: '../../img/xtx/8.jpg',
+        mname: "本田销售"
+    }, {mimg: '../../img/xtx/9.jpg', mname: "小妞儿"}, {
+        mimg: '../../img/xtx/10.jpg',
+        mname: "MK-星图"
+    }, {mimg: '../../img/xtx/11.jpg', mname: "蔡徐坤"}, {
+        mimg: '../../img/xtx/12.jpg',
+        mname: "宝贝"
+    }, {mimg: '../../img/xtx/13.jpg', mname: "左左妈妈"}, {
+        mimg: '../../img/xtx/14.jpg',
+        mname: "大量收号"
+    }, {mimg: '../../img/xtx/15.jpg', mname: "吃遍天下无敌手"}, {
+        mimg: '../../img/xtx/16.jpg',
+        mname: "情归何处"
+    }, {mimg: '../../img/xtx/17.jpg', mname: "小亮儿奶奶"}, {
+        mimg: '../../img/xtx/18.jpg',
+        mname: "柳暗花明"
+    }, {mimg: '../../img/xtx/19.jpg', mname: "pgOne"}, {mimg: '../../img/xtx/20.jpg', mname: "周.."}]
+    for (var i = 0; i < mList.length; i++) {
         var img = mList[i].mimg;
         var name = mList[i].mname;
-        listDiscuss(img,name)
+        listDiscuss(img, name)
     }
 
-    function listDiscuss(img,name){
-        var sjm = 1;
-        var sjt = 22;
-        var mhtml = '<li><div class="user_infor"><img src="'+img+'" class="head_img"><div class="user_name"><p>'+name+'<\/p><span>'+sjt+'<\/span><\/div></div><div class="money">'+sjm+'元<\/div></li>';
+    function listDiscuss(img, name) {
+        var sjm = sjMoneyNum();
+        var sjt = sjTimeAdd();
+        var mhtml = '<li><div class="user_infor"><img src="' + img + '" class="head_img"><div class="user_name"><p>' + name + '<\/p><span>' + sjt + '<\/span><\/div></div><div class="money">' + sjm + '元<\/div></li>';
         $("#demoDown").append(mhtml);
     }
 
-    function Scroll() {}
-    Scroll.prototype.upScroll = function(dom, _h, interval) {
+
+    function Scroll() {
+    }
+
+    Scroll.prototype.upScroll = function (dom, _h, interval) {
         var dom = document.getElementById(dom);
-        var timer = setTimeout(function() {
+        var timer = setTimeout(function () {
             var _field = dom.firstElementChild;
             _field.style.marginTop = _h;
             clearTimeout(timer);
         }, 1000)
-        setInterval(function() {
+        setInterval(function () {
             var _field = dom.firstElementChild;
             _field.style.marginTop = "0px";
             dom.appendChild(_field);
@@ -180,8 +107,57 @@
             _field.style.marginTop = _h;
         }, interval)
     }
+
+
     var myScroll = new Scroll();
     myScroll.upScroll("demoDown", "-1.2rem", 2500);
+
+
+    // 免接口分享
+    var shareATimes = 0
+    var shareTTimes = 0
+    var hiddenProperty = 'hidden' in document ? 'hidden'
+        : 'webkitHidden' in document ? 'webkitHidden'
+            : 'mozHidden' in document ? 'mozHidden'
+                : null
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
+    var onVisibilityChange = function () {
+        if (!document[hiddenProperty]) {
+            window.show_time = Date.now()
+            shareATimes += 1
+            if (shareATimes > 4) {
+                shareTTimes += 1
+                setTimeout(share_tip(shareATimes, shareTTimes), 100)
+            } else {
+                setTimeout(share_tip(shareATimes, -1), 100)
+            }
+        } else {
+            window.hidden_time = Date.now()
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
+
+    function share_tip(share_app_times, share_timeline_times) { // 分享处理
+        console.log('处理了吗')
+
+        if (share_timeline_times == -1) {
+            if (shareATimes == 1) {
+                $('#shareImg').removeClass('shake')
+                $('#shareImg').addClass('shakeTwo')
+                $('#shareImg').attr('src', './img/jx1.png')
+            } else if (shareATimes == 2) {
+                $('#shareImg').removeClass('shakeTwo')
+                $('#shareImg').addClass('shake')
+                $('#shareImg').attr('src', './img/jx2.png')
+            } else if (shareATimes == 3) {
+                $('#shareImg').removeClass('shake')
+                $('#shareImg').addClass('shakeTwo')
+                $('#shareImg').attr('src', './img/jx3.png')
+            } else {
+                console.log('结束')
+            }
+        }
+    }
 
 
 </script>

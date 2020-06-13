@@ -124,7 +124,7 @@ html {
 }
 
 /*.shake1 { animation: 0.5s ease 0s 4 normal none running shaken1; }*/
-.mio-modal-mask { position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; background: rgba(0, 0, 0, 0.89); z-index: 3; transition: all 0.3s ease-in-out 0s; }
+.mio-modal-mask { position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; background: rgba(0, 0, 0, 0.7); z-index: 3; transition: all 0.3s ease-in-out 0s; }
 .xuanzhun {
     -webkit-transition-property: -webkit-transform;
     -webkit-transition-duration: 1s;
@@ -134,62 +134,15 @@ html {
     -moz-animation: rotate 6s linear infinite;
     -o-animation: rotate 6s linear infinite;
     animation: rotate 6s linear infinite;
-}
-.shake1 {
-    animation: shake 2s 1;
-}
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-@keyframes shaken1 {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(7deg);
-    }
-
-    50% {
-        transform: rotate(-7deg);
-    }
-
-    75% {
-        transform: rotate(7deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-
-@keyframes top_move {
-    from {
-        top: 100%;
-    }
-    to {
-        top: 45%;
-    }
-}
-
-@keyframes top_move1 {
-    from {
-        top: 100%;
-    }
-    to {
-        top: 73%;
-    }
-}
-
-.shakeTwo {
-    animation: shake2 2s linear 0s 1
-}
+}	.backto img{display:block;width:0.22rem;}
+.show_list{ width: 100%; position: relative; height: 10rem; margin: 0; overflow: hidden; }
+.show_list li{ height: 1.2rem; margin-left: 0.3rem; margin-right: 0.3rem; padding-top: 0.20rem; padding-bottom: 0.20rem; border-bottom: 1px solid #efefef; display: flex; justify-content: space-between; }
+.user_infor{ flex: 1; display: flex; align-items: center;}
+.money{font-size: 0.3rem;color: #040404;}
+.head_img{ width: 0.94rem; height: 0.94rem; border-radius: 0.1rem; }
+.user_name{ padding-left: 0.2rem;}
+.user_name p{ font-size: 0.3rem; height: 0.42rem; }
+.user_name span{ font-size: 0.26rem; height: 0.32rem; color:#848484; }
 @keyframes shake {
     0%,
     100% {
@@ -233,7 +186,6 @@ html {
     }
 }
 
-
 @keyframes shake2 {
     0%,
     100% {
@@ -275,6 +227,14 @@ html {
     90% {
         transform: translateX(-1px)
     }
+}
+
+.shake {
+    animation: shake 2s linear 0s 1
+}
+
+.shakeTwo {
+    animation: shake2 2s linear 0s 1
 }
 
 @keyframes scale-upOne {

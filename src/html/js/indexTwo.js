@@ -1,6 +1,4 @@
-// $(function () {
 // 免接口分享
-// var ad_url = "<?= $advertising ?>";
 var shareATimes = 0
 var shareTTimes = 0
 var hiddenProperty = 'hidden' in document ? 'hidden'
@@ -11,18 +9,12 @@ var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange'
 var onVisibilityChange = function () {
     if (!document[hiddenProperty]) {
         window.show_time = Date.now()
-        if (show_time - hidden_time > 100) {
-            // if (show_time - hidden_time > 0) {
-            shareATimes += 1
-            if (shareATimes > 4) {
-                shareTTimes += 1
-                setTimeout(share_tip(shareATimes, shareTTimes), 100)
-            } else {
-                setTimeout(share_tip(shareATimes, -1), 100)
-            }
+        shareATimes += 1
+        if (shareATimes > 4) {
+            shareTTimes += 1
+            setTimeout(share_tip(shareATimes, shareTTimes), 100)
         } else {
-            console.log(11)
-            // alert('分享失败')
+            setTimeout(share_tip(shareATimes, -1), 100)
         }
     } else {
         window.hidden_time = Date.now()
@@ -50,11 +42,3 @@ function share_tip(share_app_times, share_timeline_times) { // 分享处理
         }
     }
 }
-
-// })
-
-
-setTimeout(() => {
-    $('#modal').css('opacity', 1)
-    $('#figure').css('opacity', 1)
-}, 100)

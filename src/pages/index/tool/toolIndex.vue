@@ -1,39 +1,46 @@
 <template>
-	<view>
-		<view class="cu-list grid margin-top-ten-five" :class="['col-' + 5, false ? '' : 'no-border']">
-			<view class="cu-item" v-for="(item, index) in toolLists" :key="index">
-				<view class="fa" :class="['fa-' + item.icon, 'text-' + item.color]">
-					<view class="cu-tag badge" v-if="item.badge != 0">
-						<block v-if="item.badge != 1">{{item.badge > 99 ? '99+' : item.badge}}</block>
-					</view>
+	<view class="cu-list grid" :class="['col-' + 3, true ? '' : 'no-border']">
+		<view @tap="tz(item.url, item.isOut)" class="cu-item" v-for="(item, index) in lists" :key="index">
+			<view class="fa" :class="['fa-' + item.icon, 'text-' + item.color]">
+				<view class="cu-tag badge" v-if="item.badge != 0">
+					<block v-if="item.badge != 1">{{item.badge > 99 ? '99+' : item.badge}}</block>
 				</view>
-				<text>{{item.name}}</text>
 			</view>
+			<text>{{item.name}}</text>
 		</view>
 	</view>
 </template>
 
 <script>
     export default {
-        data () {
+        data() {
             return {
-                toolLists: [
-                    {icon: 'weixin', color: 'red', badge: 0, name: 'weixin'},
-                    {icon: 'close', color: 'orange', badge: 0, name: '录像'},
-                    {icon: 'weixin', color: 'yellow', badge: 0, name: '图像'},
-                    {icon: 'weixin', color: 'olive', badge: 0, name: '通知'},
-                    {icon: 'weibo', color: 'cyan', badge: 0, name: '排行榜通知'},
-                    {icon: 'qq', color: 'blue', badge: 0, name: '皮肤'},
-                    {icon: 'weixin', color: 'purple', badge: 0, name: '帮助发现图像'},
-                    {icon: 'weixin', color: 'mauve', badge: 0, name: '帮助'},
-                    {icon: 'weixin', color: 'purple', badge: 0, name: '问答'},
-                    {icon: 'weixin', color: 'mauve', badge: 0, name: '版权'}
+                lists: [
+                    {url: 'wxArticle', icon: 'cny', color: 'red', badge: 0, name: '微信文章封面提取'},
+                    {url: 'heightAndWeight', icon: 'dollar', color: 'orange', badge: 0, name: '身体质量指数'},
+                    {url: 'idCard', icon: 'btc', color: 'yellow', badge: 0, name: '身份信息查询'},
+                    {url: 'phone', icon: 'money', color: 'olive', badge: 0, name: '手机归属地查询'},
+                    {url: 'phoneInformation', icon: 'won', color: 'cyan', badge: 0, name: '手机完整信息'},
+                    {url: 'wx161b6221791a7340', icon: 'krw', color: 'blue', badge: 0, name: '免费VIP影视', isOut: true},
+                    {url: 'wx2de5f627b0461a70', icon: 'gg', color: 'purple', badge: 0, name: 'AI智能识别'},
+                    {url: '', icon: 'try', color: 'mauve', badge: 0, name: '帮助'},
                 ]
             }
         },
+        methods: {
+            tz (url, isOut) {
+                if (isOut) {
+                    wx.navigateToMiniProgram({
+                        appId: url,
+                        success (res) {
+                            // 打开成功
+                            console.log(res)
+                        }
+                    })
+                } else {
+                    this.router.push({name: url})
+                }
+            },
+        },
     }
 </script>
-
-<style>
-
-</style>

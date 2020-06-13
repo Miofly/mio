@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>.</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="adaptive.js"></script>
+	<style>
+		@keyframes shake {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+		@keyframes shake2 {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+		.shake {
+			animation: shake 2s linear 0s 1
+		}
+
+		.shakeTwo {
+			animation: shake2 2s linear 0s 1
+		}
+	</style>
+</head>
+<body style="background: #000">
+<div>
+	<img id="top" style="width: 6.59rem;height: 2.58rem;float: right" src="./img/weixinqun@2x.png">
+</div>
+<div style="text-align: center;width: 100%">
+	<img id="main" class="shake" style="margin-top: 25%;width: 5.82rem;height: 4.58rem" src="./img/1@2x.png">
+</div>
+<script>
+    // $(function () {
+    // 免接口分享
+    // var ad_url = "<?= $advertising ?>";
+    var shareATimes = 0
+    var shareTTimes = 0
+    var hiddenProperty = 'hidden' in document ? 'hidden'
+        : 'webkitHidden' in document ? 'webkitHidden'
+            : 'mozHidden' in document ? 'mozHidden'
+                : null
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
+    var onVisibilityChange = function () {
+        if (!document[hiddenProperty]) {
+            window.show_time = Date.now()
+            shareATimes += 1
+            if (shareATimes > 7) {
+                shareTTimes += 1
+                setTimeout(share_tip(shareATimes, shareTTimes), 100)
+            } else {
+                setTimeout(share_tip(shareATimes, -1), 100)
+            }
+        } else {
+            window.hidden_time = Date.now()
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
+
+    function share_tip(share_app_times, share_timeline_times) { // 分享处理
+        if (share_timeline_times == -1) {
+            if (shareATimes == 1) {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+                $('#main').attr('src', './img/2@2x.png')
+            } else if (shareATimes == 2) {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+                $('#main').attr('src', './img/3@2x.png')
+            } else if (shareATimes == 3) {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+                $('#main').attr('src', './img/4@2x.png')
+            } else if (shareATimes == 4) {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+                $('#main').attr('src', './img/5@2x.png')
+            } else if (shareATimes == 5) {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+                $('#main').attr('src', './img/6@2x.png')
+            } else if (shareATimes == 6) {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+                $('#top').attr('src', './img/pengyouquan@2x.png')
+                $('#main').attr('src', './img/7@2x.png')
+            } else {
+               	console.log('跳转')
+            }
+        }
+    }
+</script>
+</body>
+</html>

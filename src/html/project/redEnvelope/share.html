@@ -13,140 +13,177 @@
 	<script src="jquery.js"></script>
 	<script type="text/javascript" src="adaptive.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/share.css"/>
+	<style>
+		.mhbbox_img img,.s_img img{ display: block; width: 100%; height: 100%; border-radius: 5px; }
+		.backto img{display:block;width:0.22rem;}
+		.show_list{ width: 100%; position: relative; height: 7rem; margin: 0; overflow: hidden; }
+		.show_list li{ height: 0.8rem; margin-left: 0.3rem; margin-right: 0.3rem; padding-top: 0.20rem; padding-bottom: 0.20rem; border-bottom: 1px solid #efefef; display: flex; justify-content: space-between; }
+		.user_infor{ flex: 1; display: flex; align-items: center;}
+		.money{font-size: 0.3rem;color: #040404;}
+		.head_img{ width: 0.74rem; height: 0.74rem; border-radius: 0.1rem; }
+		.user_name{ padding-left: 0.2rem;}
+		.user_name p{ font-size: 0.3rem; height: 0.42rem; }
+		.user_name span{ font-size: 0.26rem; height: 0.32rem; color:#848484; }
+	</style>
 </head>
 <body style="font-size: 0.05rem;" class="bg-white">
 <div>
-	<div style="padding: 0.30rem;">
-		<div onclick="location.href = 'http://www.baidu.com'" style="margin-left: 0.05rem">
-			<img src="../../img/mole/back.png">
-		</div>
-		<!--<div style="font-size:0.46rem;color:rgba(0,0,0,1);height:0.78rem;text-align: center">-->
-			<!--恭喜你结果已生成-->
-		<!--</div>-->
-		<div style="margin-top: 0.1rem">
-			<span onclick="location.href = 'http://www.baidu.com'" style="font-size:0.32rem;color:rgba(55,120,167,1);width: 1.48rem">痣相详解</span>
-			<span style="font-size:0.32rem;color:rgba(153,153,153,1);margin-left: 0.09rem" id="time"></span>
-		</div>
-		<div>
-			<img style="width: 100%" src="../../img/mole/gzh.png">
-		</div>
+	<div style="text-align: center">
+		<img src="../../img/redEnvelope/shang@2x.png" style="width: 100%">
+		<h1 style="font-size:1.15rem;height: 1.61rem;font-weight:600;color:rgba(204,170,118,1);">100.00</h1>
+		<img src="../../img/redEnvelope/anniu@2x.png" style="width: 4.48rem;height: 1.13rem;
+		animation: scale-upOne 2s linear 0s infinite alternate;">
 	</div>
-
-	<div style="position: relative;">
-		<img id="moleImg" style="width: 100%">
-		<img id="btn" src="../../img/mole/icon@2x.png" onclick="zqyq()"
-			 style="animation: scale-upOne 2s linear 0s infinite alternate;
-			 width: 4.76rem;height: 0.94rem;position: absolute;margin: 0 auto;left: 18%;bottom:8.5%;text-align: center">
+	<div class="show_list">
+		<ul id="demoDown"></ul>
 	</div>
-
-	<div class="padding" style="position: relative">
-		<img style="width: 100%" src="../../img/mole/discern.png">
-		<img style="width: 2.6rem;position: absolute;left: 0.68rem;bottom: 1.28rem" src="../../img/mole/ewm.png">
-	</div>
-
-	<div id="showqr">
-		<img id="logoimg" src='' style="display:none"/>
-	</div>
-
-	<div id="sum">
-		<div id="mb" style="display: block" class="mio-modal-mask"></div>
-
-		<div style="position: fixed;width: 100%;left: 0;text-align: center;top: 20%;z-index: 13">
-			<img id="shareImg" style="width: 6.48rem;height: 3.96rem;" class="shake1" src="../../img/mole/character2@2x.png">
-		</div>
-
-		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 2.34rem;z-index: 13">
-			<img style="width: 2.20rem;height: 2.20rem" src="../../img/mole/fingerprint.png">
-		</div>
-		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 2.50rem;z-index: 12;">
-			<img style="-webkit-animation: scale-up 0.9s linear 0s infinite alternate;
-		animation: scale-up 0.9s linear 0s infinite alternate;width: 2.0rem;height: 2.0rem" src="../../img/mole/transparent.png">
-		</div>
-		<div style="position: fixed;width: 100%;left: 0;text-align: center;bottom: 1.1rem;z-index: 11;">
-			<div style="display: inline-block;width:100%;height:0.45rem;font-size:0.5rem;font-weight:600;color:rgba(255,255,255,1);">
-				长按屏幕分享
-			</div>
-		</div>
-	</div>
-
-	<div id="imgOne" style="position: fixed;bottom: 0;opacity: 0.01;z-index: 101"></div>
 </div>
-<script type="text/javascript" src="../../js/common/ewm.js"></script>
-<script type="text/javascript" src="../../js/common/canvas.js"></script>
 <script>
-    document.body.addEventListener('touchmove', bodyScroll, {passive: false});
+    var mians;
+    var mainbox;
+    var main = []; //所有数据
+    var mainheight; //高
+    var mainwidth; //宽
+    var speed = 1; //速度
+    var golddh = null;
+    var goldimg;
+    var imgwidth = 35; //金币大小宽度
+    start()
 
-    $('#moleImg').attr('src', '../../img/mole/' + getUrlParam('num') +'@2x.png')
-
-    qraa({ewmSize: 95, logo: '', url: 'http://www.baidu.com', logoSize: 'default', isShow: false})
-
-    $('#time').html(new Date().toLocaleDateString().replace(/\//g, '-'))
-
-    var imgLists = [
-        {src: '../../img/mole/diagrammatize@2x.png', left: 0, top: 0, width: 375, height: 667},
-		{src: $('#qrAnonymous').attr('src'), left: 5, top: 570, width: 91, height: 91},
-    ]
-    var canvas = document.createElement('canvas')
-    canvas.width = 375;
-    canvas.height = 667; // 这是canvas的宽高
-    var ctx = canvas.getContext('2d')
-
-    ctx.rect(0, 0, 375, 667); // 这是图片的宽高
-    ctx.fill();
-    drawing(0, $('#imgOne'), false, 100);
-
-    function zqyq() {
-        window.location.href = 'http://192.168.3.149:8888/mio/src/html/project/mole/index.html'
+    function start() {
+        $('body').append('<img id="goldimg" ' +
+            'src="http://allwebloction.yifutangvip.net/invite/assets/module1/icon1.png" />').append(
+            '<canvas id="canvas" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0"></canvas>');
+        $('#canvas').click(function () {
+            $('.btn2').click();
+        });
+        mainheight = $('#canvas').height(); //高
+        mainwidth = $('#canvas').width(); //宽
+        goldimg = document.getElementById("goldimg");
+        mians = document.getElementById("canvas");
+        mainbox = mians.getContext("2d");
+        $('#canvas').attr({
+            width: $(window).width(),
+            height: $(window).height()
+        });
+        // 开始动画   金币位置数据
+        for (var i = 0; i < 70; i++) {
+            main.push({
+                x: randomNum(50, mainwidth - 50),
+                y: randomNum(-800, 0),
+                direction: Math.round(Math.random()) ? 'left' : 'right', //左右方向
+                updown: 'down', //上下方向
+                jump: randomNum(30, 80), //到底跳跃
+                bottom: 0, //到底第几次
+                jumpspeed: randomNum(5, 10), //跳跃速度
+                downspeed: randomNum(15, 25), //下降速度
+                leftright: randomNum(10, 15) //左右跳跃幅度
+            });
+        }
+        playdh();
     }
 
-    function share_tip(share_app_times, share_timeline_times) { // 分享处理
-        if (share_timeline_times == -1) {
-            if (shareATimes == 1) {
-                $('#shareImg').attr('src', '../../img/mole/character1@2x.png')
-                $('#shareImg').addClass('shakeTwo')
-            } else if (shareATimes == 2) {
-                document.body.removeEventListener('touchmove', bodyScroll, false);
-                $('#sum').css('display', 'none')
-                $('#imgOne').css('display', 'none')
+    function playdh() {
+        clearInterval(golddh);
+        window.requestAnimationFrame(function () {
+
+            for (var i = 0; i < main.length; i++) {
+                var item = main[i];
+                item.direction == "left" ? item.x -= item.leftright / 10 : item.x += item.leftright / 10;
+                var thisspeed = item.bottom >= 1 ? item.jumpspeed : item.downspeed;
+
+                if (item.y >= mainheight - imgwidth) {
+                    //金币到底到底
+
+                    if (item.bottom == 0) {
+                        // 第一次到底 反向
+                        item.bottom = 1; //增加到底次输
+                        item.updown = 'up';
+                    }
+                    if (item.bottom == 2) {
+                        main.splice(i, 1);
+                        if (main.length == 0) {
+                            clearInterval(golddh);
+                            $('#goldimg').remove();
+                            $('#canvas').remove();
+                        }
+                    }
+                }
+
+                if (item.bottom == 1) {
+                    item.jump -= 3;
+                    // console.log(item.jump)
+                    if (item.jump <= 0) {
+                        // 反向到底
+                        item.updown = 'down';
+                        item.bottom = 2;
+                    }
+                }
+                item.updown == "down" ? item.y += thisspeed : item.y -= thisspeed;
             }
+            mainbox.clearRect(0, 0, mainwidth, mainheight);
+            draw(main);
+        });
+    }
+
+    function draw(e) {
+        for (var i = 0; i < e.length; i++) {
+            var item = e[i];
+            mainbox.drawImage(goldimg, item.x, item.y, imgwidth, imgwidth);
+        }
+        playdh();
+    }
+
+    function randomNum(minNum, maxNum) {
+        // 随机数
+        switch (arguments.length) {
+            case 1:
+                return parseInt(Math.random() * minNum + 1, 10);
+                break;
+            case 2:
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+            default:
+                return 0;
+                break;
         }
     }
 
-    var shareATimes = 0
-    var shareTTimes = 0
-    var hiddenProperty = 'hidden' in document ? 'hidden'
-        : 'webkitHidden' in document ? 'webkitHidden'
-            : 'mozHidden' in document ? 'mozHidden'
-                : null
-    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
 
-    var onVisibilityChange = function () {
-        if (!document[hiddenProperty]) {
-            window.show_time = Date.now()
-            shareATimes += 1
-            if (shareATimes > 4) {
-                shareTTimes += 1
-                setTimeout(share_tip(shareATimes, shareTTimes), 100)
-            } else {
-                setTimeout(share_tip(shareATimes, -1), 100)
-            }
-        } else {
-            window.hidden_time = Date.now()
-        }
+    var mList=[{mimg:'../../img/xtx/1.jpg',mname:"次日图捏"},{mimg:'../../img/xtx/2.jpg',mname:"laneud"},{mimg:'../../img/xtx/3.jpg',mname:"开诶女聪明"},{mimg:'../../img/xtx/4.jpg',mname:"奥Y他们"},{mimg:'../../img/xtx/5.jpg',mname:"拉开日~"},{mimg:'../../img/xtx/6.jpg',mname:"NFHEY楷模"},{mimg:'../../img/xtx/7.jpg',mname:"默默的爱"},{mimg:'../../img/xtx/8.jpg',mname:"本田销售"},{mimg:'../../img/xtx/9.jpg',mname:"小妞儿"},{mimg:'../../img/xtx/10.jpg',mname:"MK-星图"},{mimg:'../../img/xtx/11.jpg',mname:"猪猪侠"},{mimg:'../../img/xtx/12.jpg',mname:"宝贝"},{mimg:'../../img/xtx/13.jpg',mname:"左左妈妈"},{mimg:'../../img/xtx/14.jpg',mname:"大量收号"},{mimg:'../../img/xtx/15.jpg',mname:"吃遍天下无敌手"},{mimg:'../../img/xtx/16.jpg',mname:"情归何处"},{mimg:'../../img/xtx/17.jpg',mname:"小亮儿奶奶"},{mimg:'../../img/xtx/18.jpg',mname:"柳暗花明"},{mimg:'../../img/xtx/19.jpg',mname:"pangeOne"},{mimg:'../../img/xtx/20.jpg',mname:"周.."}]
+    for(var i=0; i<mList.length; i++){
+        var img = mList[i].mimg;
+        var name = mList[i].mname;
+        listDiscuss(img,name)
     }
 
-    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
-
-    function bodyScroll(event) {
-        event.preventDefault()
+    function listDiscuss(img,name){
+        var sjm = 1;
+        var sjt = 22;
+        var mhtml = '<li><div class="user_infor"><img src="'+img+'" class="head_img"><div class="user_name"><p>'+name+'<\/p><span>'+sjt+'<\/span><\/div></div><div class="money">'+sjm+'元<\/div></li>';
+        $("#demoDown").append(mhtml);
     }
 
-    function getUrlParam(name) { // 获取地址栏参数
-        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
-        if (r != null) return unescape(r[2])
-        return null // 返回参数值
+    function Scroll() {}
+    Scroll.prototype.upScroll = function(dom, _h, interval) {
+        var dom = document.getElementById(dom);
+        var timer = setTimeout(function() {
+            var _field = dom.firstElementChild;
+            _field.style.marginTop = _h;
+            clearTimeout(timer);
+        }, 1000)
+        setInterval(function() {
+            var _field = dom.firstElementChild;
+            _field.style.marginTop = "0px";
+            dom.appendChild(_field);
+            var _field = dom.firstElementChild
+            _field.style.marginTop = _h;
+        }, interval)
     }
+    var myScroll = new Scroll();
+    myScroll.upScroll("demoDown", "-1.2rem", 2500);
+
+
 </script>
 </body>
 </html>

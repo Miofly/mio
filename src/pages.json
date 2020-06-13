@@ -161,6 +161,11 @@
             "name": "zipCode"
         },
         {
+            "path": "pages/index/tool/smallTolls/wxArticle",
+            "style": {},
+            "name": "wxArticle"
+        },
+        {
             "path": "pages/index/tool/other/bjx",
             "style": {},
             "name": "bjx"

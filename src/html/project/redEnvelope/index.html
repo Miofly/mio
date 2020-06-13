@@ -51,12 +51,22 @@
 		}
 	</style>
 <body style="height: 100%;width: 100%;background: rgb(23, 7, 7)">
-<div style="position: relative;height: 100%;width: 100%">
-	<img src="../../img/redEnvelope/hongbao2@2x.png"
-		 style="width: 84%;height: 9.14rem;position: absolute;top:15%;left: 8%">
-	<img onclick="addTurn()" class="btnTwinkle" src="../../img/redEnvelope/ling@2x.png"
-		 style="width: 2.33rem;height: 2.22rem;position: absolute;top:56%;left: 33%">
+
+<div style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;z-index: 1;">
+	<div style="position: relative;background: url('../../img/redEnvelope/hongbao2@2x.png');background-repeat: no-repeat;background-size: 100%;
+	background-position: center;margin-left: 0%;width: 6.39rem;height: 9.88rem;">
+		<div style="position: absolute;left: 50%;width: 2.4rem;height: 2.28rem;bottom: 1.48rem;margin-left: -1.20rem;">
+			<img onclick="addTurn()" class="btnTwinkle" src="../../img/redEnvelope/ling@2x.png"
+				 style="width: 2.33rem;height: 2.22rem;display: block">
+		</div>
 </div>
+
+
+</div>
+
+
+
+
 <script>
     function addTurn() {
         $('.btnTwinkle').addClass('overturn')

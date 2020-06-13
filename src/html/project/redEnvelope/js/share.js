@@ -2,12 +2,13 @@ $(function () {
     document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
         evt.preventDefault()
     }, {passive: false})
+    audioAutoPlay("mp3");
 
     start()
 
     setTimeout(function() {
         $('#sum').show(10)
-    }, 2000)
+    }, 2300)
 })
 
 var mians;

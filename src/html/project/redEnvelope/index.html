@@ -9,7 +9,7 @@
 	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 	<meta content="telephone=no" name="format-detection"/>
 	<meta content="email=no" name="format-detection"/>
-	<title>痣相占卜测运</title>
+	<title>端午节</title>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/adaptive.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
@@ -51,99 +51,20 @@
 		}
 	</style>
 <body style="height: 100%;width: 100%;background: rgb(23, 7, 7)">
-
 <div style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;z-index: 1;">
 	<div style="position: relative;background: url('./img/hongbao2@2x.png');background-repeat: no-repeat;background-size: 100%;
 	background-position: center;margin-left: 0%;width: 6.39rem;height: 9.88rem;">
 		<div style="position: absolute;left: 50%;width: 2.4rem;height: 2.28rem;bottom: 1.48rem;margin-left: -1.20rem;">
-			<img onclick="addTurn()" class="btnTwinkle" src="./img/ling@2x.png"
-				 style="width: 2.33rem;height: 2.22rem;display: block">
+			<img onclick="addTurn()" class="btnTwinkle" src="./img/ling@2x.png" style="width: 2.33rem;height: 2.22rem;display: block">
 		</div>
 	</div>
 </div>
-
 <script>
     function addTurn() {
         $('.btnTwinkle').addClass('overturn')
         setTimeout(function () {
+            location.href = 'http://192.168.3.149:8888/mio/src/html/project/redEnvelope/share.html'
         }, 2000)
-    }
-</script>
-<script>
-    $('#sjs').html(randomNum(1111111, 9999999))
-    var tempList = [
-        {name: '脸颊', val: '7'},
-        {name: '眉毛', val: '9'},
-        {name: '嘴角', val: '1'},
-        {name: '眼角', val: '2'},
-        {name: '嘴唇', val: '35'},
-        {name: '眉心', val: '40'},
-        {name: '眼眶', val: '36'},
-        {name: '鼻梁', val: '37'},
-        {name: '鼻尖', val: '38'},
-        {name: '颧骨', val: '39'},
-        {name: '额头', val: '6'},
-        {name: '耳朵', val: '4'},
-        {name: '鼻翼', val: '3'},
-        {name: '左下巴', val: '5'},
-        {name: '右下巴', val: '34'},
-        {name: '锁骨部分', val: '17'},
-        {name: '脖子', val: '8'},
-        {name: '胸部', val: '10'},
-        {name: '背部', val: '11'},
-        {name: '腹部', val: '13'},
-        {name: '腰部', val: '14'},
-        {name: '臀部', val: '15'},
-        {name: '肩部', val: '16'},
-        {name: '肚脐周围', val: '12'},
-        {name: '手腕', val: '21'},
-        {name: '手背', val: '22'},
-        {name: '手指', val: '24'},
-        {name: '手掌心', val: '23'},
-        {name: '上手臂', val: '18'},
-        {name: '下手臂', val: '19'},
-        {name: '胳膊肘', val: '20'},
-        {name: '腋下', val: '25'},
-        {name: '大腿', val: '26'},
-        {name: '小腿', val: '27'},
-        {name: '膝盖', val: '28'},
-        {name: '脚踝', val: '29'},
-        {name: '脚背', val: '31'},
-        {name: '脚趾', val: '33'},
-        {name: '脚后跟', val: '30'},
-        {name: '脚底板', val: '32'},
-    ]
-    $('#comment1s').html('')
-    var html = ''
-    $.each(tempList, function (key, val) {
-        html += '<div onclick="choiceMethod()" style="width: 100%;height: 1.2rem;border-bottom: 1px solid #eeeeee;line-height: 1.2rem;text-align: center">' +
-            '<label style="width: 100%;display: block;font-size: 0.5rem;font-weight: bold">' +
-            '<input type="radio" name="radio2" value="' + tempList[key].val + '" true_name="' + tempList[key].name + '">' + tempList[key].name + '</label></div>'
-    })
-    $('#comment1s').append(html)
-
-    function choiceMethod() {
-        $('#choiceDiv').hide(500)
-        $('#moleName').html($('input[name="radio2"]:checked').attr('true_name'))
-    }
-
-    function showChoice() {
-        $('#choiceDiv').show(500)
-    }
-
-    function ljfx() {
-        if ($('input[name="radio2"]:checked').val() == undefined) {
-            $('#choiceDiv').show(500)
-        } else {
-            $('#tpfx').show(500)
-            setTimeout(function () {
-                location.href = 'http://192.168.3.149:8888/mio/src/html/project/mole/share.html?num=' + $('input[name="radio2"]:checked').val() + ''
-            }, 3000)
-        }
-    }
-
-    function randomNum(min, max) { // 生成随机数 min<=num<=max
-        return Math.floor(Math.random() * (max - min + 1)) + min
     }
 </script>
 </body>

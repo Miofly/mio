@@ -32,7 +32,7 @@
 	<div id="sum" style="display: none">
 		<div id="mb" style="display: block" class="mio-modal-mask"></div>
 		<div style="position: fixed;top: 0;right: 0.5rem;z-index: 13">
-			<img style="width: 6.02rem;height: 1.83rem;" src="./img/wei@2x.png">
+			<img id="fxImg" style="width: 6.02rem;height: 1.83rem;" src="./img/wei.png">
 		</div>
 
 		<div style="position: fixed;width: 100%;left: 0;text-align: center;top: 25%;z-index: 13">
@@ -45,7 +45,6 @@
 	</div>
 </div>
 <script>
-    audioAutoPlay("mp3");
 
     var mList = [{mimg: '../../img/xtx/1.jpg', mname: "love girl"}, {
         mimg: '../../img/xtx/2.jpg',
@@ -142,10 +141,12 @@
 
         if (share_timeline_times == -1) {
             if (shareATimes == 1) {
+                $('#shareImg').css('height', '6.28rem')
                 $('#shareImg').removeClass('shake')
                 $('#shareImg').addClass('shakeTwo')
                 $('#shareImg').attr('src', './img/jx1.png')
             } else if (shareATimes == 2) {
+                $('#shareImg').css('height', '5.78rem')
                 $('#shareImg').removeClass('shakeTwo')
                 $('#shareImg').addClass('shake')
                 $('#shareImg').attr('src', './img/jx2.png')
@@ -153,6 +154,12 @@
                 $('#shareImg').removeClass('shake')
                 $('#shareImg').addClass('shakeTwo')
                 $('#shareImg').attr('src', './img/jx3.png')
+            } else if (shareATimes == 4) {
+                $('#shareImg').css('height', '6.28rem')
+                $('#shareImg').removeClass('shakeTwo')
+                $('#shareImg').addClass('shake')
+                $('#shareImg').attr('src', './img/jx4.png')
+                $('#fxImg').attr('src', './img/peng.png')
             } else {
                 console.log('结束')
             }

@@ -166,6 +166,38 @@
         }
     }
 
+    function start() {
+        $('body').append('<img id="goldimg" ' +
+            'src="./img/icon1.png" />').append(
+            '<canvas id="canvas" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0"></canvas>');
+        $('#canvas').click(function () {
+            $('.btn2').click();
+        });
+        mainheight = $('#canvas').height(); //高
+        mainwidth = $('#canvas').width(); //宽
+        goldimg = document.getElementById("goldimg");
+        mians = document.getElementById("canvas");
+        mainbox = mians.getContext("2d");
+        $('#canvas').attr({
+            width: $(window).width(),
+            height: $(window).height()
+        });
+        // 开始动画   金币位置数据
+        for (var i = 0; i < 70; i++) {
+            main.push({
+                x: randomNum(50, mainwidth - 50),
+                y: randomNum(-800, 0),
+                direction: Math.round(Math.random()) ? 'left' : 'right', //左右方向
+                updown: 'down', //上下方向
+                jump: randomNum(30, 80), //到底跳跃
+                bottom: 0, //到底第几次
+                jumpspeed: randomNum(5, 10), //跳跃速度
+                downspeed: randomNum(15, 25), //下降速度
+                leftright: randomNum(10, 15) //左右跳跃幅度
+            });
+        }
+        playdh();
+    }
 
     function ljlq() {
 		$('#sum').show(100)

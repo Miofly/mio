@@ -8,7 +8,7 @@ $(function () {
 
     setTimeout(function() {
         $('#sum').show(10)
-    }, 2300)
+    }, 2000)
 })
 
 var mians;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>.</title>
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<div class="video-wrap">
+	<div id="mod_player"></div>
+	<canvas id="canvas" height="750" width="750"></canvas>
+
+</div>
+<script>
+	var obj = {
+        vid: 'a0919rdlm06',
+		pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592233151580&di=bf46119ff4fcb33b35497c7bbab6cd5a&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170511%2F20170511132314_6cab43df10415723a8f3bdd9dc5364ed_8.jpeg',
+        playStatus: '1',
+        delayTime: 30,
+	}
+
+    var player = new Txplayer({
+        containerId: 'mod_player',
+        vid: obj.vid,
+        width: '100%', // 数值600
+        height: screen.availHeight / 1.5,
+        autoplay: true,
+        playStartTime: 200,
+        isUsePreload: true, // 是否预加载
+        // useMiniSkin: true,
+        miniSkinAdaptive: true,
+        poster: obj.pic,
+        showBullet: true,
+        showBulletInput: true
+    });
+    var _playStatus = obj.playStatus;
+    if(location.href.indexOf('continue') > -1){
+        _playStatus = 'continue';
+    }
+    player.on('ready', () => {
+
+    });
+
+    document.addEventListener('WeixinJSBridgeReady',function(){ //
+        player.play();
+    },false);
+
+    var temp = 'a'
+    player.on('timeupdate', (parmas) => {
+        if (parmas.videoTag.currentTime < 1) {
+            // player.enterBrowserFullscreen(); // 全屏播放
+        }
+
+        if (_playStatus == 'continue' && temp == 'a') { // 分享完成从断点播放
+            setTimeout( () => {
+                parmas.videoTag.currentTime = obj.delayTime
+            }, 100)
+            temp = 'b'
+        }
+        if (player.getCurrentTime() == player.getDuration()) {
+			console.log('视频播放结束事件')
+        }
+
+        if (_playStatus != 'continue' && parmas.videoTag.currentTime >= obj.delayTime) {
+            player.pause();
+           	console.log('断点处跳转')
+        }
+
+    });
+
+</script>
+</body>
+</html>

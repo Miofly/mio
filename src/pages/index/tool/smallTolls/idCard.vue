@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="full-height">
 		<!--.test>view>view>view{height: 100%;}-->
 		<search class="test" @parentFun="questionListFn" :hotStatus="false" :ssBackIndex="true" style="height: 100%;">
 			<template v-slot:content>

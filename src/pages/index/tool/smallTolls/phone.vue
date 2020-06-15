@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="full-height">
 		<!--.test>view>view>view{height: 100%;} ssBackIndex表示是否需要搜索页列表 true不需要template v-slot:detail-->
 		<search class="test" @parentFun="questionListFn" :hotStatus="false"
 				:ssBackIndex="true" hisKeys="phoneKey" placeholder="请输入手机号" style="height: 100%;">
@@ -130,7 +130,7 @@
             async initData (val) {
                 const INVOKE_CLOUD_FUNCTION_URL = `https://tool.lu/mobile/ajax.html?mobile=${val}&operate=query`
                 const data = await publicGet(INVOKE_CLOUD_FUNCTION_URL)
-
+                this.phoneNum = val
                 if (data.status) {
                     this.phoneData = data.text
                     console.log('手机号码段', this.phoneData.mobile)

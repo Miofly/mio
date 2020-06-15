@@ -1,5 +1,5 @@
 <template>
-	<view class="full-width-height">
+	<scroll-view scroll-y class="full-width-height">
 		<view class="margin">
 			<view class="cu-form-group radius-sm">
 				<view class="title">微信文章地址</view>
@@ -52,7 +52,7 @@
 			</imgLoad>
 		</view>
 
-	</view>
+	</scroll-view>
 </template>
 
 <script>
@@ -62,7 +62,12 @@
 
     export default {
         async onLoad() {
+            // #ifdef H5
             this.wechatGet('wx/s/spd-h3drTQB8dveGdX3D6Q')
+            // #endif
+			// #ifdef MP-WEIXIN
+            this.wechatGet('https://mp.weixin.qq.com/s/spd-h3drTQB8dveGdX3D6Q')
+			// #endif
         },
         data() {
             return {
@@ -82,10 +87,13 @@
                     this.ui.showToast('请输入公众号文章链接')
                     return
                 }
-                // if (url.indexOf('http://mp.weixin.qq.com/') == -1 && url.indexOf('https://mp.weixin.qq.com/') == -1) {
-                //     this.ui.showToast('请填写 “http or https://mp.weixin.qq.com/ ” 开头的网址')
-                //     return
-                // }
+                // #ifdef MP-WEIXIN
+                if (url.indexOf('http://mp.weixin.qq.com/') == -1 && url.indexOf('https://mp.weixin.qq.com/') == -1) {
+                    this.ui.showToast('请填写 “http or https://mp.weixin.qq.com/ ” 开头的网址')
+                    return
+                }
+                // #endif
+
                 const data = await publicGet(url) // 获取的数
 
                 try {

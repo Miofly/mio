@@ -22,8 +22,8 @@
                     {url: 'phone', icon: 'money', color: 'olive', badge: 0, name: '手机归属地查询'},
                     {url: 'phoneInformation', icon: 'won', color: 'cyan', badge: 0, name: '手机完整信息'},
                     {url: 'wx161b6221791a7340', icon: 'krw', color: 'blue', badge: 0, name: '免费VIP影视', isOut: true},
-                    {url: 'wx2de5f627b0461a70', icon: 'gg', color: 'purple', badge: 0, name: 'AI智能识别'},
-                    {url: '', icon: 'try', color: 'mauve', badge: 0, name: '帮助'},
+                    {url: 'wx2de5f627b0461a70', icon: 'gg', color: 'purple', badge: 0, name: 'AI智能识别', isOut: true},
+                    // {url: '', icon: 'try', color: 'mauve', badge: 0, name: '帮助'},
                 ]
             }
         },

@@ -1,6 +1,5 @@
-<!--suppress ALL -->
 <template>
-	<view>
+	<scroll-view>
 
 		<view class="cu-card article">
 			<view class="cu-item shadow padding-top-xl">
@@ -98,7 +97,7 @@
 			</button>
 		</view>
 
-	</view>
+	</scroll-view>
 </template>
 
 <script>

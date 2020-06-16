@@ -5,7 +5,6 @@
         publicGet
 	} from '@/api'
     export default {
-
         onLaunch () {
             // #ifdef MP-WEIXIN
             this.autoUpdate()
@@ -53,9 +52,6 @@
                     // #endif
                 }
             })
-			// #ifdef H5
-			// this.initData()
-			// #endif
         },
         onShow () {
             // #ifdef MP-WEIXIN
@@ -87,6 +83,11 @@
                     this.$store.state.ggkz = data.ggkz
                     this.$store.state.indexData = data.indexData
                     this.$store.state.indexPage = data.indexPage
+
+                    // 控制首页展示
+                    this.$store.state.masters = data.masters
+                    this.$store.state.indexArr = data.indexArr
+                    this.$store.state.defaultPage = data.defaultPage
                 })
             },
             // #endif
@@ -168,7 +169,7 @@
             }
         },
         computed: {
-            ...mapState(['indexData']),
+            ...mapState(['indexData', 'indexArr', 'defaultPage', 'masters']),
         },
     }
 </script>

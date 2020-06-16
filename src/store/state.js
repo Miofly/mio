@@ -13,5 +13,10 @@ export default {
     ssKey: '',
     sspage: 1,
     ssUrl: '',
-    ssPlay: ''
+    ssPlay: '',
+
+    // 控制首页展示
+    masters: false,
+    indexArr: [],
+    defaultPage: 'question'
 }

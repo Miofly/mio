@@ -28,9 +28,12 @@ function ajax ({
                    errHandle = false, // 单独提示错误信息设置，为true全局提示无效
                    contentType = 'application/json;charset=utf-8', // post请求默认请求头
                    getHeader, // get请求默认请求头
+                   showLoading = true,
                }) {
     return new Promise((resolve, reject) => {
-        ui.showLoading()
+        if (showLoading) {
+            ui.showLoading()
+        }
         // 处理method(转大写) 防止请求类型写成小写形式
         method = method.toUpperCase()
 
@@ -97,7 +100,9 @@ function ajax ({
         }
 
         promise.then(response => {
-            uni.hideLoading()
+            if (showLoading) {
+                uni.hideLoading()
+            }
             const resMess = { // 封装返回成功的数据信息
                 data: response.data,
                 status: response.status,
@@ -110,7 +115,9 @@ function ajax ({
                 console.log('请求失败', resMess)
             }
         }).catch(err => { // 失败了调用reject()
-            uni.hideLoading()
+            if (showLoading) {
+                uni.hideLoading()
+            }
             if (!errHandle) { // 全局错误的提示
                 console.log('请求出错')
                 ui.showToast('请求出错')

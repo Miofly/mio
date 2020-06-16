@@ -52,7 +52,7 @@
     // 引入全局配置
     import GlobalOption from './mescroll-uni-option.js'
     // 引入空布局组件
-    import MescrollEmpty from './components/mescroll-empty.vue'
+    import MescrollEmpty from './components//mescroll-empty.vue'
     // 引入回到顶部组件
     import MescrollTop from './components/mescroll-top.vue'
 

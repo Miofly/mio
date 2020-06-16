@@ -87,8 +87,8 @@
 <script>
     import {
         dbJsonData
-    } from '@/api'
-    import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
+    } from 'src/api'
+    import MescrollBody from 'src/components/mescroll-uni/mescroll-body.vue'
     import MescrollMixin from 'cn/load//mescroll-uni/mescroll-mixins.js'
 	import mioModal from 'cn/../components/modal/modal'
 	import scrollMessage from 'cn/module/scrollMessage'

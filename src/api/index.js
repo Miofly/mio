@@ -11,7 +11,8 @@ const goodGirlData = (type = 'Android', pageNum, pageSize) => ajax({
     url: `https://gank.io/api/v2/data/category/GanHuo/type/${type}/page/${pageNum}/count/${pageSize}`,
     getHeader: {
         'Content-Type': 'json'
-    }
+    },
+    showLoading: false
 })
 
 const navJsonData = () => ajax({url: 'static/mockJson/navJson.json'}) // 导航模块数据

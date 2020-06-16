@@ -18,22 +18,18 @@ import mvIndex from './pages/index/movieOld/mvIndex'
 import lxj from './pages/index/movieOld/lxj'
 import zy from './pages/index/movieOld/zy'
 
-// import uView from '@/uView'
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
 import {RouterMount} from 'uni-simple-router'
 import routerLink from '../node_modules/uni-simple-router/component/router-link.vue'
-import colorData from './static/mockJson/color'
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
 import Router from '@/router'
 
 import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
 import MescrollUni from 'zj/mescroll-uni/mescroll-uni.vue'
-// Vue.use(uView)
 Vue.component('mescroll-body', MescrollBody)
 Vue.component('mescroll-uni', MescrollUni)
-
 
 Vue.prototype.ui = ui
 Vue.prototype.tu = tu
@@ -56,9 +52,6 @@ Vue.component('mvIndex', mvIndex)
 Vue.component('lxj', lxj)
 Vue.component('zy', zy)
 
-
-Vue.prototype.ColorList = colorData
-
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
@@ -66,7 +59,6 @@ const app = new Vue({
     store
 })
 
-// v1.3.5起 H5端 你应该去除原有的app.$mount();使用路由自带的渲染方式
 // #ifdef H5
 RouterMount(app, '#app')
 // #endif

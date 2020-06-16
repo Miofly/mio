@@ -51,11 +51,11 @@
 
 <script>
 	import {mapState} from 'vuex'
-    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
-    import MescrollMoreItemMixin from 'zj/mescroll-uni/mixins/mescroll-more-item.js'
+    import MescrollMixin from 'src/components/mescroll-uni/mescroll-mixins.js'
+    import MescrollMoreItemMixin from 'src/components/mescroll-uni/mixins/mescroll-more-item.js'
     import {
         dbJsonData
-    } from '@/api'
+    } from 'src/api'
 
 
     export default { // 注意此处还需使用MescrollMoreItemMixin (必须写在MescrollMixin后面)

@@ -4,5 +4,6 @@
 @keyframes scale-up{0%{transform:scale(1.0)}100%{transform:scale(1.2)}}
 @keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 .txp_btn_definition[data-role="txp-h5-ui-control-definitionbtn"] { display: none !important;}/*隐藏高清按钮*/
-.txp_watermark{display: none} /*隐藏腾讯视频图片*/
+.txp_watermark{display: none!important;} /*隐藏腾讯视频图片*/
 .txp_poster{}/*封面图片设置*/
+.txp_btn_fullscreen{display: none!important;}

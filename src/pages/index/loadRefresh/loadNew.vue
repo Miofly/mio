@@ -1,4 +1,5 @@
 <template>
+	<!--#ifdef H5-->
 	<view style="height: 100%">
 		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;">
 			<!--这是顶部测试-->
@@ -22,7 +23,6 @@
 					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 				</view>
 			</view>
-
 			<!--实际滚动-->
 			<view class="padding">
 				<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
@@ -91,6 +91,8 @@
 			</view>
 		</scroll-view>
 	</view>
+
+	<!--#endif-->
 </template>
 
 <script>
@@ -124,8 +126,6 @@
             },
         },
         onLoad() {
-
-
             document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
                 evt.preventDefault()
             }, {passive: false})
@@ -135,12 +135,3 @@
         }
     }
 </script>
-
-<style>
-	.header {
-
-	}
-	.scrollEle {
-
-	}
-</style>

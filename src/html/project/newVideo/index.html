@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta content="yes" name="apple-mobile-web-app-capable"/>
 	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 	<meta content="telephone=no" name="format-detection"/>
@@ -16,31 +17,42 @@
 	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
 	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
-<body>
+<body style="background: black">
 <div class="video-wrap">
-	<div id="mod_player" style="display: none"></div>
-	<div style="text-align: center">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2782918362,3780749595&fm=26&gp=0.jpg">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1972436152,3397327487&fm=26&gp=0.jpg">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3924453498,2562693578&fm=26&gp=0.jpg">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2693775123,3929296512&fm=26&gp=0.jpg">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3544763245,2194193016&fm=26&gp=0.jpg">
-		<img onclick="play()" style="width: 150px;height: 150px" vid="a0919rdlm06" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2189564866,2215764273&fm=26&gp=0.jpg">
-	</div>
+	<img class="allShow" src="img/back.png" onclick="backIndex()" style="display: none;position: fixed;top: 0;left: 10px;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none"></div>
+	<div style="text-align: center" id="parLists"></div>
 </div>
 <script>
-	var obj = {
+    var list = [ // 随机留言
+        {vid: 'a0919rdlm06', src: '../../img/xtx/1.jpg'},
+        {vid: 'x0977n3m1rv', src: '../../img/xtx/2.jpg'},
+        {vid: 'i0975w0af8a', src: '../../img/xtx/3.jpg'},
+        {vid: 'q097606n0v6', src: '../../img/xtx/4.jpg'},
+        {vid: 'l0975w9qbee', src: '../../img/xtx/5.jpg'},
+        {vid: 'i0975qgpym8', src: '../../img/xtx/6.jpg'},
+    ]
+
+    var tempList = JSON.parse(JSON.stringify(list))
+    var html = ''
+    $.each(tempList, function (key) {
+        html += '<img onclick="test('+ key +')" style="width: 150px;height: 150px" vid="' + tempList[key].vid + '" src="' + tempList[key].src + '">'
+    })
+    $('#parLists').append(html)
+
+    var obj = {
         vid: 'a0919rdlm06',
-		// pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592233151580&di=bf46119ff4fcb33b35497c7bbab6cd5a&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170511%2F20170511132314_6cab43df10415723a8f3bdd9dc5364ed_8.jpeg',
+        // pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592233151580&di=bf46119ff4fcb33b35497c7bbab6cd5a&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170511%2F20170511132314_6cab43df10415723a8f3bdd9dc5364ed_8.jpeg',
         playStatus: '1',
         delayTime: 30,
-	}
+    }
 
     var player = new Txplayer({
         containerId: 'mod_player',
         vid: obj.vid,
         width: '100%', // 数值600
-        height: screen.availHeight / 1.5,
+        height: '100%',
+        // height: screen.availHeight / 1.5,
         autoplay: true,
         playStartTime: 200,
         isUsePreload: true, // 是否预加载
@@ -50,44 +62,54 @@
         showBullet: true,
         showBulletInput: true
     });
-    var _playStatus = obj.playStatus;
-    if(location.href.indexOf('continue') > -1){
-        _playStatus = 'continue';
-    }
+
     player.on('ready', () => {
-
+        player.enterBrowserFullscreen(); // 全屏播放
     });
+    function test(key) {
+        console.log('播放的视频id', list[key].vid)
+        $('.allShow').show()
+        player.play(list[key].vid)
 
-    document.addEventListener('WeixinJSBridgeReady',function(){ //
-        player.play();
-    },false);
+        var temp = 'a'
+        player.on('timeupdate', (parmas) => {
+            if (parmas.videoTag.currentTime < 1) {
+            }
 
-    var temp = 'a'
-    player.on('timeupdate', (parmas) => {
-        if (parmas.videoTag.currentTime < 1) {
-            // player.enterBrowserFullscreen(); // 全屏播放
-        }
+            // if (_playStatus == 'continue' && temp == 'a') { // 分享完成从断点播放
+            //     setTimeout(() => {
+            //         parmas.videoTag.currentTime = obj.delayTime
+            //     }, 100)
+            //     temp = 'b'
+            // }
 
-        if (_playStatus == 'continue' && temp == 'a') { // 分享完成从断点播放
-            setTimeout( () => {
-                parmas.videoTag.currentTime = obj.delayTime
-            }, 100)
-            temp = 'b'
-        }
-        if (player.getCurrentTime() == player.getDuration()) {
-			console.log('视频播放结束事件')
-        }
+            if (player.getCurrentTime() == player.getDuration()) {
+                console.log('视频播放结束事件')
+            }
 
-        if (_playStatus != 'continue' && parmas.videoTag.currentTime >= obj.delayTime) {
-            player.pause();
-           	console.log('断点处跳转')
-        }
-
-    });
-
-    function play() {
-
+            if (_playStatus != 'continue' && parmas.videoTag.currentTime >= obj.delayTime) {
+                player.pause();
+                console.log('断点处跳转')
+            }
+        })
     }
+
+    function backIndex() {
+        $('.allShow').hide()
+    }
+
+    // var _playStatus = obj.playStatus;
+    // if (location.href.indexOf('continue') > -1) {
+    //     _playStatus = 'continue';
+    // }
+
+	//
+
+
+    // document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+    //     player.play();
+    // }, false);
 </script>
+
 </body>
 </html>

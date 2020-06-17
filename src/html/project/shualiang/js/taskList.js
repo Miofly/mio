@@ -16,7 +16,6 @@ jQuery(document).ready(function ($) {
         dataType: "JSON",
         dataField: "data",
         queryParams: function (params) {
-            console.log(params)
             var temp = {
                 page: params.pageNumber,
                 per_page: params.pageSize,
@@ -27,27 +26,20 @@ jQuery(document).ready(function ($) {
         clickToSelect: true,
         singleSelect : false, // 设置为true将禁止多选
         columns: [
-            {
-                // title: '', formatter: function (value, row, index, field) {
-                //     return '<input type="checkbox" name="taskId" value="' + row.id + '"/>';
-                // }
-           field: 'check',  checkbox: true, align: 'center', formatter: function (value, row, index) {
-//                              if (row.check == true) {
-//                                  //设置选中
-//                                  return {  checked: true };
-//                              }
-                },width:'54px',
-
-
-            },
+            {field: 'check',  checkbox: true, align: 'center', formatter: function (value, row, index) {},width:'54px'},
             {field: 'id', title: '编号', align: 'center'},
             {field: 'title', title: '标题', align: 'center'},
             {field: 'programme_name', title: '方案名称', align: 'center'},
             {
                 field: 'total_uv', title: '浏览量', align: 'center',
                 formatter: function (value, row, index, field) {
-                    var show = row.true_total_uv + "/" + row.total_uv;
-                    return show;
+                    if (value != undefined) {
+                        var show = row.true_total_uv + "/" + row.total_uv;
+                        return show;
+                    } else {
+                        return '-'
+                    }
+
                 }
             },
             {field: 'created_at', title: '发布时间', align: 'center'}

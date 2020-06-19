@@ -2,7 +2,6 @@
 	<view style="height: 100%;background: rgb(30, 40, 40);color: white">
 		<!--头部搜索-->
 		<scroll-view style="background: rgb(30, 40, 40);">
-			<!--#ifdef H5-->
 			<!--当月最热电影-->
 			<view style="border-bottom:2px solid #2c2c36;" class="padding-bottom">
 				<view class="flex justify-between padding-bottom-sm" style="background: rgb(30, 40, 40);">
@@ -98,7 +97,6 @@
 					</view>
 				</view>
 			</view>
-			<!--#endif-->
 
 			<!--#ifdef MP-WEIXIN-->
 			<!--当月最热电影-->
@@ -196,7 +194,6 @@
 					</view>
 				</view>
 			</view>
-			<!--#endif-->
 
 			<movie-footer></movie-footer>
 
@@ -297,7 +294,7 @@
             // #endif
             // #ifdef H5
             this.ui.showLoading()
-            const data = await publicGet('getHomeInfo.php')
+            const data = await publicGet('http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php')
             uni.hideLoading()
             const $ = cheerio.load(data, {_useHtmlParser2: true})
 

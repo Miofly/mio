@@ -31,7 +31,7 @@
 		</view>
 
 		<view v-if="status" class="padding full-height">
-			<app-tabs v-model="tabIndex" :tabs="tabs" :fixed="false"></app-tabs>
+			<swiper-tab v-model="tabIndex" :tabs="tabs" :fixed="false"></swiper-tab>
 			<swiper :style="{height: height}" :current="tabIndex" @change="swiperChange">
 				<!--全部 -->
 				<swiper-item>
@@ -56,7 +56,7 @@
 		</view>
 
 		<view v-if="!status" class="padding full-height">
-			<app-tabs v-model="tabIndex" :tabs="tabs" :fixed="false"></app-tabs>
+			<swiper-tab v-model="tabIndex" :tabLists="tabs" :fixed="false"></swiper-tab>
 			<swiper :style="{height: height}" :current="tabIndex" @change="swiperChange">
 				<!--全部 -->
 				<swiper-item>
@@ -88,13 +88,11 @@
 	} from '@/api'
     import MescrollItem from './team-swiper'
     import MescrollItems from './team-swipers'
-    import AppTabs from 'zj/mescroll-uni/app-tabs.vue'
 	// import {mapState} from 'vuex'
     export default {
         components: {
             MescrollItem,
             MescrollItems,
-            AppTabs
         },
 		async mounted () {
 			const data = await commonPost('/team/team-info')
@@ -110,7 +108,7 @@
 		    return {
 		        status: true,
                 height: '62%', // 需要固定swiper的高度
-                tabs: ['今日', '昨日', '本周', '上周'],
+                tabs: [{name: '今日'}, {name: '昨日'}, {name: '本周'}, {name: '上周'}],
                 tabIndex: 0, // 当前tab的下标
                 headerInfos: {
                     teamName: '',

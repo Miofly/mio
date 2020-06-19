@@ -311,7 +311,7 @@
                     localStorage.setItem('ssPlay', location.href.split('#')[0].split('?')[1].split('&')[0].split('=')[1])
                     localStorage.setItem('nowNum', location.href.split('#')[0].split('?')[1].split('&')[1].split('=')[1])
                 }
-                const data = await publicGet('getCinemaInfo.php')
+                const data = await publicGet('http://123.0t038.cn/jin-61/wfd/515love/api/getCinemaInfo.php')
                 localStorage.setItem('cinemaName', data.cinemaName)
                 localStorage.setItem('friend_link', JSON.stringify(data.friend_link))
                 localStorage.setItem('qrcode', data.qrcode)

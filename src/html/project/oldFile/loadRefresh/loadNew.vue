@@ -25,7 +25,7 @@
 			</view>
 			<!--实际滚动-->
 			<view class="padding">
-				<tab-longtab ref="mytab" v-model="tabClick" :tabLists="tabLists"></tab-longtab>
+				<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
 				<swiper :style="{height: height}" :current="tabClick" @change="swiperChange">
 					<swiper-item>
 						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
@@ -96,13 +96,13 @@
 </template>
 
 <script>
-    import MescrollItem from './mescroll-swiper-item-two'
-    import TabLongtab from '@/components/tab/tab-longtab/tab-longtab'
+    import MescrollItem from '../../../../pages/index/loadRefresh/mescroll-swiper-item-two'
+    import AppTabs from 'src/components/mescroll-uni/app-tabs-two.vue'
 
     export default {
         components: {
-            TabLongtab,
             MescrollItem,
+            AppTabs
         },
         data() {
             return {

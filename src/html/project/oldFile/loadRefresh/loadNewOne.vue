@@ -1,8 +1,8 @@
 <template>
-	<!--#ifdef H5-->
-	<view style="height: 100%">
-		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;">
-			<!--这是顶部测试-->
+	<view>
+		<view class="header">Header</view>
+		<!--#ifdef H5-->
+		<view @touchmove="test" ref="scrollEle" class="scrollEle">
 			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 				<view v-for="(item, index) in
 				[{name: '列表一', icon: 'video-camera'},
@@ -23,7 +23,7 @@
 					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 				</view>
 			</view>
-			<!--实际滚动-->
+
 			<view class="padding">
 				<app-tabs ref="mytab" v-model="tabClick" :tabLists="tabLists"></app-tabs>
 				<swiper :style="{height: height}" :current="tabClick" @change="swiperChange">
@@ -53,25 +53,9 @@
 				</swiper>
 			</view>
 
-			<!--底部测试-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 				<view v-for="(item, index) in
 				[{name: '列表一', icon: 'video-camera'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
-				{name: '列表一', icon: 'user'},
 				{name: '列表一', icon: 'user'},
 				{name: '列表一', icon: 'phone'}]" :key="index" class="cu-item">
 					<view class="content padding-tb-sm">
@@ -89,16 +73,16 @@
 					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 				</view>
 			</view>
-		</scroll-view>
-	</view>
+		</view>
+		<!--#endif-->
 
-	<!--#endif-->
+		<view class="footer">Footer</view>
+	</view>
 </template>
 
 <script>
-    import MescrollItem from './mescroll-swiper-item-two'
-    import AppTabs from 'zj/mescroll-uni/app-tabs-two.vue'
-
+    import MescrollItem from '../../../../pages/index/loadRefresh/mescroll-swiper-item-two'
+    import AppTabs from 'src/components/mescroll-uni/app-tabs-two.vue'
     export default {
         components: {
             MescrollItem,
@@ -106,6 +90,8 @@
         },
         data() {
             return {
+                startX: 0,
+                startY: 0,
                 height: '700rpx', // 需要固定swiper的高度
                 tabLists: [
                     {name: '前端', type: 'frontend'},
@@ -119,19 +105,83 @@
             }
         },
         methods: {
+            touchStart (e) {
+                console.log(e)
+                try {
+                    var touch = e.touches[0]
+                    var x = Number(touch.pageX)
+                    var y = Number(touch.pageY)
+                    this.startX = x
+                    this.startY = y
+                } catch (e) {
+                    alert(e)
+                }
+            },
             // 轮播菜单
             swiperChange(e) {
                 this.tabClick = e.detail.current
                 this.$refs.mytab.longClick(e.detail.current)
             },
+            test(e) {
+                var point = e.touches[0]
+
+                var eleTop = this.$refs.scrollEle.$el.scrollTop
+                var eleScrollHeight = this.$refs.scrollEle.$el.scrollHeight
+                var eleOffsetHeight = this.$refs.scrollEle.$el.offsetHeight
+                var eleTouchBottom = eleScrollHeight - eleOffsetHeight
+                if (eleTop === 0) {
+                    if (point.clientY > this.startY) {
+                        e.preventDefault()
+                    }
+                } else if (eleTop === eleTouchBottom) {
+                    if (point.clientY < this.startY) {
+                        e.preventDefault()
+                    }
+                }
+            },
         },
         onLoad() {
-            document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
-                evt.preventDefault()
-            }, {passive: false})
+            document.addEventListener('touchstart', this.touchStart)
+            // document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
+            //     evt.preventDefault()
+            // }, {passive: false})
             // 需要固定swiper的高度
             // this.height = uni.getSystemInfoSync().windowHeight + 'px'
             // console.log(this.height)
         }
     }
 </script>
+
+<style>
+
+	.header, .footer {
+		position: fixed;
+		width: 100vw;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		z-index: 3;
+	}
+
+	.header {
+		top: 0;
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+	.footer {
+		bottom: 0;
+		border-top: 1px solid #e6e6e6;
+
+	}
+
+	.scrollEle {
+		position: fixed;
+		width: 100vw;
+		top: 40px;
+		bottom: 40px;
+		z-index: 2;
+		background: #fff;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+</style>

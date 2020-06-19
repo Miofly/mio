@@ -1,20 +1,29 @@
 <template>
-	<view>
+	<view class="full-width-height">
 		<view class="header bg-blue full-width"
 			  style="height: 180rpx;position: fixed;top: --window-top;left: 0;z-index: 9999">
 			固定在头部的内容
 		</view>
-		<mescroll-body ref="mescrollRef" top="180" bottom="100" :down="downOption" :up="upOption"
-					   @init="mescrollInit" @down="downCallback" @up="upCallback">
+		<mescroll-body ref="mescrollRef" top="180" bottom="0" :down="downOption" :up="upOption"
+					   @init="mescrollInit" @down="downCallback" @up="upCallback" @scroll="scroll">
 			<!--数据列表-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 					<view class="content padding-tb-sm">
 						<view class="padding-top-bottom">
-							<image :src="'https://images.weserv.nl/?url=' + item.cover"
-								   style="height: 200rpx;width: 200rpx"
-								   :mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"
-							></image>
+							<!--<image :src="'https://images.weserv.nl/?url=' + item.cover"-->
+								   <!--style="height: 200rpx;width: 200rpx"-->
+								   <!--:mode="['', 'scaleToFill', 'aspectFit', 'aspectFill', 'widthFix', 'heightFix'][0]"-->
+							<!--&gt;</image>-->
+
+							<imgLoad style="height: 200rpx;width: 200rpx" :scroll-top="scrollTop"
+									 :image-src="item.cover == undefined ?
+									 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' :
+									 'https://images.weserv.nl/?url=' + item.cover"
+									 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][3]">
+							</imgLoad>
+
+
 							<view class="padding-left-xl">
 								<view>
 									{{ item.title }}
@@ -46,18 +55,15 @@
 				</view>
 			</view>
 		</mescroll-body>
-
-		<image class="footer" src="http://www.mescroll.com/img/beibei/footer.jpg" mode="aspectFit"/>
-
 	</view>
 </template>
 
 <script>
     import {
         dbJsonData
-    } from '@/api'
-    import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
-    import MescrollMixin from 'zj/mescroll-uni/mescroll-mixins.js'
+    } from 'src/api'
+    import MescrollBody from 'src/components/mescroll-uni/mescroll-body.vue'
+    import MescrollMixin from 'src/components/mescroll-uni/mescroll-mixins.js'
 
     export default {
         components: {
@@ -66,26 +72,48 @@
         mixins: [MescrollMixin],
         data() {
             return {
-                downOption: {
+                scrollTop: 0,
+
+                downOption: { // 下拉刷新的配置参数
+                    use: true, // 是否启用下拉刷新
+                    auto: true, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
                     textInOffset: '下拉刷新',
                     textOutOffset: '释放更新',
-                    textLoading: '正在拼命的加载中 ...'
+                    textLoading: '正在拼命的加载中 ...',
+                    bgColor: 'transparent',
+                    textColor: 'gray',
                 },
-                // 上拉加载的常用配置
-                upOption: {
-                    use: true, // 是否启用上拉加载; 默认true
-                    auto: true, // 是否在初始化完毕之后自动执行上拉加载的回调; 默认true
-                    noMoreSize: 5, // 配置列表的总数量要大于等于5条才显示'-- END --'的提示
-                    empty: {
-                        tip: '暂无相关数据'
-                    },
+                upOption: { // 上拉加载的常用配置
+                    use: true, // 是否启用下拉刷新
+                    auto: true, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
+                    noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据
                     textLoading: '正在玩命的加载...',
-                    textNoMore: '我也是有底线的...'
+                    textNoMore: '我也是有底线的...',
+                    bgColor: 'transparent',
+                    textColor: 'gray',
+                    page: {
+                        num: 0,
+                        size: 10
+                    },
+					toTop: {
+                       	src: 'http://img.htmlsucai.com/huyoucss/gotop.gif',
+                        offset: 500,
+                        duration: 100,
+                    },
+                    empty: {
+                        use: true,
+						icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1444001776,3669515325&fm=15&gp=0.jpg',
+                        tip: '暂无相关数据111',
+                        btnText: '这是按钮文字'
+                    },
                 },
                 dataLists: []
             }
         },
         methods: {
+            scroll () {
+              console.log(1)
+            },
             downCallback() { // 下拉刷新的回调
                 this.mescroll.resetUpScroll() // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
                 // 若整个downCallback方法仅调用mescroll.resetUpScroll(),则downCallback方法可删 (mixins已默认)
@@ -119,8 +147,3 @@
         }
     }
 </script>
-
-<style>
-	image{width: 100%;vertical-align: bottom;will-change: transform}
-	.footer{z-index: 9900;position: fixed;bottom: 0;left: 0;height: 100upx;background: white;}
-</style>

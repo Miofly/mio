@@ -1,5 +1,5 @@
 <template>
-	<view class="navTabBox">
+	<view class="navTabBox" :style="{width: fullWidth}">
 		<view class="longTab">
 			<scroll-view scroll-x="true" style="white-space: nowrap; display: flex" scroll-with-animation
 						 :scroll-left="tabLeft">
@@ -26,6 +26,11 @@
             tabClick: { //
                 type: Number,
                 default: 0, // 导航栏被点击
+                required: false
+            },
+            fullWidth: { // 宽度是否100%
+                type: String,
+                default: '94vw',
                 required: false
             },
 
@@ -72,7 +77,6 @@
 
 <style>
 	.navTabBox {
-		width: 94vw;
 		color: black;
 		background: rgba(255, 255, 255, 1);
 	}
@@ -103,7 +107,7 @@
 	}
 
 	.underline {
-		width: 84rpx;
+		width: 60%;
 		height: 4px;
 		background-color: red;
 	}

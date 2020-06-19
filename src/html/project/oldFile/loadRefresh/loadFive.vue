@@ -76,8 +76,8 @@
 </template>
 
 <script>
-    import MescrollItem from './mescroll-swiper-item-two'
-    import AppTabs from 'zj/mescroll-uni/app-tabs-two.vue'
+    import MescrollItem from '../../../../pages/index/loadRefresh/mescroll-swiper-item-two'
+    import AppTabs from 'src/components/mescroll-uni/app-tabs-two.vue'
 
 
     export default {

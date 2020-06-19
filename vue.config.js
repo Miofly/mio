@@ -93,6 +93,15 @@ module.exports = {
                 pathRewrite: {
                     '^/ks': ''
                 }
+            },
+            '/ym': {
+                // target: "http://10.19.193.135:8870/ssyth",
+                target: 'http://luodi10424.1.0t038.cn/jin-61/',
+                changeOrigin: true, // 是否跨域
+                ws: true,
+                pathRewrite: {
+                    '^/ym': ''
+                }
             }
         }
     },

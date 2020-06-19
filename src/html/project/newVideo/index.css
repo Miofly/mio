@@ -7,3 +7,5 @@
 .txp_watermark{display: none!important;} /*隐藏腾讯视频图片*/
 .txp_poster{}/*封面图片设置*/
 .txp_btn_fullscreen{display: none!important;}
+@keyframes moveLeft{0%{transform:translateX(0)}100%{transform:translateX(-8px)}}
+@keyframes scale-small{0%{transform:scale(1.0)}100%{transform:scale(1.05)}}

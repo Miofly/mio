@@ -17,7 +17,6 @@
 
 <script>
 	export default {
-		name: 'mioTips',
 		props: {
 			// top bottom center
 			position: {

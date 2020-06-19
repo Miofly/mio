@@ -525,7 +525,8 @@
     "easycom": {
         "autoscan": true,
         "custom": {
-            "movie-(.*)": "@/components/movie/movie-$1/movie-$1.vue"
+            "movie-(.*)": "@/components/movie/movie-$1/movie-$1.vue",
+            "tab-(.*)": "@/components/tab/tab-$1/tab-$1.vue"
         }
     },
     "tabBar": {

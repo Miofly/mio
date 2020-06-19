@@ -30,7 +30,7 @@
 <div style="display: flex;align-items: center;justify-content: space-between;margin-top: 0.05rem;">
 	<div style="width: 0.94rem;height: 0.94rem;border-radius: 50%;margin-left: 0.2rem;text-align: left">
 		<img src="../../img/xtx/10.jpg" style="animation: rotate 5s linear 0s infinite;width: 0.94rem;height: 0.94rem;border-radius: 50%">
-		<span style="color: white;font-size: 0.21rem;width: 600px;display: inline-block">美女直播TEST</span>
+		<span style="color: white;font-size: 0.21rem;width: 200px;display: inline-block">美女直播TEST</span>
 	</div>
 
 	<div style="width:1.78rem;height:0.41rem;background:rgba(255,81,4,1);font-size: 0.19rem;color:rgba(255,255,255,1);
@@ -56,7 +56,7 @@
 
 <div class="video-wrap" style="width: 100%">
 	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
-		 style="display: none;position: fixed;top: 0;left: 10px;z-index: 9999999999999">
+		 style="display: none;position: fixed;top: 10px;left: 10px;width: 0.5rem;z-index: 9999999999999">
 	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
 </div>
 
@@ -65,6 +65,7 @@
 </div>
 
 <script>
+
 
     var list = [
         {vid: 'a0919rdlm06', pic: '../../img/xtx/11.jpg', delayTime: '115'},
@@ -100,12 +101,12 @@
         showBullet: true,
         showBulletInput: true
     });
-    var _playStatus = 1
-    if (location.href.indexOf('continue') > -1) {
-        _playStatus = 'continue';
-    }
+    // var _playStatus = 1
+    // if (location.href.indexOf('key') > -1) {
+    //     _playStatus = 'continue';
+    // }
     player.on('ready', () => {
-        if (_playStatus == 'continue') {
+        if (location.href.indexOf('key') > -1) {
             getVideo(getUrlParam('key'))
         }
         player.enterBrowserFullscreen(); // 全屏播放

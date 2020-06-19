@@ -65,6 +65,36 @@
         if (r != null) return unescape(r[2])
         return null // 返回参数值
     }
+
+    player.on('timeupdate', (parmas) => {
+        // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+        if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+            setTimeout(() => {
+                parmas.videoTag.currentTime = list[key].delayTime
+            }, 100)
+            temp = 'b'
+        }
+
+        if (player.getCurrentTime() == player.getDuration()) {
+            $('#test').click()
+            // location.href = '<?php echo $advertising?>';
+            console.log('视频播放结束事件')
+        }
+
+        if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+            player.pause();
+            $.get(url + 'api/shareurl.php', function (res) {
+
+                jump_url = res.url+'key='+key +'&'+ "<?php echo $data_arr?>";
+                location.href = jump_url;
+            }, 'json');
+
+
+            // location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
+            // console.log('断点处跳转')
+        }
+    })
 </script>
 </body>
 </html>

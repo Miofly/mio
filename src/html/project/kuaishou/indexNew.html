@@ -25,6 +25,7 @@
 </div>
 
 <script>
+	$('#ipt').val('https://v.kuaishou.com/5mXx7I')
     function getVideo(url) {
 
         url = url.trim()
@@ -69,7 +70,7 @@
             if (url.length > 80) {
                 $('#jx').html('正在解析长链中...')
                 $.ajax({
-                    url: 'http://123.0t038.cn/jin-61/616gklUrlApi/urlApi.php',
+                    url: 'http://106.13.231.20/kuaishouApi/urlApi.php',
                     type: 'post',
                     // 设置的是请求参数
                     data: {url: url, type: 1},
@@ -115,7 +116,7 @@
                 $('#jx').html('正在解析中...')
 
                 $.ajax({
-                    url: 'http://123.0t038.cn/jin-61/616gklUrlApi/urlApi.php',
+                    url: 'http://106.13.231.20/kuaishouApi/urlApi.php',
                     type: 'post',
                     // 设置的是请求参数
                     data: {url: url, type: 2},

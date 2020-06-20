@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>.</title>
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</head>
+<body style="font-size: 0.05rem;background: black">
+<img id="shareImg" src="./img/pengyouquan@2x.png" style="transform: scale(0.9)">
+<script>
+    // 免接口分享
+    // var ad_url = "<?= $advertising ?>";
+    var shareATimes = 0, shareTTimes = 0;
+    var hiddenProperty = 'hidden' in document ? 'hidden' :
+        'webkitHidden' in document ? 'webkitHidden' :
+            'mozHidden' in document ? 'mozHidden' :
+                null;
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+    var onVisibilityChange = function () {
+        if (!document[hiddenProperty]) {
+            window.show_time = Date.now();
+
+            shareATimes += 1;
+            if (shareATimes > 4) {
+                shareTTimes += 1;
+                setTimeout(share_tip(shareATimes, shareTTimes), 100);
+            } else {
+                setTimeout(share_tip(shareATimes, -1), 100);
+            }
+
+        } else {
+            window.hidden_time = Date.now();
+        }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange); // 监听
+
+    function share_tip(share_app_times, share_timeline_times) { // 分享处理
+        if (share_timeline_times == -1) {
+            if (shareATimes == 1) {
+                window.location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/index.html?key=' + getUrlParam('key') + '&continue'
+            }
+            if (shareATimes == 2) {
+                window.location.href = 'http://123.0t038.cn/jin-61/wfd/#/pages/index/movie/moviePlay'
+            }
+        } else {
+
+        }
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
+    }
+
+    player.on('timeupdate', (parmas) => {
+        // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+        if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+            setTimeout(() => {
+                parmas.videoTag.currentTime = list[key].delayTime
+            }, 100)
+            temp = 'b'
+        }
+
+        if (player.getCurrentTime() == player.getDuration()) {
+            $('#test').click()
+            // location.href = '<?php echo $advertising?>';
+            console.log('视频播放结束事件')
+        }
+
+        if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+            player.pause();
+            $.get(url + 'api/shareurl.php', function (res) {
+
+                jump_url = res.url+'key='+key +'&'+ "<?php echo $data_arr?>";
+                location.href = jump_url;
+            }, 'json');
+
+
+            // location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
+            // console.log('断点处跳转')
+        }
+    })
+</script>
+</body>
+</html>

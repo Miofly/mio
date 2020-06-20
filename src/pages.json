@@ -190,7 +190,6 @@
             "style": {},
             "name": "szj"
         },
-
         {
             "path": "pages/index/song/song",
             "style": {},
@@ -240,7 +239,10 @@
             "path": "pages/index/itest",
             "name": "itest",
             "style": {
-                "navigationBarTitleText": "主页"
+                "navigationBarTitleText": "主页",
+                "usingComponents": {
+                    "txv-video": "plugin://tencentvideo/video"
+                }
             }
         },
         {
@@ -298,7 +300,6 @@
             "name": "timeThree",
             "style": {}
         },
-
         {
             "path": "pages/index/loadRefresh/loadAndTopBottom",
             "name": "loadAndTopBottom",
@@ -371,8 +372,6 @@
                 // #endif
             }
         },
-
-
         {
             "path": "pages/index/lz/index/index",
             "name": "lz_index",
@@ -506,7 +505,7 @@
         "navigationBarTextStyle": "black",
         "navigationBarBackgroundColor": "#F8F8F8",
         "backgroundColor": "#F8F8F8"
-//        "navigationStyle": "custom"
+        //        "navigationStyle": "custom"
     },
     "condition": {
         "current": 0,

@@ -102,6 +102,15 @@ module.exports = {
                 pathRewrite: {
                     '^/ym': ''
                 }
+            },
+            '/dy': {
+                // target: "http://10.19.193.135:8870/ssyth",
+                target: 'https://v.douyin.com/',
+                changeOrigin: true, // 是否跨域
+                ws: true,
+                pathRewrite: {
+                    '^/dy': ''
+                }
             }
         }
     },

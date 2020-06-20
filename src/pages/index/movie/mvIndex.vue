@@ -2,6 +2,7 @@
 	<view style="height: 100%;background: rgb(30, 40, 40);color: white">
 		<!--头部搜索-->
 		<scroll-view style="background: rgb(30, 40, 40);">
+			<!--#ifdef H5-->
 			<!--当月最热电影-->
 			<view style="border-bottom:2px solid #2c2c36;" class="padding-bottom">
 				<view class="flex justify-between padding-bottom-sm" style="background: rgb(30, 40, 40);">
@@ -97,6 +98,7 @@
 					</view>
 				</view>
 			</view>
+			<!--#endif-->
 
 			<!--#ifdef MP-WEIXIN-->
 			<!--当月最热电影-->
@@ -194,8 +196,9 @@
 					</view>
 				</view>
 			</view>
+			<!--#endif-->
 
-			<movie-footer></movie-footer>
+			<!--<movie-footer></movie-footer>-->
 
 		</scroll-view>
 	</view>

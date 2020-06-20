@@ -1,0 +1,11 @@
+*{padding:0;margin:0;word-wrap:break-word;}html{-webkit-text-size-adjust:none;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,span{padding:0;margin:0;box-sizing:border-box;}body{font:normal "Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Heiti SC","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}a{text-decoration:none;-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;transition:all 0.3s ease;color:#333;}a{-webkit-tap-highlight-color:rgba(0,0,0,0);}a,img{border:none;}a,button{outline:none;border:0;}textarea,input,button,select{outline:0;}textarea{overflow:auto;resize:none;}ol,ul{list-style:none;}em,i,small,caption,th{font-weight:normal;font-style:normal;font-size:100%;}a,a:hover,a:active,a:visited,a:link,a:focus,button{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;outline:none;text-decoration:none;}html,body{width:100%;height:100%;}body{color:#333;background-color:#fff;}html{font-size:100px;}
+@keyframes shake{0%,100%{transform:translateX(0)}10%{transform:translateX(-9px)}20%{transform:translateX(8px)}30%{transform:translateX(-7px)}40%{transform:translateX(6px)}50%{transform:translateX(-5px)}60%{transform:translateX(4px)}70%{transform:translateX(-3px)}80%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+@keyframes shake2{0%,100%{transform:translateX(0)}10%{transform:translateX(-9px)}20%{transform:translateX(8px)}30%{transform:translateX(-7px)}40%{transform:translateX(6px)}50%{transform:translateX(-5px)}60%{transform:translateX(4px)}70%{transform:translateX(-3px)}80%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+@keyframes scale-up{0%{transform:scale(1.0)}100%{transform:scale(1.2)}}
+@keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.txp_btn_definition[data-role="txp-h5-ui-control-definitionbtn"] { display: none !important;}/*隐藏高清按钮*/
+.txp_watermark{display: none!important;} /*隐藏腾讯视频图片*/
+.txp_poster{}/*封面图片设置*/
+.txp_btn_fullscreen{display: none!important;}
+@keyframes moveLeft{0%{transform:translateX(0)}100%{transform:translateX(-8px)}}
+@keyframes scale-small{0%{transform:scale(1.0)}100%{transform:scale(1.05)}}

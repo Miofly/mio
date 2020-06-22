@@ -5,8 +5,6 @@
 				<swiper-tab ref="mytab" v-model="tabClick" fullWidth="100%" :tabLists="tabLists"></swiper-tab>
 				<swiper style="height: calc(100% - 90rpx);" :current="tabClick" @change="swiperChange">
 					<swiper-item>
-						<txv-video vid="i0975w0af8a" playerid="txv1"></txv-video>
-
 						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
 					</swiper-item>
 

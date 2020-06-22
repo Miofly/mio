@@ -246,6 +246,16 @@
             }
         },
         {
+            "path": "pages/index/txVideo",
+            "name": "txVideo",
+            "style": {
+                "navigationBarTitleText": "主页",
+                "usingComponents": {
+                    "txv-video": "plugin://tencentvideo/video"
+                }
+            }
+        },
+        {
             "path": "pages/index/chart/chartHome",
             "name": "chartHome",
             "style": {}

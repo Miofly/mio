@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)http://ja.bigliang.cn/wxTask/dashboard/pointsAdd.action -->
 <html style=""
 	  class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
 	<meta name="renderer" content="webkit">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 	<meta name="author" content="Coderthemes">
-
 	<title>积分充值</title>
 	<link href="./css/select2.css" rel="stylesheet" type="text/css">
 	<link href="./css/select2-bootstrap.css" rel="stylesheet" type="text/css">
@@ -25,6 +21,10 @@
 	<link href="./css/responsive.css" rel="stylesheet" type="text/css">
 	<script src="./js/modernizr.min.js"></script>
 	<style type="text/css">
+		.bg-custom {
+			background-color: #e0b40e !important;
+		}
+
 		.bg-custom {
 			background-color: #e0b40e !important;
 		}
@@ -86,10 +86,10 @@
 </head>
 <body class="fixed-left widescreen">
 <div class="fs-fixed-top">
-	<a href="main.html" class="back-btn">
+	<a href="./pointsAdd.html" class="back-btn">
 		<img src="./img/back.png">
 	</a>
-	<p class="title">积分充值</p>
+	<p class="title">请用支付宝扫码充值</p>
 </div>
 <div id="wrapper">
 	<div class="content-page" style="margin-left:0px;">
@@ -100,41 +100,8 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="panel panel-default">
-							<div class="panel-body">
-								<form id="pointsForm" class="form-horizontal" method="post" role="form" >
-									<div class="form-group">
-										<label class="col-md-12 control-label">当前积分：&nbsp;&nbsp;&nbsp;<span
-												id="myPonits" class="pull-right"></span></label>
-									</div>
-									<div class="form-group">
-										<label class="col-md-12 control-label">充值用户：&nbsp;&nbsp;&nbsp;<span id="myName"
-																											class="pull-right"></span></label>
-									</div>
-									<div class="form-group">
-										<label class="col-md-2 control-label">积分：</label>
-										<div class="col-md-10">
-											<select id="points" name="points" class="select2 form-control">
-												<option value="">请选择</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="form-group">
-										<div class="col-sm-12">
-											<button type="button" onclick="showDetail();"
-													class="btn btn-warning waves-effect waves-light" style="width:100%">
-												充值记录
-											</button>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-sm-12">
-											<button type="button" onclick="doSave();"
-													class="btn btn-info waves-effect waves-light" style="width:100%">充值
-											</button>
-										</div>
-									</div>
-								</form>
+							<div class="panel-body" style="text-align:center;">
+								<img id="ewm" style="width: 300px">
 							</div> <!-- panel-body -->
 						</div> <!-- panel -->
 					</div> <!-- col -->
@@ -169,94 +136,87 @@
 <script type="text/javascript" src="./js/jquery.multi-select.js"></script>
 <script type="text/javascript" src="./js/jquery.quicksearch.js"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://api.51sld.cn/api/my/member-info",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    console.log(data.data)
-                    $('#myName').html(data.data.username)
-                    $('#myPonits').html(data.data.points)
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
+    $.ajax({
+        async: true,
+        type: "POST",
+        url: "http://api.51sld.cn/api/bus/recharge",
+		data: {points_id: localStorage.getItem('czId')},
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        dataType: "JSON",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
+        },
+        success: function (data) {
+            if (data.code == 200) {
+
+                console.log(data)
+                $('#ewm').attr('src', data.data.imgSrc)
+				setInterval(function(){
+				    getStatus(data.data.orderId)
+				}, 2000)
+            } else {
+                toast(data.message, 1000);
+                setTimeout(() => {
+                    if (data.code == 403) {
+                        window.location.href = './login.html'
+                    }
+                }, 1000)
+                return;
             }
-        });
-
-        $.ajax({
-            async: true,
-            type: "POST",
-            url: "http://api.51sld.cn/api/config/points-amount-list",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "JSON",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
-            },
-            success: function (data) {
-                if (data.code == 200) {
-                    data.data.list.forEach(e => {
-                        $("#points").append(`<option value="${e.id}">${e.name}</option>`)
-
-                    })
-                } else {
-                    toast(data.message, 1000);
-                    setTimeout(() => {
-                        if (data.code == 403) {
-                            window.location.href = 'login.html'
-                        }
-                    }, 1000)
-                    return;
-                }
-            },
-            error: function () {
-                toast("系统异常！", 1000);
-            }
-        });
-
-
+        },
+        error: function () {
+            toast("系统异常！", 1000);
+        }
     });
 
-    function showDetail() {
-        window.location.href = "showPointsDetails.html";
+    function getStatus(id) {
+        console.log(id)
+        $.ajax({
+            async: true,
+            type: "POST",
+            url: "http://api.51sld.cn/api/bus/order-pay-status",
+            data: {order_id: id},
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "JSON",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", localStorage.getItem('TOKEN_KEY_SL'));
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+					if (data.data.status == 2) {
+                        toast("充值成功", 1000);
+                        setTimeout(() => {
+                            location.href = './pointsAdd.html'
+                        }, 1500)
+					} else {
+					    // console.log('未充值')
+					}
+
+                } else {
+                    toast(data.message, 1000);
+                    setTimeout(() => {
+                        if (data.code == 403) {
+                            window.location.href = './login.html'
+                        }
+                    }, 1000)
+                    return;
+                }
+            },
+            error: function () {
+                toast("系统异常！", 1000);
+            }
+        });
+
     }
 
-    function doSave() {
-        var points = $("#points").val()
-        console.log(points)
-        if (checkParameterIsEmpty(points)) {
-            toast("请选择积分", 1000);
-            return;
-        } else {
-            localStorage.setItem('czId', points)
-            window.location.href = './getPayImage.html'
-		}
-        // $("#pointsForm")[0].submit();
-    }
+    setTimeout(() => {
 
-    //检查值是否为空；空：返回true；不为空返回false
-    function checkParameterIsEmpty(parameter) {
-        if (parameter == null || parameter == "null" || parameter == "" || parameter == "undefined" || parameter == undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+        location.href = './pointsAdd.html'
+    }, 300000)
+
 </script>
-<span role="status" aria-live="polite" class="select2-hidden-accessible"></span></body>
+
+
+</body>
 </html>

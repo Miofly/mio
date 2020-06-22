@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" href="static/swiper.min.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="static/swiper.min.js"></script>
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			background: #eee;
+			font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #000;
+			margin: 0;
+			padding: 0;
+		}
+
+		.swiper-container {
+			width: 100%;
+			height: 100%;
+		}
+
+		.swiper-slide {
+			text-align: center;
+			font-size: 18px;
+			overflow: hidden;
+			/* Center slide text vertically */
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-pack: center;
+			-ms-flex-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			overflow: hidden;
+		}
+
+
+		.play-video-img img {
+			display: block;
+			width: 40px;
+			height: 40px;
+		}
+
+		@keyframes extendArrow {
+			0%,
+			100% {
+				margin-top: 5px;
+				opacity: 0;
+			}
+			50% {
+				margin-top: 15px;
+				opacity: 1;
+			}
+		}
+
+		.right-list-all {
+			position: absolute;
+			right: 20px;
+			z-index: 6;
+			top: 60%;
+			transform: translate(0, -50%);
+		}
+
+		.right-list-all img {
+			width: 32px;
+			height: 32px;
+		}
+
+		.right-list-all {
+			color: #ececec;
+			font-size: 12px;
+		}
+
+		.list-heart {
+			text-align: center;
+			margin-bottom: 5vw;
+		}
+
+		.list-heart1 {
+			text-align: center;
+			margin-bottom: 8vw;
+			width: 32px;
+			height: 32px;
+			border: 1px solid #fff;
+			border-radius: 50%;
+		}
+
+		.list-heart1 img {
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
+
+		.img_arrow_down {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			transform: translate(-50%, 50%);
+			z-index: 66;
+		}
+
+		.img_arrow_down img {
+			width: 18px;
+			height: auto;
+			animation: extendArrow 1.2s ease infinite;
+		}
+
+		.video-desc {
+			position: absolute;
+			bottom: 26px;
+			z-index: 22;
+			color: #b2b2b2;
+			font-size: 14px;
+			width: 90vw;
+			left: 0;
+			text-align: left;
+			padding: 0 5vw;
+			line-height: 1.4;
+		}
+	</style>
+</head>
+<body style="background: #000;width: 100%">
+<div style="position: fixed;top: 0.09rem;left: 0.17rem;z-index: 9999">
+	<img src="img/fanhui@2x.png" style="width: 0.55rem;height: 0.26rem">
+</div>
+<div class="video-wrap" style="width: 100%">
+	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
+		 style="display: none;position: fixed;top: 10px;left: 10px;width: 0.5rem;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+</div>
+<div class="swiper-container" style="width: 100%">
+	<div class="swiper-wrapper" id="wrap-box" style="width: 100%">
+		<div class="swiper-slide test1" style="width: 100%;flex-wrap: wrap">
+			<div class="v1" onclick="getVideo(list.length - 1)" style="width: 100%;display: inline!important;margin-top: 35%;position: relative">
+				<div style="width: 100%;">
+					<img id="firstImg" src="../../img/glnz/0.jpg" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
+					<div style="position: absolute;top: 30%;left: 41%">
+						<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+					</div>
+				</div>
+				<div>
+					<img src="img/footer.png" style="width: 1.68rem;height: 0.67rem">
+				</div>
+			</div>
+			<div class="v2" style="display: none;width: 100%;height: 100%">
+
+				<div style="width: 100%;height: 100%">
+					<div onclick="getVideo(list.length - 1)" style="width: 100%;height: 40%;position: relative;margin-top: 13%">
+						<img id="img1" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">
+						</div>
+					</div>
+					<div onclick="getVideo(0)" style="width: 100%;height: 20%;position: relative;">
+						<img id="img2"
+							 style="width: 94%;border-radius: 0.1rem;height: 100%">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+						</div>
+					</div>
+					<div onclick="getVideo(1)" style="width: 100%;height: 20%;position: relative;margin-top: 10%">
+						<img id="img3"
+							 style="width: 94%;border-radius: 0.1rem;height: 100%">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script>
+	localStorage.removeItem('realIndex')
+    var list = [
+        {vid: 'a0919rdlm06', pic: '../../img/glnz/20.jpg', delayTime: '115'},
+        {vid: 'x0977n3m1rv', pic: '../../img/glnz/2.jpg', delayTime: '10'},
+        {vid: 'i0975w0af8a', pic: '../../img/glnz/3.jpg', delayTime: '15'},
+        {vid: 'q097606n0v6', pic: '../../img/glnz/4.jpg', delayTime: '10'},
+        {vid: 'l0975w9qbee', pic: '../../img/glnz/5.jpg', delayTime: '5'},
+        {vid: 'i0975qgpym8', pic: '../../img/glnz/6.jpg', delayTime: '13'},
+    ]
+    $('#firstImg').attr('src', list[list.length - 1].pic)
+
+    $('#img1').attr('src', list[list.length - 1].pic)
+	$('#img2').attr('src', list[0].pic)
+	$('#img3').attr('src', list[1].pic)
+    // <div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+    var html_content = "";
+    $.each(list, function (key) {
+        if (key < list.length - 2) {
+            html_content +=
+                '<div class="swiper-slide">' +
+                '<div style="width: 100%;height: 100%">' +
+                '<div onclick="getVideo(' + key + ')" style="width: 100%;height: 40%;position: relative;margin-top: 13%">' +
+                '<img vid="' + list[key].vid + '" src="' + list[key].pic + '" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 1) + ')" style="width: 100%;height: 20%;position: relative;">' +
+                '<img vid="' + list[key + 1].vid + '" src="' + list[key + 1].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 2) + ')" style="width: 100%;height: 20%;position: relative;margin-top: 10%">' +
+                '<img vid="' + list[key + 2].vid + '" src="' + list[key + 2].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+        if (key == list.length - 2) {
+            html_content +=
+                '<div class="swiper-slide">' +
+                '<div style="width: 100%;height: 100%">' +
+                '<div onclick="getVideo(' + key + ')" style="width: 100%;height: 40%;position: relative;margin-top: 13%">' +
+                '<img vid="' + list[key].vid + '" src="' + list[key].pic + '" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 1) + ')" style="width: 100%;height: 20%;position: relative;">' +
+                '<img vid="' + list[key + 1].vid + '" src="' + list[key + 1].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(0)" style="width: 100%;height: 20%;position: relative;margin-top: 10%">' +
+                '<img vid="' + list[0].vid + '" src="' + list[0].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+    })
+    $("#wrap-box").append(html_content);
+
+    var n = 0;
+    var swiper = new Swiper(".swiper-container", {
+        effect: 'coverflow', // fade cube flip coverflow
+        direction: "vertical",
+        speed: 800,
+        loop: true,
+        parallax: true,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        on: {
+            slidePrevTransitionStart: function () {
+                console.log('realIndex', swiper.realIndex)
+                localStorage.setItem('realIndex', swiper.realIndex)
+                $('.v1').hide()
+                $('.v2').show()
+            },
+            slideNextTransitionStart: function () {
+                n++;
+                if (n > 1) {
+                    console.log('realIndex', swiper.realIndex)
+                    localStorage.setItem('realIndex', swiper.realIndex)
+                }
+                if (n > list.length - 1) {
+                    $('.v1').hide()
+                    $('.v2').show()
+                }
+            }
+        },
+    });
+
+    var player = new Txplayer({
+        containerId: 'mod_player',
+        vid: list[0].vid,
+        width: '100%', // 数值600
+        height: '100%',
+        isUsePreload: true, // 是否预加载
+        miniSkinAdaptive: true,
+        showBullet: true,
+        virtualTranslate: true,
+        showBulletInput: true
+    });
+    player.on('ready', () => {
+        if (location.href.indexOf('key') > -1) {
+            getVideo(getUrlParam('key'))
+        }
+        player.enterBrowserFullscreen(); // 全屏播放
+    });
+
+
+    var temp = 'a'
+    function getVideo(key) {
+        console.log(localStorage.getItem('realIndex'))
+        console.log(localStorage.getItem('realIndex') != null)
+        if (localStorage.getItem('realIndex') != null) {
+            // swiper.slideTo()
+            $('.v1').hide()
+            $('.v2').show()
+            swiper.slideToLoop(Number(1 + key), 1000, true)
+            setTimeout(function () {
+                $('#shou').hide()
+
+                console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+
+                $('.allShow').show()
+                player.play(list[key].vid)
+
+                document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+                    player.play();
+                }, false);
+
+                player.on('timeupdate', (parmas) => {
+                    // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+                    if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                        setTimeout(() => {
+                            parmas.videoTag.currentTime = list[key].delayTime
+                        }, 100)
+                        temp = 'b'
+                    }
+
+                    if (player.getCurrentTime() == player.getDuration()) {
+                        $('#test').click()
+                        console.log('视频播放结束事件')
+                    }
+
+                    if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                        player.pause();
+                        location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/share.html?key=' + key + ''
+                        console.log('断点处跳转')
+                    }
+                })
+            }, 1000)
+        } else {
+            $('#shou').hide()
+
+            console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+
+            $('.allShow').show()
+            player.play(list[key].vid)
+
+            document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+                player.play();
+            }, false);
+
+            player.on('timeupdate', (parmas) => {
+                // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+                if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                    setTimeout(() => {
+                        parmas.videoTag.currentTime = list[key].delayTime
+                    }, 100)
+                    temp = 'b'
+                }
+
+                if (player.getCurrentTime() == player.getDuration()) {
+                    $('#test').click()
+                    console.log('视频播放结束事件')
+                }
+
+                if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                    player.pause();
+                    location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/share.html?key=' + key + ''
+                    console.log('断点处跳转')
+                }
+            })
+        }
+
+
+
+    }
+
+
+
+
+
+    console.log(localStorage.getItem('realIndex'))
+    if (localStorage.getItem('realIndex') != null) {
+        swiper.slideTo()
+    } else {
+
+	}
+
+    function backIndex() {
+        $('.allShow').hide()
+        player.pause();
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
+    }
+</script>
+</body>
+</html>

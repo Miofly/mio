@@ -3,8 +3,6 @@
 				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
-		<txv-video vid="i0975w0af8a" playerid="txv1"></txv-video>
-
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
 			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
@@ -18,9 +16,7 @@
 								 <!--:image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"-->
 								 <!--:loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">-->
 						<!--</imgLoad>-->
-
-
-
+						<txv-video vid="i0975w0af8a" playerid="txv1"></txv-video>
 					</view>
 				</view>
 

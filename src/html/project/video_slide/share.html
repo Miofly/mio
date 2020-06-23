@@ -12,12 +12,14 @@
 	<title>.</title>
 	<script type="text/javascript" src="./js/jquery.js"></script>
 	<script type="text/javascript" src="./js/adaptive.js"></script>
-	<script type="text/javascript" src="./js/txplayer.js"></script>
-	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
-	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 </head>
-<body style="font-size: 0.05rem;background: black">
-<img id="shareImg" src="./img/pengyouquan@2x.png" style="transform: scale(0.9)">
+<body style="background: #000">
+<div>
+	<img id="top" style="width: 3.3rem;height: 1.3rem;float: right" src="./img/weixinqun@2x.png">
+</div>
+<div style="text-align: center;width: 100%">
+	<img id="main" class="shake" style="margin-top: 25%;width: 2.9rem;height: 2.3rem" src="./img/1@2x.png">
+</div>
 <script>
     // 免接口分享
     // var ad_url = "<?= $advertising ?>";
@@ -48,7 +50,8 @@
     function share_tip(share_app_times, share_timeline_times) { // 分享处理
         if (share_timeline_times == -1) {
             if (shareATimes == 1) {
-                window.location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/index.html?key=' + getUrlParam('key') + '&continue'
+                window.location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/index.html?' +
+					'key=' + getUrlParam('key') + '&slide=' + getUrlParam('slide')
             }
             if (shareATimes == 2) {
                 window.location.href = 'http://123.0t038.cn/jin-61/wfd/#/pages/index/movie/moviePlay'

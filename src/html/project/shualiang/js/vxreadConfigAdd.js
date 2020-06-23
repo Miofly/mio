@@ -25,6 +25,13 @@ jQuery(document).ready(function ($) {
     $('#h23Min').val(0)
     $('#h24Min').val(0)
     $('#total_uv').val(parseInt($('#h01Min').val()) + parseInt($('#h02Min').val()))
+
+    $('#total_uv').bind('input propertychange', function(){
+        if ($('#total_uv').val().length == 2 && $('#total_uv').val().slice(0,1) == 0) {
+            $('#total_uv').val($('#total_uv').val().slice(1))
+        }
+    })
+
     $('.minInput').bind('input propertychange', function(){
         console.log($('#h01Min').val().length)
         if ($('#h01Min').val().length == 2 && $('#h01Min').val().slice(0,1) == 0) {
@@ -125,16 +132,9 @@ jQuery(document).ready(function ($) {
         var hh23 = isNaN(parseInt($('#h23Min').val())) ? 0 : parseInt($('#h23Min').val())
         var hh24 = isNaN(parseInt($('#h24Min').val())) ? 0 : parseInt($('#h24Min').val())
 
-
-
-
         $('#total_uv').val(
             hh01 + hh02 + hh03 + hh04 + hh05 + hh06 + hh07 + hh08 + hh09 + hh10 + hh11 + hh12 + hh13 + hh14 + hh15 + hh16 + hh17 + hh18 + hh19 + hh20 + hh21 + hh22 + hh23 +hh24
         )
-
-        // if ($('#total_uv').val() > 1000) {
-        //     toast("一小时的总浏览量必须小于等于1000", 1000);
-        // }
     })
 
 });
@@ -161,10 +161,35 @@ function doSave() {
         return;
     }
 
-    // if (total_uv > 1000) {
-    //     toast("一小时的总浏览量必须小于等于1000", 1000);
-    //     return;
-    // }
+    var hh01 = isNaN(parseInt($('#h01Min').val())) ? 0 : parseInt($('#h01Min').val())
+    var hh02 = isNaN(parseInt($('#h02Min').val())) ? 0 : parseInt($('#h02Min').val())
+    var hh03 = isNaN(parseInt($('#h03Min').val())) ? 0 : parseInt($('#h03Min').val())
+    var hh04 = isNaN(parseInt($('#h04Min').val())) ? 0 : parseInt($('#h04Min').val())
+    var hh05 = isNaN(parseInt($('#h05Min').val())) ? 0 : parseInt($('#h05Min').val())
+    var hh06 = isNaN(parseInt($('#h06Min').val())) ? 0 : parseInt($('#h06Min').val())
+    var hh07 = isNaN(parseInt($('#h07Min').val())) ? 0 : parseInt($('#h07Min').val())
+    var hh08 = isNaN(parseInt($('#h08Min').val())) ? 0 : parseInt($('#h08Min').val())
+    var hh09 = isNaN(parseInt($('#h09Min').val())) ? 0 : parseInt($('#h09Min').val())
+    var hh10 = isNaN(parseInt($('#h10Min').val())) ? 0 : parseInt($('#h10Min').val())
+    var hh11 = isNaN(parseInt($('#h11Min').val())) ? 0 : parseInt($('#h11Min').val())
+    var hh12 = isNaN(parseInt($('#h12Min').val())) ? 0 : parseInt($('#h12Min').val())
+    var hh13 = isNaN(parseInt($('#h13Min').val())) ? 0 : parseInt($('#h13Min').val())
+    var hh14 = isNaN(parseInt($('#h14Min').val())) ? 0 : parseInt($('#h14Min').val())
+    var hh15 = isNaN(parseInt($('#h15Min').val())) ? 0 : parseInt($('#h15Min').val())
+    var hh16 = isNaN(parseInt($('#h16Min').val())) ? 0 : parseInt($('#h16Min').val())
+    var hh17 = isNaN(parseInt($('#h17Min').val())) ? 0 : parseInt($('#h17Min').val())
+    var hh18 = isNaN(parseInt($('#h18Min').val())) ? 0 : parseInt($('#h18Min').val())
+    var hh19 = isNaN(parseInt($('#h19Min').val())) ? 0 : parseInt($('#h19Min').val())
+    var hh20 = isNaN(parseInt($('#h20Min').val())) ? 0 : parseInt($('#h20Min').val())
+    var hh21 = isNaN(parseInt($('#h21Min').val())) ? 0 : parseInt($('#h21Min').val())
+    var hh22 = isNaN(parseInt($('#h22Min').val())) ? 0 : parseInt($('#h22Min').val())
+    var hh23 = isNaN(parseInt($('#h23Min').val())) ? 0 : parseInt($('#h23Min').val())
+    var hh24 = isNaN(parseInt($('#h24Min').val())) ? 0 : parseInt($('#h24Min').val())
+
+    if (total_uv != hh01 + hh02 + hh03 + hh04 + hh05 + hh06 + hh07 + hh08 + hh09 + hh10 + hh11 + hh12 + hh13 + hh14 + hh15 + hh16 + hh17 + hh18 + hh19 + hh20 + hh21 + hh22 + hh23 +hh24) {
+        toast("总浏览量与时段浏览量不相等", 1000);
+        return
+    }
 
     swal({
         title: "保存确认",

@@ -232,30 +232,30 @@ function doSave() {
         // console.log($('#sle01'))
 
         var uvos = [
-            {"state_uv": hh01,"os_type": $('#sle01 input[name="type01"]:checked').val()},
-            {"state_uv": hh02,"os_type": $('#sle02 input[name="type02"]:checked').val()},
-            {"state_uv": hh03,"os_type": $('#sle03 input[name="type03"]:checked').val()},
-            {"state_uv": hh04,"os_type": $('#sle04 input[name="type04"]:checked').val()},
-            {"state_uv": hh05,"os_type": $('#sle05 input[name="type05"]:checked').val()},
-            {"state_uv": hh06,"os_type": $('#sle06 input[name="type06"]:checked').val()},
-            {"state_uv": hh07,"os_type": $('#sle07 input[name="type07"]:checked').val()},
-            {"state_uv": hh08,"os_type": $('#sle08 input[name="type08"]:checked').val()},
-            {"state_uv": hh09,"os_type": $('#sle09 input[name="type09"]:checked').val()},
-            {"state_uv": hh10,"os_type": $('#sle10 input[name="type10"]:checked').val()},
-            {"state_uv": hh11,"os_type": $('#sle11 input[name="type11"]:checked').val()},
-            {"state_uv": hh12,"os_type": $('#sle12 input[name="type12"]:checked').val()},
-            {"state_uv": hh13,"os_type": $('#sle13 input[name="type13"]:checked').val()},
-            {"state_uv": hh14,"os_type": $('#sle14 input[name="type14"]:checked').val()},
-            {"state_uv": hh15,"os_type": $('#sle15 input[name="type15"]:checked').val()},
-            {"state_uv": hh16,"os_type": $('#sle16 input[name="type16"]:checked').val()},
-            {"state_uv": hh17,"os_type": $('#sle17 input[name="type17"]:checked').val()},
-            {"state_uv": hh18,"os_type": $('#sle18 input[name="type18"]:checked').val()},
-            {"state_uv": hh19,"os_type": $('#sle19 input[name="type19"]:checked').val()},
-            {"state_uv": hh20,"os_type": $('#sle20 input[name="type20"]:checked').val()},
-            {"state_uv": hh21,"os_type": $('#sle21 input[name="type21"]:checked').val()},
-            {"state_uv": hh22,"os_type": $('#sle22 input[name="type22"]:checked').val()},
-            {"state_uv": hh23,"os_type": $('#sle23 input[name="type23"]:checked').val()},
-            {"state_uv": hh24,"os_type": $('#sle24 input[name="type24"]:checked').val()},
+            {"state_uv": hh01,"os_type": 1},
+            {"state_uv": hh02,"os_type": 1},
+            {"state_uv": hh03,"os_type": 1},
+            {"state_uv": hh04,"os_type": 1},
+            {"state_uv": hh05,"os_type": 1},
+            {"state_uv": hh06,"os_type": 1},
+            {"state_uv": hh07,"os_type": 1},
+            {"state_uv": hh08,"os_type": 1},
+            {"state_uv": hh09,"os_type": 1},
+            {"state_uv": hh10,"os_type": 1},
+            {"state_uv": hh11,"os_type": 1},
+            {"state_uv": hh12,"os_type": 1},
+            {"state_uv": hh13,"os_type": 1},
+            {"state_uv": hh14,"os_type": 1},
+            {"state_uv": hh15,"os_type": 1},
+            {"state_uv": hh16,"os_type": 1},
+            {"state_uv": hh17,"os_type": 1},
+            {"state_uv": hh18,"os_type": 1},
+            {"state_uv": hh19,"os_type": 1},
+            {"state_uv": hh20,"os_type": 1},
+            {"state_uv": hh21,"os_type": 1},
+            {"state_uv": hh22,"os_type": 1},
+            {"state_uv": hh23,"os_type": 1},
+            {"state_uv": hh24,"os_type": 1},
         ]
 
         $.ajax({
@@ -277,7 +277,7 @@ function doSave() {
                     toast(data.message, 1000);
                     console.log(data.data)
                     setTimeout(() => {
-                        window.location.href = './planList.html'
+                        // window.location.href = './planList.html'
                     }, 1000)
                 } else {
                     toast(data.message, 1000);

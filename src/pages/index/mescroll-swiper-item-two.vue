@@ -1,35 +1,32 @@
 <template>
-	<mescroll-uni ref="mescrollRef" top="0" :down="downOption"
-				  :up="upOption" @init="mescrollInit" @scroll="scroll"
-				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
-		<!-- 数据列表 -->
-		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
-				<view class="content padding-tb-sm">
-					<view class="padding-top-bottom" id="test">
-						<!--
-							scrollTop: 0 || newscroll(e) {this.scrollTop = e.detail.scrollTop}
-							>>> .spin-circle {background: url('@/static/images/common/loading1.gif') no-repeat center !important;}
-							>>> .easy-loadimage{width: 100%;}  >>> .origin-img{border-radius: 20rpx;}
-						-->
-						<!--<imgLoad :scroll-top="scrollTop" mode="widthFix" style="width: 150rpx;height: 150rpx"-->
-								 <!--:image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"-->
-								 <!--:loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">-->
-						<!--</imgLoad>-->
-						<txv-video vid="i0975w0af8a" playerid="txv1"></txv-video>
+	<view>
+		<mescroll-uni ref="mescrollRef" top="0" :down="downOption"
+					  :up="upOption" @init="mescrollInit" @scroll="scroll"
+					  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
+			<!-- 数据列表 -->
+			<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
+				<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+					<view class="content padding-tb-sm">
+						<view class="padding-top-bottom" id="test">
+							<!--
+								scrollTop: 0 || newscroll(e) {this.scrollTop = e.detail.scrollTop}
+								>>> .spin-circle {background: url('@/static/images/common/loading1.gif') no-repeat center !important;}
+								>>> .easy-loadimage{width: 100%;}  >>> .origin-img{border-radius: 20rpx;}
+							-->
+							<imgLoad :scroll-top="scrollTop" mode="widthFix" style="width: 100%;height: 150rpx"
+								:image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"
+								:loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">
+							</imgLoad>
+
+						</view>
 					</view>
 				</view>
-
-				<view v-show="false" class="action">
-					<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
-						操作
-					</button>
-				</view>
-				<view v-show="false" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
 			</view>
-		</view>
 
-	</mescroll-uni>
+		</mescroll-uni>
+		<!--<txv-video vid="i0975w0af8a" playerid="txv1"></txv-video>-->
+
+	</view>
 </template>
 
 <script>

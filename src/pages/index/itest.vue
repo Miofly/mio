@@ -35,6 +35,9 @@
 
 <script>
     import MescrollItem from './mescroll-swiper-item-two'
+	import {
+
+	} from '@/api'
 
     export default {
         components: {

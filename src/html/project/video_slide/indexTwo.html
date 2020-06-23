@@ -23,18 +23,16 @@
 	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
 </div>
 <div id="swiperCon" class="swiper-container" style="width: 100%">
-	<div class="swiper-wrapper" id="wrap-box" style="width: 100%">
-
-	</div>
+	<div class="swiper-wrapper" id="wrap-box" style="width: 100%"></div>
 </div>
 <div id="footer" style="position: fixed;bottom: 10px;width: 100%;left: 0;text-align: center">
 	<div style="animation: moveTop 0.7s linear 0s infinite alternate;">
 		<img src="img/xiahua@2x.png" style="width: 0.42rem;height: 0.34rem">
-		</div>
+	</div>
 	<div style="margin-top: 10px;">
 		<img src="img/sh.png" style="width: 2.18rem;height: 0.29rem">'
-		</div>
 	</div>
+</div>
 <script>
     var list = [
         {vid: 'a0919rdlm06', pic: '../../img/glnz/20.jpg', delayTime: '20'},
@@ -47,10 +45,10 @@
 
     var html_content = "";
     $.each(list, function (key) {
-        html_content += '<div class="swiper-slide" style="width: 100%;flex-wrap: wrap"><div onclick="getVideo('+ key + ')" style="width: 100%;display: inline!important;' +
-			'position: relative">' +
+        html_content += '<div class="swiper-slide" style="width: 100%;flex-wrap: wrap"><div onclick="getVideo(' + key + ')" style="width: 100%;display: inline!important;' +
+            'position: relative">' +
             '<div style="width: 100%;">' +
-            '<img id="firstImg" src="../../img/glnz/'+ key + '.jpg" style="width: 94%;height: 2.54rem;border-radius: 0.1rem">' +
+            '<img id="firstImg" src="../../img/glnz/' + key + '.jpg" style="width: 94%;height: 2.54rem;border-radius: 0.1rem">' +
             '<div style="position: absolute;top: 40%;left: 41%">' +
             '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">' +
             '</div>' +
@@ -77,7 +75,7 @@
         on: {
             slidePrevTransitionStart: function () {
                 $('#footer').fadeOut(500)
-                setTimeout(function() {
+                setTimeout(function () {
                     $('#footer').fadeIn(500)
                 }, 500)
                 console.log('realIndex', swiper.realIndex)
@@ -89,7 +87,7 @@
                 n++;
                 if (n > 1) {
                     $('#footer').fadeOut(500)
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#footer').fadeIn(500)
                     }, 500)
                     console.log('realIndex', swiper.realIndex)
@@ -148,8 +146,6 @@
             }
         })
     }
-
-
 
 
     function backIndex() {

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div style="display: flex">
+	<!--水平居中-->
+	<div style="width: 33%">
+		<!--行级元素：为该行级元素的父元素设置text-align:center配合line-height样式-->
+		<div style="width: 500px;height: 100px;line-height: 100px;border: 1px solid green;text-align:center;">
+			<span>水平居中行级元素</span>
+		</div>
+		<!--块级元素：为其自身设置margin:auto样式-->
+		<div style="width: 500px;height: 100px;border: 1px solid red;">
+			<div style="line-height: 100px;text-align: center;margin:auto;width: 200px;height: 100px;border: 1px solid gold">
+				水平居中块级元素
+			</div>
+		</div>
+	</div>
+
+	<!--垂直居中-->
+	<div style="width: 33%">
+		<!--方法一： display:table;此元素会作为块级表格来显示（类似 <table>），表格前后带有换行符.
+			 display:table-cell;此元素会作为一个表格单元格显示（类似 <td> 和 <th>）-->
+		<div style="display: table;width: 500px;height: 200px;border: 1px solid red;">
+			<div style="display: table-cell;vertical-align: middle;text-align:center;">垂直居中方法一</div>
+		</div>
+
+		<!--方法二：利用flex布局使内部块级元素水平，垂直居中（display:flex;justify-content: center; align-items:center;）-->
+		<div style="display:flex;justify-content: center; align-items:center; width: 500px;height: 200px;border: 1px solid green;text-align:center;line-height:150px">
+			<div style="width: 150px;height: 150px;border: 1px solid gold">垂直居中方法二</div>
+		</div>
+
+		<!--方法三： 利用定位实现，父元素：position:relative; ，子元素：position: absolute;top:50%;left:50%;transform:translate(-50%,-50%);-->
+		<div style="position:relative; width: 500px;height: 200px;border: 1px solid red;">
+			<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px">
+				垂直居中方法三
+			</div>
+		</div>
+
+		<!--方法四： 绝对定位， left：50%，top: 50% + margin-left:-(自身宽度的一半),margin-top:-(自身高度的一半)-->
+		<!--缺点：要自己计算容器的宽高，万一容器的宽高改变还要修改css样式-->
+		<div style="position:relative; width: 500px;height: 200px;border: 1px solid red;">
+			<div style="position:absolute;top:50%;left:50%;margin-left: -75px;margin-top: -75px;
+    width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px">
+				垂直居中方法四
+			</div>
+		</div>
+	</div>
+
+	<div style="width: 33%">
+		<!--方法五： 绝对定位，left: 0，right: 0, top: 0, bottom: 0 + margin：auto-->
+		<div style="position:relative; width: 500px;height: 200px;border: 1px solid red;">
+			<div style="position:absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;
+    width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px">
+				垂直居中方法五
+			</div>
+		</div>
+
+		<!--方法六： 固定定位position:fixed;并设置一个较大的z-index层叠属性值。-->
+		<div style="position:fixed;top: 50%;left: 50%;margin-left: -75px;margin-top: -75px;z-index: 999;
+    width: 150px;height: 150px;border: 1px solid red;text-align:center;line-height:150px">
+			垂直居中方法六
+		</div>
+
+		<!--方法七： Flex加margin:auto-->
+		<div style="display: flex;width: 500px;height: 200px;border: 1px solid red;">
+			<div style="margin: auto;width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px">
+				垂直居中方法七
+			</div>
+		</div>
+
+		<!--方法八： absolute + calc 缺点：依赖calc的兼容性-->
+		<div style="position: relative;width: 500px;height: 200px;border: 1px solid red;">
+			<div style="position: absolute;top: calc(50% - 75px);left: calc(50% - 75px);width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px;">
+				垂直居中方法八
+			</div>
+		</div>
+
+		<!--方法九： display: grid 缺点：代码量也很少，但兼容性不如flex，不推荐使用-->
+		<div style="display: grid;width: 500px;height: 200px;border: 1px solid red;">
+			<div style="align-self: center;justify-self: center;;width: 150px;height: 150px;border: 1px solid gold;text-align:center;line-height:150px;">
+				垂直居中方法九
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

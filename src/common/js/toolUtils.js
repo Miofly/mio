@@ -435,11 +435,16 @@ const tu = {
         // 冻结自身
         return Object.freeze(obj)
     },
-    getUrlParam(name) { // 获取地址栏参数
-        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
-        if (r != null) return unescape(r[2])
-        return null // 返回参数值
+    getParam(name, url) { // 获取地址栏参数
+        if (typeof name !== 'string') return false
+        if (!url) url = window.location.href
+        // 当遇到name[xx]时，对方括号做一下转义为 name\[xxx\]，因为下面还需要使用name做正则
+        name = name.replace(/[\[\]]/g, '\\$&')
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+        var results = regex.exec(url)
+        if (!results) return null
+        if (!results[2]) return ''
+        return decodeURIComponent(results[2].replace(/\+/g, ' '))
     }
 
 }

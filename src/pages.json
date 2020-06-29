@@ -241,7 +241,9 @@
             "style": {
                 "navigationBarTitleText": "主页",
                 "usingComponents": {
+                    // #ifdef MP-WEIXIN
                     "txv-video": "plugin://tencentvideo/video"
+                    // #endif
                 }
             }
         },
@@ -250,7 +252,9 @@
             "name": "mescrollTwo",
             "style": {
                 "usingComponents": {
+                    // #ifdef MP-WEIXIN
                     "txv-video": "plugin://tencentvideo/video"
+                    // #endif
                 }
             }
         },

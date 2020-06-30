@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta content="yes" name="apple-mobile-web-app-capable"/>
 	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 	<meta content="telephone=no" name="format-detection"/>
@@ -15,70 +16,148 @@
 	<script type="text/javascript" src="./js/txplayer.js"></script>
 	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
 	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<style>
+		.a1 {
+			animation: scale-small 1s linear 0s infinite alternate
+		}
+	</style>
 </head>
-<body>
-<div class="video-wrap">
-	<div id="mod_player" style="display: none"></div>
+<body style="background: black">
+<!--跳广告-->
+<div onclick="location.href = ''">
+	<img src="img/xiaochengxun@2x.png" style="width: 100%">
 </div>
+<div style="display: flex;align-items: center;justify-content: space-between;margin-top: 0.05rem;">
+	<div style="width: 0.94rem;height: 0.94rem;border-radius: 50%;margin-left: 0.2rem;text-align: left">
+		<img src="../../img/xtx/10.jpg" style="animation: rotate 5s linear 0s infinite;width: 0.94rem;height: 0.94rem;border-radius: 50%">
+		<span style="color: white;font-size: 0.21rem;width: 200px;display: inline-block">美女直播TEST</span>
+	</div>
+
+	<div style="width:1.78rem;height:0.41rem;background:rgba(255,81,4,1);font-size: 0.19rem;color:rgba(255,255,255,1);
+	border-radius:0.05rem;text-align: center;line-height: 0.41rem;margin-left: 0.10rem">
+		直播中...
+	</div>
+
+	<div style="width:0.41rem;height:0.41rem;margin-right: 0.16rem;background:rgba(55,58,69,1);
+	border-radius:0.05rem;line-height: 0.41rem;text-align: center">
+		<img src="img/qianjin@2x.png" style="animation: moveLeft 1s linear 0s infinite alternate;width: 0.21rem;height: 0.22rem;">
+	</div>
+</div>
+
+<div style="font-size:0.18rem;color:rgba(255,255,255,1);line-height:0.25rem;text-align: left;width: 86%;margin-left: 7%;margin-top: 13%">
+	每天定时直播，不同美女不同时段直播<br>
+	点击“直播中”红色按钮<br>
+	哥哥，快来看我直播吧～
+</div>
+
+<div style="width: 100%;text-align: center;font-size: 0.27rem;color: white;margin: 0.3rem 0">
+	作品6
+</div>
+
+<div class="video-wrap" style="width: 100%">
+	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
+		 style="display: none;position: fixed;top: 10px;left: 10px;width: 0.5rem;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+</div>
+
+<div style="text-align: center;position: relative;width: 100%;" id="parLists">
+	<img id="shou" src="img/shou@2x.png" onclick="getVideo(0)" style="animation: scale-up 1s linear 0s infinite alternate;position: absolute;top: 0.8rem;left: 22%;width: 0.47rem;height: 0.58rem;z-index: 999">
+</div>
+
 <script>
-	var obj = {
-        vid: 'a0919rdlm06',
-		// pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592233151580&di=bf46119ff4fcb33b35497c7bbab6cd5a&imgtype=0&src=http%3A%2F%2F00.minipic.eastday.com%2F20170511%2F20170511132314_6cab43df10415723a8f3bdd9dc5364ed_8.jpeg',
-        playStatus: '1',
-        delayTime: 30,
-	}
+    var list = [
+        {vid: 'r09779c7gd4', pic: '../../img/xtx/11.jpg', delayTime: '115'},
+        {vid: 'x0977n3m1rv', pic: '../../img/xtx/2.jpg', delayTime: '10'},
+        {vid: 'i0975w0af8a', pic: '../../img/xtx/3.jpg', delayTime: '15'},
+        {vid: 'q097606n0v6', pic: '../../img/xtx/4.jpg', delayTime: '10'},
+        {vid: 'l0975w9qbee', pic: '../../img/xtx/5.jpg', delayTime: '5'},
+        {vid: 'i0975qgpym8', pic: '../../img/xtx/6.jpg', delayTime: '3'},
+    ]
+    var html = ''
+    $.each(list, function (key) {
+        html += '<div onclick="getVideo(' + key + ')" style="width: 46%;height: 46%;position: relative;float: left;margin-left: 2%;margin-right: 2%;text-align: center">' +
+            '<img id="'+ 'img' + key + '" style="width: 100%;height: 100%;" ' +
+            'vid="' + list[key].vid + '" src="' + list[key].pic + '">' +
+            '<img src="img/bofang@2x.png" style="position: absolute;left: 35%;top: 35%;width: 0.54rem;height: 0.54rem"></div>'
+    })
+    $('#parLists').append(html)
+
+	$('#img0').addClass('a1')
 
     var player = new Txplayer({
         containerId: 'mod_player',
-        vid: obj.vid,
+        vid: list[0].vid,
         width: '100%', // 数值600
-        height: screen.availHeight / 1.5,
-        autoplay: true,
-        playStartTime: 200,
+        height: '100%',
+        // height: screen.availHeight / 1.5,
+        // autoplay: true,
+        // playStartTime: 200,
         isUsePreload: true, // 是否预加载
         // useMiniSkin: true,
         miniSkinAdaptive: true,
-        poster: obj.pic,
+        // poster: obj.pic,
         showBullet: true,
         showBulletInput: true
     });
-    var _playStatus = obj.playStatus;
-    if(location.href.indexOf('continue') > -1){
-        _playStatus = 'continue';
-    }
+    // var _playStatus = 1
+    // if (location.href.indexOf('key') > -1) {
+    //     _playStatus = 'continue';
+    // }
     player.on('ready', () => {
-
+        if (location.href.indexOf('key') > -1) {
+            getVideo(getUrlParam('key'))
+        }
+        player.enterBrowserFullscreen(); // 全屏播放
     });
 
-    document.addEventListener('WeixinJSBridgeReady',function(){ //
-        player.play();
-    },false);
 
-    var temp = 'a'
-    player.on('timeupdate', (parmas) => {
-        if (parmas.videoTag.currentTime < 1) {
-            // player.enterBrowserFullscreen(); // 全屏播放
-        }
+    function getVideo(key) {
+        $('#shou').hide()
 
-        if (_playStatus == 'continue' && temp == 'a') { // 分享完成从断点播放
-            setTimeout( () => {
-                parmas.videoTag.currentTime = obj.delayTime
-            }, 100)
-            temp = 'b'
-        }
-        if (player.getCurrentTime() == player.getDuration()) {
-			console.log('视频播放结束事件')
-        }
+        console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
 
-        if (_playStatus != 'continue' && parmas.videoTag.currentTime >= obj.delayTime) {
-            player.pause();
-           	console.log('断点处跳转')
-        }
+        $('.allShow').show()
+        player.play(list[key].vid)
 
-    });
+        document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+            player.play();
+        }, false);
 
-    function play() {
+        var temp = 'a'
+        player.on('timeupdate', (parmas) => {
+            // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
 
+            if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                setTimeout(() => {
+                    parmas.videoTag.currentTime = list[key].delayTime
+                }, 100)
+                temp = 'b'
+            }
+
+            if (player.getCurrentTime() == player.getDuration()) {
+                $('#test').click()
+                console.log('视频播放结束事件')
+            }
+
+            if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                player.pause();
+                location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
+                console.log('断点处跳转')
+            }
+        })
+    }
+
+    function backIndex() {
+        $('.allShow').hide()
+		$('#img0').removeClass('a1')
+        player.pause();
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
     }
 </script>
 </body>

@@ -241,7 +241,6 @@
                 })
             },
             realTimeInput: tu.debounce(function (key) { // 实时输入搜索
-                console.log(21312123132)
                 if (this.ssBackIndex) {
                     this.indexShow = true
                     if (this.keyword.trim() != '') { // eslint-disable-line

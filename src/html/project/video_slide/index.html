@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" href="static/swiper.min.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="static/swiper.min.js"></script>
+</head>
+<body style="background: #000;width: 100%">
+<div style="position: fixed;top: 0.09rem;left: 0.17rem;z-index: 9999">
+	<img src="img/fanhui@2x.png" style="width: 0.55rem;height: 0.26rem">
+</div>
+<div class="video-wrap" style="width: 100%">
+	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
+		 style="display: none;position: fixed;top: 10px;left: 10px;width: 0.5rem;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+</div>
+<div id="swiperCon" class="swiper-container" style="width: 100%">
+	<div class="swiper-wrapper" id="wrap-box" style="width: 100%">
+		<div class="swiper-slide test1" style="width: 100%;flex-wrap: wrap">
+			<div class="v1" onclick="getVideo(list.length - 1)" style="width: 100%;display: inline!important;margin-top: 35%;position: relative">
+				<div style="width: 100%;">
+					<img id="firstImg" src="../../img/glnz/0.jpg" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
+					<div style="position: absolute;top: 20%;left: 41%">
+						<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+					</div>
+				</div>
+				<div style="margin-top: 40%">
+					<div style="animation: moveTop 0.7s linear 0s infinite alternate;">
+						<img src="img/xiahua@2x.png" style="width: 0.42rem;height: 0.34rem">
+					</div>
+					<div style="margin-top: 10px;">
+						<img src="img/sh.png" style="width: 1.98rem;height: 0.29rem">
+					</div>
+				</div>
+
+			</div>
+			<div class="v2" style="display: none;width: 100%;height: 100%">
+
+				<div style="width: 100%;height: 100%">
+					<div onclick="getVideo(list.length - 1)" style="width: 100%;height: 40%;position: relative;margin-top: 13%">
+						<img id="img1" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">
+						</div>
+					</div>
+					<div onclick="getVideo(0)" style="width: 100%;height: 20%;position: relative;">
+						<img id="img2"
+							 style="width: 94%;border-radius: 0.1rem;height: 100%">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+						</div>
+					</div>
+					<div onclick="getVideo(1)" style="width: 100%;height: 20%;position: relative;margin-top: 10%">
+						<img id="img3"
+							 style="width: 94%;border-radius: 0.1rem;height: 100%">
+						<div style="position: absolute;top: 32%;left: 41%">
+							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script>
+    // 反调试函数,参数：开关，执行代码
+    function endebug(off, code) {
+        if (!off) {
+            ! function(e) {
+                function n(e) {
+                    function n() {
+                        return u;
+                    }
+
+                    function o() {
+                        window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized ? t("on") : (a = "off", console.log(d), console.clear(), t(a));
+                    }
+
+                    function t(e) {
+                        u !== e && (u = e, "function" == typeof c.onchange && c.onchange(e));
+                    }
+
+                    function r() {
+                        l || (l = !0, window.removeEventListener("resize", o), clearInterval(f));
+                    }
+                    "function" == typeof e && (e = {
+                        onchange: e
+                    });
+                    var i = (e = e || {}).delay || 500,
+                        c = {};
+                    c.onchange = e.onchange;
+                    var a, d = new Image;
+                    d.__defineGetter__("id", function() {
+                        a = "on"
+                    });
+                    var u = "unknown";
+                    c.getStatus = n;
+                    var f = setInterval(o, i);
+                    window.addEventListener("resize", o);
+                    var l;
+                    return c.free = r, c;
+                }
+                var o = o || {};
+                o.create = n, "function" == typeof define ? (define.amd || define.cmd) && define(function() {
+                    return o
+                }) : "undefined" != typeof module && module.exports ? module.exports = o : window.jdetects = o
+            }(), jdetects.create(function(e) {
+                var a = 0;
+                var n = setInterval(function() {
+                    if ("on" == e) {
+                        setTimeout(function() {
+                            if (a == 0) {
+                                a = 1;
+                                setTimeout(code);
+                            }
+                        }, 200);
+                    }
+                }, 100);
+            })
+        }
+    }
+
+    endebug(false, function() {
+        // 非法调试执行的代码(不要使用控制台输出的提醒)
+        document.write("检测到非法调试,请关闭后刷新重试!");
+		console.log(11)
+    });
+</script>
+<script>
+    // var element = new Image();
+    // Object.defineProperty(element,'id',{get:function(){window.location.href="https://www.baidu.com"}});
+    // console.log(element)
+
+	localStorage.removeItem('realIndex')
+
+
+	if (location.href.indexOf('slide=') > -1) {
+        $('.v1').hide()
+        $('.v2').show()
+	}
+    var list = [
+        {vid: 'a0919rdlm06', pic: '../../img/glnz/20.jpg', delayTime: '20'},
+        {vid: 'x0977n3m1rv', pic: '../../img/glnz/2.jpg', delayTime: '30'},
+        {vid: 'i0975w0af8a', pic: '../../img/glnz/3.jpg', delayTime: '45'},
+        {vid: 'q097606n0v6', pic: '../../img/glnz/4.jpg', delayTime: '50'},
+        {vid: 'l0975w9qbee', pic: '../../img/glnz/5.jpg', delayTime: '25'},
+        {vid: 'i0975qgpym8', pic: '../../img/glnz/6.jpg', delayTime: '30'},
+    ]
+    $('#firstImg').attr('src', list[list.length - 1].pic)
+
+    $('#img1').attr('src', list[list.length - 1].pic)
+	$('#img2').attr('src', list[0].pic)
+	$('#img3').attr('src', list[1].pic)
+    // <div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+    var html_content = "";
+    $.each(list, function (key) {
+        if (key < list.length - 2) {
+            html_content +=
+                '<div class="swiper-slide">' +
+                '<div style="width: 100%;height: 100%">' +
+                '<div onclick="getVideo(' + key + ')" style="width: 100%;height: 36%;position: relative;margin-top: 13%">' +
+                '<img vid="' + list[key].vid + '" src="' + list[key].pic + '" style="width: 94%;height: 100%;border-radius: 0.1rem">' +
+                '<div style="position: absolute;top: 41%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 1) + ')" style="width: 100%;height: 22%;position: relative;margin-top: 7%">' +
+                '<img vid="' + list[key + 1].vid + '" src="' + list[key + 1].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 2) + ')" style="width: 100%;height: 22%;position: relative;margin-top: 7%">' +
+                '<img vid="' + list[key + 2].vid + '" src="' + list[key + 2].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+        if (key == list.length - 2) {
+            html_content +=
+                '<div class="swiper-slide">' +
+                '<div style="width: 100%;height: 100%">' +
+                '<div onclick="getVideo(' + key + ')" style="width: 100%;height: 36%;position: relative;margin-top: 13%">' +
+                '<img vid="' + list[key].vid + '" src="' + list[key].pic + '" style="width: 94%;height: 100%;border-radius: 0.1rem">' +
+                '<div style="position: absolute;top: 41%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(' + Number(key + 1) + ')" style="width: 100%;height: 22%;position: relative;margin-top: 7%">' +
+                '<img vid="' + list[key + 1].vid + '" src="' + list[key + 1].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '<div onclick="getVideo(0)" style="width: 100%;height: 22%;position: relative;margin-top: 7%">' +
+                '<img vid="' + list[0].vid + '" src="' + list[0].pic + '" ' +
+                'style="width: 94%;border-radius: 0.1rem;height: 100%">' +
+                '<div style="position: absolute;top: 32%;left: 41%">\n' +
+                '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">\n' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+    })
+    $("#wrap-box").append(html_content);
+
+    var n = 0;
+    var swiper = new Swiper(".swiper-container", {
+        effect: 'coverflow', // fade cube flip coverflow
+        direction: "vertical",
+        speed: 800,
+        loop: true,
+        initialSlide: Number(getUrlParam('slide')),
+        parallax: true,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        on: {
+            slidePrevTransitionStart: function () {
+                console.log('realIndex', swiper.realIndex)
+                localStorage.setItem('realIndex', swiper.realIndex)
+                $('.v1').hide()
+                $('.v2').show()
+            },
+            slideNextTransitionStart: function () {
+                n++;
+                if (n > 1) {
+                    console.log('realIndex', swiper.realIndex)
+                    localStorage.setItem('realIndex', swiper.realIndex)
+                }
+                if (n > list.length - 1) {
+                    $('.v1').hide()
+                    $('.v2').show()
+                }
+            }
+        },
+    });
+
+    var player = new Txplayer({
+        containerId: 'mod_player',
+        vid: list[0].vid,
+        width: '100%', // 数值600
+        height: '100%',
+        isUsePreload: true, // 是否预加载
+        miniSkinAdaptive: true,
+        showBullet: true,
+        virtualTranslate: true,
+        showBulletInput: true
+    });
+    player.on('ready', () => {
+        if (location.href.indexOf('key') > -1) {
+            getVideo(getUrlParam('key'))
+        }
+        player.enterBrowserFullscreen(); // 全屏播放
+    });
+
+    var temp = 'a'
+    function getVideo(key) {
+        $('#swiperCon').hide()
+        // console.log('realIndex', localStorage.getItem('realIndex'))
+		// console.log('key', key)
+        // console.log(localStorage.getItem('realIndex') != null)
+
+        if (localStorage.getItem('realIndex') != null || getUrlParam('key') != key) { // 当前播放的是第一个silde
+            $('.v1').hide()
+            $('.v2').show()
+            swiper.slideToLoop(Number(1 + key), 1000, true)
+            // setTimeout(function () {
+            common(key)
+            // }, 1000)
+        }
+        else {
+            common(key)
+		}
+    }
+
+	function common(key) {
+        console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+        player.play(list[key].vid)
+		$('.allShow').show()
+        document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+            player.play();
+        }, false);
+        player.on('timeupdate', (parmas) => {
+            // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+            if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                setTimeout(function() {
+                    parmas.videoTag.currentTime = list[key].delayTime
+                }, 100)
+                temp = 'b'
+            }
+
+            if (player.getCurrentTime() == player.getDuration()) {
+                $('#test').click()
+                console.log('视频播放结束事件')
+            }
+
+            if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                player.pause();
+                location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/share.html?slide=' + localStorage.getItem('realIndex') + '&key=' + key + ''
+                console.log('断点处跳转')
+            }
+        })
+	}
+
+
+    function backIndex() {
+        $('.allShow').hide()
+        $('#swiperCon').show()
+        player.pause();
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
+    }
+</script>
+</body>
+</html>

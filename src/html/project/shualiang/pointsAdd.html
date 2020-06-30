@@ -5,9 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<!--
-	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
-	 -->
+
 	<meta name="renderer" content="webkit">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
@@ -103,8 +101,7 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<form id="pointsForm" class="form-horizontal" method="post" role="form"
-									  action="http://ja.bigliang.cn/wxTask/dashboard/getPayImage.action">
+								<form id="pointsForm" class="form-horizontal" method="post" role="form" >
 									<div class="form-group">
 										<label class="col-md-12 control-label">当前积分：&nbsp;&nbsp;&nbsp;<span
 												id="myPonits" class="pull-right"></span></label>
@@ -240,11 +237,15 @@
     }
 
     function doSave() {
-        var points = $("#points").select2("val");
+        var points = $("#points").val()
+        console.log(points)
         if (checkParameterIsEmpty(points)) {
             toast("请选择积分", 1000);
             return;
-        }
+        } else {
+            localStorage.setItem('czId', points)
+            window.location.href = './getPayImage.html'
+		}
         // $("#pointsForm")[0].submit();
     }
 
@@ -257,7 +258,5 @@
         }
     }
 </script>
-
-
 <span role="status" aria-live="polite" class="select2-hidden-accessible"></span></body>
 </html>

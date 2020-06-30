@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>.</title>
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+</head>
+<body style="background: black">
+<div class="vide    o-wrap" style="height: 100%;width: 100%">
+	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
+		 style="display: none;position: fixed;top: 0;left: 10px;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+	<div style="text-align: center" id="parLists"></div>
+</div>
+<script>
+
+    var list = res.video_config
+    var html = ''
+    $.each(list, function (key) {
+        html += '<img onclick="getVideo(' + key + ')" style="width: 150px;height: 150px" vid="' + list[key].vid + '" src="' + list[key].pic + '">'
+    })
+    $('#parLists').append(html)
+
+    var player = new Txplayer({
+        containerId: 'mod_player',
+        vid: list[0].vid,
+        width: '100%', // 数值600
+        height: '100%',
+        // height: screen.availHeight / 1.5,
+        // autoplay: true,
+        // playStartTime: 200,
+        isUsePreload: true, // 是否预加载
+        // useMiniSkin: true,
+        miniSkinAdaptive: true,
+        // poster: obj.pic,
+        showBullet: true,
+        showBulletInput: true
+    });
+    var _playStatus = 1
+    if (location.href.indexOf('continue') > -1) {
+        _playStatus = 'continue';
+    }
+    player.on('ready', () => {
+        if (_playStatus == 'continue') {
+            getVideo(getUrlParam('key'))
+        }
+        player.enterBrowserFullscreen(); // 全屏播放
+    });
+
+
+    function getVideo(key) {
+
+        console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+
+        $('.allShow').show()
+        player.play(list[key].vid)
+
+        document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+            player.play();
+        }, false);
+
+        var temp = 'a'
+        player.on('timeupdate', (parmas) => {
+            // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
+
+            if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                setTimeout(() => {
+                    parmas.videoTag.currentTime = list[key].delayTime
+                }, 100)
+                temp = 'b'
+            }
+
+            if (player.getCurrentTime() == player.getDuration()) {
+                $('#test').click()
+                console.log('视频播放结束事件')
+            }
+
+            if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                player.pause();
+                location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
+                console.log('断点处跳转')
+            }
+        })
+    }
+
+
+    function backIndex() {
+        $('.allShow').hide()
+        player.pause();
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
+    }
+</script>
+</body>
+</html>

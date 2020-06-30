@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" href="static/swiper.min.css"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./index.css"/>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="static/swiper.min.js"></script>
+</head>
+<body style="background: #000;width: 100%">
+<div style="position: fixed;top: 0.09rem;left: 0.17rem;z-index: 9999">
+	<img src="img/fanhui@2x.png" style="width: 0.55rem;height: 0.26rem">
+</div>
+<div class="video-wrap" style="width: 100%">
+	<img class="allShow" id="test" src="img/back.png" onclick="backIndex()"
+		 style="display: none;position: fixed;top: 10px;left: 10px;width: 0.5rem;z-index: 9999999999999">
+	<div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
+</div>
+<div id="swiperCon" class="swiper-container" style="width: 100%">
+	<div class="swiper-wrapper" id="wrap-box" style="width: 100%"></div>
+</div>
+<div id="footer" style="position: fixed;bottom: 10px;width: 100%;left: 0;text-align: center">
+	<div style="animation: moveTop 0.7s linear 0s infinite alternate;">
+		<img src="img/xiahua@2x.png" style="width: 0.42rem;height: 0.34rem">
+	</div>
+	<div style="margin-top: 10px;">
+		<img src="img/sh.png" style="width: 2.18rem;height: 0.29rem">'
+	</div>
+</div>
+<script>
+    var list = [
+        {vid: 'a0919rdlm06', pic: '../../img/glnz/20.jpg', delayTime: '20'},
+        {vid: 'x0977n3m1rv', pic: '../../img/glnz/2.jpg', delayTime: '30'},
+        {vid: 'i0975w0af8a', pic: '../../img/glnz/3.jpg', delayTime: '45'},
+        {vid: 'q097606n0v6', pic: '../../img/glnz/4.jpg', delayTime: '50'},
+        {vid: 'l0975w9qbee', pic: '../../img/glnz/5.jpg', delayTime: '25'},
+        {vid: 'i0975qgpym8', pic: '../../img/glnz/6.jpg', delayTime: '30'},
+    ]
+
+    var html_content = "";
+    $.each(list, function (key) {
+        html_content += '<div class="swiper-slide" style="width: 100%;flex-wrap: wrap"><div onclick="getVideo(' + key + ')" style="width: 100%;display: inline!important;' +
+            'position: relative">' +
+            '<div style="width: 100%;">' +
+            '<img id="firstImg" src="../../img/glnz/' + key + '.jpg" style="width: 94%;height: 2.54rem;border-radius: 0.1rem">' +
+            '<div style="position: absolute;top: 40%;left: 41%">' +
+            '<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+    })
+    $("#wrap-box").append(html_content);
+
+    var n = 0;
+    var swiper = new Swiper(".swiper-container", {
+        effect: 'coverflow', // fade cube flip coverflow
+        direction: "vertical",
+        speed: 800,
+        loop: true,
+        initialSlide: Number(getUrlParam('key')),
+        parallax: true,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        on: {
+            slidePrevTransitionStart: function () {
+                $('#footer').fadeOut(500)
+                setTimeout(function () {
+                    $('#footer').fadeIn(500)
+                }, 500)
+                console.log('realIndex', swiper.realIndex)
+                localStorage.setItem('realIndex', swiper.realIndex)
+
+            },
+            slideNextTransitionStart: function () {
+
+                n++;
+                if (n > 1) {
+                    $('#footer').fadeOut(500)
+                    setTimeout(function () {
+                        $('#footer').fadeIn(500)
+                    }, 500)
+                    console.log('realIndex', swiper.realIndex)
+                    localStorage.setItem('realIndex', swiper.realIndex)
+                }
+            }
+        },
+    })
+
+    var player = new Txplayer({
+        containerId: 'mod_player',
+        vid: list[0].vid,
+        width: '100%', // 数值600
+        height: '100%',
+        isUsePreload: true, // 是否预加载
+        miniSkinAdaptive: true,
+        showBullet: true,
+        virtualTranslate: true,
+        showBulletInput: true
+    })
+    player.on('ready', () => {
+        if (location.href.indexOf('key') > -1) {
+            getVideo(getUrlParam('key'))
+        }
+        player.enterBrowserFullscreen(); // 全屏播放
+    })
+
+    var temp = 'a'
+
+    function getVideo(key) {
+        $('#swiperCon').hide()
+        $('#footer').hide()
+        console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+        player.play(list[key].vid)
+        $('.allShow').show()
+        document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+            player.play();
+        }, false);
+        player.on('timeupdate', (parmas) => {
+            if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
+                setTimeout(function () {
+                    parmas.videoTag.currentTime = list[key].delayTime
+                }, 100)
+                temp = 'b'
+            }
+
+            if (player.getCurrentTime() == player.getDuration()) {
+                $('#test').click()
+                console.log('视频播放结束事件')
+            }
+
+            if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
+                player.pause();
+                location.href = 'http://192.168.3.106:8888/mio/src/html/project/video_slide/shareTwo.html?&key=' + key + ''
+                console.log('断点处跳转')
+            }
+        })
+    }
+
+
+    function backIndex() {
+        $('.allShow').hide()
+        $('#swiperCon').show()
+        $('#footer').show()
+        player.pause();
+    }
+
+    function getUrlParam(name) { // 获取地址栏参数
+        var reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`) // 构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg)// 匹配目标参数
+        if (r != null) return unescape(r[2])
+        return null // 返回参数值
+    }
+</script>
+</body>
+</html>

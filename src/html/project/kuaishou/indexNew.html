@@ -1,0 +1,155 @@
+<!DOCTYPE html >
+<html lang="en" style="width: 100%">
+<head>
+	<meta charset="UTF-8">
+	<title>快手视频去水印</title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body style="width: 100%">
+<div style="margin-top: 30px;margin-left: 30%">
+	快手链接：<input type="text" id="ipt" style="width: 500px" placeholder="把快手的分享链接粘贴到此处即可"><br>
+	<button id="jx" onclick="getVideo($('#ipt').val())"
+			style="width: 300px;margin-left: 120px;margin-top: 10px;margin-bottom: 10px;height: 30px">解析
+	</button>
+	<div id="test">
+		视频地址1：<input type="text" style="width: 500px" id="videoTwo" placeholder="通常此链接粘贴到浏览器可以播放视频"><br>
+		视频地址2：<input type="text" style="width: 500px" id="videoOne" placeholder="通常此链接粘贴到浏览器会自动下载视频">
+	</div>
+
+	<p style="margin-left: 60px">
+		不要频繁请求，以免我们的服务器IP被快手拉入黑名单。<br>
+		遇到BUG，刷新页面，解决不了把请求的链接发给我。<br>
+		频繁解析出错请刷新页面。不要浪费服务器资源。<br>
+		一般是由于地址问题，或者其他问题。
+	</p>
+</div>
+
+<script>
+	$('#ipt').val('https://v.kuaishou.com/5mXx7I')
+    function getVideo(url) {
+
+        url = url.trim()
+
+        if ($('#ipt').val() == '') {
+            $('#jx').html('小朋友，你是否有很多？？？？？？')
+            setTimeout(() => {
+                $('#jx').html('链接不能为空')
+            }, 1000)
+            return
+        }
+
+        if ($('#ipt').val().indexOf('http:') == -1 && $('#ipt').val().indexOf('https:') == -1) {
+            $('#jx').html('请输入http or https 开头的地址')
+            setTimeout(() => {
+                $('#jx').html('解析')
+            }, 2000)
+            return
+        }
+
+        if ($('#ipt').val().indexOf('kuaishou') == -1 && $('#ipt').val().indexOf('KUAISHOU') == -1) {
+            $('#jx').html('请输入快手的链接地址')
+            setTimeout(() => {
+                $('#jx').html('解析')
+            }, 2000)
+            return
+        }
+
+
+        $('#jx').attr('disabled', true)
+        // setTimeout(() => {
+        // 	if ($('#jx').attr('disabled') == 'disabled') {
+        //         $('#jx').html('解析时间超过十秒，可能出现未知问题，请重新解析...')
+        //         $('#jx').attr('disabled', false)
+        // 	}
+        //
+        // }, 10000)
+        $('#videoOne').val('')
+        $('#videoTwo').val('')
+
+        try {
+            if (url.length > 80) {
+                $('#jx').html('正在解析长链中...')
+                $.ajax({
+                    url: 'http://106.13.231.20/kuaishouApi/urlApi.php',
+                    type: 'post',
+                    // 设置的是请求参数
+                    data: {url: url, type: 1},
+                    success: function (res) {
+                        if (res == '') {
+                            console.log('返回结果为空')
+                            $('#jx').html('解析出错...正在重新解析长链')
+                            setTimeout(() => {
+                                $('#jx').click()
+                            }, 1000)
+                        } else {
+                            try {
+                                var v1 = res.split('mainMvUrls')[1].split('width')[0].split('url')[1].replace(/&#34;/g, '').split('},{')[0].replace(':http', 'http')
+                                var v2 = res.split('mainMvUrls')[1].split('width')[0].split('url')[2].replace(/&#34;/g, '').split('}]')[0].replace(':http', 'http')
+                                $('#jx').html('解析完毕...复制下方地址到浏览器下载即可')
+                                console.log('v1:', v1)
+                                console.log('v2:', v2)
+                                $('#videoOne').val(v1)
+                                $('#videoTwo').val(v2)
+
+                                $('#jx').attr('disabled', false)
+                                setTimeout(() => {
+                                    $('#jx').html('解析新链接')
+                                }, 2000)
+                            } catch (e) {
+                                $('#jx').html('解析出错...正在重新解析长链')
+                                setTimeout(() => {
+                                    $('#jx').click()
+                                }, 1000)
+                            }
+
+                        }
+                    },
+                    fail: function (err) {
+                        console.log(err)
+                        $('#jx').html('解析出错...正在重新解析')
+                        setTimeout(() => {
+                            $('#jx').click()
+                        }, 1000)
+                    }
+                })
+            } else {
+                $('#jx').html('正在解析中...')
+
+                $.ajax({
+                    url: 'http://106.13.231.20/kuaishouApi/urlApi.php',
+                    type: 'post',
+                    // 设置的是请求参数
+                    data: {url: url, type: 2},
+                    success: function (res) {
+                        if (res == '') {
+                            console.log('返回结果为空')
+                            $('#jx').html('解析出错...正在重新解析')
+                            setTimeout(() => {
+                                $('#jx').click()
+                            }, 1000)
+                        } else {
+                            console.log('获取到的长链', res)
+                            $('#jx').html('短链已解析成长链...继续解析中...')
+                            $('#ipt').val(res)
+                            setTimeout(() => {
+                                $('#jx').click()
+                            }, 1000)
+                        }
+                    },
+                    fail: function (err) {
+                        console.log('出现报错')
+                        console.log(err)
+                        $('#jx').html('解析出错...正在重新解析')
+                        setTimeout(() => {
+                            $('#jx').click()
+                        }, 1000)
+                    }
+                })
+            }
+        } catch (e) {
+            console.log('请求可能出错了')
+        }
+    }
+</script>
+</body>
+</html>

@@ -105,7 +105,7 @@
                 this.appyys = []
                 // #ifdef MP-WEIXIN
                 this.ui.yunFun('getUrlData', {
-                    url: `http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php?type=${this.mvType}&page=${this.page}`
+                    url: `http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php?type=${this.mvType}&page=${this.page}`
                 }, (res) => {
                     // console.log('得到的数据', res.result.body)
                     const $ = cheerio.load(data, {_useHtmlParser2: true})
@@ -128,7 +128,7 @@
 
                 // #ifdef H5
                 this.ui.showLoading()
-                const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php?type=${this.mvType}&page=${this.page}`)
+                const data = await publicGet(`http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php?type=${this.mvType}&page=${this.page}`)
                 uni.hideLoading()
                 const $ = cheerio.load(data, {_useHtmlParser2: true})
 
@@ -153,7 +153,7 @@
             },
             initMv() {
                 this.ui.yunFun('getUrlData', {
-                    url: `http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php?type=${this.mvType}&page=1`
+                    url: `http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php?type=${this.mvType}&page=1`
                 }, (res) => {
                     // console.log('得到的数据', res.result.body)
                     const data = res.result.body
@@ -183,7 +183,7 @@
 
             // #ifdef H5
             this.ui.showLoading()
-            const data = await publicGet(`http://123.0t038.cn/jin-61/0509gkl/515love/api/getHomeInfo.php?type=${this.mvType}&page=1`)
+            const data = await publicGet(`http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php?type=${this.mvType}&page=1`)
             uni.hideLoading()
             const $ = cheerio.load(data, {_useHtmlParser2: true})
 

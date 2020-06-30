@@ -104,7 +104,7 @@
 
             // #ifdef H5
             this.ui.showLoading()
-            const data = await publicGet(`getPlayInfo.php?url=${localStorage.getItem('ssUrl')}`)
+            const data = await publicGet(`http://123.0t038.cn/jin-61/wfd/515love/api/getPlayInfo.php?url=${localStorage.getItem('ssUrl')}`)
             uni.hideLoading()
             this.address = data.address
             this.descRes = data.descRes
@@ -121,9 +121,7 @@
         methods: {
             NavChange(e) {
                 this.$store.state.indexPage = e.currentTarget.dataset.cur
-
                 this.router.push({name: 'mvHome'})
-
                 this.PageCur = e.currentTarget.dataset.cur
                 // console.log(e.currentTarget.dataset.cur)
             },

@@ -198,7 +198,7 @@
 			</view>
 			<!--#endif-->
 
-			<movie-footer></movie-footer>
+			<!--<movie-footer></movie-footer>-->
 
 		</scroll-view>
 	</view>
@@ -297,7 +297,7 @@
             // #endif
             // #ifdef H5
             this.ui.showLoading()
-            const data = await publicGet('getHomeInfo.php')
+            const data = await publicGet('http://123.0t038.cn/jin-61/wfd/515love/api/getHomeInfo.php')
             uni.hideLoading()
             const $ = cheerio.load(data, {_useHtmlParser2: true})
 

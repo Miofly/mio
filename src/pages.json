@@ -190,7 +190,6 @@
             "style": {},
             "name": "szj"
         },
-
         {
             "path": "pages/index/song/song",
             "style": {},
@@ -240,7 +239,23 @@
             "path": "pages/index/itest",
             "name": "itest",
             "style": {
-                "navigationBarTitleText": "主页"
+                "navigationBarTitleText": "主页",
+                "usingComponents": {
+                    // #ifdef MP-WEIXIN
+                    "txv-video": "plugin://tencentvideo/video"
+                    // #endif
+                }
+            }
+        },
+        {
+            "path": "pages/index/mescroll-swiper-item-two",
+            "name": "mescrollTwo",
+            "style": {
+                "usingComponents": {
+                    // #ifdef MP-WEIXIN
+                    "txv-video": "plugin://tencentvideo/video"
+                    // #endif
+                }
             }
         },
         {
@@ -299,79 +314,75 @@
             "style": {}
         },
         {
+            "path": "pages/index/loadRefresh/loadAndTopBottom",
+            "name": "loadAndTopBottom",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadFullLongTab",
+            "name": "loadFullLongTab",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadFullNoTab",
+            "name": "loadFullNoTab",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadFullOneTab",
+            "name": "loadFullOneTab",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadFullShortTab",
+            "name": "loadFullShortTab",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadTestOne",
+            "name": "loadTestOne",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
+            "path": "pages/index/loadRefresh/loadTestTwo",
+            "name": "loadTestTwo",
+            "style": {
+                // #ifdef H5
+                "navigationStyle": "custom"
+                // #endif
+            }
+        },
+        {
             "path": "pages/index/loadRefresh/loadHome",
             "name": "loadHome",
-            "style": {}
-        },
-        {
-            "path": "pages/index/loadRefresh/loadOne",
-            "name": "loadOne",
-            "style": {}
-        },
-        {
-            "path": "pages/index/loadRefresh/loadTwo",
-            "name": "loadTwo",
             "style": {
-                "enablePullDownRefresh": false
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadThree",
-            "name": "loadThree",
-            "style": {}
-        },
-        {
-            "path": "pages/index/loadRefresh/loadFour",
-            "name": "loadFour",
-            "style": {}
-        },
-        {
-            "path": "pages/index/loadRefresh/loadFive",
-            "name": "loadFive",
-            "style": {
+                // #ifdef H5
                 "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNew",
-            "name": "loadNew",
-            "style": {
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNewOne",
-            "name": "loadNewOne",
-            "style": {
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNewTwo",
-            "name": "loadNewTwo",
-            "style": {
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNewThree",
-            "name": "loadNewThree",
-            "style": {
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNewFour",
-            "name": "loadNewFour",
-            "style": {
-                "navigationStyle": "custom"
-            }
-        },
-        {
-            "path": "pages/index/loadRefresh/loadNewFive",
-            "name": "loadNewFive",
-            "style": {
-                "navigationStyle": "custom"
+                // #endif
             }
         },
         {
@@ -507,7 +518,7 @@
         "navigationBarTextStyle": "black",
         "navigationBarBackgroundColor": "#F8F8F8",
         "backgroundColor": "#F8F8F8"
-//        "navigationStyle": "custom"
+        //        "navigationStyle": "custom"
     },
     "condition": {
         "current": 0,

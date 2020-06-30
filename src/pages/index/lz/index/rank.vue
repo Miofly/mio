@@ -33,7 +33,7 @@
 		</view>
 
 		<view v-else class="full-height">
-			<app-tabs v-model="tabIndex" :tabs="tabs" :fixed="false"></app-tabs>
+			<swiper-tab v-model="tabIndex" :tabLists="tabs" :fixed="false"></swiper-tab>
 			<swiper :style="{height: height}" :current="tabIndex" @change="swiperChange">
 				<swiper-item>
 					<mescroll-items ref="stOne" :url="url" :i="0" :index="tabIndex" :tabs="tabs"></mescroll-items>
@@ -58,19 +58,16 @@
 <script>
     import MescrollItem from './rank-swiper'
     import MescrollItems from './rank-swipers'
-
-    import AppTabs from 'zj/mescroll-uni/app-tabs.vue'
     export default {
         components: {
             MescrollItem,
             MescrollItems,
-            AppTabs
         },
         data () {
             return {
                 status: true,
                 height: '62%', // 需要固定swiper的高度
-                tabs: ['今日', '昨日', '本周', '上周'],
+                tabs: [{name: '今日'}, {name: '昨日'}, {name: '本周'}, {name: '上周'}],
                 tabIndex: 0, // 当前tab的下标
             }
         },

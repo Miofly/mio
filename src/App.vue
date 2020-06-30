@@ -1,9 +1,7 @@
 <script>
     import Vue from 'vue'
     import {mapState} from 'vuex'
-	import {
-        publicGet
-	} from '@/api'
+
     export default {
         onLaunch () {
             // #ifdef MP-WEIXIN
@@ -63,14 +61,6 @@
             console.log('onHide：应用页面隐藏')
         },
         methods: {
-            // #ifdef H5
-            async initData () {
-				const data = await publicGet('http://123.0t038.cn/jin-61/0509gkl/515love/api/getCinemaInfo.php')
-				localStorage.setItem('cinemaName', data.cinemaName)
-				localStorage.setItem('friend_link', JSON.stringify(data.friend_link))
-				localStorage.setItem('qrcode', data.qrcode)
-            },
-            // #endif
             // #ifdef MP-WEIXIN
             initData () {
                 this.ui.yunFun('getDataPage', {

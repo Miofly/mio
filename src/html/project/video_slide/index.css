@@ -1,0 +1,143 @@
+*{padding:0;margin:0;word-wrap:break-word;}html{-webkit-text-size-adjust:none;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,span{padding:0;margin:0;box-sizing:border-box;}body{font:normal "Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Heiti SC","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;}a{text-decoration:none;-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;transition:all 0.3s ease;color:#333;}a{-webkit-tap-highlight-color:rgba(0,0,0,0);}a,img{border:none;}a,button{outline:none;border:0;}textarea,input,button,select{outline:0;}textarea{overflow:auto;resize:none;}ol,ul{list-style:none;}em,i,small,caption,th{font-weight:normal;font-style:normal;font-size:100%;}a,a:hover,a:active,a:visited,a:link,a:focus,button{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;outline:none;text-decoration:none;}html,body{width:100%;height:100%;}body{color:#333;background-color:#fff;}html{font-size:100px;}
+@keyframes shake{0%,100%{transform:translateX(0)}10%{transform:translateX(-9px)}20%{transform:translateX(8px)}30%{transform:translateX(-7px)}40%{transform:translateX(6px)}50%{transform:translateX(-5px)}60%{transform:translateX(4px)}70%{transform:translateX(-3px)}80%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+@keyframes shake2{0%,100%{transform:translateX(0)}10%{transform:translateX(-9px)}20%{transform:translateX(8px)}30%{transform:translateX(-7px)}40%{transform:translateX(6px)}50%{transform:translateX(-5px)}60%{transform:translateX(4px)}70%{transform:translateX(-3px)}80%{transform:translateX(2px)}90%{transform:translateX(-1px)}}
+@keyframes scale-up{0%{transform:scale(1.0)}100%{transform:scale(1.2)}}
+@keyframes rotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.txp_btn_definition[data-role="txp-h5-ui-control-definitionbtn"] { display: none !important;}/*隐藏高清按钮*/
+.txp_watermark{display: none!important;} /*隐藏腾讯视频图片*/
+.txp_poster{}/*封面图片设置*/
+.txp_btn_fullscreen{display: none!important;}
+@keyframes moveLeft{0%{transform:translateX(0)}100%{transform:translateX(-8px)}}
+@keyframes moveTop{0%{transform:translateY(0)}100%{transform:translateY(8px)}}
+@keyframes scale-small{0%{transform:scale(1.0)}100%{transform:scale(1.05)}}
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    overflow: hidden;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+
+.play-video-img img {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+@keyframes extendArrow {
+    0%,
+    100% {
+        margin-top: 5px;
+        opacity: 0;
+    }
+    50% {
+        margin-top: 15px;
+        opacity: 1;
+    }
+}
+
+.right-list-all {
+    position: absolute;
+    right: 20px;
+    z-index: 6;
+    top: 60%;
+    transform: translate(0, -50%);
+}
+
+.right-list-all img {
+    width: 32px;
+    height: 32px;
+}
+
+.right-list-all {
+    color: #ececec;
+    font-size: 12px;
+}
+
+.list-heart {
+    text-align: center;
+    margin-bottom: 5vw;
+}
+
+.list-heart1 {
+    text-align: center;
+    margin-bottom: 8vw;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+
+.list-heart1 img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.img_arrow_down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 66;
+}
+
+.img_arrow_down img {
+    width: 18px;
+    height: auto;
+    animation: extendArrow 1.2s ease infinite;
+}
+
+.video-desc {
+    position: absolute;
+    bottom: 26px;
+    z-index: 22;
+    color: #b2b2b2;
+    font-size: 14px;
+    width: 90vw;
+    left: 0;
+    text-align: left;
+    padding: 0 5vw;
+    line-height: 1.4;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<script>
+	// 处理URL的query的接口：URLSearchParams
+
+	// 简单使用
+    let url = '?wd=胡歌&love=fx&year=2020';
+    let searchParams = new URLSearchParams(url);
+
+    for (let p of searchParams) {
+        console.log(p);
+    }
+    // ["wd", "胡歌"]
+    // ["love", "fx"]
+    // ["year", "2020"]
+
+	// 获取单个字段 调用这个实例的get方法
+    searchParams.get('wd') // "胡歌"
+    searchParams.get('love') // "fx"
+    searchParams.get('year') // "2020"
+
+	// 字段是否存在，使用实例的has方法进行判断
+    searchParams.has('wd') // true
+    searchParams.has('age') // false
+
+	// 添加字段 append方法来添加字段，这个方法接收两个参数，前者是key，后者是value
+    searchParams.append('age', 26);
+    searchParams.has('age'); // true
+    searchParams.get('age'); // 26
+
+	// 删除字段 delete
+    searchParams.delete('year');
+    searchParams.has('year'); // false
+
+	// 重写字段 set方法
+    searchParams.set('wd', '胡歌 fx');
+
+
+    // 获取单个参数
+    function getParam(name, url) {
+        if(typeof name !== 'string') return false;
+        if (!url) url = window.location.href;
+        // 当遇到name[xx]时，对方括号做一下转义为 name\[xxx\]，因为下面还需要使用name做正则
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        var results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    getParam('query','https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // "hello"
+
+
+	// 设置单个参数
+    function setParam(name, val, url) {
+        if(typeof name !== 'string') return false;
+        if (!url) url = window.location.href;
+        var _name = name.replace(/[\[\]]/g, '\\$&');
+        var value = name + '=' + encodeURIComponent(val);
+        var regex = new RegExp(_name + '=[^&]*');
+        var urlArr = url.split('#');
+        var result = '';
+
+        if(regex.exec(url)){
+            result =  url.replace(regex, value);
+        }else{
+            result = urlArr[0]+'&'+value+ (urlArr[1] || '');
+        }
+
+        return result
+    }
+    setParam('query','world','https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // "https://juejin.im/search?query=world&time=2017-11-12"
+
+	// 移除单个参数
+    function removeParam(name, url) {
+        if(typeof name !== 'string') return false;
+        if (!url) url = window.location.href;
+        var urlparts = url.split('?');
+        var prefix = encodeURIComponent(name + '=');
+        var pars = urlparts[1].split(/[&;]/g);
+        var i = 0, len = pars.length;
+
+        for (; i < len; i++) {
+            if (encodeURIComponent(pars[i]).lastIndexOf(prefix, 0) !== -1) {
+                pars.splice(i, 1);
+            }
+        }
+
+        url = urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+
+        return url;
+    }
+    removeParam('query','https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // "https://juejin.im/search?time=2017-11-12"
+
+	// 获取多个参数
+    function getParams(names, url) {
+        if(typeof name !== 'string') return false;
+        var names = names.split(' ');
+        var result = {};
+        var i = 0,
+            len = names.length;
+        if (names.length === 0) return false;
+        for (; i < len; i++) {
+            result[names[i]] = getParam(names[i], url);
+        }
+        return result;
+    }
+    getParams('query time','https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // {query: "hello", time: "2017-11-12"}
+
+   // 设置多个参数
+    function setParams(obj, url) {
+        var result = url || '';
+        if (Object.prototype.toString.call(obj) !== '[object Object]') return false;
+        for (var name in obj) {
+            result = setParam(name, obj[name], result);
+        }
+        return result;
+    }
+    setParams({a:111,b:222,query:'world'},'https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // "https://juejin.im/search?query=world&time=2017-11-12&a=111&b=222"
+
+	// 移除多个参数
+    function removeParams(names, url) {
+        var result = url || '';
+        var names = names.split(' ');
+        var i = 0,
+            len = names.length;
+        if (names.length === 0) return false;
+
+        for (; i < len; i++) {
+            result = removeParam(names[i], result);
+        }
+        return result;
+    }
+    removeParams('query time','https://juejin.im/search?query=hello&time=2017-11-12')
+    // output:
+    // "https://juejin.im/search"
+
+    // url hash 操作
+    function getHash(url) {
+        return decodeURIComponent(url ? url.substring(url.indexOf('#') + 1) : window.location.hash.substr(1));
+    }
+
+    function setHash(hash) {
+        window.location.replace('#' + encodeURIComponent(hash));
+    }
+
+    function removeHash() {
+        window.location.replace('#', '');
+    }
+</script>
+</body>
+</html>

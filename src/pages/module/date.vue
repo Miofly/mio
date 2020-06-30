@@ -13,8 +13,8 @@
             // console.log(calendar.solar2lunar('2020-6-1'))
             // console.log(calendar.solar2lunar('2020-07-1'))
             // 参数类型：第一种：年份（数字或字符串，1901~2099），月份（数字或字符串，1~12），日期（数字或字符串，1~31）
-			// 参数类型：第二种：年月日（字符串 ： 2020-05-01 或者 2020-5-1 或 2020/05/01 或 2020/5/1）
-			// 参数类型：第三种：数字（1588691866）
+            // 参数类型：第二种：年月日（字符串 ： 2020-05-01 或者 2020-5-1 或 2020/05/01 或 2020/5/1）
+            // 参数类型：第三种：数字（1588691866）
 
             calendar.lunar2solar(2020, 5, 1, false)
             // calendar.lunar2solar(2020, 5, 1, false)
@@ -28,15 +28,15 @@
             // 查询星座
             calendar.getConstellation(5, 1)
 
-			console.log(calendar.getYearCN(2000))
-			// console.log(calendar.lunarYearDays(2001))
+            console.log(calendar.getYearCN(2000))
+            // console.log(calendar.lunarYearDays(2001))
 
             // 查询某年是否为闰年
             calendar.isLeapYear(2020)
 
 
 
-			console.log(calendar)
+            console.log(calendar)
         },
     }
 </script>

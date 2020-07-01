@@ -1,5 +1,5 @@
 import root from './root'
-
+import calendar from 'solarday2lunarday'
 const DAY_TIME = 86400000 // 一天的时间
 
 const dateShift = (time) => new Date(new Date().getTime() - time * DAY_TIME) // 控制时间在多少天前/后
@@ -179,7 +179,21 @@ const dateUtils = {
         if (week === 6) week = weekText + '六'
         return week
     },
-
+    getAllFestival (year = new Date().getFullYear()) { // 查询节日
+        return calendar.getAllFestival(year)
+    },
+    getConstellation (month = new Date().getMonth() + 1, date = new Date().getDate()) { // 星座
+        return calendar.getConstellation(month, date)
+    },
+    isLeapYear (year = new Date().getFullYear()) { // 查询某年是否为闰年
+        return calendar.isLeapYear(year)
+    },
+    getYearCN (year = new Date().getFullYear()) { // 年份转化成中文
+        return calendar.getYearCN(year)
+    },
+    solar2lunar (date = this.timeFun({ymrSign: true})) { // 阳历转阴历
+        return calendar.solar2lunar(date)
+    },
 }
 
 export {dateUtils}

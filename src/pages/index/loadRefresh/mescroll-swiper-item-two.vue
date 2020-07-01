@@ -4,6 +4,7 @@
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
+			<!--.active {animation: fade 1s linear 0s forwards;}-->
 			<view v-for="(item, index) in dataLists" :key="index" class="cu-item" >
 				<view class="content padding-tb-sm">
 					<view class="padding-top-bottom" id="test">
@@ -11,6 +12,7 @@
 							scrollTop: 0 || newscroll(e) {this.scrollTop = e.detail.scrollTop}
 							>>> .spin-circle {background: url('@/static/images/common/loading1.gif') no-repeat center !important;}
 							>>> .easy-loadimage{width: 100%;}  >>> .origin-img{border-radius: 20rpx;}
+							>>> .loadfail-img {height: 300rpx !important;}
 						-->
 						<imgLoad :scroll-top="scrollTop" mode="widthFix" style="width: 150rpx;height: 150rpx"
 								 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' : item.images[0]"

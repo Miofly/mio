@@ -4,7 +4,7 @@
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
+			<view v-for="(item, index) in dataLists" :key="index" class="cu-item" >
 				<view class="content padding-tb-sm">
 					<view class="padding-top-bottom" id="test">
 						<!--

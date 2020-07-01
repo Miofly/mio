@@ -98,7 +98,7 @@
 	}
 
 	.underlineBox {
-		height: 3px;
+		height: 6rpx;
 		width: 20%;
 		display: flex;
 		align-content: center;

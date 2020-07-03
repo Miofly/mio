@@ -56,7 +56,8 @@ const dateUtils = {
                  allTimeWeek = false, // 有符号年月日时分秒、星期
                  dateSigns = '-', // 年月日符号
                  timeSigns = ':', // 时分秒符号
-                 timeFormat = false // 时间格式化
+                 timeFormat = false, // 时间格式化
+                 cnDate = false // 年月日中文
              }) {
         const year = date.getFullYear().toString()
         // const month = date.getMonth() + 1
@@ -78,6 +79,7 @@ const dateUtils = {
         const timeStr = addZeroHours + addZeroMinutes + addZeroSeconds
         const dateHaveSign = year + dateSigns + addZeroMonth + dateSigns + addZeroDate
         const timeHaveSign = addZeroHours + timeSigns + addZeroMinutes + timeSigns + addZeroSeconds
+        const cnDateTime = year + '年' + addZeroMonth + '月' + addZeroDate + '日'
 
         if (ymr) return dateStr
         if (ymrSign) return dateHaveSign
@@ -86,8 +88,11 @@ const dateUtils = {
         if (allTime) return dateStr + timeStr
         if (allTimeWeek) return dateHaveSign + ' ' + timeHaveSign + ' ' + this.weekStr(week)
         if (allTimeSign) return dateHaveSign + ' ' + timeHaveSign
+        if (cnDate) return cnDateTime
     },
-
+    cnDateTime (params) {
+        return this.timeFun({date: today, cnDate: true})
+    },
     today (params) {
         return this.timeFun({date: today, ...params})
     },

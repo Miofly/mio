@@ -13,45 +13,50 @@
 	<link rel="stylesheet" type="text/css" href="./index.css"/>
 	<script type="text/javascript" src="./js/jquery.js"></script>
 	<script type="text/javascript" src="./js/adaptive.js"></script>
-	<script type="text/javascript" src="./js/txplayer.js"></script>
+	<script type="text/javascript" src="./js/zepto.js"></script>
+	<script type="text/javascript" src="./js/tvp.js"></script>
 	<script type="text/javascript" src="./js/jsmpeg.min.js"></script>
 	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<style>
 		.a1 {
 			animation: scale-small 1s linear 0s infinite alternate
 		}
+		/*.txp_ad,.txp_none,.txp_overlay_error{display: none}*/
 	</style>
 </head>
 <body style="background: black">
 <!--跳广告-->
-<div onclick="location.href = ''">
-	<img src="img/xiaochengxun@2x.png" style="width: 100%">
-</div>
-<div style="display: flex;align-items: center;justify-content: space-between;margin-top: 0.05rem;">
-	<div style="width: 0.94rem;height: 0.94rem;border-radius: 50%;margin-left: 0.2rem;text-align: left">
-		<img src="../../img/xtx/10.jpg" style="animation: rotate 5s linear 0s infinite;width: 0.94rem;height: 0.94rem;border-radius: 50%">
-		<span style="color: white;font-size: 0.21rem;width: 200px;display: inline-block">美女直播TEST</span>
-	</div>
+<div id="test1">
 
-	<div style="width:1.78rem;height:0.41rem;background:rgba(255,81,4,1);font-size: 0.19rem;color:rgba(255,255,255,1);
+	<div onclick="location.href = ''">
+		<img src="img/xiaochengxun@2x.png" style="width: 100%">
+	</div>
+	<div style="display: flex;align-items: center;justify-content: space-between;margin-top: 0.05rem;">
+		<div style="width: 0.94rem;height: 0.94rem;border-radius: 50%;margin-left: 0.2rem;text-align: left">
+			<img src="../../img/xtx/10.jpg" style="animation: rotate 5s linear 0s infinite;width: 0.94rem;height: 0.94rem;border-radius: 50%">
+			<span style="color: white;font-size: 0.21rem;width: 200px;display: inline-block">美女直播TEST</span>
+		</div>
+
+		<div style="width:1.78rem;height:0.41rem;background:rgba(255,81,4,1);font-size: 0.19rem;color:rgba(255,255,255,1);
 	border-radius:0.05rem;text-align: center;line-height: 0.41rem;margin-left: 0.10rem">
-		直播中...
-	</div>
+			直播中...
+		</div>
 
-	<div style="width:0.41rem;height:0.41rem;margin-right: 0.16rem;background:rgba(55,58,69,1);
+		<div style="width:0.41rem;height:0.41rem;margin-right: 0.16rem;background:rgba(55,58,69,1);
 	border-radius:0.05rem;line-height: 0.41rem;text-align: center">
-		<img src="img/qianjin@2x.png" style="animation: moveLeft 1s linear 0s infinite alternate;width: 0.21rem;height: 0.22rem;">
+			<img src="img/qianjin@2x.png" style="animation: moveLeft 1s linear 0s infinite alternate;width: 0.21rem;height: 0.22rem;">
+		</div>
 	</div>
-</div>
 
-<div style="font-size:0.18rem;color:rgba(255,255,255,1);line-height:0.25rem;text-align: left;width: 86%;margin-left: 7%;margin-top: 13%">
-	每天定时直播，不同美女不同时段直播<br>
-	点击“直播中”红色按钮<br>
-	哥哥，快来看我直播吧～
-</div>
+	<div style="font-size:0.18rem;color:rgba(255,255,255,1);line-height:0.25rem;text-align: left;width: 86%;margin-left: 7%;margin-top: 13%">
+		每天定时直播，不同美女不同时段直播<br>
+		点击“直播中”红色按钮<br>
+		哥哥，快来看我直播吧～
+	</div>
 
-<div style="width: 100%;text-align: center;font-size: 0.27rem;color: white;margin: 0.3rem 0">
-	作品6
+	<div style="width: 100%;text-align: center;font-size: 0.27rem;color: white;margin: 0.3rem 0">
+		作品6
+	</div>
 </div>
 
 <div class="video-wrap" style="width: 100%">
@@ -67,11 +72,11 @@
 <script>
     var list = [
         {vid: 'r09779c7gd4', pic: '../../img/xtx/11.jpg', delayTime: '115'},
-        {vid: 'x0977n3m1rv', pic: '../../img/xtx/2.jpg', delayTime: '10'},
-        {vid: 'i0975w0af8a', pic: '../../img/xtx/3.jpg', delayTime: '15'},
-        {vid: 'q097606n0v6', pic: '../../img/xtx/4.jpg', delayTime: '10'},
-        {vid: 'l0975w9qbee', pic: '../../img/xtx/5.jpg', delayTime: '5'},
-        {vid: 'i0975qgpym8', pic: '../../img/xtx/6.jpg', delayTime: '3'},
+        {vid: 'n0951vjpvkl', pic: '../../img/xtx/2.jpg', delayTime: '1110'},
+        {vid: 'i0975w0af8a', pic: '../../img/xtx/3.jpg', delayTime: '1115'},
+        {vid: 'q097606n0v6', pic: '../../img/xtx/4.jpg', delayTime: '1110'},
+        {vid: 'l0975w9qbee', pic: '../../img/xtx/5.jpg', delayTime: '115'},
+        {vid: 'i0975qgpym8', pic: '../../img/xtx/6.jpg', delayTime: '113'},
     ]
     var html = ''
     $.each(list, function (key) {
@@ -84,46 +89,38 @@
 
 	$('#img0').addClass('a1')
 
-    var player = new Txplayer({
-        containerId: 'mod_player',
-        vid: list[0].vid,
-        width: '100%', // 数值600
-        height: '100%',
-        // height: screen.availHeight / 1.5,
-        // autoplay: true,
-        // playStartTime: 200,
-        isUsePreload: true, // 是否预加载
-        // useMiniSkin: true,
-        miniSkinAdaptive: true,
-        // poster: obj.pic,
-        showBullet: true,
-        showBulletInput: true
-    });
-    // var _playStatus = 1
-    // if (location.href.indexOf('key') > -1) {
-    //     _playStatus = 'continue';
-    // }
-    player.on('ready', () => {
-        if (location.href.indexOf('key') > -1) {
-            getVideo(getUrlParam('key'))
-        }
-        player.enterBrowserFullscreen(); // 全屏播放
-    });
 
-
+    // function getVideo(key) {
+    //     $('#shou').hide()
+    //     //
+    //     //     console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
+    //     //
+    //         $('.allShow').show()
+    //     video.setVid(list[1].vid);
+    //     // var player = new tvp.Player(300, 200);
+    //     var player = new tvp.Player('100%', '100vh');
+    //     console.log(player)
+    //     player.setCurVideo(video);
+    //     player.addParam("autoplay", true);
+    //     // player.addParam("pic", tvp.common.getVideoSnapMobile(vid));
+    //     player.write('mod_player');
+	// }
+    var video = new tvp.VideoInfo();
     function getVideo(key) {
         $('#shou').hide()
-
-        console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
-
+        $('#test1').hide()
         $('.allShow').show()
-        player.play(list[key].vid)
+        video.setVid(list[key].vid)
+        var player = new tvp.Player('100%', '100vh');
 
-        document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
-            player.play();
-        }, false);
+        player.setCurVideo(video);
+        player.addParam("autoplay", true);
+        player.write('mod_player');
+        // document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
+        //     player.play();
+        // }, false);
 
-        var temp = 'a'
+        // var temp = 'a'
         player.on('timeupdate', (parmas) => {
             // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
 
@@ -147,10 +144,39 @@
         })
     }
 
+    // var player = new Txplayer({
+    //     containerId: 'mod_player',
+    //     vid: list[1].vid,
+    //     width: '100%', // 数值600
+    //     height: '100%',
+    //     // height: screen.availHeight / 1.5,
+    //     // autoplay: true,
+    //     // playStartTime: 200,
+    //     isUsePreload: true, // 是否预加载
+    //     // useMiniSkin: true,
+    //     miniSkinAdaptive: true,
+    //     // poster: obj.pic,
+    //     showBullet: true,
+    //     showBulletInput: true
+    // });
+    // // var _playStatus = 1
+    // // if (location.href.indexOf('key') > -1) {
+    // //     _playStatus = 'continue';
+    // // }
+    // player.on('ready', () => {
+    //     if (location.href.indexOf('key') > -1) {
+    //         getVideo(getUrlParam('key'))
+    //     }
+    //     player.enterBrowserFullscreen(); // 全屏播放
+    // });
+	//
+	//
+
+
     function backIndex() {
         $('.allShow').hide()
 		$('#img0').removeClass('a1')
-        player.pause();
+        // player.pause();
     }
 
     function getUrlParam(name) { // 获取地址栏参数

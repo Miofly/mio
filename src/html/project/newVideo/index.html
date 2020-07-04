@@ -105,8 +105,9 @@
     //     // player.addParam("pic", tvp.common.getVideoSnapMobile(vid));
     //     player.write('mod_player');
 	// }
-    var video = new tvp.VideoInfo();
     function getVideo(key) {
+        var video = new tvp.VideoInfo();
+
         $('#shou').hide()
         $('#test1').hide()
         $('.allShow').show()
@@ -120,8 +121,36 @@
         //     player.play();
         // }, false);
 
+        video.setHistoryStart(3);
+
+		player.onready = function () {
+            video.setHistoryStart(1);
+            player.setPlaytime(0)
+
+        }
+
         // var temp = 'a'
+        player.onplay = function() {
+            console.log(video)
+            console.log(player)
+            // video.setHistoryStart(1);
+            player.setPlaytime(0)
+
+            // console.log(1231)
+                // video.setHistoryStart(3);
+			// player.setPlaytime(3)
+        }
+
+
+        var tempVar = 'c'
+
         player.on('timeupdate', (parmas) => {
+            // if (tempVar == 'c') {
+            //     console.log(12312)
+            //     video.setHistoryStart(0);
+            //     player.setPlaytime(0)
+			// 	tempVar = 'ccc'
+            // }
             // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
 
             if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
@@ -138,7 +167,7 @@
 
             if (parmas.videoTag.currentTime >= list[key].delayTime && key != getUrlParam('key')) {
                 player.pause();
-                location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
+                // location.href = 'http://192.168.3.106:8888/mio/src/html/project/newVideo/share.html?key=' + key + ''
                 console.log('断点处跳转')
             }
         })

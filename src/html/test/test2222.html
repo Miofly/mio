@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="./jquery-1.7.2.min.js"></script>
+</head>
+<body>
+	<script>
+        $.ajax({
+            url: 'https://api.weixin.qq.com/cgi-bin/shorturl',
+            type: 'post',
+			data: {
+                access_token: '35_1i22o-HSYZHHAb4xbhrj7qe2YiLHvray2hOyXWwn8yykc7X_1kdiXL-fTslcEEha4VVqvyQj8jLGRqMMtpBLtkiom4eejicDiL3oAvlG1sxmuHYAMxQgpdlXTvJFNNrd5qQxcpvShZz9akB-RKJhAFAYRQ',
+                action: 'long2short',
+				long_url: 'http://32kv45pdby.sdgfg.13143344.cn/3d5f24539fa539d094d1bd9c4c75a83926e8af386a9486421cb4b6d7e99be955ba2f6d756983022bed311b7bbc10825cd62c10092ffd406146d99ed2da85271d087952f2463369702eb6d9175a4f1419f40876cd3c3c705c?uuid=e0491265-1dc6-44c1-998a-de7046e44a55#1594018856714'
+			},
+            // 设置的是请求参数
+            // 用于设置响应体的类型 注意 跟 data 参数没关系！！！
+            dataType: 'json',
+            success: function (res) {
+                // 一旦设置的 dataType 选项，就不再关心 服务端 响应的 Content-Type 了
+                // 客户端会主观认为服务端返回的就是 JSON 格式的字符串
+                console.log(res)
+            }
+        })
+	</script>
+</body>
+</html>

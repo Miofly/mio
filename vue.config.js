@@ -30,6 +30,24 @@ module.exports = {
         config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
             ROUTES: JSON.stringify(tfPages.routes)
         }])
+        config.module
+            .rule('zepto')
+            .test(require.resolve('./src/common/js/utils/zepto.min.js'))
+            .use('exports')
+            .loader('exports-loader?window.zepto')
+            .end()
+            .use('script')
+            .loader('script-loader')
+            .end()
+        config.module
+            .rule('tvp')
+            .test(require.resolve('./src/common/js/utils/tvp.js'))
+            .use('exports')
+            .loader('exports-loader?window.tvp')
+            .end()
+            .use('script')
+            .loader('script-loader')
+            .end()
     },
     devServer: { // 测试环境跨域处理
         proxy: {

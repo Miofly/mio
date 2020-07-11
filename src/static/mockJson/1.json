@@ -1,1 +1,132 @@
-http://lzuvhux2uc.weuifd.ommhy.cn/240009b75f307becbfe69f791760d393d19c7c32f11deea964b3f807aa254ec87e8db2e8d63bb50bd57d4e719986148f6ac3ee3c87497889dc69571c341ac56d37d62e5904fd1265b57c8146941b42695fa4bd524a4a69ee?article=uf5h5u&e_lz=338175cef3be64acf08e494326ec6c61fb588f14d7d68156a11dba5bab79e05179402c5cd80a1fb3a1391d168d4b8b463c999492771f30ddb76380a0bbcb45c1c311d180855f6102b1e3ef235f5e4f041ed76b3e332a99958fbb89c9d566ae62a24118a6d8886c53334693d4e72e55c9267f05710cdaa6e69a8d4df0c60e6a04dd2e869a1088c8e2164d5273f6597a4a34fe620a13ba9f48d17853483b&from=groupmessage&isappinstalled=0#1592275538608
+{
+    "dltype": 1,
+    "exem": 0,
+    "fl": {
+        "cnt": 2,
+        "fi": [
+            {
+                "id": 100701,
+                "name": "msd",
+                "lmt": 0,
+                "sb": 1,
+                "cname": "标清;(270P)",
+                "br": 29,
+                "profile": 2,
+                "drm": 0,
+                "video": 1,
+                "audio": 1,
+                "fs": 35776912,
+                "super": 0,
+                "hdr10enh": 0,
+                "sname": "标清",
+                "resolution": "270P",
+                "recommend": 0,
+                "sl": 1
+            },
+            {
+                "id": 2,
+                "name": "mp4",
+                "lmt": 0,
+                "sb": 1,
+                "cname": "高清;(480P)",
+                "br": 34,
+                "profile": 1,
+                "drm": 0,
+                "video": 1,
+                "audio": 1,
+                "fs": 74129447,
+                "super": 0,
+                "hdr10enh": 0,
+                "sname": "高清",
+                "resolution": "480P",
+                "recommend": 0,
+                "sl": 0
+            }
+        ]
+    },
+    "hs": 0,
+    "ip": "183.167.103.252",
+    "ls": 0,
+    "preview": 1186,
+    "s": "o",
+    "sfl": {
+        "cnt": 0
+    },
+    "tm": 1594361054,
+    "vl": {
+        "cnt": 1,
+        "vi": [
+            {
+                "br": 29,
+                "ch": 0,
+                "cl": {
+                    "fc": 0,
+                    "keyid": "b0136et5ztz.100701"
+                },
+                "ct": 21600,
+                "drm": 0,
+                "dsb": 0,
+                "fmd5": "87d7d2ef15f55a456bcdb359dd580795",
+                "fn": "b0136et5ztz.m701.mp4",
+                "fs": 35776912,
+                "fst": 5,
+                "fvkey": "AF9BAABB0257433C7EF877A1D0EE64C54899640A7FAB22BEE658FCB7B9B5A0E686B2E989170F088DFA08ADFEE25C7088E4D09B2E1BE3DA08B281F4FF0027A0FF9A4625DF2680B9A54F26C9A79511A819CC1910A5237CF18E5D42486F7EB09FA1F8DDBA8641A0171DA179665F9F9E4801",
+                "head": 0,
+                "hevc": 0,
+                "iflag": 0,
+                "level": 0,
+                "lnk": "b0136et5ztz",
+                "logo": 1,
+                "mst": 8,
+                "pl": null,
+                "share": 1,
+                "sp": 0,
+                "st": 2,
+                "tail": 0,
+                "td": "1186.92",
+                "ti": "解密潮汕多神信仰",
+                "tie": 0,
+                "type": 3,
+                "ul": {
+                    "ui": [
+                        {
+                            "url": "http://ugcdx.qq.com/",
+                            "vt": 179,
+                            "dtc": 0,
+                            "dt": 2
+                        },
+                        {
+                            "url": "http://vhot2.qqvideo.tc.qq.com/47000642/uwMROfz2r5zAoaQXGdGnC2dfhzkrvqBxjTHFA2hC4m2Yr1g7/",
+                            "vt": 200,
+                            "dtc": 0,
+                            "dt": 2
+                        },
+                        {
+                            "url": "http://video.dispatch.tc.qq.com/uwMROfz2r5zAoaQXGdGnCGdfhzlNWxjyb6mfN0iysWg32419/",
+                            "vt": 0,
+                            "dtc": 0,
+                            "dt": 2
+                        }
+                    ]
+                },
+                "vh": 272,
+                "vid": "b0136et5ztz",
+                "videotype": 27,
+                "vr": 0,
+                "vst": 2,
+                "vw": 480,
+                "wh": 1.7647059,
+                "wl": {
+                    "wi": []
+                },
+                "uptime": 1410505772,
+                "fvideo": 0,
+                "cached": 1,
+                "fvpint": 0,
+                "swhdcp": 0,
+                "sshot": 3,
+                "mshot": 0
+            }
+        ]
+    }
+}

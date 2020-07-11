@@ -5,14 +5,12 @@
 </template>
 
 <script>
-    import {
-        publicGet
-    } from '@/api'
+    import $ from 'mioJs/utils/zepto.min'
+    import tvp from 'mioJs/utils/tvp'
 
     export default {
         async onLoad() {
-            const data = await publicGet('https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN')
-            // console.log(data)
+            console.log(tvp)
         },
         data() {
 

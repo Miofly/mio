@@ -20,20 +20,17 @@ import zy from './pages/index/movie/zy'
 
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
-import {RouterMount} from 'uni-simple-router'
+import {RouterMount} from 'uni-simple-router' // 类似vue-router的组件
 import routerLink from '../node_modules/uni-simple-router/component/router-link.vue'
+import Router from '@/router'
+// 两个公用js
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
-import Router from '@/router'
-
-import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
-import MescrollUni from 'zj/mescroll-uni/mescroll-uni.vue'
-Vue.component('mescroll-body', MescrollBody)
-Vue.component('mescroll-uni', MescrollUni)
 
 Vue.prototype.ui = ui
 Vue.prototype.tu = tu
 Vue.prototype.router = Router
+
 Vue.component('setting', setting)
 Vue.component('user', user)
 Vue.component('index', index)

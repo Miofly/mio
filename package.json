@@ -1,6 +1,6 @@
 {
   "name": "vue_project",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "npm run dev:h5",
     "build": "npm run build:h5",

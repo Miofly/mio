@@ -1,6 +1,6 @@
 const path = require('path')
-// 配置uni-router的路由页面
-const TransformPages = require('uni-read-pages')
+
+const TransformPages = require('uni-read-pages') // 配置uni-router的路由页面
 const tfPages = new TransformPages({
     includes: ['path', 'name', 'meta']
 })
@@ -30,6 +30,7 @@ module.exports = {
         config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
             ROUTES: JSON.stringify(tfPages.routes)
         }])
+        // 配置没有export导出的js
         config.module
             .rule('zepto')
             .test(require.resolve('./src/common/js/utils/zepto.min.js'))
@@ -49,10 +50,9 @@ module.exports = {
             .loader('script-loader')
             .end()
     },
-    devServer: { // 测试环境跨域处理
+    devServer: { // 开发环境跨域处理
         proxy: {
             '/api': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://www.okzyw.com',
                 changeOrigin: true, // 是否跨域
                 pathRewrite: {
@@ -60,7 +60,6 @@ module.exports = {
                 }
             },
             '/foo': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'https://api.apiopen.top',
                 changeOrigin: true, // 是否跨域
                 pathRewrite: {
@@ -77,7 +76,6 @@ module.exports = {
                 }
             },
             '/mv': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://123.0t038.cn/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
@@ -95,7 +93,6 @@ module.exports = {
                 }
             },
             '/wx': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'https://mp.weixin.qq.com/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
@@ -104,7 +101,6 @@ module.exports = {
                 }
             },
             '/ks': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'https://v.kuaishou.com/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
@@ -113,7 +109,6 @@ module.exports = {
                 }
             },
             '/ym': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'http://luodi10424.1.0t038.cn/jin-61/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
@@ -122,7 +117,6 @@ module.exports = {
                 }
             },
             '/dy': {
-                // target: "http://10.19.193.135:8870/ssyth",
                 target: 'https://v.douyin.com/',
                 changeOrigin: true, // 是否跨域
                 ws: true,

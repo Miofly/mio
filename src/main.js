@@ -25,13 +25,11 @@ import routerLink from '../node_modules/uni-simple-router/component/router-link.
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
 import Router from '@/router'
-import VueFullpage from 'vue-fullpage.js'
 
 import MescrollBody from 'zj/mescroll-uni/mescroll-body.vue'
 import MescrollUni from 'zj/mescroll-uni/mescroll-uni.vue'
 Vue.component('mescroll-body', MescrollBody)
 Vue.component('mescroll-uni', MescrollUni)
-Vue.use(VueFullpage)
 
 Vue.prototype.ui = ui
 Vue.prototype.tu = tu

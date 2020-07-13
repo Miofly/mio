@@ -123,6 +123,14 @@ module.exports = {
                 pathRewrite: {
                     '^/dy': ''
                 }
+            },
+            '/wxv': {
+                target: 'http://vv.video.qq.com/',
+                changeOrigin: true, // 是否跨域
+                ws: true,
+                pathRewrite: {
+                    '^/wxv': ''
+                }
             }
         }
     },

@@ -7,14 +7,13 @@
 					 @touchstart="touchstartEvent" @touchmove="touchmoveEvent" @touchend="touchendEvent"
 					 @touchcancel="touchendEvent">
 			<view class="mescroll-uni-content" :style="{'transform': translateY, 'transition': transition}">
-				<!-- 下拉加载区域 (支付宝小程序子组件传参给子子组件仍报单项数据流的异常,暂时不通过mescroll-down组件实现)-->
-				<!-- <mescroll-down :option="mescroll.optDown" :type="downLoadType" :rate="downRate"></mescroll-down> -->
+				<!-- 下拉加载区域 -->
 				<view v-if="mescroll.optDown.use" class="mescroll-downwarp"
 					  :style="{'background-color':mescroll.optDown.bgColor,'color':mescroll.optDown.textColor}">
 					<view class="downwarp-content">
 						<view class="downwarp-progress" :class="{'mescroll-rotate': isDownLoading}"
 							  :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"></view>
-						<view class="downwarp-tip">{{ downText }}</view>
+						<view class="downwarp-tip" :style="{fontSize: textSize + 'px'}">{{ downText }}</view>
 					</view>
 				</view>
 
@@ -25,18 +24,17 @@
 				<mescroll-empty v-if="isShowEmpty" :option="mescroll.optUp.empty"
 								@emptyclick="emptyClick"></mescroll-empty>
 
-				<!-- 上拉加载区域 (下拉刷新时不显示, 支付宝小程序子组件传参给子子组件仍报单项数据流的异常,暂时不通过mescroll-up组件实现)-->
-				<!-- <mescroll-up v-if="mescroll.optUp.use && !isDownLoading" :option="mescroll.optUp" :type="upLoadType"></mescroll-up> -->
+				<!-- 上拉加载区域-->
 				<view v-if="mescroll.optUp.use && !isDownLoading" class="mescroll-upwarp"
 					  :style="{'background-color':mescroll.optUp.bgColor,'color':mescroll.optUp.textColor}">
 					<!-- 加载中 (此处不能用v-if,否则android小程序快速上拉可能会不断触发上拉回调) -->
 					<view v-show="upLoadType===1">
 						<view class="upwarp-progress mescroll-rotate"
 							  :style="{'border-color':mescroll.optUp.textColor}"></view>
-						<view class="upwarp-tip">{{ mescroll.optUp.textLoading }}</view>
+						<view class="upwarp-tip" :style="{fontSize: textSize + 'px'}">{{ mescroll.optUp.textLoading }}</view>
 					</view>
 					<!-- 无数据 -->
-					<view v-if="upLoadType===2" class="upwarp-nodata">{{ mescroll.optUp.textNoMore }}</view>
+					<view v-if="upLoadType===2" class="upwarp-nodata" :style="{fontSize: textSize + 'px'}">{{ mescroll.optUp.textNoMore }}</view>
 				</view>
 			</view>
 		</scroll-view>
@@ -62,6 +60,11 @@
             MescrollTop
         },
         props: {
+            textSize: { // 文字大小
+                type: Number,
+                default: 16,
+                required: false
+            },
             down: Object, // 下拉刷新的参数配置
             up: Object, // 上拉加载的参数配置
             top: [String, Number], // 下拉布局往下的偏移量 (支持20, "20rpx", "20px", "20%"格式的值, 其中纯数字则默认单位rpx, 百分比则相对于windowHeight)

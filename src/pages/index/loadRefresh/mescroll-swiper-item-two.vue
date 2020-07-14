@@ -1,11 +1,10 @@
 <template>
-	<mescroll-uni ref="mescrollRef" top="0" :down="downOption"
+	<mescroll-uni ref="mescrollRef" top="0" :down="downOption" :textSize=16
 				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<!-- 数据列表 -->
 		<view class="cu-list menu" :class="[false?'sm-border':'', false?'card-menu margin-top':'']">
-			<!--.active {animation: fade 1s linear 0s forwards;}-->
-			<view v-for="(item, index) in dataLists" :key="index" class="cu-item" >
+			<view v-for="(item, index) in dataLists" :key="index" class="cu-item">
 				<view class="content padding-tb-sm">
 					<view class="padding-top-bottom" id="test">
 						<!--
@@ -77,7 +76,7 @@
                 upOption: { // 上拉加载的常用配置
                     use: true, // 是否启用下拉刷新
                     auto: false, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
-                    noMoreSize: 1, // 如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据
+                    noMoreSize: 1, // 如果列表已无数据,可设置列表的总数量要大于1条才显示无更多数据
                     textLoading: '正在玩命的加载...',
                     textNoMore: '我也是有底线的...',
                     bgColor: 'transparent',
@@ -87,74 +86,54 @@
                         size: 10
                     },
                     toTop: {
-                        src: 'http://img.htmlsucai.com/huyoucss/gotop.gif',
+                        src: '/static/images/common/totop.png',
                         offset: 1000,
                         duration: 100,
                     },
                     empty: {
                         use: true,
-                        icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1444001776,3669515325&fm=15&gp=0.jpg',
-                        tip: '暂无相关数据111',
+                        icon: '/static/images/common/empty.jpg',
+                        tip: '暂无相关数据',
                         btnText: '这是按钮文字'
                     },
                     onScroll: true // 是否监听滚动事件
                 },
-                dataLists: [],
-                scrollTop: 0
+                dataLists: [], // 数据列表
+                scrollTop: 0, // 用于懒加载图片使用
+                nowType: '' // 当前tab的类型
             }
         },
-        mounted() {
-            // this.mescroll.resetUpScroll()
-        },
         methods: {
-            scroll(e) {
+            scroll(e) { // 用于懒加载图片使用
                 this.scrollTop = this.mescroll.scrollTop
             },
-            /* 下拉刷新的回调 */
-            downCallback() {
-                // 这里加载你想下拉刷新的数据, 比如刷新轮播数据
-                // loadSwiper();
-                // 下拉刷新的回调,默认重置上拉加载列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
+            downCallback() { // 下拉刷新的回调 默认重置上拉加载列表为第一页 自动执行 page.num=1, 再触发upCallback方法
                 this.mescroll.resetUpScroll()
             },
-            /* 上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
-            async upCallback(page) {
-                const type = this.tabs[this.i].type
-                const pageNum = page.num // 页码, 默认从1开始
-                const pageSize = page.size // 页长, 默认每页10条
+            async upCallback(page) { // 上拉加载的回调
+                this.nowType = this.tabs[this.i].type // 获取当前点击的tab的类型
+                const pageNum = page.num // 页码
+                const pageSize = page.size // 页长
 
-                console.log('数据类型：', type, '|', '页码：', pageNum, '|', '页长：', pageSize)
+                console.log('数据类型：', this.nowType, '|', '页码：', pageNum, '|', '页长：', pageSize)
 
-                setTimeout(async () => { // 延迟500毫秒获取数据
-                    const data = await goodGirlData(type, pageNum, pageSize) // 获取的数据
+                const data = await goodGirlData(this.nowType, pageNum, pageSize) // 获取的数据
 
-                    const curPageData = data.data // 返回的当前页数据列表
-                    const curPageLen = curPageData.length // 接口返回的当前页数据长度 (如列表有26个数据,当前页返回8个,则curPageLen=8)
+                const curPageData = data.data // 当前页数据列表
+                const curPageLen = curPageData.length // 当前页数据长度
+                const totalSize = data.total_counts // 总数据条数
 
-                    if (page.num == 1) this.dataLists = [] // 如果是第一页需手动置空列表
-                    this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
+                if (page.num == 1) this.dataLists = [] // 第一页需手动置空列表
+                this.dataLists = this.dataLists.concat(curPageData) // 追加新数据
+
+                setTimeout(() => { // 接口请求太快，展示数据样式延迟500ms,要不太丑
                     this.mescroll.endDownScroll()
-                    this.mescroll.endByPage(curPageLen, data.total_counts)
-                    // 接口返回的总页数 (如列表有26个数据,每页10条,共3页; 则totalPage=3)
-                    // const totalPage = data.xxx
-                    // // 接口返回的总数据量(如列表有26个数据,每页10条,共3页; 则totalSize=26)
-                    // const totalSize = data.xxx
-                    // // 接口返回的是否有下一页 (true/false)
-                    // const hasNext = data.xxx
-                    // 设置列表数据
-
-                    // 方法一(推荐): 后台接口有返回列表的总页数 totalPage
-                    // this.mescroll.endByPage(curPageLen, 3)
-                    // 方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-                    // this.mescroll.endBySize(curPageLen, totalSize);
-                    // 方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-                    // this.mescroll.endSuccess(curPageLen, hasNext);
-                }, 500)
+                    this.mescroll.endByPage(curPageLen, totalSize) // 接口返回的是否有下一页 总页数/总数据量/是否有下一页
+				}, 500)
             },
-            // 点击空布局按钮的回调
-            emptyClick() {
+            emptyClick() { // 点击空布局按钮的回调
                 uni.showToast({
-                    title: '点击了按钮,具体逻辑自行实现'
+                    title: '点击了按钮'
                 })
             }
         }

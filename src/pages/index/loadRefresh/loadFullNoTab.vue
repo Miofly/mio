@@ -1,8 +1,8 @@
 <template>
 	<view style="height: 100%">
 		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;">
-			<view class=" full-height">
-				<swiper style="height: 100%" :current="tabClick">
+			<view class="full-height">
+				<swiper class="full-height" :current="tabClick">
 					<swiper-item>
 						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
 					</swiper-item>

@@ -23,9 +23,11 @@
 				</view>
 			</view>
 
-			<!--实际下拉滚动位置-->
+			<!--实际滚动组件位置-->
 			<view class="padding">
-				<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists"></swiper-tab>
+				<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" :lineHeight="6"
+							tabColor="red" :tabHeight="90" textSize="18px" fullWidth="94vw">
+				</swiper-tab>
 
 				<swiper style="height: 500rpx" :current="tabClick" @change="swiperChange">
 					<swiper-item v-for="(item, index) in tabLists" :key="index">

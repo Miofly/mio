@@ -3,13 +3,15 @@
 		<view class="longTab">
 			<scroll-view scroll-x="true" style="white-space: nowrap; display: flex" scroll-with-animation
 						 :scroll-left="tabLeft">
-				<view class="longItem" :style='"width:"+isWidth+"px"' :data-index="index"
-					  :class="index===myTab?'click':''"
+				<view class="longItem" :data-index="index"
+					  :style="{color: index===myTab ? tabColor : '', width: isWidth + 'px', fontSize: textSize,
+					  height: tabHeight + 'rpx', lineHeight: tabHeight + 'rpx'}"
 					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">
 					{{item.name}}
 				</view>
-				<view class="underlineBox" :style='"transform:translateX("+isLeft+"px);width:"+isWidth+"px"'>
-					<view class="underline"></view>
+				<view class="underlineBox"
+					  :style='"transform:translateX("+isLeft+"px);width:"+isWidth+"px;height:"+underLineHeight+"rpx"'>
+					<view class="underline" :style="{backgroundColor: tabColor}"></view>
 				</view>
 			</scroll-view>
 		</view>
@@ -19,11 +21,34 @@
 <script>
     export default {
         props: {
-            tabLists: {
-                type: Array,
-                default: []
+            underLineHeight: { // 下划线高度
+                type: Number,
+                default: 6,
+                required: false
             },
-            tabClick: { //
+            tabHeight: { // tab栏高度
+                type: Number,
+                default: 90,
+                required: false
+            },
+            textSize: { // 文字大小
+                type: String,
+                default: '14px',
+                required: false
+            },
+            tabColor: { // 颜色
+                type: String,
+                default: 'red',
+                required: false
+            },
+            tabLists: { // tab栏数据
+                type: Array,
+                default: function () {
+                    return []
+                },
+                required: false
+            },
+            tabClick: { // 当前被点击的导航
                 type: Number,
                 default: 0, // 导航栏被点击
                 required: false
@@ -33,7 +58,6 @@
                 default: '94vw',
                 required: false
             },
-
         },
         data() {
             return {
@@ -58,18 +82,14 @@
             })
         },
         methods: {
-            // 导航栏点击
-            longClick(index) {
-                console.log(index)
+            longClick(index) { // 导航栏被点击事件
                 if (this.tabLists.length > 5) {
-                    var tempIndex = index - 2
-                    tempIndex = tempIndex <= 0 ? 0 : tempIndex
                     this.tabLeft = (index - 2) * this.isWidth // 设置下划线位置
                 }
                 this.myTab = index // 设置导航点击了哪一个
                 this.isLeft = index * this.isWidth // 设置下划线位置
                 this.$emit('input', index)
-                this.$emit('change', index)// 设置swiper的第几页
+                this.$emit('change', index) // 设置swiper的第几页
             }
         }
     }
@@ -81,24 +101,16 @@
 		background: rgba(255, 255, 255, 1);
 	}
 
-	.click {
-		color: red;
-	}
-
 	.longTab {
 		width: 100%;
 	}
 
 	.longItem {
-		height: 90rpx;
 		display: inline-block;
-		line-height: 90rpx;
 		text-align: center;
-		font-size: 14px;
 	}
 
 	.underlineBox {
-		height: 6rpx;
 		width: 20%;
 		display: flex;
 		align-content: center;
@@ -109,6 +121,5 @@
 	.underline {
 		width: 60%;
 		height: 4px;
-		background-color: red;
 	}
 </style>

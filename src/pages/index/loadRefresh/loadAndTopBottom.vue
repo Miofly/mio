@@ -1,7 +1,10 @@
 <template>
-	<view style="height: 100%">
-		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;">
-			<!--这是顶部测试-->
+	<view class="full-width-height">
+		<!--如果当前tab栏为空默认展示页面-->
+		<view v-if="tabLists.length == 0"></view>
+
+		<scroll-view v-else scroll-y class="full-width-height" style="position: fixed;top: 0;bottom: 0;">
+			<!--预留顶部空间-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 				<view v-for="(item, index) in lists" :key="index" class="cu-item">
 					<view class="content padding-tb-sm">
@@ -20,37 +23,18 @@
 				</view>
 			</view>
 
-			<!--实际滚动-->
+			<!--实际下拉滚动位置-->
 			<view class="padding">
-				<swiper-tab ref="mytab" v-model="tabClick" :tabLists="tabLists"></swiper-tab>
-				<swiper style="height: 700rpx" :current="tabClick" @change="swiperChange">
-					<swiper-item>
-						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
+				<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists"></swiper-tab>
 
-					<swiper-item>
-						<mescroll-item :i="1" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="2" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="3" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="4" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="5" :index="tabClick" :tabs="tabLists"></mescroll-item>
+				<swiper style="height: 500rpx" :current="tabClick" @change="swiperChange">
+					<swiper-item v-for="(item, index) in tabLists" :key="index">
+						<mescroll-item :i="index" :index="tabClick" :tabs="tabLists"></mescroll-item>
 					</swiper-item>
 				</swiper>
 			</view>
 
-			<!--底部测试-->
+			<!--底部预留空间-->
 			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
 				<view v-for="(item, index) in lists" :key="index" class="cu-item">
 					<view class="content padding-tb-sm">
@@ -74,18 +58,19 @@
 
 <script>
     import MescrollItem from './mescroll-swiper-item-two'
-    import SwiperTab from '@/components/swiper-tab/swiper-tab'
 
     export default {
         components: {
-            SwiperTab,
+            // SwiperTab,
             MescrollItem,
         },
         data() {
-            return {
-                lists: [{name: '列表一', icon: 'video-camera'},
+            return { // 小程序不支持在template中直接渲染数组
+                lists: [
+                    {name: '列表一', icon: 'video-camera'},
                     {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'phone'}],
+                    {name: '列表一', icon: 'phone'}
+                ],
                 tabLists: [
                     {name: '前端', type: 'frontend'},
                     {name: '后端', type: 'backend'},
@@ -100,7 +85,7 @@
         methods: {
             swiperChange(e) { // 轮播菜单
                 this.tabClick = e.detail.current
-                this.$refs.mytab.longClick(e.detail.current)
+                this.$refs.swiperTab.longClick(e.detail.current)
             },
         },
         onLoad() {

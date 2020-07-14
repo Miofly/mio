@@ -20,16 +20,6 @@ module.exports = {
         }
     },
     chainWebpack: config => {
-        // 配置快捷访问文件夹
-        config.resolve.alias
-            .set('@', resolve('src'))
-            .set('zj', resolve('src/components'))
-            .set('mioJs', resolve('src/common/js'))
-            .set('json', resolve('src/static/mockJson'))
-        // 配置uni-router
-        config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
-            ROUTES: JSON.stringify(tfPages.routes)
-        }])
         // 配置没有export导出的js
         config.module
             .rule('zepto')
@@ -49,6 +39,16 @@ module.exports = {
             .use('script')
             .loader('script-loader')
             .end()
+        // 配置快捷访问文件夹
+        config.resolve.alias
+            .set('@', resolve('src'))
+            .set('zj', resolve('src/components'))
+            .set('mioJs', resolve('src/common/js'))
+            .set('json', resolve('src/static/mockJson'))
+        // 配置uni-router
+        config.plugin('provide').use(tfPages.webpack.DefinePlugin, [{
+            ROUTES: JSON.stringify(tfPages.routes)
+        }])
     },
     devServer: { // 开发环境跨域处理
         proxy: {
@@ -125,7 +125,7 @@ module.exports = {
                 }
             },
             '/wxv': {
-                target: 'http://vv.video.qq.com/',
+                target: 'http://api-xcx.idoujia.cn/',
                 changeOrigin: true, // 是否跨域
                 ws: true,
                 pathRewrite: {

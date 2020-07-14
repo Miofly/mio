@@ -1,5 +1,5 @@
 <template>
-	<view style="height: 100%">
+	<view class="full-height">
 		<!--当tabList没加载处理空布局-->
 		<view v-if="tabLists.length == 0"></view>
 		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;" v-else>
@@ -17,7 +17,7 @@
 				<view :style="{height: fixCon? allHeight + 'rpx' : tabHeight + headerHeight + 'rpx'}"></view>
 				<!--固定内容-->
 				<view v-if="fixCon" style="position: fixed;z-index: 9999;" class="full-width"
-					  :style="{height: fixHeight + 'rpx', top: fixHeight + headerHeight + 'rpx'}">
+					  :style="{height: fixHeight + 'rpx', top: tabHeight + headerHeight + 'rpx'}">
 					这是滚动的固定内容
 				</view>
 				<swiper :style="{height: fixCon ? `calc(100% - (${allHeight + 'rpx'}))` : `calc(100% - ${tabHeight + headerHeight + 'rpx'})`}"

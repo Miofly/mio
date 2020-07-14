@@ -5,7 +5,7 @@
 						 :scroll-left="tabLeft">
 				<view class="longItem" :data-index="index"
 					  :style="{color: index===myTab ? tabColor : '', width: isWidth + 'px', fontSize: textSize,
-					  height: tabHeight + 'rpx', lineHeight: tabHeight + 'rpx'}"
+					  height: tabHeight + 'rpx', lineHeight: tabHeight + 'rpx', fontWeight: isBold}"
 					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">
 					{{item.name}}
 				</view>
@@ -21,6 +21,11 @@
 <script>
     export default {
         props: {
+            isBold: { // 字体加粗
+                type: String,
+                default: 'bold',
+                required: false
+            },
             underLineHeight: { // 下划线高度
                 type: Number,
                 default: 6,
@@ -120,6 +125,6 @@
 
 	.underline {
 		width: 60%;
-		height: 4px;
+		height: 10rpx;
 	}
 </style>

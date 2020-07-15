@@ -8,7 +8,7 @@
 @import "../list"; // 列表样式模块
 
 @import "../messTip"; // 消息提示样式模块
-@import "../text"; // 文字样式模块
+@import "text"; // 文字样式模块
 @import "../shadow"; // 阴影样式模块
 
 @import "../badge"; // 标签样式模块
@@ -16,8 +16,8 @@
 @import "../image"; // 图片样式模块
 @import "../form"; // 模态框样式模块
 @import "color"; // 颜色样式模块
-@import "box"; // 颜色样式模块
-@import "common"; // 颜色样式模块
+@import "box"; // 盒子模型样式模块
+@import "common"; // 公共样式模块
 @import "../card"; // 卡片样式模块
 
 page {

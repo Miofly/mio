@@ -67,6 +67,14 @@
                 }
             }, 1000)
         },
+        methods: {
+            NavChange(e) {
+                this.PageCur = e.currentTarget.dataset.cur
+            }
+        },
+        computed: {
+            ...mapState(['indexData', 'indexPage']),
+        },
         onUnload() {
             console.log('onUnload：页面卸载')
         },
@@ -84,14 +92,6 @@
         },
         onBackPress() {
             console.log('onBackPress：页面返回')
-        },
-        methods: {
-            NavChange(e) {
-                this.PageCur = e.currentTarget.dataset.cur
-            }
-        },
-        computed: {
-            ...mapState(['indexData', 'indexPage']),
         },
     }
 </script>

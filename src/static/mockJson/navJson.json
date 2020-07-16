@@ -75,5 +75,33 @@
         "color": "green",
         "icon": "book",
         "url": "scrollMessage"
+    },
+    {
+        "title": "颜色",
+        "name": "color",
+        "color": "green",
+        "icon": "book",
+        "url": "color"
+    },
+    {
+        "title": "时间",
+        "name": "date",
+        "color": "green",
+        "icon": "book",
+        "url": "date"
+    },
+    {
+        "title": "图片",
+        "name": "image",
+        "color": "green",
+        "icon": "book",
+        "url": "image"
+    },
+    {
+        "title": "输入框",
+        "name": "input",
+        "color": "green",
+        "icon": "book",
+        "url": "input"
     }
 ]

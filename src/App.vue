@@ -3,66 +3,32 @@
     import {mapState} from 'vuex'
 
     export default {
-        onLaunch () {
-            // #ifdef MP-WEIXIN
-            this.autoUpdate()
+        onLaunch() {
             console.log('onLaunch：初始化完成')
+            // #ifdef MP-WEIXIN
+            this.autoUpdate() // 检查小程序是否更新
             if (!wx.cloud) { // 使用微信云函数
                 console.error('请使用 2.2.3 或以上的基础库以使用云能力')
             } else {
-                /*
-                    在用户管理中会显示使用云能力的小程序的访问用户列表，默认以访问时间倒叙排列，
-                    访问时间的触发点是在小程序端调用 wx.cloud.init 方法，且其中的 traceUser 参数传值为 true
-                */
-                // 调用 wx.cloud.init 方法完成云能力初始化
-                wx.cloud.init({
+                wx.cloud.init({ // 调用 wx.cloud.init 方法完成云能力初始化
                     traceUser: true
                 })
             }
-            this.initData()
+            this.initData() // 加载初始化数据
             // #endif
-            uni.getSystemInfo({
-                success: function (e) {
-                    // #ifndef MP
-                    Vue.prototype.StatusBar = e.statusBarHeight
-                    if (e.platform === 'android') {
-                        Vue.prototype.CustomBar = e.statusBarHeight + 50
-                    } else {
-                        Vue.prototype.CustomBar = e.statusBarHeight + 45
-                    }
-                    // #endif
-
-                    // #ifdef MP-WEIXIN || MP-QQ
-                    Vue.prototype.StatusBar = e.statusBarHeight
-                    const capsule = wx.getMenuButtonBoundingClientRect()
-                    if (capsule) {
-                        Vue.prototype.Custom = capsule
-                        // Vue.prototype.capsuleSafe = uni.rpx2px(750) - capsule.left + uni.rpx2px(750) - capsule.right;
-                        Vue.prototype.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight
-                    } else {
-                        Vue.prototype.CustomBar = e.statusBarHeight + 50
-                    }
-                    // #endif
-
-                    // #ifdef MP-ALIPAY
-                    Vue.prototype.StatusBar = e.statusBarHeight
-                    Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight
-                    // #endif
-                }
-            })
         },
-        onShow () {
+        onShow() {
             // #ifdef MP-WEIXIN
-            this.share()
+            this.share() // 定义微信小程序全局分享
             // #endif
             console.log('onShow：应用页面显示')
         },
-        onHide () {
+        onHide() {
             console.log('onHide：应用页面隐藏')
         },
         methods: {
             // #ifdef MP-WEIXIN
-            initData () {
+            initData() { // 云函数初始数据
                 this.ui.yunFun('getDataPage', {
                     dbName: 'initDatas',
                     pageSize: 100
@@ -165,5 +131,5 @@
 </script>
 
 <style lang='scss'>
-    @import "common/css/summary/main";
+	@import "common/css/summary/main";
 </style>

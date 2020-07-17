@@ -1,33 +1,6 @@
 <template>
 	<view style="">
-		<view style="background: rgb(76, 76, 76);">
-			<view >
-				<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg"
-					   :class="[false?'cu-avatar':'', false?'round': '']"
-				    style="width: 100%;position: relative">
-					<view style="position: absolute;top: 25rpx;left: 20rpx;color:white">广告</view>
-					<view>
 
-					</view>
-				</image>
-
-			</view>
-			<view style="height: 120rpx;background: rgb(76, 76, 76);width: 100vw;"
-				  class="flex align-center justify-between">
-				<view class="cu-avatar margin-left" :class="[false ? 'radius' : 'round']"
-					  style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg);
-						width: 80rpx">
-					<view v-if="false" class="cu-tag badge">999</view>
-					<view style="color: white;margin-left: 300rpx">
-						小招助手
-					</view>
-				</view>
-				<view style="color: white;margin-right: 20rpx">
-					查看详情
-
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 

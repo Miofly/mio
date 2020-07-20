@@ -9,3 +9,6 @@ wx8adbdb6a661538f6 AiCamera Photo
 wx8e25bd4ee4bff7e9 实用功能大全
 
 wx3ae32d7fae071a15 还没想好做啥
+
+安装 yarn npm install -g yarn
+

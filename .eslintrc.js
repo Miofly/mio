@@ -20,11 +20,11 @@ module.exports = {
         'vue'
     ],
     rules: {
-        "vue/attribute-hyphenation": "off",
-        "vue/order-in-components": "off",
-        "comma-dangle": "off",
-        "eqeqeq": "off",
-        "vue/max-attributes-per-line": 0,
+        'vue/attribute-hyphenation': 'off',
+        'vue/order-in-components': 'off',
+        'comma-dangle': 'off',
+        'eqeqeq': 'off',
+        'vue/max-attributes-per-line': 0,
         // "vue/max-attributes-per-line": [2, {
         //     "singleline": 10,
         //     "multiline": {
@@ -32,14 +32,14 @@ module.exports = {
         //         "allowFirstLine": false
         //     }
         // }],
-        "vue/mustache-interpolation-spacing": 0, // 大括号两边加空格
-        "vue/attributes-order": "off", // class方法等顺序问题
-        "vue/singleline-html-element-content-newline": "off",
-        "vue/multiline-html-element-content-newline": "off",
-        "vue/name-property-casing": ["error", "PascalCase"],
-        "vue/html-indent": "off",
-        "object-curly-spacing": "off", // {}后需要空格问题
-        "vue/no-v-html": "off",
+        'vue/mustache-interpolation-spacing': 0, // 大括号两边加空格
+        'vue/attributes-order': 'off', // class方法等顺序问题
+        'vue/singleline-html-element-content-newline': 'off',
+        'vue/multiline-html-element-content-newline': 'off',
+        'vue/name-property-casing': ['error', 'PascalCase'],
+        'vue/html-indent': 'off',
+        'object-curly-spacing': 'off', // {}后需要空格问题
+        'vue/no-v-html': 'off',
         'accessor-pairs': 2,
         'arrow-spacing': [2, {
             'before': true,
@@ -116,7 +116,7 @@ module.exports = {
             'allowLoop': false,
             'allowSwitch': false
         }],
-        "no-tabs": 0,
+        'no-tabs': 0,
         'no-lone-blocks': 2,
         'no-mixed-spaces-and-tabs': 'off',
         'no-multi-spaces': 2,

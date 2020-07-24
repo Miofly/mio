@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8"/>
+	<title>八字精批-算命平台</title>
+	<meta name="Keywords" content="八字精批,八字算命,运程分析,流年运程"/>
+	<meta name="Description" content="根据出生年月日排算出周易八字信息，对八字进行精批测算，分析命主的流年运势，八字中可以分析一生运势旺衰，可以达到趋吉避凶让运势一帆风顺。"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<!--<link rel="shortcut icon" href="./statics/ffsm/favicon.ico"/>-->
+	<link href="./statics/ffsm/bazimf/wap.min-v=0817.css" rel="stylesheet" type="text/css"/>
+	<link href="./statics/ffsm/bazimf/style.min.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="./statics/ffsm/bazimf/sty.css"/>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+	<script>
+
+	</script>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="statics/ffsm/public/js/require/require.min.js"></script>
+	<script src="statics/ffsm/public/js/common.min.js"></script>
+</head>
+<body>
+<header class="public_header">
+	<h1 class="public_h_con">2020年八字精批</h1>
+	<!--<a class="public_h_home" href="/"></a>-->
+	<!--<a href="?ac=history" class="public_h_menu">我的测算</a>-->
+</header>
+<div class="public_banner" id="submit2">
+	<img src="statics/ffsm/bazimf/images/banner_1.jpg" alt="八字精批"/>
+</div>
+<div class="public_bg_color">
+	<form class="J_ajaxForm J_testFixedShow" id="submit1" action="detail.html" name="login" method="post"
+		  onSubmit="return checkForm();">
+		<div class="public_form_wrap" id="miaodian">
+			<ul>
+				<li>
+					<div class="left">
+						您的姓名
+					</div>
+					<div class="auto">
+						<input type="text" class="bg_no" id="username" name="username" placeholder="请输入名字（必须汉字）"
+							   value=""/>
+					</div>
+				</li>
+				<li>
+					<div class="left">
+						您的性别
+					</div>
+					<div class="auto sex sex J_sex">
+						<span class="cur" data-value="1"><i></i><font>男</font></span><span
+							data-value="0"><i></i><font>女</font></span><input type="hidden" name="gender" value="1"/>
+					</div>
+				</li>
+				<li>
+					<div class="left">
+						出生日期
+					</div>
+					<div class="auto">
+						<input type="text" id="birthday" data-input-id="b_input" class="Js_date" data-type="0"
+							   value="请选择出生日期" placeholder="请选择日期" data-toid-hour="birthday">
+					</div>
+				</li>
+				<input type="hidden" name="h" class="auto input J-time" id='j_dd' value="">
+				<input type="hidden" name=y value="0">
+				<input type="hidden" name=m value="0">
+				<input type="hidden" name=d value="0">
+
+				<input type="hidden" name=i value="0">
+				<input type="hidden" name=cY value="">
+				<input type="hidden" name=cM value="">
+				<input type="hidden" name=cD value="">
+				<input type="hidden" name=cH value="">
+				<input type="hidden" name=term1 value="">
+				<input type="hidden" name=term2 value="">
+				<input type="hidden" name=start_term value="">
+				<input type="hidden" name=end_term value="">
+				<input type="hidden" name=start_term1 value="">
+				<input type="hidden" name=end_term1 value="">
+				<input type="hidden" name=lDate value="">
+			</ul>
+		</div>
+		<div class="public_btn_s">
+			<input type="button" value="立即测算" class="J_ajax_submit_btnsub">
+		</div>
+		<div class="form_bottom_txt">
+			<span>已为<b>23285408</b>人查看2020年八字命格详批</span>
+			<!--<a href="?ac=history"><span>查看历史订单 ></span></a>-->
+		</div>
+	</form>
+</div>
+<div class="public_bg_color">
+	<div class="know_img">
+		<img src="statics/ffsm/bazimf/images/jp_1.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_2.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_3.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_4.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_5.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_6.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_8.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_9.png" alt="测算后您将知道以下信息"/>
+		<img src="statics/ffsm/bazimf/images/jp_12.png" alt="测算后您将知道以下信息"/>
+	</div>
+</div>
+<style type="text/css">
+	.input_btn {
+		margin: 10px 2px;
+		overflow: hidden;
+	}
+
+	.input_btn a {
+		width: 100%;
+		float: left;
+		margin: 0 auto;
+		box-sizing: border-box;
+		height: 36px;
+		line-height: 36px;
+		color: #fff;
+		text-align: center;
+	}
+
+	.as_form .input_btn .cancel {
+		background-color: #999;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+
+	}
+
+	.input_btn .sure {
+		border: 1px solid #f90;
+		background-color: #f90;
+	}
+
+	.input_text, .as_form .input_textarea {
+		position: relative;
+		display: block;
+		overflow: hidden;
+		padding: 0 0 0 100px;
+		height: 32px;
+		margin: 6px 4px;
+	}
+
+	.input_text span, .as_form .input_textarea span {
+		width: 94px;
+		padding: 0 0 0 6px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 32px;
+		line-height: 32px;
+	}
+
+	.input_text input, .as_form .input_textarea textarea {
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid #ccc;
+		height: 32px;
+		padding: 0 4px;
+	}
+
+	.as_form {
+		position: relative;
+		margin: 0;
+	}
+</style>
+<div class="lunpan_box" style="display:none;">
+	<div class="lunpan">
+		<img src="statics/ffsm/bazisyy/1/images/luopan.png" alt="轮盘">
+		<img src="statics/ffsm/bazisyy/1/images/zhizheng.png" alt="轮盘">
+	</div>
+	<div class="lunpan_color"></div>
+</div>
+<script>
+    $(function () {
+        // 服务轮播
+        var scrollTop = 0
+        var scrollUl = $('#feedbackScroll').children('ul')
+
+        function scrollTip() {
+            var top = scrollUl.children('li').eq(0).outerHeight()
+            if (Math.abs(scrollTop) == Math.abs(top)) {
+                scrollUl.children('li').eq(0).appendTo(scrollUl)
+                scrollUl.css('top', 0)
+                scrollTop = 0
+            } else {
+                scrollTop--
+                scrollUl.css('top', scrollTop)
+            }
+        }
+
+        setInterval(scrollTip, 50)
+    })
+</script>
+<div class="protocol_pop_box" id="protocolPopBox">
+	<div class="ppb_content">
+		<div class="ppb_title">
+			个人隐私协议
+		</div>
+		<div class="ppb_text">
+			<p>
+				尊敬的用户，欢迎阅读本协议：
+			</p>
+			<p>
+				算命平台依据本协议的规定提供服务，本协议具有合同效力。您必须完全同意以下所有条款，才能保证享受到更好的服务。您使用服务的行为将视为对本协议的接受，并同意接受本协议各项条款的约束。
+			</p>
+			<p>
+				用户在申请算命平台服务过程中，需要填写一些必要的个人信息，为了更好的为用户服务，请保证提供的这些个人信息的真实、准确、合法、有效并注意及时更新。<strong>若因填写的信息不完整或不准确，则可能无法使用本服务或在使用过程中受到限制。如因用户提供的个人资料不实或不准确，给用户自身造成任何性质的损失，均由用户自行承担。</strong>
+			</p>
+			<p>
+				保护用户个人信息是算命平台的一项基本原则，算命平台运用各种安全技术和程序建立完善的管理制度来保护用户的个人信息，以免遭受未经授权的访问、使用或披露。<strong>未经用户许可算命平台不会向第三方（算命平台公司或关联、运营合作单位除外）公开、透露用户个人信息，但由于政府要求、法律政策需要等原因除外。</strong>
+			</p>
+			<p>
+				在用户发送信息的过程中和本网站收到信息后，<strong>本网站将遵守行业通用的标准来保护用户的私人信息。但是任何通过因特网发送的信息或电子版本的存储方式都无法确保100%的安全性。因此，本网站会尽力使用商业上可接受的方式来保护用户的个人信息，但不对用户信息的安全作任何担保。</strong>
+			</p>
+			<p>
+				此外，您已知悉并同意：<strong>在现行法律法规允许的范围内，算命平台可能会将您非隐私的个人信息用于市场营销，使用方式包括但不限于：在网页或者app平台中向您展示或提供广告和促销资料，向您通告或推荐服务或产品信息，使用，短信等方式推送其他此类根据您使用算命平台服务或产品的情况所认为您可能会感兴趣的信息。</strong>
+			</p>
+			<p>
+				本网站有权在必要时修改服务条例，<strong>本网站的服务条例一旦发生变动，将会在本网站的重要页面上提示修改内容，用户如不同意新的修改内容，须立即停止使用本协议约定的服务，否则视为用户完全同意并接受新的修改内容。</strong>根据客观情况及经营方针的变化，本网站有中断或停止服务的权利，用户对此表示理解并完全认同。
+			</p>
+			<p>
+				如果您还有其他问题和建议，可以通过微信：80050030或者微信关注【wxsuanming】联系我们。
+			</p>
+			<p>
+				算命平台保留对本协议的最终解释权。
+			</p>
+		</div>
+		<div class="ppb_close" id="protocolHideBtn">
+			<b>关闭</b>
+		</div>
+	</div>
+</div>
+<!--<div class="ainuo_foot_nav cl" id="testFixedBtn" style="display: none;">-->
+	<!--<ul>-->
+		<!--<li><a href="/"><i class="shouye_1"></i>-->
+			<!--<p>测算首页</p></a></li>-->
+		<!--<li><a href="/?ac=history"><i class="wddd_1"></i>-->
+			<!--<p>订单查询</p></a></li>-->
+		<!--<li><a href="#submit2" class="botpost"><em><i class="lijics_1"></i></em>-->
+			<!--<p>立即测算</p></a></li>-->
+		<!--<li><a href="/"><i class="gengduo_1"></i>-->
+			<!--<p>更多测算</p></a></li>-->
+		<!--<li><a href="/?ac=member"><i class="grzx_1"></i>-->
+			<!--<p>个人中心</p></a></li>-->
+	<!--</ul>-->
+<!--</div>-->
+<style type="text/css">
+	.ainuo_foot_nav {
+		display: block;
+		padding: 2px 0;
+		background: #ff5e5e;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 99999;
+		max-width: 640px;
+	}
+
+	.ainuo_foot_nav li {
+		width: 20%;
+		text-align: center;
+		float: left;
+	}
+
+	.ainuo_foot_nav li a {
+		width: 100%;
+		display: block;
+	}
+
+	.ainuo_foot_nav .foothover i {
+		color: #f13030;
+	}
+
+	.ainuo_foot_nav li i {
+		display: block;
+		line-height: 25px;
+		height: 25px;
+		margin: auto;
+		padding: 0;
+		width: 25px;
+		overflow: hidden;
+		background-size: 100%;
+	}
+
+	.ainuo_foot_nav li a.botpost {
+		position: relative;
+		margin-top: -11px;
+		background-color: rgba(0, 0, 0, 0.0);
+	}
+
+	.ainuo_foot_nav li a.botpost em {
+		background: #ffffff;
+		padding: 2px;
+		border: 1px solid #ff5e5e;
+		display: block;
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		margin: 0 auto;
+		margin-bottom: 2px;
+		padding-bottom: 0px;
+	}
+
+	.ainuo_foot_nav li p {
+		overflow: hidden;
+		font-size: 12px;
+		height: 16px;
+		line-height: 16px;
+		color: #fff;
+		font-weight: 400;
+	}
+
+	.shouye_1 {
+		background: url(./statics/ffsm/public/images/shouye.png) no-repeat;
+	}
+
+	.wddd_1 {
+		background: url(./statics/ffsm/public/images/dingdan.png) no-repeat;
+	}
+
+	.lijics_1 {
+		background: url(./statics/ffsm/public/images/suan.png) no-repeat;
+	}
+
+	.gengduo_1 {
+		background: url(./statics/ffsm/public/images/gengduo.png) no-repeat;
+	}
+
+	.grzx_1 {
+		background: url(./statics/ffsm/public/images/grzx.png) no-repeat;
+	}
+</style>
+<script>
+    $('.J_ajax_submit_btnsub').click(function () {
+        if ('undefined' == typeof layer) {
+            alert('正在准备中，请稍等...')
+            $('.lunpan_box').css('display', 'none')
+            document.login.username.focus()
+            return false
+        }
+        $('.lunpan_box').css('display', 'block')
+        setTimeout(function () {
+            checkForm()
+        }, 1000)
+    })
+</script>
+
+<script>
+    //测算底部悬浮
+    (function () {
+        var topShow = $('.J_testFixedShow')
+        if (topShow.length) {
+            var topShow = topShow.offset().top
+            var testBtn = $('#testFixedBtn')
+            $(window).scroll(function () {
+                var wt = $(window).scrollTop()
+                wt > topShow ? (testBtn.fadeIn(), $('.public_footer_servers').css('padding-bottom', '50px')) : (testBtn.fadeOut(), $('.public_footer_servers').css('padding-bottom', '20px'))
+            })
+            testBtn.add('.J_testScrollTop').on('click', function () {
+                $('html,body').scrollTop(topNum)
+            })
+        }
+    })()
+</script>
+<script src="statics/suanming.js"></script>
+<script type="text/javascript">
+    function _resize() {
+        var html = document.getElementsByTagName('html')[0]
+        var hW = html.offsetWidth > 750 ? 750 : html.offsetWidth
+        var fS = 100 / 750 * hW
+        html.style.fontSize = fS + 'px'
+    }
+
+    _resize()
+    window.onresize = function () {
+        _resize()
+    }
+</script>
+<link href="./statics/user/css/extend_module.css" rel="stylesheet" type="text/css"/>
+<!--<div class="public_hot_test">-->
+	<!--<a href="/?ac=xydd"><img style="width:100%; height:auto; margin:0 auto; display:block;"-->
+							 <!--src="./statics/img/diandeng.jpg" alt="点灯还愿"/></a>-->
+	<!--<div class="hot_cs">-->
+		<!--<h3 class="hotcs_title">热门推荐</h3>-->
+		<!--<ul class="hotcs_list">-->
+			<!--<a class="hotcs_item" href="/?ac=hehun" target="_blank">-->
+				<!--<img src="./tu/img_1.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>八字合婚</b>：看你和TA的八字合不合？关系你后半生幸福一定要看！</p>-->
+					<!--<div class="r_foot"><p>35016</p>-->
+						<!--<p>9.6分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=bazi" target="_blank">-->
+				<!--<img src="./tu/img_3.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>事业测算</b>：人一辈子总希望能出人头地，教你三招旺2020年事业！</p>-->
+					<!--<div class="r_foot"><p>21586</p>-->
+						<!--<p>9.5分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=bazi" target="_blank">-->
+				<!--<img src="./tu/img_4.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>八字财运</b>：财运十断九验，哪些人走财运？大师教你转财运！</p>-->
+					<!--<div class="r_foot"><p>28776</p>-->
+						<!--<p>9.3分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=bzyy" target="_blank">-->
+				<!--<img src="./tu/img_6.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>婚姻走势</b>：婚姻是个坎！民间师傅告诉你姻缘走势，准的惊人！</p>-->
+					<!--<div class="r_foot"><p>37111</p>-->
+						<!--<p>9.1分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=xmfx" target="_blank">-->
+				<!--<img src="./tu/img_7.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>姓名测算</b>：神奇的姓名吉凶测试，解开运势密码！</p>-->
+					<!--<div class="r_foot"><p>57123</p>-->
+						<!--<p>9.3分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=hmjx" target="_blank">-->
+				<!--<img src="./tu/img_11.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>号码解析</b>：手机号码大揭秘，11位数暴露了你的.....</p>-->
+					<!--<div class="r_foot"><p>21699</p>-->
+						<!--<p>9.5分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+			<!--<a class="hotcs_item" href="/?ac=ffqm" target="_blank">-->
+				<!--<img src="./tu/img_9.png" class="l_img" alt="">-->
+				<!--<div class="r_wrap">-->
+					<!--<p class="r_deriction"><b>宝宝起名</b>：给孩子起名需要注意的，不要亲手毁掉他的一生！</p>-->
+					<!--<div class="r_foot"><p>56688</p>-->
+						<!--<p>9.6分</p></div>-->
+				<!--</div>-->
+			<!--</a>-->
+		<!--</ul>-->
+	<!--</div>-->
+	<!--<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>-->
+	<!--<script type="text/javascript" src="./statics/ffsm/public/js/dibu.js"></script>-->
+	<!--<div class="rmcsbox">-->
+		<!--<div class="xttbox_title">-->
+			<!--<span>热门测算</span>-->
+		<!--</div>-->
+		<!--<div class="rmcs_list" id="rmcs_list">-->
+			<!--<div class="tempWrap">-->
+				<!--<div class="bd" style="">-->
+					<!--<ul class="clearfix">-->
+						<!--<li><a href="/?ac=bazijp"><img src="./statics/img/logo158.png" alt="八字精批"/><em>八字精批</em></a>-->
+						<!--</li>-->
+						<!--<li><a href="/?ac=jinnian"><img src="./statics/img/logo_12.png"-->
+														<!--alt="2020流年运程"/><em>鼠年运程</em></a></li>-->
+						<!--<li><a href="/?ac=xydd"><img src="./statics/img/logo_5.jpg" alt="祈福点灯"/><em>祈福点灯</em></a></li>-->
+						<!--<li><a href="/?ac=hehun"><img src="./statics/img/logo_2.jpg" alt="八字合婚"/><em>八字合婚</em></a></li>-->
+						<!--<li><a href="/?ac=bazi"><img src="./statics/img/logo_3.jpg" alt="事业财运"/><em>事业财运</em></a></li>-->
+						<!--<li><a href="/?ac=bzyy"><img src="./statics/img/logo_4.jpg" alt="月老姻缘"/><em>月老姻缘</em></a></li>-->
+						<!--<li><a href="/?ac=ziwei"><img src="./statics/img/logo_6.jpg" alt="紫微斗数"/><em>紫微斗数</em></a></li>-->
+						<!--<li><a href="/?ac=xmfx"><img src="./statics/img/logo_15.png" alt="姓名详批"/><em>姓名详批</em></a></li>-->
+					<!--</ul>-->
+					<!--<ul class="clearfix">-->
+						<!--<li><a href="/?ac=hmjx"><img src="./statics/img/logo_14.png" alt="号码解析"/><em>号码解析</em></a></li>-->
+						<!--<li><a href="/?ac=gsqm"><img src="./statics/img/logo_13.png" alt="公司起名"/><em>公司测名</em></a></li>-->
+						<!--<li><a href="/?ac=aiqingyun"><img src="./statics/img/logo_9.jpg" alt="爱情运"/><em>爱情运势</em></a>-->
+						<!--</li>-->
+						<!--<li><a href="/?ac=yinyuancs"><img src="./statics/img/taluo_1.png" alt="感情婚姻"/><em>感情婚姻</em></a>-->
+						<!--</li>-->
+						<!--<li><a href="/?ac=xmpd"><img src="./statics/img/logo_8.jpg" alt="姓名配对"/><em>姓名配对</em></a></li>-->
+						<!--<li><a href="/?ac=xmfx"><img src="./statics/img/logo_15.png" alt="姓名详批"/><em>姓名详批</em></a></li>-->
+						<!--<li><a href="/?ac=hehun"><img src="./statics/img/logo_11.png" alt="八字合婚"/><em>八字合婚</em></a></li>-->
+						<!--<li><a href="javascript:void(0)"><img src="./statics/img/jqqd.png" alt="敬请期待"/><em>敬请期待</em></a>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="hd">-->
+				<!--<ul class="clearfix">-->
+					<!--<li class="on">1</li>-->
+					<!--<li class="">2</li>-->
+					<!--<li class="">3</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--<div class="zcdgbox"><a href="javascript:void(0)" class="back_top" id="back_top" style="display: inline-block;"></a>-->
+	<!--</div>-->
+<!--</div>-->
+<footer class="footer_severs">
+	<div class="ocrloader">
+		<em></em>
+		<img src="./statics/img/weixin.jpg" alt="二维码">
+		<span></span>
+	</div>
+	<p>长按二维码加客服微信</p>
+	<p>在线服务时间：周一至周日8:00--20:00</p>
+</footer>
+<link href="./statics/quanju.css" rel="stylesheet" type="text/css"/>
+<script>
+    window.requestAnimFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60)
+            }
+    })()
+    $('#alertMarquee').each(function () {
+        $('.contents').addClass('has-alert-marquee')
+
+        var $this = $(this)
+        var $cont = $this.find('.inner')
+        var w = $this.width()
+        var sw = w + $cont.width()
+        var n = w / 375 * 1
+        var i = 0
+        var movingFn = function () {
+            i = i + n
+            if (i > sw) {
+                i = 0
+            }
+            $cont.css({'margin-left': -i})
+            window.requestAnimFrame(movingFn)
+        }
+        window.requestAnimFrame(movingFn)
+    })
+</script>
+<!--百度统计代码-->
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+    })()
+</script>
+<script language=javascript src="./statics/user/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./statics/user/js/mshare.js"></script>
+<!--<div id="mshare_bt"></div>-->
+<script>
+    $('#mshare_bt').ready(function () {
+        var mshare = new mShare({
+            title: '超准的八字测算',
+            url: window.location.href,
+            desc: '超准的八字测算',
+            img: './statics/img/57de106713afa.png'
+        })
+        $('#mshare_bt').click(function () {
+            mshare.init(0, '#mshare_bt')
+        })
+    })
+</script>
+<script>
+    function dl_getCookie(cname) {
+        var name = cname + '='
+        var ca = document.cookie.split(';')
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim()
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length)
+            }
+        }
+        return ''
+    }
+
+    function addUrlPara1(value) {
+        var Cts = window.location.href
+        var name = 'dl'
+        if (Cts.indexOf('dl') <= 0) {
+            var currentUrl = Cts.split('#')[0]
+            if (/\?/g.test(currentUrl)) {
+                currentUrl += '&' + name + '=' + value
+            } else {
+                currentUrl += '?' + name + '=' + value
+            }
+            if (Cts.split('#')[1]) {
+
+                history.replaceState(null, null, currentUrl + '#' + Cts.split('#')[1])
+            } else {
+                history.replaceState(null, null, currentUrl)
+            }
+        }
+    }
+
+    var dl_id = dl_getCookie('dl')
+    if (dl_id != '') {
+        addUrlPara1(dl_id)
+    }
+</script>
+</body>
+</html>

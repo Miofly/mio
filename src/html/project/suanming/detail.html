@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0030)http://www.trtui.cn/?ac=bazijp -->
 <html lang="zh-CN" style="font-size: 100px;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,15 +14,19 @@
 	<link href="detail/style.min.css" rel="stylesheet" type="text/css">
 	<script src="detail/hm.js"></script>
 	<script type="text/javascript" src="detail/jweixin-1.6.0.js"></script>
-	<script>
-
-	</script>
 	<script src="detail/require.min.js" data-main="/statics/ffsm/public/js/common.min.js?v=0817"></script>
 	<script src="detail/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_"
 			data-requiremodule="/statics/ffsm/public/js/common.min.js?v=0817" src="detail/common.min.js"></script>
 	<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ffsm.zhChinese"
 			src="detail/zhChinese.min.js"></script>
+	<script>
+		$(function () {
+			$('#name').html('姓名：' + localStorage.getItem('smName'))
+			$('#gender').html('性别：' + localStorage.getItem('smGender'))
+			$('#birthday').html('生日：' + localStorage.getItem('smDay'))
+        })
+	</script>
 </head>
 <body>
 <header class="public_header">
@@ -34,9 +37,9 @@
 			<div class="hd">
 				<img src="detail/hd.jpg"></div>
 			<div class="infos">
-				<p>姓名：魏飞斗</p>
-				<p>性别：男</p>
-				<p>生日：2020年7月24日未知时</p>
+				<p id="name"></p>
+				<p id="gender"></p>
+				<p id="birthday"></p>
 			</div>
 		</div>
 		<p class="gk">已有
@@ -67,17 +70,17 @@
 						<li class="on" id="wx_zf">
 							<span class="pay-icon icon-wechat"></span>
 							<span>微信支付</span>
-							<span class="gopaywx">立即支付</span>
+							<span class="gopaywx" >立即支付</span>
 						</li>
 					</a>
-					<a class="weixin">
-						<li class="on" id="wx_zf">
-							<span class="pay-icon icon-extpay"></span>
-							<span>积分支付</span>
-							<em class="ico-arrow"></em>
-						</li>
-					</a>
-					<a class="weixin">
+					<!--<a class="weixin">-->
+						<!--<li class="on" id="wx_zf">-->
+							<!--<span class="pay-icon icon-extpay"></span>-->
+							<!--<span>积分支付</span>-->
+							<!--<em class="ico-arrow"></em>-->
+						<!--</li>-->
+					<!--</a>-->
+					<a class="weixin" href="result.html">
 						<li class="on" id="wx_zf">
 							<span class="pay-icon icon-vip_pay"></span>
 							<span>vip免支付</span>
@@ -155,15 +158,7 @@
 		<div class="info">
 			<img src="detail/title_other.png"></div>
 	</div>
-	<!--<div class="ainuo_foot_nav cl" id="testFixedBtn" style="">-->
-	<!--<ul>-->
-	<!--<li><a href="http://www.trtui.cn/"><i class="shouye_1"></i><p>测算首页</p></a></li>-->
-	<!--<li><a href="http://www.trtui.cn/?ac=history"><i class="wddd_1"></i><p>订单查询</p></a></li>-->
-	<!--<li><a href="javascript:;" id="publicPayBottom" class="botpost" style="display: block;"><em><i class="lijijs_1"></i></em><p>付费解锁</p></a></li>-->
-	<!--<li><a href="http://www.trtui.cn/"><i class="gengduo_1"></i><p>更多测算</p></a></li>-->
-	<!--<li><a href="http://www.trtui.cn/?ac=member"><i class="grzx_1"></i><p>个人中心</p></a></li>-->
-	<!--</ul>-->
-	<!--</div>-->
+
 	<style type="text/css">
 		.ainuo_foot_nav {
 			display: block;
@@ -376,127 +371,15 @@
     }
 </script>
 <link href="detail/extend_module.css" rel="stylesheet" type="text/css">
-<!--<div class="public_hot_test">-->
-<!--<a href="http://www.trtui.cn/?ac=xydd"><img style="width:100%; height:auto; margin:0 auto; display:block;" src="detail/diandeng.jpg" alt="点灯还愿"></a>-->
-<!--<div class="hot_cs">-->
-<!--<h3 class="hotcs_title">热门推荐</h3>-->
-<!--<ul class="hotcs_list">-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=hehun" target="_blank">-->
-<!--<img src="detail/img_1.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>八字合婚</b>：看你和TA的八字合不合？关系你后半生幸福一定要看！</p>-->
-<!--<div class="r_foot"><p>35016</p><p>9.6分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=bazi" target="_blank">-->
-<!--<img src="detail/img_3.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>事业测算</b>：人一辈子总希望能出人头地，教你三招旺2020年事业！</p>-->
-<!--<div class="r_foot"><p>21586</p><p>9.5分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=bazi" target="_blank">-->
-<!--<img src="detail/img_4.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>八字财运</b>：财运十断九验，哪些人走财运？大师教你转财运！</p>-->
-<!--<div class="r_foot"><p>28776</p><p>9.3分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=bzyy" target="_blank">-->
-<!--<img src="detail/img_6.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>婚姻走势</b>：婚姻是个坎！民间师傅告诉你姻缘走势，准的惊人！</p>-->
-<!--<div class="r_foot"><p>37111</p><p>9.1分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=xmfx" target="_blank">-->
-<!--<img src="detail/img_7.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>姓名测算</b>：神奇的姓名吉凶测试，解开运势密码！</p>-->
-<!--<div class="r_foot"><p>57123</p><p>9.3分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=hmjx" target="_blank">-->
-<!--<img src="detail/img_11.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>号码解析</b>：手机号码大揭秘，11位数暴露了你的.....</p>-->
-<!--<div class="r_foot"><p>21699</p><p>9.5分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--<a class="hotcs_item" href="http://www.trtui.cn/?ac=ffqm" target="_blank">-->
-<!--<img src="detail/img_9.png" class="l_img" alt="">-->
-<!--<div class="r_wrap">-->
-<!--<p class="r_deriction"><b>宝宝起名</b>：给孩子起名需要注意的，不要亲手毁掉他的一生！</p>-->
-<!--<div class="r_foot"><p>56688</p><p>9.6分</p></div>-->
-<!--</div>-->
-<!--</a>-->
-<!--</ul>-->
-<!--</div>-->
-<!--<script type="text/javascript" src="detail/jquery.min.js"></script>-->
-<!--<script type="text/javascript" src="detail/dibu.js"></script>-->
-<!--<div class="rmcsbox">-->
-<!--<div class="xttbox_title">-->
-<!--<span>热门测算</span>-->
-<!--</div>-->
-<!--<div class="rmcs_list" id="rmcs_list">-->
-<!--<div class="tempWrap">-->
-<!--<div class="tempWrap" style="overflow:hidden; position:relative;"><div class="bd" style="width: 3000px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 0ms; transform: translate(-750px, 0px) translateZ(0px);">-->
-<!--<ul class="clearfix" style="display: table-cell; vertical-align: top; width: 750px;">-->
-<!--<li><a href="http://www.trtui.cn/?ac=hmjx"><img src="detail/logo_14.png" alt="号码解析"><em>号码解析</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=gsqm"><img src="detail/logo_13.png" alt="公司起名"><em>公司测名</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=aiqingyun"><img src="detail/logo_9.jpg" alt="爱情运"><em>爱情运势</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=yinyuancs"><img src="detail/taluo_1.png" alt="感情婚姻"><em>感情婚姻</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmpd"><img src="detail/logo_8.jpg" alt="姓名配对"><em>姓名配对</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmfx"><img src="detail/logo_15.png" alt="姓名详批"><em>姓名详批</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=hehun"><img src="detail/logo_11.png" alt="八字合婚"><em>八字合婚</em></a></li>-->
-<!--<li><a href="javascript:void(0)"><img src="detail/jqqd.png" alt="敬请期待"><em>敬请期待</em></a></li>-->
-<!--</ul><ul class="clearfix" style="display: table-cell; vertical-align: top; width: 750px;">-->
-<!--<li><a href="http://www.trtui.cn/?ac=bazijp"><img src="detail/logo158.png" alt="八字精批"><em>八字精批</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=jinnian"><img src="detail/logo_12.png" alt="2020流年运程"><em>鼠年运程</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xydd"><img src="detail/logo_5.jpg" alt="祈福点灯"><em>祈福点灯</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=hehun"><img src="detail/logo_2.jpg" alt="八字合婚"><em>八字合婚</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=bazi"><img src="detail/logo_3.jpg" alt="事业财运"><em>事业财运</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=bzyy"><img src="detail/logo_4.jpg" alt="月老姻缘"><em>月老姻缘</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=ziwei"><img src="detail/logo_6.jpg" alt="紫微斗数"><em>紫微斗数</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmfx"><img src="detail/logo_15.png" alt="姓名详批"><em>姓名详批</em></a></li>-->
-<!--</ul>-->
-<!--<ul class="clearfix" style="display: table-cell; vertical-align: top; width: 750px;">-->
-<!--<li><a href="http://www.trtui.cn/?ac=hmjx"><img src="detail/logo_14.png" alt="号码解析"><em>号码解析</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=gsqm"><img src="detail/logo_13.png" alt="公司起名"><em>公司测名</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=aiqingyun"><img src="detail/logo_9.jpg" alt="爱情运"><em>爱情运势</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=yinyuancs"><img src="detail/taluo_1.png" alt="感情婚姻"><em>感情婚姻</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmpd"><img src="detail/logo_8.jpg" alt="姓名配对"><em>姓名配对</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmfx"><img src="detail/logo_15.png" alt="姓名详批"><em>姓名详批</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=hehun"><img src="detail/logo_11.png" alt="八字合婚"><em>八字合婚</em></a></li>-->
-<!--<li><a href="javascript:void(0)"><img src="detail/jqqd.png" alt="敬请期待"><em>敬请期待</em></a></li>-->
-<!--</ul>-->
-<!--<ul class="clearfix" style="display: table-cell; vertical-align: top; width: 750px;">-->
-<!--<li><a href="http://www.trtui.cn/?ac=bazijp"><img src="detail/logo158.png" alt="八字精批"><em>八字精批</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=jinnian"><img src="detail/logo_12.png" alt="2020流年运程"><em>鼠年运程</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xydd"><img src="detail/logo_5.jpg" alt="祈福点灯"><em>祈福点灯</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=hehun"><img src="detail/logo_2.jpg" alt="八字合婚"><em>八字合婚</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=bazi"><img src="detail/logo_3.jpg" alt="事业财运"><em>事业财运</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=bzyy"><img src="detail/logo_4.jpg" alt="月老姻缘"><em>月老姻缘</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=ziwei"><img src="detail/logo_6.jpg" alt="紫微斗数"><em>紫微斗数</em></a></li>-->
-<!--<li><a href="http://www.trtui.cn/?ac=xmfx"><img src="detail/logo_15.png" alt="姓名详批"><em>姓名详批</em></a></li>-->
-<!--</ul></div></div>-->
-<!--</div>-->
-<!--<div class="hd">-->
-<!--<ul class="clearfix"><li class="on">1</li><li class="">2</li></ul>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="zcdgbox"><a href="javascript:void(0)" class="back_top" id="back_top" style="display: inline-block;"></a></div>-->
-<!--</div>-->
-<footer class="footer_severs">
-	<div class="ocrloader">
-		<em></em>
-		<img src="detail/weixin.jpg" alt="二维码">
-		<span></span>
-	</div>
-	<p>长按二维码加客服微信</p>
-	<p>在线服务时间：周一至周日8:00--20:00</p>
-</footer>
+<!--<footer class="footer_severs">-->
+	<!--<div class="ocrloader">-->
+		<!--<em></em>-->
+		<!--<img src="detail/weixin.jpg" alt="二维码">-->
+		<!--<span></span>-->
+	<!--</div>-->
+	<!--<p>长按二维码加客服微信</p>-->
+	<!--<p>在线服务时间：周一至周日8:00&#45;&#45;20:00</p>-->
+<!--</footer>-->
 <link href="detail/quanju.css" rel="stylesheet" type="text/css">
 <script>
     window.requestAnimFrame = (function () {
@@ -527,16 +410,7 @@
         window.requestAnimFrame(movingFn)
     })
 </script>
-<!--百度统计代码-->
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement('script')
-        hm.src = 'https://hm.baidu.com/hm.js?'
-        var s = document.getElementsByTagName('script')[0]
-        s.parentNode.insertBefore(hm, s)
-    })()
-</script>
+
 <script language="javascript" src="detail/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="detail/mshare.js"></script>
 <!--<div id="mshare_bt"></div>-->

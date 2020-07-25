@@ -7,16 +7,16 @@ function checkForm() {
 		document.login.username.focus();
 		return false;
 	}
-	
+
 	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
-	　　if(!reg.test(username)){     
+	　　if(!reg.test(username)){
 		   layer.msg("请输入正确的姓名")
 		   $('.lunpan_box').css('display','none');
 		   document.login.username.focus();
-		   return false; 
+		   return false;
 		}
 	var b_input = document.getElementById('birthday').getAttribute("data-date");
-	
+
 	if (b_input=="" || b_input==null) {
 		$('.lunpan_box').css('display','none');
 		layer.msg("请输入生日！");
@@ -28,11 +28,11 @@ function checkForm() {
 	var y = strs[0];
 	var m = strs[1];
 	var d = strs[2];
-	
+
 	var ys = y;
 	var ms = m;
 	var ds = d;
-	
+
 	var h = document.login.h.value;
 
 	var i = document.login.i.value;
@@ -225,15 +225,15 @@ function checkForm() {
 			var lS ='未知';
 		}
 		var lH = lDObj.isLeap ? '闰' : '';
-		
+
 		return (lY + '年' + lL + lM + '月' + lD + '日' + ' '+lS+'时' )
 	}
 	var lDate = lll(y, m, d, h);
-	
+
 	login.y.value = ys;
 	login.m.value = ms;
 	login.d.value = ds;
-	
+
 	login.cY.value = cY;
 	login.cM.value = cM;
 	login.cD.value = cD;
@@ -245,5 +245,8 @@ function checkForm() {
 	login.start_term1.value = start_term1;
 	login.end_term1.value = end_term1;
 	login.lDate.value = lDate;
+
+
+	console.log(111111111111111)
 	document.getElementById("submit1").submit();
 }

@@ -1,0 +1,211 @@
+.alert-marquee{display: block;height: 0.6rem;line-height: 0.6rem;background: #777;background: rgba(0,0,0,0.7);white-space: nowrap;overflow: hidden;position: relative;z-index: 1;}
+.alert-marquee .inner{position: absolute;left: 100%;color: #fff;font-size: 0.28rem;}
+@media screen and (max-width: 1222px) { .guanzhuwx{display:none; }
+}
+.guanzhuwx_1{left: 10%;top: 50%;margin-top: -200px;position: fixed;width: 10%;opacity: 0.5;background: #fff;padding-bottom: 10px;padding-top: 5px;}
+.guanzhuwx_2{right: 10%;top: 50%;margin-top: -200px;position: fixed;width: 10%;opacity: 0.01;background: #fff;padding-bottom: 10px;padding-top: 5px;}
+.guanzhuwx img{width: 90%;display: block;margin: 0 auto;}
+.guanzhuwx p{font-size: 16px;text-align: center;color: #00b98d;text-decoration: none;}
+.guanzhuwx_1:hover{opacity: 1;}
+.guanzhuwx_2:hover{opacity: 1;}
+.public_pp_tit {font-weight: 700;font-size: 20px;}
+.pay .pay-type li .icon-vip_pay {
+    background: url(/statics/img/vip_pay.png) no-repeat;
+    background-size: 100%;
+}
+.pay .pay-type li .icon-extpay {
+    background: url(/statics/img/extpay.png) no-repeat;
+    background-size: 100%;
+}
+.zffs-list .plf span.zf-extpay {
+    background-image: url(/statics/img/extpay.png);
+}
+.zffs-list .plf span.zf-vippay {
+    background-image: url(/statics/img/vip_pay.png);
+}
+.public_pay_box .m-vippay {
+    background: url(/statics/img/m_vip_pay.png) center center no-repeat #000000;
+    background-size: 120px;
+}
+.public_pay_box .m-extpay {
+    background: url(/statics/img/m_extpay.png) center center no-repeat #FFB521;
+    background-size: 120px;
+}
+.common-pay-lists .common-pay-item li .extpay {
+    background: transparent url(/statics/img/extpay.png) center no-repeat;
+    background-size: 1.25333rem 1.25333rem;
+}
+.common-pay-lists .common-pay-item li .vip_pay {
+    background: transparent url(/statics/img/vip_pay.png) center no-repeat;
+    background-size: 1.25333rem 1.25333rem;
+}
+.tuiguang_1 {
+    position: fixed;
+    right: 10px;
+    bottom: 50%;
+    width: 50px;
+    height: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    z-index: 9999;
+    background-attachment: fixed;
+    background: url(/statics/VIP/qiandai.png) no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    -webkit-animation: icon-bounce 4s infinite;
+    -moz-animation: icon-bounce 0.5s infinite;
+    -o-animation: icon-bounce 0.5s infinite;
+    animation: icon-bounce 0.5s infinite;
+    text-decoration: none;
+}
+.tuiguang_1 em{
+    color: #ff6a48;
+    display: block;
+    padding-top: 45px;
+    font-size: 12px;
+}
+@keyframes icon-bounce {
+  0%, 100% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+ 
+  25% {
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+ 
+  50% {
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+ 
+  75% {
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+ 
+  85% {
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@-webkit-keyframes icon-bounce {
+  0%, 75%, 100% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+ 
+  80% {
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+ 
+  85% {
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+ 
+  90% {
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+ 
+  95% {
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@-moz-keyframes icon-bounce {
+  0%, 100% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+ 
+  25% {
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+ 
+  50% {
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+ 
+  75% {
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+ 
+  85% {
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}
+@-o-keyframes icon-bounce {
+  0%, 100% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+ 
+  25% {
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+ 
+  50% {
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+ 
+  75% {
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+ 
+  85% {
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+}

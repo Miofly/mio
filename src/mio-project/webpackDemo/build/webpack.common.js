@@ -4,7 +4,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const merge = require('webpack-merge')
 const devConfig = require('./webpack.dev')
 const prodConfig = require('./webpack.prod')
-const VueLoaderPlugin = require('vue-loader/lib/plugin') // webpack4配置需要包含VueLoaderPlugin 在输出里面配置plugins:{new VueLoaderPlugin()} 否则会报错
 
 function resolve(dir) {
     return path.join(__dirname, '../../../../', dir)
@@ -26,10 +25,10 @@ const commonConfig = { // 配置好后 npx webpack
         // extensions: ['.js', '.vue', '.json'], // 可以导入的时候忽略的拓展名范围
         extensions: ['.js', '.json', '.vue', '.scss', '.css'], // 省略文件名后缀
         alias: {
-            // '@': resolve('src'),
-            // zj: resolve('src/components'),
-            // mioJs: resolve('src/common/js'),
-            // json: resolve('src/static/mockJson'),
+            '@': resolve('src'),
+            zj: resolve('src/components'),
+            mioJs: resolve('src/common/js'),
+            json: resolve('src/static/mockJson'),
         }
     },
     module: { // loader的顺序从下到上，从右到左
@@ -67,10 +66,9 @@ const commonConfig = { // 配置好后 npx webpack
     },
     plugins: [
         new HtmlWebpackPlugin({ // 打包后自动生成一个HTML文件，并把打包生成的js自动引入到这个html文件中
-            template: './public/index.html' // 以index.html为模板打包
+            template: './src/index.html' // 以index.html为模板打包
         }),
         new CleanWebpackPlugin(), // 清除之前打包的文件
-        new VueLoaderPlugin() // vue-loader
     ],
     optimization: { // treeshaking在开发环境下未使用的js仍然存在，但提示只使用了某一个
         usedExports: true,

@@ -4,7 +4,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const merge = require('webpack-merge')
 const devConfig = require('./webpack.dev')
 const prodConfig = require('./webpack.prod')
-const VueLoaderPlugin = require('vue-loader/lib/plugin') // webpack4配置需要包含VueLoaderPlugin 在输出里面配置plugins:{new VueLoaderPlugin()} 否则会报错
 
 function resolve(dir) {
     return path.join(__dirname, '../../../../', dir)
@@ -13,27 +12,32 @@ function resolve(dir) {
 const commonConfig = { // 配置好后 npx webpack
     entry: { // 上面是简写
         // lodash: './src/lodash.js',
-        // myVue: './src/index.js',
-        sub: './src/main.js'
+        main1: './src/index.ts',
+        // sub: './src/index.js'
     },
     output: { // 输出到bundle/bundle.js
-        // publicPath: 'http://192.168.3.99:8888/mio/src/html/', // 类似base_url
+        // publicPath: 'https://localhost:8080//', // 类似base_url
         filename: '[name].js', // 打包文件的文件名 这样entry可以配置两个入口js 入口文件走这里
         chunkFilename: '[name].chunk.js', // index.js里又引入的js走这里
         // path: path.resolve(__dirname, './dist') //  __dirname指webpack.config.js文件的当前路径
     },
     resolve: {
         // extensions: ['.js', '.vue', '.json'], // 可以导入的时候忽略的拓展名范围
-        extensions: ['.js', '.json', '.vue', '.scss', '.css'], // 省略文件名后缀
+        extensions: ['.js', '.json', '.vue', 'ts', 'tsx'], // 省略文件名后缀
         alias: {
-            // '@': resolve('src'),
-            // zj: resolve('src/components'),
-            // mioJs: resolve('src/common/js'),
-            // json: resolve('src/static/mockJson'),
+            '@': resolve('src'),
+            zj: resolve('src/components'),
+            mioJs: resolve('src/common/js'),
+            json: resolve('src/static/mockJson')
         }
     },
     module: { // loader的顺序从下到上，从右到左
         rules: [
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/, // 排除在外
+                loader: 'ts-loader', // 使用babel-loader把es6语法转成es5语法
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/, // 排除在外
@@ -46,7 +50,7 @@ const commonConfig = { // 配置好后 npx webpack
                         // 弥补低版本浏览器不支持转es5语法
                         // 使用下面这个属性，不需要 import '@babel/polyfill'
                         // 他会根据使用es6的情况只代码使用到的es6语法
-                        // useBuiltIns: 'usage',
+                        useBuiltIns: 'usage',
                         // corejs: 3
                     }]]
                 }
@@ -67,18 +71,17 @@ const commonConfig = { // 配置好后 npx webpack
     },
     plugins: [
         new HtmlWebpackPlugin({ // 打包后自动生成一个HTML文件，并把打包生成的js自动引入到这个html文件中
-            template: './public/index.html' // 以index.html为模板打包
+            template: './src/index.html' // 以index.html为模板打包
         }),
-        new CleanWebpackPlugin(), // 清除之前打包的文件
-        new VueLoaderPlugin() // vue-loader
+        new CleanWebpackPlugin(),
     ],
     optimization: { // treeshaking在开发环境下未使用的js仍然存在，但提示只使用了某一个
         usedExports: true,
-        // runtimeChunk: { // 老版本的webpack会由于manifest造成因为没改代码
-        //     // 也会让contenthash改变, 配置上runtimeChunk会把manifest造成的
-        //     // 不同js代码单独抽离出来（抽离的文件runtime.js）
-        //     name: 'runtime'
-        // },
+        runtimeChunk: { // 老版本的webpack会由于manifest造成因为没改代码
+            // 也会让contenthash改变, 配置上runtimeChunk会把manifest造成的
+            // 不同js代码单独抽离出来（抽离的文件runtime.js）
+            name: 'runtime'
+        },
         // // production下不需要 // 在mode: 'development'配置Tree Shaking
         // splitChunks: { // 默认配置即可 代码分割
         //     chunks: 'all',

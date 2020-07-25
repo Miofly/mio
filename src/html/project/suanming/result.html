@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 72.2667px;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>八字精批测算结果-算命平台</title>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link rel="shortcut icon" href="http://www.trtui.cn/statics/ffsm/favicon.ico">
+	<link href="result/page1.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="result/jweixin-1.6.0.js"></script>
+	<script src="result/jquery.min.js"></script>
+	<script>
+        $(function () {
+            $('#name').html('姓名：' + localStorage.getItem('smName'))
+            $('#gender').html(localStorage.getItem('smGender'))
+            $('#birthday').html(localStorage.getItem('smDay'))
+			var year = localStorage.getItem('smMytime').slice(0, 4)
+            $('#shengxiao').html(getShengXiao(year))
+
+            var number = new Array("零", "一", "二", "三", "四", "五", "六", "七", "八", "九");
+            var s = [];
+            for (let i = 0; i < year.length; i++) {
+                if (number[year.charAt(i)])  s.push(number[year.charAt(i)])
+            }
+
+            $('#myTime').html(s.join('') + localStorage.getItem('smMytime').slice(4))
+        })
+        function getShengXiao(birth) { // 生肖计算
+            birth += ''
+            var len = birth.length
+            if (len < 4 && len != 2) {
+                return ''
+            }
+            if (len == 2) {
+                birth - 0 > 30 ? birth = '19' + birth : birth = '20' + birth
+            }
+            var year = (new Date(birth)).getFullYear()
+            var arr = ['猴', '鸡', '狗', '猪', '鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊']
+            return /^\d{4}$/.test(year) ? arr[year % 12] : ''
+        }
+	</script>
+</head>
+<body>
+<header class="public_header">
+	<h1 class="public_h_con">八字精批结果</h1>
+</header>
+<section class="page3-bg-1">
+	<img style="width: 100%;" src="result/bzjp_1.png" alt="八字">
+	<div class="material-box">
+		<div class="material-img1"></div>
+		<div class="material-img2"></div>
+		<div class="top clearfix">
+			<em class="left center-text">您输入的个人资料</em>
+		</div>
+		<div class="center clearfix">
+			<div class="infor clearfix">
+				<div class="infor1 left">
+					<span class="key-text">性别:</span>
+					<span class="value-text" id="gender"></span></div>
+				<div class="infor2 left">
+					<span class="key-text">生肖:</span>
+					<span class="value-text" id="shengxiao"></span></div>
+			</div>
+			<div class="infor-data clearfix">
+				<span class="key-text left">生辰:</span>
+				<div class="value-text left">
+					<p id="birthday"></p>
+					<p id="myTime"></p>
+				</div>
+			</div>
+			<div class="infor-table">
+				<p class="key-text">您的五行八字资料</p>
+				<table>
+					<tbody>
+					<tr>
+						<th>八字</th>
+						<th>年柱</th>
+						<th>月柱</th>
+						<th>日柱</th>
+						<th>时柱</th>
+					</tr>
+					<tr>
+						<td>天干</td>
+						<td>壬</td>
+						<td>己</td>
+						<td>乙</td>
+						<td>丙</td>
+					</tr>
+					<tr>
+						<td>地支</td>
+						<td>申</td>
+						<td>酉</td>
+						<td>卯</td>
+						<td>子</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="solution-box clearfix">
+				<div class="sol-left">
+					<p>本命属猴，剑锋金命。日主天干为剑锋金乙，生于秋季。<span style="color: rgb(255, 0, 0);"></span></p>
+					<p>
+					</p>
+				</div>
+				<!--<div class="sol-right">-->
+				<!--<img src="//statics/ffsm/bazimf/images/pic8.png" alt="">-->
+				<!--</div>--></div>
+		</div>
+	</div>
+	<div class="content-box page3-content">
+		<div class="title clearfix" style="display: flex">
+			<img style="text-align: center;margin: 2% auto;" src="result/pic-text4.png" alt=""></div>
+		<div class="list-box list1">
+			<h2 class="clearfix">
+				<span class="icon icon1"></span>
+				<em>八字排盘</em></h2>
+			<div class="list-text">
+				<span class="red">提示:</span>
+				<span>八字命盘从阴阳干支三合历取得。上排是天干，由五行「金水木火土」轮流排列。下排是地支，用十二生肖顺序排列。十二生肖可转换成五行。</span></div>
+			<table>
+				<tbody>
+				<tr>
+					<th>八字</th>
+					<th>年柱</th>
+					<th>月柱</th>
+					<th>日柱</th>
+					<th>时柱</th>
+				</tr>
+				<tr>
+					<!--1=天干 2地支 3本气 4余气 5杂气-->
+					<th>天干</th>
+					<td>壬/<font color="blue">偏印</font></td>
+					<td>己/<font color="blue">正印</font></td>
+					<td>乙/<font color="blue">伤官</font></td>
+					<td>丙/<font color="blue">偏财</font></td>
+				</tr>
+				<tr>
+					<th>地支</th>
+					<td>申/<font color="blue">正印</font></td>
+					<td>酉/<font color="blue">偏财</font></td>
+					<td>卯/<font color="blue">偏印</font></td>
+					<td>子/<font color="blue">伤官</font></td>
+				</tr>
+				<tr>
+					<th>藏干</th>
+					<td>壬庚戊</td>
+					<td>辛</td>
+					<td>乙</td>
+					<td>癸</td>
+				</tr>
+				<tr>
+					<th>命宫</th>
+					<td colspan="4">戊申</td>
+				</tr>
+				<tr>
+					<th>胎元</th>
+					<td colspan="4">庚子</td>
+				</tr>
+				<tr>
+					<th>胎息</th>
+					<td colspan="4">丙子</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--<div class="list-box list2">
+		  <h2 class="clearfix">
+			<span class="icon icon2"></span>
+			<em>吉神凶煞</em></h2>
+		  <table>
+			<tbody>
+			  <tr>
+				<th>四柱</th>
+				<th>神煞</th></tr>
+			  <tr>
+				<th>年柱</th>
+				<td>月德 天乙贵人</td></tr>
+			  <tr>
+				<th>月柱</th>
+				<td>病符 亡神 反朝桃花 四大空亡 天福贵 福星贵 截路空亡 大败</td></tr>
+			  <tr>
+				<th>日柱</th>
+				<td>福德 天喜 桃花 绞煞 天德 流霞 阴阳差错 交神</td></tr>
+			  <tr>
+				<th>时柱</th>
+				<td>岁破 灾煞 天哭</td></tr>
+			</tbody>
+		  </table>
+		</div>-->
+		<div class="list-box list3">
+			<h2 class="clearfix">
+				<span class="icon icon3"></span>
+				<em>五行综述</em></h2>
+			<table>
+				<tbody>
+				<tr>
+					<th>八字</th>
+					<th>壬申</th>
+					<th>己酉</th>
+					<th>乙卯</th>
+					<th>丙子</th>
+				</tr>
+				<tr>
+					<th>五行</th>
+					<td>水金</td>
+					<td>土金</td>
+					<td>木木</td>
+					<td>火水</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="content-box page3-content">
+		<div class="title" style="display: flex">
+			<img style="text-align: center;margin: 2% auto;" src="result/pic-text2.png" alt=""></div>
+		<div class="content-warp1">
+			<div class="warp1-text-box">
+				<h3>●性格分析:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p></p>
+					<p>
+						乙同属木性,与木之兄的阳木相对,有木之弟的阴性气质。木所具有温和、安静特性较常在乙身上出现。<br>乙源自轧,意指互相倾轧或互相摩擦,春季时,万物会自皮中挣出逐渐成长。<br>若以天文现象而言,甲是一闪而过的雷电,而乙则是吹拂树尖的风。性格上而言,甲是树木,而乙则是攀沿树木的葛藤。也就是说甲会直往上伸展,而乙则是柔软、弯曲身体的蜿蜒而上。<br>由于乙的性格温和,因此多半不是自我主张过强的人,就算问题发生时,也多采取静观事变的态度,进而寻求合理的解决方法。但因过于重视人和,往往成了好好先生,易受四周环境所影响。<br><font
+							color="#0000ff">乙卯日出生的人特立独行,有朝目标勇往直前的性格和坚强的信念,然而因气势过强反易成问题。不论吉、凶的振幅都极大,此点需注意。</font></p>
+				</div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●爱情分析:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p>您命中有:红艳桃花2朵</p>
+					<p></p>
+					<p>
+						命局中日支为夫妻宫，日坐七杀为闲神，说明你个性强势，喜欢寻求刺激的感情关系，婚前感情机会多，感情情况较复杂。由于你和你的伴侣容易因为矛盾出现碰撞，你很可能因为争执而不堪其烦，移情别恋。为了维持感情幸福，你需要主动反思和改善自己强势偏执的性格。</p>
+					<p>婚姻感情命格</p>
+					<p>
+						在婚姻中，您不太能融入两人的婚姻家庭生活，您比较容易遇到性格比较霸道，脾气比较大的配偶，与自己的年龄差距较大或心智较为成熟稳重，若日支五行为命局之病，还会出现厌恶配偶的情况，有一定年龄差的关系可调整自己，让感情变得更加充实，否则婚姻容易多争吵不和。因您有较多与异性接触的机会，即便在婚后，您也可能遇到来自感情方面的困扰，而且结婚以后或有与配偶父母不和的情况。</p>
+					<p>性格表现的比较好，很容易吸引到异性的关注，感情生活比较丰富。同时浪漫多情，可以有机会经历偶像剧般的爱情。配偶相貌俊美，走出去往往是惹人羡慕的一对，但也要谨防对方花心哦。</p>
+					<p></p></div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●事业分析:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p>
+						乙具有木的温柔、敦厚，不论任何行业都能柔软的适应。不过，最好从事协助性的工作，如主管不在时，代理主管辅佐事务，要比当主管领导部属来得胜任。甲给人的印象是可依靠的高树，而乙则是温和柔弱的小草木，因此乙的人很重情趣，多从事绘画、音乐等艺术工作，如果成为教师也多教导情趣方面的知识。<br>从木性的观点来看，甲适合使用木材原料的行业，而乙则适合木材加工业，如纸浆业、制纸业、纸商，或加工植物纤维而成的衣料制造，贩卖业。五谷杂粮、花卉、青果、果实等流通、贩卖也在此范围内。纸制品关系可扩大来考虑，如文具或画籍、杂志的出版、印刷业等都很好。<br>丙年的人最能表现乙的典型本性，由于他会倾尽自己的温柔，为世人谋福利，所以很适合慈善事业，宗教或教育界，这种性格若进入企业界，也多半从事促进人类健康、福利的工作。
+					</p>
+					<p>宜木者，&nbsp;喜东方。&nbsp;可从事木材，&nbsp;木器，&nbsp;家具，&nbsp;装潢，&nbsp;木成品，&nbsp;纸业，&nbsp;种植，养花，&nbsp;育树苗，&nbsp;敬神物品，&nbsp;香料，&nbsp;植物性素食品等经营和事业。</p>
+				</div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●健康分析:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p></p>
+					<p>易患疾病:</p>
+					<p>易发症状:</p>
+					<p>从中医养生上来说，您基本上是<font color="#ff4632"></font>型人。</p>
+					<p>养生要点:</p>
+					<p>生活起居:</p>
+					<p>饮食调养:</p>
+					<p>保健膳食:</p></div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●财运分析:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p>乙日生的人表面上虽有“开口谈钱太俗气”的气概，但内心却有惜金的一面。由于生性使然，对于别人的要求很难断然拒绝，事后却又懊悔不已，不论借人大钱、小钱都有这种倾向。</p>
+				</div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●三命通会:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p>
+						生于乙日丙子时,以六乙鼠贵格论。乙用庚为正官,时支子使乙处死的状态;又以丙为伤官,丙与辛化水消煞,如果四柱中没有庚辛,又没有丑绊午冲的情况,才算是六乙鼠贵格,成为贵人命。如果犯了上面的忌讳,而且又不得月令,没有可以补救的东西,此命凶狠恶毒,贫困下贱,有病缠身,而且短命。
+					</p>
+					<p>乙卯日丙子时生，这是清高的命，年月支是辰戌丑未亥，而且不见官星，尊贵。</p>
+				</div>
+			</div>
+			<div class="warp1-text-box">
+				<h3>●未来一年:
+					<span></span></h3>
+				<div class="warp1-text">
+					<p><font color="blue">2020年 07月 日～2020年 8月 8日：</font><br>
+					</p>
+					<p>五行秀气色生财，天光雾月乐悠悠。</p>
+					<p>生挫折，防与人发生纠纷。</p>
+					<p><font color="green">十神为七杀：</font>其表象范围大多与武职、军衔、诉讼、外敌、建筑，以及儿女、女性的情人等有关。</p>
+					<p>吉象：做事干脆利落，工作效率高，较易文成武就。侠义助人受人感激，名声显赫，有地位或有权威。</p>
+					<p>凶象：个性太张扬，聪明反被聪明误，自己容易受损失。生活起伏较大，身体易受伤残。女性早婚不利。</p>
+					<font color="blue">2020年 8月 8日～2020年 9月 8日：</font><br>
+					<p>钓得鱼儿已上钩，俄然跃起水中游。</p>
+					<p>树威信，工作顺利，办事成功。</p>
+					<p><font color="green">十神为正印：</font>其表象范围大多与学业、艺术，以及长辈、师长、母亲、女婿等有关。</p>
+					<p>吉象：自己的天赋较易发挥，学业艺术方面有发展。</p>
+					<p>凶象：劳神费心，工作受自己的情绪影响较大，女性不利子女。</p>
+					<font color="blue">2020年 9月 8日～2020年 10月 8日：</font><br>
+					<p>有缘有财过晚景，无忧无虑乐升平。</p>
+					<p>进退不定，防小人暗算，守旧业可也。</p>
+					<p><font color="green">十神为偏印：</font>其表象范围大多与学术研究、爱好特长，以及长辈、 贵人、母亲等有关。</p>
+					<p>吉象：较易得贵人帮助，爱好特长易发挥，学术研究较易有成就。</p>
+					<p>凶象：学业或事业有波折，生活不安定，名誉有损，或母亲有事。不利子女，易发生交通事故。</p>
+					<font color="blue">2020年 10月 8日～2020年 11月 7日：</font><br>
+					<p>乍雨乍晴春不定，花开花落两无情。</p>
+					<p>损财，办事生挫折，防冲体生暗疾。</p>
+					<p><font color="green">十神为比劫：</font>其表象范围大多与本身的思想言行、陈规陋习、决策计划，以及朋友、同辈、兄弟姐妹等有关。</p>
+					<p>吉象：理想远大，进取心强，有主见，敢于与不良现象作斗争。</p>
+					<p>凶象：不容易听取别人的意见，固执已见、独断专行，多招惹诽谤有伤名誉。做事没有恒心，说的多做的少。易染上酗酒赌博等恶习。男性要防婚变，女性婚期早不利。</p>
+					<font color="blue">2020年 11月 7日～2020年 12月 7日：</font><br>
+					<p>水满池塘花满枝，青鲜叶里自闻香。</p>
+					<p>稳步上升，家中有小合想事。益同胞之运。</p>
+					<p><font color="green">十神为比肩：</font>其表象范围大多与本身的事业、思想言行、决策、健康安全，以及兄弟姐妹、同学、同事、朋友、近邻等有关。</p>
+					<p>吉象：个性张扬，事业心较强，勇于向不利环境挑战，在异乡较顺利，较得朋友之助力。</p>
+					<p>凶象：易争强斗胜、独断专行，常遭小人陷害，或受兄弟姐妹、同事或朋友拖累而破财，合作事业易散伙，父亲受牵累。夫妻易生是非。</p>
+					<font color="blue">2020年 12月 7日～2021年 1月 6日：</font><br>
+					<p>虽有浮云掩月光，俨然风卷云收藏。</p>
+					<p>冲财，冲长辈体差，官场交际防官非。</p>
+					<p><font color="green">十神为伤官：</font>其表象范围大多与理想追求、爱好特长、文学技术、公共关系、迁移调动，以及儿女、学生、晚辈、部属、性欲等有关。</p>
+					<p>吉象：比平时有较高的智慧和才能，聪明智谋多，在音乐艺术、爱好特长方面较易成功。</p>
+					<p>凶象：本性过度暴露，惹事生非好管事，易与人产生过节，孤独寂寞。男性易盲目追求爱情而有损名誉及事业。女性防婚姻不顺利。</p>
+					<font color="blue">2021年 1月 6日～2021年 2月 4日：</font><br>
+					<p>天赐祯祥纳庆多，花前月下听高歌。</p>
+					<p>工作顺利，好运气，收入高。</p>
+					<p><font color="green">十神为食神：</font>其表象范围大多与开业迁居、文学写作、自由职业、专业技术，以及子女、学生、下属、性欲等有关。</p>
+					<p>吉象：学业事业较易进步和成功，天赋较易发挥。爱情也较易产生和进展，易交桃花运。女性较易怀胎生育。</p>
+					<p>凶象：聪明易被聪明误，产生矛盾，引起官司诉讼。外表光华内里平淡，防过度劳神而损身心；盲目追求爱情而有损名誉及事业。男女要防矛盾和婚变。</p>
+					<font color="blue">2021年 2月 4日～2021年 3月 6日：</font><br>
+					<p>改换门闾事更新，锦衣玉食福乃臻。</p>
+					<p>财源广进，工作顺利，好运。男性益妻。</p>
+					<p><font color="green">十神为正财：</font>其表象范围大都与财产、金钱，以及父亲、男性的妻子或女友等有关。</p>
+					<p>吉象：财运亨通，有比平时较多求财的机遇。父亲较有利，或容易交上女友，姻缘不错。</p>
+					<p>凶象：易引起财产或金钱纠纷，意外破耗。财多伤母克妻，易发生感情破裂。</p>
+					<font color="blue">2021年 3月 6日～2021年 4月 5日：</font><br>
+					<p>财如春水源源进，福似朝花朵朵新。</p>
+					<p>平运，防得后复失，存款宜购置，守旧业较好。</p>
+					<p><font color="green">十神为偏财：</font>其表象范围大都与商业、财产、金钱，以及父亲、男性的情人、女性的婆婆等有关。</p>
+					<p>吉象：人缘好口碑佳，生意买卖比较顺利，富裕发达。男性风流豪爽，易得女人喜欢。</p>
+					<p>凶象：本地求财不易得，财虽多但不易存下，婚姻感情易变。</p>
+					<font color="blue">2021年 4月 5日～2021年 5月 5日：</font><br>
+					<p>嫩竹出竿风势恶，全凭老竹傍其身。</p>
+					<p>财源广进，有购置建设等好事。女性益夫。</p>
+					<p><font color="green">十神为正官：</font>其表象范围大多与职位、名誉、权力、事业竞争、上司，以及子女、女性的丈夫或男友等有关。</p>
+					<p>吉象：职位权力易稳固或上升，官司易获胜诉或平反，学业或事业较顺利。男性较易获得子女尊重。女性的丈夫较有地位或权威。</p>
+					<p>凶象：易遭诽谤财受损，易发生是非争执，影响职位、名誉，兄弟姐妹易发生刑伤。女性之丈夫或男友易有不利事。</p>
+					<font color="blue">2021年 5月 5日～2021年 6月 6日：</font><br>
+					<p>牡丹原是百花王，开向人间分外香。</p>
+					<p>工作浮动，防小人暗算，驾车谨慎，夜勿远走。</p>
+					<p><font color="green">十神为七杀：</font>其表象范围大多与武职、军衔、诉讼、外敌、建筑，以及儿女、女性的情人等有关。</p>
+					<p>吉象：做事干脆利落，工作效率高，较易文成武就。侠义助人受人感激，名声显赫，有地位或有权威。</p>
+					<p>凶象：个性太张扬，聪明反被聪明误，自己容易受损失。生活起伏较大，身体易受伤残。女性早婚不利。</p>
+					<font color="blue">2021年 6月 6日～2021年 7月 7日：</font><br>
+					<p>数注紫衣人指人，财禄功名自有期。</p>
+					<p>大得幸运，有发展，顺利。</p>
+					<p><font color="green">十神为正印：</font>其表象范围大多与学业、艺术，以及长辈、师长、母亲、女婿等有关。</p>
+					<p>吉象：自己的天赋较易发挥，学业艺术方面有发展。</p>
+					<p>凶象：劳神费心，工作受自己的情绪影响较大，女性不利子女。</p>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<style type="text/css">
+	.ainuo_foot_nav {
+		display: block;
+		padding: 2px 0;
+		background: #ff2e0c;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 99999;
+		max-width: 640px;
+	}
+
+	.ainuo_foot_nav ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	.ainuo_foot_nav li {
+		width: 20%;
+		text-align: center;
+		float: left;
+	}
+
+	.ainuo_foot_nav li a {
+		width: 100%;
+		display: block;
+	}
+
+	.ainuo_foot_nav .foothover i {
+		color: #f13030;
+	}
+
+	.ainuo_foot_nav li i {
+		display: block;
+		line-height: 25px;
+		height: 25px;
+		margin: auto;
+		padding: 0;
+		width: 25px;
+		overflow: hidden;
+		background-size: 100%;
+	}
+
+	.ainuo_foot_nav li a.botpost {
+		position: relative;
+		margin-top: -11px;
+		background-color: rgba(0, 0, 0, 0.0);
+	}
+
+	.ainuo_foot_nav li a.botpost em {
+		background: #ffffff;
+		padding: 2px;
+		border: 1px solid #ff5e5e;
+		display: block;
+		border-radius: 50%;
+		width: 30px;
+		height: 30px;
+		margin: 0 auto;
+		margin-bottom: 2px;
+		padding-bottom: 0px;
+	}
+
+	.ainuo_foot_nav li p {
+		overflow: hidden;
+		font-size: 12px;
+		height: 16px;
+		line-height: 16px;
+		color: #fff;
+		font-weight: 400;
+		margin: 0;
+		padding: 0;
+	}
+
+	.shouye_1 {
+		background: url(/statics/ffsm/public/images/shouye.png) no-repeat;
+	}
+
+	.wddd_1 {
+		background: url(/statics/ffsm/public/images/dingdan.png) no-repeat;
+	}
+
+	.lijics_1 {
+		background: url(/statics/ffsm/public/images/suan.png) no-repeat;
+	}
+
+	.gengduo_1 {
+		background: url(/statics/ffsm/public/images/gengduo.png) no-repeat;
+	}
+
+	.grzx_1 {
+		background: url(/statics/ffsm/public/images/grzx.png) no-repeat;
+	}
+</style>
+<script type="text/javascript">
+    function _resize() {
+        var html = document.getElementsByTagName('html')[0]
+        var hW = html.offsetWidth > 750 ? 750 : html.offsetWidth
+        var fS = 100 / 750 * hW
+        html.style.fontSize = fS + 'px'
+    }
+
+    _resize()
+    window.onresize = function () {
+        _resize()
+    }
+</script>
+<link href="result/extend_module.css" rel="stylesheet" type="text/css">
+
+<link href="result/quanju.css" rel="stylesheet" type="text/css">
+<script>
+    window.requestAnimFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60)
+            }
+    })()
+    $('#alertMarquee').each(function () {
+        $('.contents').addClass('has-alert-marquee')
+
+        var $this = $(this)
+        var $cont = $this.find('.inner')
+        var w = $this.width()
+        var sw = w + $cont.width()
+        var n = w / 375 * 1
+        var i = 0
+        var movingFn = function () {
+            i = i + n
+            if (i > sw) {
+                i = 0
+            }
+            $cont.css({'margin-left': -i})
+            window.requestAnimFrame(movingFn)
+        }
+        window.requestAnimFrame(movingFn)
+    })
+</script>
+<script language="javascript" src="result/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="result/mshare.js"></script>
+<script>
+
+
+    function dl_getCookie(cname) {
+        var name = cname + '='
+        var ca = document.cookie.split(';')
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim()
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length)
+            }
+        }
+        return ''
+    }
+
+    function addUrlPara1(value) {
+        var Cts = window.location.href
+        var name = 'dl'
+        if (Cts.indexOf('dl') <= 0) {
+            var currentUrl = Cts.split('#')[0]
+            if (/\?/g.test(currentUrl)) {
+                currentUrl += '&' + name + '=' + value
+            } else {
+                currentUrl += '?' + name + '=' + value
+            }
+            if (Cts.split('#')[1]) {
+
+                history.replaceState(null, null, currentUrl + '#' + Cts.split('#')[1])
+            } else {
+                history.replaceState(null, null, currentUrl)
+            }
+        }
+    }
+
+    var dl_id = dl_getCookie('dl')
+    if (dl_id != '') {
+        addUrlPara1(dl_id)
+    }
+</script>
+</body>
+</html>

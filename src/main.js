@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App'
-
 import setting from './pages/setting/home.vue'
 import user from './pages/user/home.vue'
 import index from './pages/index/home.vue'
@@ -28,12 +27,14 @@ import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
 
 Vue.prototype.ui = ui
+
+Vue.component('index', index)
+
 Vue.prototype.tu = tu
 Vue.prototype.router = Router
 
 Vue.component('setting', setting)
 Vue.component('user', user)
-Vue.component('index', index)
 Vue.component('module', module)
 Vue.component('plugin', plugin)
 Vue.component('router-link', routerLink)

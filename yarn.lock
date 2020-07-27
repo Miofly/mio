@@ -2427,8 +2427,8 @@
 
 "@vue/cli@^4.4.6":
   version "4.4.6"
-  resolved "https://registry.npm.taobao.org/@vue/cli/download/@vue/cli-4.4.6.tgz#61510b5a673f1e505ff6139d15850ca0238baee9"
-  integrity sha1-YVELWmc/HlBf9hOdFYUMoCOLruk=
+  resolved "https://registry.yarnpkg.com/@vue/cli/-/cli-4.4.6.tgz#61510b5a673f1e505ff6139d15850ca0238baee9"
+  integrity sha512-IaLrnZ80BrBLPAkBup8bn363S1NHfNf8jfCJLWoXad598cUm6byMqntWtDFeTq0c3KohXcsIbT+nqLc5S9vz0w==
   dependencies:
     "@babel/preset-env" "^7.9.6"
     "@vue/cli-shared-utils" "^4.4.6"

@@ -25,6 +25,7 @@ import Router from '@/router'
 // 两个公用js
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
+// import $ from 'mioJs/utils/zepto.min'
 
 Vue.prototype.ui = ui
 

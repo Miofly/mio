@@ -19,8 +19,8 @@ module.exports = {
 
         }
     },
+    // 配置没有export导出的js
     chainWebpack: config => {
-        // 配置没有export导出的js
         config.module
             .rule('zepto')
             .test(require.resolve('./src/common/js/utils/zepto.min.js'))
@@ -30,8 +30,7 @@ module.exports = {
             .use('script')
             .loader('script-loader')
             .end()
-        config.module
-            .rule('tvp')
+        config.module.rule('tvp')
             .test(require.resolve('./src/common/js/utils/tvp.js'))
             .use('exports')
             .loader('exports-loader?window.tvp')
@@ -39,6 +38,8 @@ module.exports = {
             .use('script')
             .loader('script-loader')
             .end()
+        config.plugin('env')
+            .use(require.resolve('webpack/lib/ProvidePlugin'), [{$: 'zepto'}])
         // 配置快捷访问文件夹
         config.resolve.alias
             .set('@', resolve('src'))

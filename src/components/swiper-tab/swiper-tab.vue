@@ -76,12 +76,13 @@
             this.myTab = this.tabClick
             var that = this
             // 获取设备宽度
-            uni.getSystemInfo({
+            uni.getSystemInfo({ // 用于控制每个tab的宽度
                 success(e) {
                     if (that.tabLists.length <= 5) {
                         that.isWidth = e.windowWidth / that.tabLists.length // 宽度除以导航标题个数=一个导航所占宽度
                     } else {
-                        that.isWidth = e.windowWidth / 5
+                        // that.isWidth = e.windowWidth / 4
+                        that.isWidth = e.windowWidth / 5.5
                     }
                 }
             })

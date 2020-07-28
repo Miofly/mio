@@ -239,7 +239,7 @@
             "path": "pages/index/itest",
             "name": "itest",
             "style": {
-                "navigationBarTitleText": "主页",
+                "navigationStyle": "custom",
                 "usingComponents": {
                     // #ifdef MP-WEIXIN
                     "txv-video": "plugin://tencentvideo/video"

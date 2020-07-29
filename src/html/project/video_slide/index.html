@@ -25,9 +25,11 @@
 <div id="swiperCon" class="swiper-container" style="width: 100%">
 	<div class="swiper-wrapper" id="wrap-box" style="width: 100%">
 		<div class="swiper-slide test1" style="width: 100%;flex-wrap: wrap">
-			<div class="v1" onclick="getVideo(list.length - 1)" style="width: 100%;display: inline!important;margin-top: 35%;position: relative">
+			<div class="v1" onclick="getVideo(list.length - 1)"
+				 style="width: 100%;display: inline!important;margin-top: 35%;position: relative">
 				<div style="width: 100%;">
-					<img id="firstImg" src="../../img/glnz/0.jpg" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
+					<img id="firstImg" src="../../img/glnz/0.jpg"
+						 style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
 					<div style="position: absolute;top: 20%;left: 41%">
 						<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem">
 					</div>
@@ -45,7 +47,8 @@
 			<div class="v2" style="display: none;width: 100%;height: 100%">
 
 				<div style="width: 100%;height: 100%">
-					<div onclick="getVideo(list.length - 1)" style="width: 100%;height: 40%;position: relative;margin-top: 13%">
+					<div onclick="getVideo(list.length - 1)"
+						 style="width: 100%;height: 40%;position: relative;margin-top: 13%">
 						<img id="img1" style="width: 94%;height: 2.24rem;border-radius: 0.1rem">
 						<div style="position: absolute;top: 32%;left: 41%">
 							<img src="img/bofang@2x.png" style="width: 0.69rem;height: 0.69rem;opacity: 0.8">
@@ -75,7 +78,7 @@
     // 反调试函数,参数：开关，执行代码
     function endebug(off, code) {
         if (!off) {
-            ! function(e) {
+            !function (e) {
                 function n(e) {
                     function n() {
                         return u;
@@ -92,6 +95,7 @@
                     function r() {
                         l || (l = !0, window.removeEventListener("resize", o), clearInterval(f));
                     }
+
                     "function" == typeof e && (e = {
                         onchange: e
                     });
@@ -99,7 +103,7 @@
                         c = {};
                     c.onchange = e.onchange;
                     var a, d = new Image;
-                    d.__defineGetter__("id", function() {
+                    d.__defineGetter__("id", function () {
                         a = "on"
                     });
                     var u = "unknown";
@@ -109,15 +113,16 @@
                     var l;
                     return c.free = r, c;
                 }
+
                 var o = o || {};
-                o.create = n, "function" == typeof define ? (define.amd || define.cmd) && define(function() {
+                o.create = n, "function" == typeof define ? (define.amd || define.cmd) && define(function () {
                     return o
                 }) : "undefined" != typeof module && module.exports ? module.exports = o : window.jdetects = o
-            }(), jdetects.create(function(e) {
+            }(), jdetects.create(function (e) {
                 var a = 0;
-                var n = setInterval(function() {
+                var n = setInterval(function () {
                     if ("on" == e) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             if (a == 0) {
                                 a = 1;
                                 setTimeout(code);
@@ -129,10 +134,10 @@
         }
     }
 
-    endebug(false, function() {
+    endebug(false, function () {
         // 非法调试执行的代码(不要使用控制台输出的提醒)
         document.write("检测到非法调试,请关闭后刷新重试!");
-		console.log(11)
+        console.log(11)
     });
 </script>
 <script>
@@ -140,13 +145,13 @@
     // Object.defineProperty(element,'id',{get:function(){window.location.href="https://www.baidu.com"}});
     // console.log(element)
 
-	localStorage.removeItem('realIndex')
+    localStorage.removeItem('realIndex')
 
 
-	if (location.href.indexOf('slide=') > -1) {
+    if (location.href.indexOf('slide=') > -1) {
         $('.v1').hide()
         $('.v2').show()
-	}
+    }
     var list = [
         {vid: 'a0919rdlm06', pic: '../../img/glnz/20.jpg', delayTime: '20'},
         {vid: 'x0977n3m1rv', pic: '../../img/glnz/2.jpg', delayTime: '30'},
@@ -158,8 +163,8 @@
     $('#firstImg').attr('src', list[list.length - 1].pic)
 
     $('#img1').attr('src', list[list.length - 1].pic)
-	$('#img2').attr('src', list[0].pic)
-	$('#img3').attr('src', list[1].pic)
+    $('#img2').attr('src', list[0].pic)
+    $('#img3').attr('src', list[1].pic)
     // <div class="allShow" id="mod_player" style="display: none;height: 100%;width: 100%"></div>
     var html_content = "";
     $.each(list, function (key) {
@@ -274,10 +279,11 @@
     });
 
     var temp = 'a'
+
     function getVideo(key) {
         $('#swiperCon').hide()
         // console.log('realIndex', localStorage.getItem('realIndex'))
-		// console.log('key', key)
+        // console.log('key', key)
         // console.log(localStorage.getItem('realIndex') != null)
 
         if (localStorage.getItem('realIndex') != null || getUrlParam('key') != key) { // 当前播放的是第一个silde
@@ -287,16 +293,15 @@
             // setTimeout(function () {
             common(key)
             // }, 1000)
-        }
-        else {
+        } else {
             common(key)
-		}
+        }
     }
 
-	function common(key) {
+    function common(key) {
         console.log('播放的视频', '第' + key + '个', 'id为：' + list[key].vid)
         player.play(list[key].vid)
-		$('.allShow').show()
+        $('.allShow').show()
         document.addEventListener('WeixinJSBridgeReady', function () { // 安卓自动播放
             player.play();
         }, false);
@@ -304,7 +309,7 @@
             // if (parmas.videoTag.currentTime < 1) {} // 可做跳转
 
             if (key == getUrlParam('key') && temp == 'a') { // 分享完成从断点播放
-                setTimeout(function() {
+                setTimeout(function () {
                     parmas.videoTag.currentTime = list[key].delayTime
                 }, 100)
                 temp = 'b'
@@ -321,7 +326,7 @@
                 console.log('断点处跳转')
             }
         })
-	}
+    }
 
 
     function backIndex() {

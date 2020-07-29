@@ -2,7 +2,7 @@
 	<mescroll-uni ref="mescrollRef" top="0" :down="downOption" :textSize=16
 				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
-		<view v-for="(item, index) in dataLists" :key="index"
+		<view v-for="(item, index) in dataLists" :key="index" @click="playVideo"
 			  :class="[index%2==0? 'fl' :'fr']" style="width: 48%;position: relative;height: 500rpx;margin: 1% 1%;">
 			<imgLoad :scroll-top="scrollTop" mode="heightFix" style="width: 100%;height: 500rpx"
 					 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' :
@@ -72,6 +72,9 @@
             }
         },
         methods: {
+            playVideo () {
+                this.router.push({name: 'lbVideoPlay'})
+            },
             scroll(e) { // 用于懒加载图片使用
                 this.scrollTop = this.mescroll.scrollTop
             },

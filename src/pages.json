@@ -8,6 +8,34 @@
             }
         },
         {
+            "path": "pages/plugin/lbVideo/index",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lbIndex"
+        },
+        {
+            "path": "pages/plugin/lbVideo/rank",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lbRank"
+        },
+        {
+            "path": "pages/plugin/lbVideo/searchVideo",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lbSearchVideo"
+        },
+        {
+            "path": "pages/plugin/lbVideo/videoPlay",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lbVideoPlay"
+        },
+        {
             "path": "pages/index/movie/dm",
             "style": {
                 "navigationStyle": "custom"
@@ -536,7 +564,8 @@
     "easycom": {
         "autoscan": true,
         "custom": {
-            "movie-(.*)": "@/components/movie/movie-$1/movie-$1.vue"
+            "movie-(.*)": "@/components/movie/movie-$1/movie-$1.vue",
+            "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
         }
     },
     "tabBar": {

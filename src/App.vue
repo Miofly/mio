@@ -132,4 +132,7 @@
 
 <style lang='scss'>
 	@import "common/css/summary/main";
+
+	@import "uview-ui/index.scss";
+
 </style>

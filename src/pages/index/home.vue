@@ -32,6 +32,7 @@
                     {title: '时间模块', name: 'timeHome', icon: 'user', color: 'gradual-pink', url: 'timeHome'},
                     {title: '工具模块', name: 'tool', icon: 'user', color: 'gradual-blue', url: 'toolIndex'},
                     {title: 'a', name: 'tool', icon: 'user', color: 'gradual-green', url: 'mvHome'},
+                    {title: '裂变', name: 'tool', icon: 'user', color: 'gradual-pink', url: 'lbIndex'},
                 ],
                 elementGoods: [
                     {title: '上拉加载', name: '下滑刷新', icon: 'user', color: 'gradual-blue', url: 'loadHome'},

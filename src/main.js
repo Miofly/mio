@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+
 import setting from './pages/setting/home.vue'
 import user from './pages/user/home.vue'
 import index from './pages/index/home.vue'
@@ -17,6 +18,9 @@ import mvIndex from './pages/index/movie/mvIndex'
 import lxj from './pages/index/movie/lxj'
 import zy from './pages/index/movie/zy'
 
+import uView from 'uview-ui'
+
+
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
 import {RouterMount} from 'uni-simple-router' // 类似vue-router的组件
@@ -25,7 +29,8 @@ import Router from '@/router'
 // 两个公用js
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
-// import $ from 'mioJs/utils/zepto.min'
+Vue.use(uView)
+Vue.component('setting', setting)
 
 Vue.prototype.ui = ui
 
@@ -34,7 +39,6 @@ Vue.component('index', index)
 Vue.prototype.tu = tu
 Vue.prototype.router = Router
 
-Vue.component('setting', setting)
 Vue.component('user', user)
 Vue.component('module', module)
 Vue.component('plugin', plugin)

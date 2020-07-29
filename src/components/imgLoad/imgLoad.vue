@@ -1,6 +1,6 @@
 <template>
 	<view class="easy-loadimage" :id="uid">
-		<image class="origin-img" :src="imageSrc" :mode="mode" @click="ui.showImg(imageSrc)"
+		<image class="origin-img" :src="imageSrc" :mode="mode" @click="showClick && ui.showImg(imageSrc)"
 			   v-if="loadImg&&!isLoadError" v-show="showImg"
 			   :class="{'no-transition':!openTransition,'show-transition':showTransition&&openTransition}"
 			   @load="handleImgLoad" @error="handleImgError">
@@ -22,6 +22,11 @@
 
     export default {
         props: {
+            showClick: { // 是否需要点击
+                type: Boolean,
+                default: true,
+                required: false
+            },
             imageSrc: {
                 type: String,
             },
@@ -138,7 +143,7 @@
 	/* 转圈 */
 	.spin-circle {
 		background: url('@/static/images/common/loading1.gif') no-repeat center;
-		background-size: 100 rpx;
+		background-size: 100rpx;
 	}
 
 	/* 动态灰色若隐若现 */
@@ -163,7 +168,7 @@
 	.skeleton-1 {
 		background-color: #e3e3e3;
 		background-image: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 80%);
-		background-size: 100 rpx 100%;
+		background-size: 100rpx 100%;
 		background-repeat: repeat-y;
 		background-position: 0 0;
 		animation: skeleton-1 .6s infinite;

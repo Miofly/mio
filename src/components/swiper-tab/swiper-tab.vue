@@ -1,17 +1,17 @@
 <template>
-	<view class="navTabBox" :style="{width: fullWidth}">
+	<view class="navTabBox" :style="{width: fullWidth, color: defaultColor}">
 		<view class="longTab">
 			<scroll-view scroll-x="true" style="white-space: nowrap; display: flex" scroll-with-animation
 						 :scroll-left="tabLeft">
 				<view class="longItem" :data-index="index"
-					  :style="{color: index===myTab ? tabColor : '', width: isWidth + 'px', fontSize: textSize,
+					  :style="{color: index===myTab ? activeColor : '', width: isWidth + 'px', fontSize: index===myTab ? activeSize : textSize,
 					  height: tabHeight + 'rpx', lineHeight: tabHeight + 'rpx', fontWeight: isBold}"
 					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">
 					{{item.name}}
 				</view>
 				<view class="underlineBox"
 					  :style='"transform:translateX("+isLeft+"px);width:"+isWidth+"px;height:"+underLineHeight+"rpx"'>
-					<view class="underline" :style="{backgroundColor: tabColor}"></view>
+					<view class="underline" :style="{background: lineColor, width: underLineWidth}"></view>
 				</view>
 			</scroll-view>
 		</view>
@@ -21,14 +21,14 @@
 <script>
     export default {
         props: {
+            defaultColor: { // 默认文字颜色
+                type: String,
+                default: 'blue',
+                required: false
+            },
             isBold: { // 字体加粗
                 type: String,
                 default: 'bold',
-                required: false
-            },
-            underLineHeight: { // 下划线高度
-                type: Number,
-                default: 6,
                 required: false
             },
             tabHeight: { // tab栏高度
@@ -41,9 +41,14 @@
                 default: '14px',
                 required: false
             },
-            tabColor: { // 颜色
+            activeColor: { // 选中颜色
                 type: String,
                 default: 'red',
+                required: false
+            },
+            activeSize: { // 选中文字大小
+                type: String,
+                default: '20px',
                 required: false
             },
             tabLists: { // tab栏数据
@@ -61,6 +66,21 @@
             fullWidth: { // 宽度是否100%
                 type: String,
                 default: '94vw',
+                required: false
+            },
+            underLineHeight: { // 下划线高度
+                type: Number,
+                default: 6,
+                required: false
+            },
+            underLineWidth: { // 下划线宽度
+                type: String,
+                default: '20%',
+                required: false
+            },
+            lineColor: { // 下划线颜色
+                type: String,
+                default: 'green',
                 required: false
             },
         },
@@ -103,7 +123,6 @@
 
 <style>
 	.navTabBox {
-		color: black;
 		background: rgba(255, 255, 255, 1);
 	}
 
@@ -117,15 +136,9 @@
 	}
 
 	.underlineBox {
-		width: 20%;
 		display: flex;
 		align-content: center;
 		justify-content: center;
 		transition: .5s;
-	}
-
-	.underline {
-		width: 60%;
-		height: 10rpx;
 	}
 </style>

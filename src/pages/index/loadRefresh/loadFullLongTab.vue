@@ -9,8 +9,10 @@
 					11111111
 				</view>
 				<scroll-view scroll-x style="position: fixed;left: 0" :style="{top: headerHeight + 'rpx'}">
-					<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" :lineHeight="6"
-								tabColor="red" :tabHeight="tabHeight - 6" textSize="18px" fullWidth="100vw">
+					<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" :lineHeight="6" activeColor="black"
+								:tabHeight="tabHeight - 10" textSize="20px" fullWidth="100vw" defaultColor="#666"
+								lineColor="linear-gradient(311deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%)"
+								underLineHeight="10" activeSize="24px" underLineWidth="50%">
 					</swiper-tab>
 				</scroll-view>
 				<!--固定设置高度-->

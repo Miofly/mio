@@ -3,17 +3,24 @@
 				  :up="upOption" @init="mescrollInit" @scroll="scroll"
 				  @down="downCallback" @up="upCallback" @emptyclick="emptyClick">
 		<view v-for="(item, index) in dataLists" :key="index" @click="playVideo"
-			  :class="[index%2==0? 'fl' :'fr']" style="width: 48%;position: relative;height: 500rpx;margin: 1% 1%;">
-			<imgLoad :scroll-top="scrollTop" mode="heightFix" style="width: 100%;height: 500rpx"
-					 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' :
+			  :class="[index%2==0? 'fl' :'fr']" :style="{margin: index%2==0 ? '10rpx 0 0 10rpx' : '10rpx 10rpx 0 0'}"
+			  style="width: 48%;position: relative;height: 500rpx;border-radius: 10px;background: rgba(0, 0, 0, 0.7);">
+
+			<view>
+				<imgLoad :scroll-top="scrollTop" mode="aspectFit" style="width: 100%;height: 500rpx"
+						 :image-src="item.images[0] == undefined ? 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3140403455,2984550794&fm=26&gp=0.jpg' :
 						  item.images[0]" :showClick="false"
-					 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">
-			</imgLoad>
-			<view style="background: rgba(0, 0, 0, 0.6);z-index: 9999!important;padding: 10rpx 10rpx 10rpx 10rpx;
-				position: absolute;bottom: 0;width: 100%;font-size: 16px;color: white">
-				{{ item.title }}
+						 :loading-mode="['spin-circle', 'skeleton-1', 'skeleton-2', 'looming-gray'][0]">
+				</imgLoad>
+				<view style="background: linear-gradient(180deg,rgba(72,72,72,0) 0%,rgba(70,70,70,1) 100%);z-index: 9999!important;padding: 10rpx 10rpx 10rpx 10rpx;
+				position: absolute;bottom: 0;width: 100%;font-size: 16px;color: white;border-radius: 10px">
+					{{ item.title }}
+				</view>
 			</view>
 		</view>
+
+
+
 	</mescroll-uni>
 </template>
 
@@ -73,7 +80,8 @@
         },
         methods: {
             playVideo () {
-                this.router.push({name: 'lbVideoPlay'})
+                // this.router.push({name: 'lbVideoPlay'})
+				uni.navigateTo({url: '/pages/plugin/lbVideo/videoPlay'})
             },
             scroll(e) { // 用于懒加载图片使用
                 this.scrollTop = this.mescroll.scrollTop
@@ -111,3 +119,6 @@
     }
 </script>
 
+<style>
+	>>> .origin-img{border-radius: 20rpx;}
+</style>

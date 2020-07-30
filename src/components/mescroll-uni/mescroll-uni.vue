@@ -14,6 +14,10 @@
 						<view class="downwarp-progress" :class="{'mescroll-rotate': isDownLoading}"
 							  :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"></view>
 						<view class="downwarp-tip" :style="{fontSize: textSize + 'px'}">{{ downText }}</view>
+						<!--<image src="/static/images/common/loading3.gif"
+							  	style="width: 200rpx"
+							   :mode="['aspectFit', 'scaleToFill', 'aspectFill', 'widthFix', 'heightFix'][3]">
+						</image>-->
 					</view>
 				</view>
 
@@ -31,10 +35,21 @@
 					<view v-show="upLoadType===1">
 						<view class="upwarp-progress mescroll-rotate"
 							  :style="{'border-color':mescroll.optUp.textColor}"></view>
-						<view class="upwarp-tip" :style="{fontSize: textSize + 'px'}">{{ mescroll.optUp.textLoading }}</view>
+						<view class="upwarp-tip" :style="{fontSize: textSize + 'px'}">
+							{{ mescroll.optUp.textLoading }}
+						</view>
+
+						<!--<view>-->
+						<!--<image src="/static/images/common/loading1.gif" :class="[false?'cu-avatar':'', false?'round': '']" @tap="ui.showImg()"-->
+						<!--:mode="['aspectFit', 'scaleToFill', 'aspectFill', 'widthFix', 'heightFix'][0]">-->
+						<!--</image>-->
+						<!--</view>-->
+
 					</view>
 					<!-- 无数据 -->
-					<view v-if="upLoadType===2" class="upwarp-nodata" :style="{fontSize: textSize + 'px'}">{{ mescroll.optUp.textNoMore }}</view>
+					<view v-if="upLoadType===2" class="upwarp-nodata" :style="{fontSize: textSize + 'px'}">{{
+						mescroll.optUp.textNoMore }}
+					</view>
 				</view>
 			</view>
 		</scroll-view>

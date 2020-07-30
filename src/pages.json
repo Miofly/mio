@@ -1,19 +1,20 @@
 {
     "pages": [
         {
-            "path": "pages/index/index",
-            "name": "index",
-            "style": {
-                "navigationBarTitleText": "主页"
-            }
-        },
-        {
             "path": "pages/plugin/lbVideo/index",
             "style": {
                 "navigationStyle": "custom"
             },
             "name": "lbIndex"
         },
+        {
+            "path": "pages/index/index",
+            "name": "index",
+            "style": {
+                "navigationBarTitleText": "主页"
+            }
+        },
+
         {
             "path": "pages/plugin/lbVideo/rank",
             "style": {

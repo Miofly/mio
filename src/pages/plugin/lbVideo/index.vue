@@ -1,5 +1,5 @@
 <template>
-	<view class="full-height">
+	<view class="full-height bg-white">
 		<!--当tabList没加载处理空布局-->
 		<view v-if="tabLists.length == 0"></view>
 		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;" v-else>
@@ -10,13 +10,13 @@
 				</view>
 				<scroll-view scroll-x style="position: fixed;left: 0" :style="{top: headerHeight + 'rpx'}">
 					<view class="flex justify-around">
-						<view>排行榜</view>
-						<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" :lineHeight="6" tabColor="red"
-									:tabHeight="tabHeight - 6" textSize="16px" fullWidth="74vw">
+						<!--<view>排行榜</view>-->
+						<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" activeColor="black"
+									:tabHeight="tabHeight - 20" textSize="20px" fullWidth="100vw" defaultColor="#666"
+									lineColor="linear-gradient(311deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%)"
+									:underLineHeight="10" activeSize="24px" underLineWidth="50%">
 						</swiper-tab>
-						<view>排行榜1</view>
 					</view>
-
 				</scroll-view>
 				<!--固定设置高度-->
 				<view :style="{height: fixCon? allHeight + 'rpx' : tabHeight + headerHeight + 'rpx'}"></view>
@@ -46,7 +46,7 @@
         },
         data() {
             return {
-                tabHeight: 96, // tab栏的高度
+                tabHeight: 100, // tab栏的高度
                 fixHeight: 100, // 固定内容的高度
                 fixCon: false, // 是否需要固定布局
                 headerFixCon: false, // 是否需要头部固定布局
@@ -55,10 +55,9 @@
                     {name: '后端', type: 'backend'},
                     {name: '安卓', type: 'Android'},
                     {name: '苹果', type: 'iOS'},
-                    {name: 'Flutter', type: 'Flutter'},
-                    {name: '应用程序', type: 'app'},
                 ],
-                tabClick: 0 // 当前tab的下标
+                tabClick: 0, // 当前tab的下标
+				myId: 0,
             }
         },
         methods: {
@@ -76,12 +75,55 @@
             }
         },
         onLoad() {
-            console.log(tvp)
             // #ifdef H5
             document.body.addEventListener('touchmove', function (evt) { // 禁止微信浏览器拖动
                 evt.preventDefault()
             }, {passive: false})
             // #endif
-        }
+        },
+		onReady () {
+		    console.log('onReady')
+		},
+		onShow () {
+            console.log('this.myId', this.myId)
+            this.myId = this.myId + 1
+
+            if (this.myId > 1) {
+                location.href = 'http://www.baidu.com'
+            }
+		},
+		onHide () {
+		    console.log('onHide')
+		},
+		onUnload () {
+		    console.log('onUnload')
+		},
+		onResize () {
+		    console.log('onResize')
+		},
+		beforeCreate () {
+		    console.log('beforeCreate')
+		},
+		created () {
+		    console.log('created')
+		},
+		beforeMount () {
+		    console.log('beforeMount')
+		},
+		mounted () {
+			console.log('mounted')
+		},
+		beforeUpdate () {
+		    console.log('beforeUpdate')
+		},
+		updated () {
+		    console.log('updated')
+		},
+		beforeDestroy () {
+		    console.log('beforeDestroy')
+		},
+		destroyed () {
+		    console.log('destroyed')
+		},
     }
 </script>

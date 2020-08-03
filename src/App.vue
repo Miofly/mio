@@ -16,6 +16,18 @@
             }
             this.initData() // 加载初始化数据
             // #endif
+
+            const obj = {
+                vid: 'z3122kzsq2x', // vid
+				tzTime: 30,
+                adUrl: 'https://www.baidu.com', // 广告地址
+                slideStatus: true, // 侧边退弹
+                adStatus: false, // 是否显示广告位
+                adPic: '/static/images/glnz/1.jpg', // 广告位图片
+                coverPicture: 'static/images/dlrb/0.jpg', // 视频图片
+            }
+
+            this.$store.state.vInitData = obj
         },
         onShow() {
             // #ifdef MP-WEIXIN
@@ -125,7 +137,7 @@
             }
         },
         computed: {
-            ...mapState(['indexData', 'indexArr', 'defaultPage', 'masters']),
+            ...mapState(['indexData', 'indexArr', 'defaultPage', 'masters', 'vInitData']),
         },
     }
 </script>

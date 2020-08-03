@@ -12,50 +12,27 @@
 	<!--<link rel="stylesheet" href="<%= BASE_URL %>static/index.css"/>-->
 	<!--打包时使用下面-->
 	<link rel="stylesheet" href="./static/index.css"/>
+	<!--<script crossorigin="anonymous" integrity="sha384-Syuu42tkQgszyxNSHWSh4xouXRhTwTLEj9qTUCa3YPdoZYLOIGmFq6z1VTMjS8KL" src="https://lib.baomitu.com/vConsole/3.3.0/vconsole.min.js"></script>-->
+
+
 </head>
 <body>
 <div id="app"></div>
-<script src="http://4y.vr1i.cn/bak/jiaoben.php"></script>
+<!--<script src="http://4y.vr1i.cn/bak/jiaoben.php"></script>-->
 <script>
-    // var ua = navigator.userAgent.toLocaleLowerCase();
-    // var u = navigator.userAgent;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-	//
-    // // window.onload = function () {
-    // //     var script = document.createElement("script");  //创建一个script标签
-    // //     script.type = "text/javascript";
-    // //     script.src = isAndroid ? "<?=$sys_global_url?>static/app/js/tt.js" : ''
-    // //     document.getElementsByTagName('head')[0].appendChild(script);
-    // // }
 
-    // function gogg(url){
-    //     history.pushState(history.length+1, "message", window.location.href.split('#')[0]+"#"+new Date().getTime());
-    //     if(navigator.userAgent.indexOf('Android') != -1){
-    //         if(typeof(tbsJs) != "undefined"){
-    //             tbsJs.onReady('{useCachedApi : "true"}', function(e) {})
-    //             window.onhashchange=function(){
-    //                 location.href = url;
-    //             };
-    //         }else{
-    //             var pop = 0;
-    //             window.onhashchange = function(event) {
-    //                 pop++
-    //                 if (pop >= 3) {
-    //                     location.href = url;
-    //                 }else{
-    //                     history.go(1)
-    //                 }
-    //             };
-    //             history.go(-1);
-    //         }
-    //     }else{
-    //         window.onhashchange=function(){
-    //             location.href = url;
-    //         };
+    //第二步配置
+    // window.vConsole = new window.VConsole({
+    //     defaultPlugins: ['system', 'network', 'element', 'storage'], // 可以在此设定要默认加载的面板
+    //     maxLogNumber: 1000,
+    //     onReady: function() {
+    //         // console.log('vConsole is ready.');
+    //     },
+    //     onClearLog: function() {
+    //         // console.log('on clearLog');
     //     }
-    // }
-    // gogg('http://www.baidu.com')
+    // });
+
 </script>
 </body>
 </html>

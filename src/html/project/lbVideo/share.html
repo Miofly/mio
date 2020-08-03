@@ -1,0 +1,111 @@
+<?php
+
+include_once __DIR__ .'/../common.php';
+
+include_once CONFIG_PATH .'config.php';
+
+//播放域名
+$vid = isset($_GET['vid']) ? $_GET['vid'] : '';
+
+
+
+$xiaoweiba = '';
+
+$canshu = http_build_query($_GET);
+if(!$_GET['from'] && !$_GET['article']){
+	$advertising = $advertising.'&qdfanhui=1&'.$canshu;
+	$playurl = $luodi1 . $_encrypter->encrypt(['t' => time(), 'class' => __MULU__ .'/home/l1.php']) .'?continue&vid='. $vid;
+}else{
+$playurl = $luodi1 . $_encrypter->encrypt(['t' => time(), 'class' => __MULU__ .'/home/l1.php']) .'?continue&vid='. $vid.'&article='.rand(100000,999999);
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>.</title>
+	<script type="text/javascript" src="<?=$sys_global_url?>home/share/adaptive.js"></script>
+	<style>
+		@keyframes shake {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+		@keyframes shake2 {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+

@@ -34,8 +34,8 @@ process.UNI_LIBRARIES.forEach(libraryName => {
     plugins.push([
         'import',
         {
-            'libraryName': libraryName,
-            'customName': (name) => {
+            libraryName: libraryName,
+            customName: (name) => {
                 return `${libraryName}/lib/${name}/${name}`
             }
         }

@@ -80,7 +80,7 @@
         },
         methods: {
             playVideo () {
-                // this.router.push({name: 'lbVideoPlay'})
+                // this.router.replace({name: 'lbVideoPlay'})
 				uni.navigateTo({url: '/pages/plugin/lbVideo/videoPlay'})
             },
             scroll(e) { // 用于懒加载图片使用

@@ -1,5 +1,9 @@
 const path = require('path')
 
+require('events').EventEmitter.defaultMaxListeners = 0
+// 解决内存溢出问题 MaxListenersExceededWarning: Possible EventEmitter memory leak detected.
+// 11 upgrade listeners added. Use emitter.setMaxListeners() to increase limit
+
 const TransformPages = require('uni-read-pages') // 配置uni-router的路由页面
 const tfPages = new TransformPages({
     includes: ['path', 'name', 'meta']
@@ -16,7 +20,10 @@ module.exports = {
         if (process.env.NODE_ENV === 'production') {
             config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true // 生产环境不输出日志
         } else { // 开发环境配置
-
+            // new vConsolePlugin({
+            //     filter: [],
+            //     enable: envType
+            // })
         }
     },
     // 配置没有export导出的js

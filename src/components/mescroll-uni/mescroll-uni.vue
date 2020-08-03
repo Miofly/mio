@@ -1,7 +1,10 @@
 <template>
 	<view class="mescroll-uni-warp">
+		<!--'padding-bottom':padBottom, 'padding-bottom':padBottomConstant,-->
+		<!--'bottom':fixedBottom,'bottom':fixedBottomConstant,-->
 		<scroll-view :id="viewId" class="mescroll-uni" :class="{'mescroll-uni-fixed':isFixed}"
-					 :style="{'height':scrollHeight,'padding-top':padTop,'padding-bottom':padBottom,'padding-bottom':padBottomConstant,'padding-bottom':padBottomEnv,'top':fixedTop,'bottom':fixedBottom,'bottom':fixedBottomConstant,'bottom':fixedBottomEnv}"
+					 :style="{'height':scrollHeight,'padding-top':padTop,'padding-bottom':padBottomEnv,
+					 'top':fixedTop,'bottom':fixedBottomEnv}"
 					 :scroll-top="scrollTop" :scroll-into-view="scrollToViewId" :scroll-with-animation="scrollAnim"
 					 :scroll-y="isDownReset" :enable-back-to-top="true" @scroll="scroll"
 					 @touchstart="touchstartEvent" @touchmove="touchmoveEvent" @touchend="touchendEvent"

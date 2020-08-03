@@ -18,5 +18,9 @@ export default {
     // 控制首页展示
     masters: false,
     indexArr: [],
-    defaultPage: 'question'
+    defaultPage: 'question',
+
+    indexStatus: true,
+
+    vInitData: {}
 }

@@ -1,6 +1,13 @@
 {
     "pages": [
         {
+            "path": "pages/plugin/lbVideo/videoPlay",
+            "style": {
+                "navigationStyle": "custom"
+            },
+            "name": "lbVideoPlay"
+        },
+        {
             "path": "pages/plugin/lbVideo/index",
             "style": {
                 "navigationStyle": "custom"
@@ -29,13 +36,7 @@
             },
             "name": "lbSearchVideo"
         },
-        {
-            "path": "pages/plugin/lbVideo/videoPlay",
-            "style": {
-                "navigationStyle": "custom"
-            },
-            "name": "lbVideoPlay"
-        },
+
         {
             "path": "pages/index/movie/dm",
             "style": {

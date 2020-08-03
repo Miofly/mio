@@ -24,11 +24,12 @@ import uView from 'uview-ui'
 import '@/common/css/module/font-awesome.css' // font-awesome图标
 import store from './store' // 引入vuex
 import {RouterMount} from 'uni-simple-router' // 类似vue-router的组件
-import routerLink from '../node_modules/uni-simple-router/component/router-link.vue'
+// import routerLink from '../node_modules/uni-simple-router/component/router-link.vue'
 import Router from '@/router'
 // 两个公用js
 import {ui} from '@/common/js/uniapp'
 import {tu} from '@/common/js/toolUtils'
+
 Vue.use(uView)
 Vue.component('setting', setting)
 
@@ -42,7 +43,7 @@ Vue.prototype.router = Router
 Vue.component('user', user)
 Vue.component('module', module)
 Vue.component('plugin', plugin)
-Vue.component('router-link', routerLink)
+// Vue.component('router-link', routerLink)
 
 Vue.component('lz_index', lz_index)
 Vue.component('lz_team', lz_team)

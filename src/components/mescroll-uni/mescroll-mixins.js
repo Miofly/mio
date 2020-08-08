@@ -1,5 +1,3 @@
-// mescroll-body 和 mescroll-uni 通用
-
 // import MescrollUni from "./mescroll-uni.vue";
 // import MescrollBody from "./mescroll-body.vue";
 

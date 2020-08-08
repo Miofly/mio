@@ -1,0 +1,161 @@
+{
+    "pages" : [
+        //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+        {
+            "path" : "pages/index/index",
+            "style" : {
+                "navigationBarTitleText" : "mescroll"
+            }
+        },
+        {
+            "path" : "pages/base/list-msg",
+            "style" : {
+				"navigationBarTitleText" : "list-msg"
+			}
+        },
+		{
+		    "path" : "pages/base/list-news",
+		    "style" : {
+				"navigationBarTitleText" : "list-news"
+			}
+		},
+        {
+            "path" : "pages/base/list-products",
+            "style" : {
+				"navigationBarTitleText" : "list-products"
+			}
+        },
+        {
+            "path" : "pages/base/mescroll-options",
+            "style" : {
+				"navigationBarTitleText" : "mescroll-options",
+				"backgroundColorTop": "#E75A7C" // iOS APP真机bounce回弹区域颜色
+			}
+        },
+		{
+		    "path" : "pages/base/sticky",
+		    "style" : {
+				"navigationBarTitleText" : "sticky吸顶悬浮 (切换刷新列表,原生css实现)"
+			}
+		},
+		{
+		    "path" : "pages/base/sticky-data",
+		    "style" : {
+				"navigationBarTitleText" : "sticky吸顶悬浮 (缓存列表数据,原生css实现)"
+			}
+		},
+		{
+		    "path" : "pages/base/sticky-scroll",
+		    "style" : {
+				"navigationBarTitleText" : "sticky吸顶悬浮 (切换刷新列表,监听滚动实现)"
+			}
+		},
+		{
+		    "path" : "pages/base/sticky-scroll-data",
+		    "style" : {
+				"navigationBarTitleText" : "sticky吸顶悬浮 (缓存列表数据,监听滚动实现)"
+			}
+		},
+		{
+		    "path" : "pages/base/sticky-uni",
+		    "style" : {
+				"navigationBarTitleText" : "sticky吸顶悬浮 (mescroll-uni使用sticky)"
+			}
+		},
+        {
+            "path" : "pages/base/mescroll-comp",
+            "style" : {
+				"navigationBarTitleText" : "mescroll-body写在子组件"
+			}
+        },
+		{
+            "path" : "pages/base/mescroll-one",
+            "style" : {
+				"navigationBarTitleText" : "mescroll-one"
+			}
+        },
+        {
+            "path" : "pages/base/mescroll-more",
+            "style" : {
+				"navigationBarTitleText" : "mescroll-more"
+			}
+        },
+        {
+            "path" : "pages/base/list-search",
+            "style" : {
+				"navigationBarTitleText" : "list-search"
+			}
+        },
+		{
+		    "path" : "pages/base/mescroll-uni-part",
+		    "style" : {
+				"navigationBarTitleText" : "mescroll-uni-part",
+				"disableScroll": true, // mescroll-uni需禁止滚动, 解决scroll-view在Android小程序卡顿的问题
+				"app-plus" : {
+					"bounce" : "none" // mescroll-uni需取消iOS回弹和安卓顶部底部的半月形阴影
+				},
+				"mp-alipay":{"allowsBounceVertical":"NO"} // mescroll-uni需取消支付宝和钉钉小程序自带的回弹
+			}
+		},
+		{
+		    "path" : "pages/base/mescroll-body-part",
+		    "style" : {
+				"navigationBarTitleText" : "mescroll-body-part"
+			}
+		},
+		{
+		    "path" : "pages/base/mescroll-native",
+		    "style" : {
+				"navigationBarTitleText" : "mescroll-native",
+				"enablePullDownRefresh" : true, // 开启系统自带的下拉刷新
+				//ifdef MP 支持条件编译,如您可以配置小程序端使用系统自带的,其他平台使用mescroll的下拉样式
+				//"enablePullDownRefresh" : true
+				//endif
+				//ifndef MP
+				//"enablePullDownRefresh" : false
+				//endif
+				"mp-alipay":{"allowsBounceVertical":"YES"} // 开启支付宝和钉钉小程序自带的回弹
+			}
+		},
+        {
+            "path" : "pages/base/mescroll-uni",
+            "style" : {
+				"navigationBarTitleText" : "mescroll-uni",
+				"disableScroll": true, // mescroll-uni需禁止滚动, 解决scroll-view在Android小程序卡顿的问题
+				"app-plus" : {
+					"bounce" : "none" // mescroll-uni需取消iOS回弹和安卓顶部底部的半月形阴影
+				},
+				"mp-alipay":{"allowsBounceVertical":"NO"} // mescroll-uni需取消支付宝和钉钉小程序自带的回弹
+			}
+        },
+		{
+		    "path" : "pages/intermediate/mescroll-swiper",
+		    "style" : {
+				"navigationBarTitleText" : "轮播菜单导航 mescroll-swiper.vue",
+				"disableScroll": true, // mescroll-uni需禁止滚动, 解决scroll-view在Android小程序卡顿的问题
+				"app-plus" : {
+					"bounce" : "none" // mescroll-uni需取消iOS回弹和安卓顶部底部的半月形阴影
+				},
+				"mp-alipay":{"allowsBounceVertical":"NO"} // mescroll-uni需取消支付宝和钉钉小程序自带的回弹
+			}
+		},
+		{
+            "path" : "pages/intermediate/beibei",
+            "style" : {
+				"navigationBarTitleText" : "贝贝 mescroll-beibei.vue"
+			}
+        },
+        {
+            "path" : "pages/intermediate/xinlang",
+            "style" : {
+				"navigationBarTitleText" : "新浪微博 mescroll-xinlang.vue"
+			}
+        }
+    ],
+    "globalStyle" : {
+		"backgroundColorTop":"#FFFFFF", // iOS APP真机bounce回弹区域默认灰色,需重置为白色
+		"mp-alipay":{"allowsBounceVertical":"NO"}, // 支付宝和钉钉小程序取消自带的回弹
+        "navigationBarTextStyle" : "black",
+        "navigationBarBackgroundColor" : "#fff"
+    }
+}

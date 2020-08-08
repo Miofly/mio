@@ -1,114 +1,70 @@
 <template>
-	<view style="height: 100%">
-		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;">
-			<!--这是顶部测试-->
-			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
-				<view v-for="(item, index) in lists" :key="index" class="cu-item">
-					<view class="content padding-tb-sm">
-						<view>
-							<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
-							<text>{{ item.name }}</text>
+	<view class="full-height">
+		<!--当tabList没加载处理空布局-->
+		<view v-if="tabLists.length == 0"></view>
+		<scroll-view scroll-y style="position: fixed;top: 0;bottom: 0;" v-else>
+			<view class="full-height">
+				<!--固定在顶部的内容-->
+				<view v-if="headerFixCon" style="position: fixed;top: 0;left: 0;" :style="{height: headerHeight}">
+					11111111
+				</view>
+				<scroll-view scroll-x style="position: fixed;left: 0" :style="{top: headerHeight + 'rpx'}">
+					<view class="flex justify-around bg-white">
+						<view v-if="leftCon">
+							<image src="/static/images/lbVideo/paihangbang.png" style="width: 72rpx;height: 100rpx">
+							</image>
+						</view>
+						<swiper-tab ref="swiperTab" v-model="tabClick" :tabLists="tabLists" activeColor="black"
+									:tabHeight="tabHeight - 12" textSize="20px" :fullWidth="leftCon == false && rightCon == false ? '100vw' : '70vw'" defaultColor="#666"
+									lineColor="linear-gradient(311deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%)"
+									:underLineHeight="10" activeSize="24px" :underLineWidth="50 + '%'" lineRadius="10px">
+						</swiper-tab>
+						<view v-if="rightCon">
+							<image src="/static/images/lbVideo/paihangbang.png" style="width: 72rpx;height: 100rpx">
+							</image>
 						</view>
 					</view>
-
-					<view v-show="false" class="action">
-						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
-							操作
-						</button>
-					</view>
-					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
+				</scroll-view>
+				<!--固定设置高度-->
+				<view :style="{height: fixCon? allHeight + 'rpx' : tabHeight + headerHeight + 'rpx'}"></view>
+				<!--固定内容-->
+				<view v-if="fixCon" style="position: fixed;z-index: 9999;" class="full-width"
+					  :style="{height: fixHeight + 'rpx', top: tabHeight + headerHeight + 'rpx'}">
+					这是滚动的固定内容
 				</view>
-			</view>
-			<!--实际滚动-->
-			<view class="padding">
-				<swiper-tab ref="mytab" v-model="tabClick" :tabLists="tabLists"></swiper-tab>
-				<swiper style="height: 700rpx" :current="tabClick" @change="swiperChange">
-					<swiper-item>
-						<mescroll-item :i="0" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="1" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="2" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="3" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="4" :index="tabClick" :tabs="tabLists"></mescroll-item>
-					</swiper-item>
-
-					<swiper-item>
-						<mescroll-item :i="5" :index="tabClick" :tabs="tabLists"></mescroll-item>
+				<swiper :style="{height: fixCon ? `calc(100% - (${allHeight + 'rpx'}))` : `calc(100% - ${tabHeight + headerHeight + 'rpx'})`}"
+						:current="tabClick" @change="swiperChange">
+					<swiper-item v-for="(item, index) in tabLists" :key="index">
+						<mescroll-item :i="index" :index="tabClick" :tabs="tabLists"></mescroll-item>
 					</swiper-item>
 				</swiper>
 			</view>
-
-			<!--底部测试-->
-			<view class="cu-list menu" :class="[false?'sm-border':'', true?'card-menu margin-top':'']">
-				<view v-for="(item, index) in lists" :key="index" class="cu-item">
-					<view class="content padding-tb-sm">
-						<view>
-							<text class="fa text-blue margin-right" :class="['fa-' + item.icon]"></text>
-							<text>{{ item.name }}</text>
-						</view>
-					</view>
-
-					<view v-show="false" class="action">
-						<button :class="['cu-btn', 'bg-blue', 'shadow']" @tap="detail(item.url)">
-							操作
-						</button>
-					</view>
-					<view v-show="true" class="fa fa-angle-right fa-2x margin-left text-gray"></view>
-				</view>
-			</view>
 		</scroll-view>
 	</view>
-
 </template>
 
 <script>
     import MescrollItem from './mescroll-swiper-item-two'
-    import SwiperTab from '@/components/swiper-tab/swiper-tab'
 
     export default {
         components: {
-            SwiperTab,
             MescrollItem,
         },
         data() {
             return {
-                lists: [{name: '列表一', icon: 'video-camera'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'user'},
-                    {name: '列表一', icon: 'phone'}
-                ],
+				leftCon: false,
+				rightCon: true,
+                tabHeight: 96, // tab栏的高度
+                fixHeight: 100, // 固定内容的高度
+                fixCon: false, // 是否需要固定布局
+                headerFixCon: true, // 是否需要头部固定布局
                 tabLists: [
                     {name: '前端', type: 'frontend'},
                     {name: '后端', type: 'backend'},
-                    {name: '安卓', type: 'Android'},
+                    // {name: '安卓', type: 'Android'},
                     // {name: '苹果', type: 'iOS'},
-                    // {name: 'Flutter', type: 'Flutter'},
-                    // {name: '应用程序', type: 'app'},
+                    {name: 'Flutter', type: 'Flutter'},
+                    {name: '应用程序', type: 'app'},
                 ],
                 tabClick: 0 // 当前tab的下标
             }
@@ -116,8 +72,16 @@
         methods: {
             swiperChange(e) { // 轮播菜单
                 this.tabClick = e.detail.current
-                this.$refs.mytab.longClick(e.detail.current)
+                this.$refs.swiperTab.longClick(e.detail.current)
             },
+        },
+        computed: {
+            allHeight: function () {
+                return this.tabHeight + this.fixHeight + this.headerHeight
+            },
+            headerHeight: function () { // 头部固定高度
+                return this.headerFixCon ? 60 : 0
+            }
         },
         onLoad() {
             // #ifdef H5

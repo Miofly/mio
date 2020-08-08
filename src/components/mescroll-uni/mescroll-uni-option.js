@@ -1,5 +1,4 @@
 // 全局配置
-// mescroll-body 和 mescroll-uni 通用
 const GlobalOption = {
     down: {
         // 其他down的配置参数也可以写,这里只展示了常用的配置:

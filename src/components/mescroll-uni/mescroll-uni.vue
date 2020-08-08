@@ -63,7 +63,7 @@
 </template>
 
 <script>
-    // 引入mescroll-uni.js,处理核心逻辑
+    // 核心逻辑
     import MeScroll from './mescroll-uni.js'
     // 引入全局配置
     import GlobalOption from './mescroll-uni-option.js'

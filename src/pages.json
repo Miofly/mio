@@ -1,6 +1,13 @@
 {
     "pages": [
         {
+            "path": "pages/index/index",
+            "name": "index",
+            "style": {
+                "navigationBarTitleText": "主页"
+            }
+        },
+        {
             "path": "pages/plugin/lbVideo/videoPlay",
             "style": {
                 "navigationStyle": "custom"
@@ -15,14 +22,6 @@
             "name": "lbIndex"
         },
         {
-            "path": "pages/index/index",
-            "name": "index",
-            "style": {
-                "navigationBarTitleText": "主页"
-            }
-        },
-
-        {
             "path": "pages/plugin/lbVideo/rank",
             "style": {
                 "navigationStyle": "custom"
@@ -36,7 +35,6 @@
             },
             "name": "lbSearchVideo"
         },
-
         {
             "path": "pages/index/movie/dm",
             "style": {

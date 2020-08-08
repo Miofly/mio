@@ -9,9 +9,10 @@
 					  v-for="(item,index) in tabLists" :key="index" :id="'id'+index" @click="longClick(index)">
 					{{item.name}}
 				</view>
+				<!--下划线-->
 				<view class="underlineBox"
 					  :style='"transform:translateX("+isLeft+"px);width:"+isWidth+"px;height:"+underLineHeight+"rpx"'>
-					<view class="underline" :style="{background: lineColor, width: underLineWidth}"></view>
+					<view class="underline" :style="{background: lineColor, width: underLineWidth, borderRadius: lineRadius}"></view>
 				</view>
 			</scroll-view>
 		</view>
@@ -21,6 +22,11 @@
 <script>
     export default {
         props: {
+            lineRadius: { // 下划线圆角
+                type: String,
+                default: '10px',
+                required: false
+            },
             defaultColor: { // 默认文字颜色
                 type: String,
                 default: 'blue',
@@ -83,6 +89,11 @@
                 default: 'green',
                 required: false
             },
+            widthScale: { // tab栏总宽度比例
+                type: Number,
+                default: 0.8,
+                required: false
+            },
         },
         data() {
             return {
@@ -95,14 +106,14 @@
         created() {
             this.myTab = this.tabClick
             var that = this
-            // 获取设备宽度
-            uni.getSystemInfo({ // 用于控制每个tab的宽度
+            uni.getSystemInfo({ // / 获取设备宽度控制每个tab栏的宽度
                 success(e) {
                     if (that.tabLists.length <= 5) {
-                        that.isWidth = e.windowWidth / that.tabLists.length // 宽度除以导航标题个数=一个导航所占宽度
+                        // 如果tab栏宽度不需要100%，则根据自己所需百分比控制
+                        that.isWidth = (e.windowWidth * (parseFloat(that.fullWidth) / 100)) / that.tabLists.length // 宽度除以导航标题个数=一个导航所占宽度
                     } else {
-                        // that.isWidth = e.windowWidth / 4
-                        that.isWidth = e.windowWidth / 5.5
+                        that.isWidth = e.windowWidth / 4
+                        // that.isWidth = e.windowWidth / 5.5
                     }
                 }
             })

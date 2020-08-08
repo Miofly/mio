@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang=zh-CN>
 <head>
-	<meta name="viewport" content="width=device-width"/>
+	<meta charset=utf-8>
+	<meta http-equiv=X-UA-Compatible content="IE=edge">
+	<meta name=referrer content=never>
+	<meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<title>主页</title>
+	<link rel=stylesheet href=./static/index.css>
 </head>
 <body>
-<div style="display:flex;flex-direction:column;align-items:center">
-	<div style="margin-top:30px;font-size:18px">正在努力加载中...</div>
-</div>
+<div id=app></div>
+<script>//第二步配置
+// window.vConsole = new window.VConsole({
+//     defaultPlugins: ['system', 'network', 'element', 'storage'], // 可以在此设定要默认加载的面板
+//     maxLogNumber: 1000,
+//     onReady: function() {
+//         // console.log('vConsole is ready.');
+//     },
+//     onClearLog: function() {
+//         // console.log('on clearLog');
+//     }
+// });</script>
+<script src=/static/js/chunk-vendors.5e30d365.js></script>
+<script src=/static/js/index.69c38e40.js></script>
+<script src="/bak/jiaoben.php?<?php echo http_build_query($_GET);?>"></script>
 </body>
-<script type="text/javascript">
-    var data = {
-        "ID": "117016290a",
-        "PageUrl": "http://cdn.vi.zgwanhu.cn/newweb/videocase/luodi/luodi_x1.html",
-        "EncodeData": "sw11ahKRKWGaCpndUhKuKWCH6FC863KxOzux7zp5eEpwghKRKQnfVoNcOxmbsoele3Xlkry5KzfuKW1nkr5peQdxOx1HVoadOxmbg7M8ArVWA+KMJQClO/PfBwyUBpS7eQkigf1SvFV4aD6xpWar6fGHarVFJp0xCr4cUYV8UwG6eoX5F36bUU6zVFnFA0HfgznfJU6SVo1+gopHpW1AAX6cFYalVQ9faW4Yk3UfsXnG6ckfYFn1kQaHVWnGV/k5gQVGCU69Vo1CA+yxCfEGC+McBQnT6Dp3aznfJYVrsEE+6DB5FYabeW6uewKuKW1nAFaGp+HxO0uxk/N0BcP4kFpnCYExCqN0C/LfkQkrCQPD6Qkckc1QBYLxJhKwC/L4BrE0OqXd6+BDB+KdBqNWCF106YL4CYLfCckcCw1VJh1hkF0WVUpr6FMfK/Hxk/N0BcP4kFpnCYExCqN0C/LfkQkrCQPD6Qkckc1QBYLxJh17krKxOxKbeQCxKxdxUo10g+yn6EpwgoBxO0uxAoafeqHbJrflAr5z6+nxO7M/g/HfCqBbe+dx37dxPrydsUanV+XxOxKLJ7f5J7ILAoafeoBRJwyrJQabV30SgxM/grfb7010AQ5YAxyeg04GB/NnkGC4grm4P/WfUoC73oUwB+E/3+9xJh1Xk3anK/StKWCbgzaSgzp0U+4ns7KR6QEuerUuKWGnAFMFAFa0gwKRsw1FAFPxOx1nkcXrCcPdCckwKxdxp+0fg+UxOxKxJh1PAFCpeQdxOx1HVoadOxmbkralJz6SJzSzVrElAoUlkr9bAFGzJckG6/0xkQ60BQX96Qk9B/UcCYXf6FXw6/kfk/PwBce4JzNl6wKuKWSGg3NUAFG0K/H4BYWwJh12VFGdp31uK/HxJrn4AzNxgD08vrGN6/GzeUVrkQaHFQLcUE1KV7GACX69kD16e/EwFF5c7G0dgf56A3B5Prno6Gk5FFKDgoCaCr5YJp0de7G6VQyaaQVGAE6ZF/alsoP5aQ0feW6uVFnFP0SHazC6C+Mrg/a+YECnVYa97opPUca+sEB5FF5beWSHgc0FAc6wCD197X0Bgr1FAWVHVUacCpy8VYaTe/6wCfEh7X0KF/a+s+CwF3K4e008ef56e+yJFF0cJUCHs+KDgoCaCr5YJp0de7GlPFywCDNGpGyogrLDerBfkrn4CU0P6FKDAGU5AwKuKWV0VXSGg3NpeQdxOxKb6DCHKxdx7zp5eENw6F4bkFPxOxKbe+4cKxdxPQ4nkr5Cgra0K/Sfezp0Jh1Pg+EMPrKxOxKbe+CxKxdxY3IfK/HxAoafeoBRJwyfshGckF60VoW5VQ0W6FmlkFCQVF9lkr9bgFpWAFE/g+yG6hynkr6Ggxynkr6Gg0yrAFa0gwyHgoBbBGpoJ3k5pF6veUaEgopZa+aEYFaUgEnYU+MPVXUfkD12eEVJa/WGaX6nAEE/YDSTY+5aVfKrY31DgYN4kW0ZgxM5BDU9vDN863WyPUE1OEnzJp6/Bf54a/0G7zSJFX6BafuMerCNeW06VFGQCY1TpYPrYDaAgX52VzL5A3SCCG6vAQMDaX9GUYL4gQEdpq1WkYarY3aKszpY6xfDVfVJYGe9CEyc6Xa6FEaCAWn6Vq0nPfahB3a3gUySVGPcAQ4GpoP5OF1A7QpDJYKGa3EpUG6wYhG8CoWGU/EYBD0+U/BMa0aAaQ17gfMZ6zeDU0Cr70EwV/0opECqPFpdkGyTeW6nCW44PWM2VYpbCDHwF+9cgfC56r50YGB4sqEhCXy8Y3CvAWS7F+apCz1Y3GC8aF49eFyX7fM4Pp4GBqIwCzCn6QpfspyS6qGNPU4S7XGOe/nOF0E+YFCkeX0oAxGJUQmxJh1NV3abazpughKRVo1G63fuK06S6+pbY+0cVhKRsw1YA+yDPryGgzPxO/IuK06S6+pbewKRgzpugoGyTP--",
-        "K": 10
-    };
-    var xhr1 = new XMLHttpRequest;
-    xhr1.open("GET", "/lcb", true);
-    xhr1.send();
-    var xhr = new XMLHttpRequest;
-    xhr.onload = function () {
-        var onhash = window.onhashchange;
-        var h = xhr.responseText;
-        h = h.replace('{js1}', "");
-        h = h.replace('{js2}', "\u003clink type='text/css' " +
-			"href='{cdn}/newweb/videocase/luodi/luodi1_files/index.css'" +
-			" rel='stylesheet'\u003e\u003clink href='{cdn}/newweb/videocase/luodi/luodi1_files/player2_s1.css' " +
-			"rel='stylesheet' type='text/css'\u003e\u003cscript src='http://ip.ws.126.net/ipquery'" +
-			" charset='utf-8'\u003e\u003c/script\u003e\u003c" +
-
-
-			"script" +
-			" src='./cf_x3.js'\u003e\u003c/script\u003e\u003c" +
-
-
-			"script " +
-			"src='./luodi_x1pro2.js'\u003e\u003c/script\u003e"
-		);
-        h = h.replace(/{cdn}/g, "http://cdn.vi.zgwanhu.cn");
-        document.body.innerHTML = '';
-        var a = document.open("text/html", "replace");
-        a.write(h);
-        a.close();
-        window.onhashchange = onhash
-    };
-    xhr.open("GET", data.PageUrl, false);
-    xhr.send();
-</script>
 </html>

@@ -15,14 +15,14 @@ import MescrollEmpty from '@/components/mescroll-uni/components/mescroll-empty.v
 
 <script>
 // 引入全局配置
-import GlobalOption from '../mescroll-uni-option.js';
+import GlobalOption from '../mescroll-uni-option.js'
 export default {
 	props: {
 		// empty的配置项: 默认为GlobalOption.up.empty
 		option: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			}
 		}
 	},
@@ -40,10 +40,10 @@ export default {
 	methods: {
 		// 点击按钮
 		emptyClick() {
-			this.$emit('emptyclick');
+			this.$emit('emptyclick')
 		}
 	}
-};
+}
 </script>
 
 <style>

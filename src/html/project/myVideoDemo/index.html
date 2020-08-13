@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/tvp.js"></script>
+</head>
+<body>
+<div id="playPage">
+	<div class="content"><div id="main_tv"></div></div>
+</div>
+<script>
+	var obj = {
+	    ttUrl: 'http://www.baidu.com', // 退弹跳转地址
+	    endUrl: 'http://www.baidu.com', // 结束跳转地址
+        ddUrl: 'http://www.baidu.com', // 断点跳转地址
+        break_point_length: '0', // 为0代表没有断点事件
+        vid: 'j3111dqsgjp',
+	    cover_img: 'http://xcx-liuliang.oss-cn-shanghai.aliyuncs.com/video-xcx-two/01B39AAA-1FD6-AB06-2F36-CC6973367E58.jpeg',
+        vHeigth: '90vh', // 视频高度百分比
+	}
+
+    gogg(obj.ttUrl)
+
+    getVideo(obj.vid, obj.cover_img, obj.break_point_length)
+
+    function getVideo(vid, img, break_point_length) {
+        var video = new tvp.VideoInfo();
+
+        video.setVid(vid)
+        var player = new tvp.Player('100%', obj.vHeigth); // 100vh代表满屏
+
+        player.setCurVideo(video);
+        player.addParam("autoplay", false);
+        player.addParam("pic", img);
+        player.write('main_tv');
+
+        player.onready = function () {
+            video.setHistoryStart(3);
+            player.setPlaytime(3)
+        }
+
+        player.onplay = function () {
+            player.seekTo(3)
+            player.setPlaytime(3)
+        }
+
+        player.ontimeupdate = function (e) {
+
+            if (player.getCurTime() == player.getDuration()) {
+				setTimeout(function (){
+				    location.href = obj.endUrl // 视频播放结束事件 放自己想要的URL 后面的2000是播放完之后2秒后跳可改为0
+				}, 2000)
+            }
+
+            if (onj.break_point_length != 0) {
+                if (player.getCurTime() >= break_point_length) { // 控制断点不需要直接注释
+                    player.pause();
+                    location.href = obj.ddUrl // 断点跳转
+                }
+            }
+        }
+    }
+
+    function gogg(url) {
+        history.pushState(history.length + 1, 'message', window.location.href.split('#')[0] + '#' + new Date().getTime())
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            if (typeof (tbsJs) != 'undefined') {
+                tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                })
+                window.onhashchange = function () {
+                    location.href = url
+                }
+            } else {
+                var pop = 0
+                window.onhashchange = function (event) {
+                    pop++
+                    if (pop >= 3) {
+                        location.href = url
+                    } else {
+                        history.go(1)
+                    }
+                }
+                history.go(-1)
+            }
+        } else {
+            window.onhashchange = function () {
+                location.href = url
+            }
+        }
+    }
+</script>
+</body>
+</html>

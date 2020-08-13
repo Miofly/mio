@@ -1,11 +1,719 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: scroll!important;">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
-</head>
-<body>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<link rel="stylesheet" href="css/index.css"/>
+	<link rel="stylesheet" href="./css/mescroll.min.css">
+	<link rel="stylesheet" href="./css/swiper-3.3.1.min.css">
+	<link rel="stylesheet" href="./css/home.css">
+	<script type="text/javascript" src="js/adaptive.js"></script>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/tvp.js"></script>
+	<script>
+        var infos = {}
+        var browse_length = 0
+        var play_length = 0
+        var is_play = 0
+        var is_to_land_two = 0
+        var is_back = 0
+        var is_breakpoint = 0
+        var urlParmas = location.href.split('?')[1].split('#')[0]
 
+        localStorage.setItem('firstEntry', 1)
+
+        localStorage.setItem('line_en', getParam('line_en'))
+
+        setInterval(function () {
+            browse_length = browse_length + 1
+        }, 1000)
+
+
+        commonPost('back/back_url', {
+            line_en: getParam('line_en'),
+            from: getParam('from') == null ? 0 : 1
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取广告成功：', res.data)
+                localStorage.setItem('adUrl', res.data)
+                gogg(localStorage.getItem('adUrl'))
+
+
+                function gogg(url) {
+                    history.pushState(history.length + 1, 'message', window.location.href.split('#')[0] + '#' + new Date().getTime())
+                    if (navigator.userAgent.indexOf('Android') != -1) {
+                        if (typeof (tbsJs) != 'undefined') {
+                            tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                            })
+                            window.onhashchange = function () {
+                                location.href = url
+                            }
+                        } else {
+                            var pop = 0
+                            window.onhashchange = function (event) {
+                                pop++
+                                if (pop >= 3) {
+                                    location.href = url
+                                } else {
+                                    history.go(1)
+                                }
+                            }
+                            history.go(-1)
+                        }
+                    } else {
+                        window.onhashchange = function () {
+                            location.href = url
+                        }
+                    }
+                }
+
+                commonPost('play/play_detail', {
+                    line_en: getParam('line_en'),
+                    v_id: getParam('video_id') == null ? 0 : getParam('video_id')
+                }, function (res) {
+                    if (res.code == 200) {
+                        console.log('获取基础信息成功：', res.data)
+                        infos = res.data
+
+                        localStorage.setItem('video_vid', res.data.videoInfo.vid)
+                        localStorage.setItem('channel_id', res.data.videoInfo.channel_id)
+                        localStorage.setItem('line_id', res.data.videoInfo.line_id)
+                        localStorage.setItem('video_id', res.data.videoInfo.id)
+                        localStorage.setItem('group_id', res.data.videoInfo.group_id)
+                        localStorage.setItem('cover_img', res.data.videoInfo.cover_img)
+                        localStorage.setItem('break_point_length', res.data.videoInfo.break_point_length)
+                        localStorage.setItem('suspension_img', res.data.baseInfo.suspension_img)
+                        localStorage.setItem('xfStatus', res.data.baseInfo.is_suspension)
+
+                        $('#xfgg').attr('src', localStorage.getItem('suspension_img'))
+
+                        if (res.data.baseInfo.is_suspension == 1) {
+                            $('#xfStatus').show()
+                        } else {
+                            $('#xfStatus').hide()
+                        }
+
+                        getVideo(res.data.videoInfo.vid, res.data.videoInfo.cover_img, res.data.videoInfo.break_point_length)
+
+                        // 猜你喜欢
+                        setTimeout(function () {
+                            cnxh()
+                        }, 1000)
+
+                    } else {
+                        console.log('获取成功基础信息失败... 跳广告')
+                        goUrl()
+                    }
+                }, function (err) {
+                    console.log('获取成功基础信息失败', err)
+                    goUrl()
+                })
+            } else {
+                console.log('获取成功广告失败... 跳广告')
+            }
+        }, function (err) {
+            console.log('获取成功广告失败', err)
+        })
+	</script>
+</head>
+<body class="msglistbody" style="overflow-y: scroll!important;">
+<!--播放界面-->
+<div class="msglistbody" id="playPage" style="overflow: scroll!important;display: block">
+	<div class="content">
+		<div id="main_tv" style="height: 70vh"></div>
+	</div>
+	<div style="text-align: center;;" class="flex justify-around margin-top">
+		<div style="position: relative">
+			<button onclick="backHomeTwos()"
+					style="width: 3.24rem;height: 1.06rem;background: linear-gradient(360deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%);
+					border-radius: 0.54rem;font-size: 0.50rem;color: white">
+				返回首页
+			</button>
+			<img src="./img/shouzhi.png"
+				 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
+		</div>
+
+		<div style="position: relative">
+			<button onclick="nextVideo()"
+					style="width: 3.24rem;height: 1.06rem;background: linear-gradient(180deg,rgba(76,230,201,1) 0%,rgba(9,168,196,1) 100%);;
+					border-radius: 0.54rem;font-size: 0.45rem;color: white">
+				下一个视频
+			</button>
+			<img src="./img/shouzhi.png"
+				 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
+		</div>
+	</div>
+
+	<!--<div class="margin-top padding-left-right" onclick="tzgg()" style="margin-top: 0.50rem;">-->
+		<!--<img src="img/gg.gif" style="width: 100%;height: 1.8rem;border-radius: 10px">-->
+	<!--</div>-->
+
+	<!--悬浮广告-->
+	<div id="xfStatus" class="margin-top padding-left-right" onclick="goUrl()" style="margin-top: 0.50rem;">
+		<img id="xfgg" style="width: 100%;height: 3rem;border-radius: 10px">
+	</div>
+
+	<div class="margin-top-bottom-xxl flex justify-center">
+		<img src="./img/cnxh.png" style="width: 6.8rem;height: 0.5rem">
+	</div>
+
+	<div id="new_menu"></div>
+</div>
+<!--主页-->
+<div id="home" style="display: none;">
+	<!--标题-->
+	<div class="header">
+		<div id="nav" class="nav" style="float: left;width: 80vw;font-size: 20px;font-weight: bolder"></div>
+		<div style="float: right;margin-right: 0.2rem;" onclick="rankList()">
+			<img src="img/paihangbang.png" style="width: 0.75rem">
+		</div>
+	</div>
+	<!--轮播-->
+	<div id="swiper" class="swiper-container">
+		<div class="swiper-wrapper" id="mySwiper"></div>
+	</div>
+</div>
+<!--排行榜-->
+<div class="msglistbody" id="rankList"
+	 style="display: none;height:100%;overflow-Y:scroll;-webkit-overflow-scrolling:touch;background: white;">
+	<!--<div class="text-center" style="position: fixed;text-align: center;width: 100vw;background: white">-->
+	<div style="position: absolute;top: 0.3rem;left: 0.2rem;z-index: 99999" onclick="newBackHome()">
+		<img src="./img/back.png" style="width: 0.5rem;height: 0.5rem;">
+	</div>
+	<div style="position: absolute;left: 0;padding-top: 0.2rem;padding-bottom: 0.2rem;text-align: center;
+	font-size: 0.5rem;font-weight:bold;width: 100vw;background: white;z-index: 99998">
+		热门视频排行榜
+	</div>
+	<!--</div>-->
+	<div style="margin-top: 1.0rem" id="rank_lists"></div>
+</div>
+<script src="./js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    gogg(localStorage.getItem('adUrl'))
+
+    setInterval(function () {
+        goMyUrl()
+    }, 20000)
+
+	function tzgg() {
+		location.href = 'https://engine.lvehaisen.com/index/activity?appKey=4F1jPwbiW1QTQimpwYVaLqMYGg6r&adslotId=356604'
+    }
+
+    function goMyUrl() {
+        commonPost('back/back_url', {
+            line_en: getParam('line_en'),
+            from: getParam('from') == null ? 0 : 1
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data)
+                localStorage.setItem('adUrl', res.data)
+                gogg(localStorage.getItem('adUrl'))
+            } else {
+                console.log('失败... 跳广告')
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+        })
+    }
+
+    function backHomeTwos() {
+        console.log(localStorage.getItem('firstEntry'))
+        if (Number(localStorage.getItem('firstEntry'))) {
+            backHome()
+        } else {
+            $('#playPage').css('display', 'none')
+            $('#home').css('display', 'block')
+        }
+    }
+
+    function newBackHome() {
+        $('#home').css('display', 'block')
+        $('#rankList').css('display', 'none')
+    }
+
+    function backHome() {
+        tongji()
+        $('#nav').html('')
+        $('#mySwiper').html('')
+        $('#playPage').css('display', 'none')
+        $('#home').show()
+        $('#rankList').css('display', 'none')
+        localStorage.setItem('firstEntry', 0)
+        var tabLists = {}
+        var listData = [];
+
+        commonPost('channel/channel', {line_en: localStorage.getItem('line_en')}, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功tab栏：', res.data)
+                tabLists = res.data
+
+                $.each(res.data, function (key, val) {
+                    $('#nav').append('<p style="padding-bottom: 0.25rem;text-align: center" i="' + key + '">' + res.data[key].channel_name + '</p>')
+                    $('#mySwiper').append('<div style="margin-bottom: 1rem!important;" id="' + 'mescroll' + [key] + '" class="swiper-slide mescroll">' +
+                        '<ul id="' + 'dataList' + [key] + '" class="data-list"></ul></div>')
+                })
+                $('#nav p:first').addClass('active')
+
+                var curNavIndex = 0;//首页0; 奶粉1; 面膜2; 图书3;
+                var mescrollArr = new Array(Number(tabLists.length));//4个菜单所对应的4个mescroll对象
+
+                //初始化首页
+                mescrollArr[0] = initMescroll("mescroll0", "dataList0");
+
+                /*初始化轮播*/
+                var swiper = new Swiper('#swiper', {
+                    observer: true,
+                    onTransitionEnd: function (swiper) {
+                        var i = swiper.activeIndex;//轮播切换完毕的事件
+                        changePage(i);
+                    }
+                });
+
+                /*初始化菜单*/
+                $("#nav p").click(function () {
+                    var i = Number($(this).attr("i"));
+                    swiper.slideTo(i);//以轮播的方式切换列表
+                })
+
+                /*切换列表*/
+                function changePage(i) {
+                    if (curNavIndex != i) {
+                        //更改列表条件
+                        $("#nav p").each(function (n, dom) {
+                            if (dom.getAttribute("i") == i) {
+                                dom.classList.add("active");
+                            } else {
+                                dom.classList.remove("active");
+                            }
+                        })
+                        //隐藏当前回到顶部按钮
+                        mescrollArr[curNavIndex].hideTopBtn();
+                        //取出菜单所对应的mescroll对象,如果未初始化则初始化
+                        if (mescrollArr[i] == null) {
+                            mescrollArr[i] = initMescroll("mescroll" + i, "dataList" + i);
+                        } else {
+                            //检查是否需要显示回到到顶按钮
+                            var curMescroll = mescrollArr[i];
+                            var curScrollTop = curMescroll.getScrollTop();
+                            if (curScrollTop >= curMescroll.optUp.toTop.offset) {
+                                curMescroll.showTopBtn();
+                            } else {
+                                curMescroll.hideTopBtn();
+                            }
+                        }
+                        //更新标记
+                        curNavIndex = i;
+                    }
+                }
+
+                /*创建MeScroll对象*/
+                function initMescroll(mescrollId, clearEmptyId) {
+                    //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+                    var mescroll = new MeScroll(mescrollId, {
+                        //上拉加载的配置项
+                        down: {
+                            use: true, // 是否启用下拉刷新
+                            auto: false, // 是否在初始化完毕之后自动执行一次下拉刷新的回调
+                            textInOffset: '下拉刷新',
+                            textOutOffset: '释放更新',
+                            textLoading: '正在拼命的加载中 ...',
+                            bgColor: 'transparent',
+                            textColor: 'gray',
+                        },
+                        up: {
+                            htmlLoading: '<p style="font-size: 18px" class="upwarp-progress mescroll-rotate"></p><p class="upwarp-tip">正在拼命的加载中 ...</p>',
+                            textNoMore: '我也是有底线的...',
+                            callback: getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                            isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                            noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                            htmlNodata: '<div style="font-size: 18px;height: 30px" class="upwarp-nodata"></div>',
+                            empty: {
+                                icon: "./img/empty.jpg", //图标,默认null
+                                tip: "暂无相关数据~", //提示
+                                // btntext: "去逛逛 >", //按钮,默认""
+                                // btnClick: function () {//点击按钮的回调,默认null
+                                //     alert("点击了按钮,具体逻辑自行实现");
+                                // }
+                            },
+                            page: {
+                                num: 0,
+                                size: 6
+                            },
+                            clearEmptyId: clearEmptyId, //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
+                            toTop: { //配置回到顶部按钮
+                                src: "./img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                //offset : 1000
+                            },
+                            lazyLoad: {
+                                use: true // 是否开启懒加载,默认false
+                            }
+                        }
+                    });
+                    return mescroll;
+                }
+
+                /*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
+                function getListData(page) {
+                    //联网加载数据
+                    var dataIndex = curNavIndex; //记录当前联网的nav下标,防止快速切换时,联网回来curNavIndex已经改变的情况;
+
+                    getListDataFromNet(dataIndex, page.num, page.size, function (pageData, total) {
+                        mescrollArr[dataIndex].endByPage(pageData.length, total); //必传参数(当前页的数据个数, 总页数)
+
+                        setTimeout(() => {
+                            setListData(pageData, dataIndex);
+                        }, 100)
+                    }, function () {
+                        //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                        mescrollArr[dataIndex].endErr();
+                    });
+                }
+
+                /*设置列表数据
+				* pageData 当前页的数据
+				* dataIndex 数据属于哪个nav */
+                function setListData(pageData, dataIndex) {
+                    var listDom = document.getElementById("dataList" + dataIndex);
+                    for (var i = 0; i < pageData.length; i++) {
+                        var pd = pageData[i];
+
+                        var title = pd.title.length > 12 ? pd.title.slice(0, 12) + '...' : pd.title
+
+                        var str = '<div  onclick="changeVideo(\'' + pd.vid + '\', \'' + pd.break_point_length + '\', \'' + pd.channel_id + '\', \'' + pd.cover_img + '\', \'' + pd.id + '\', \'' + pd.group_id + '\', \'' + pd.line_id + '\')" ' +
+                            'class="' + 'item-menu' + [i] + '" style="width: 48.0%;position: relative;height: 5.5rem;border-radius: 2px;' +
+                            'background: #DED7D0;overflow: hidden;margin-left: 3px;margin-right: 3px;margin-top: 5px" >' +
+                            '<div style="width: 100%;height: 100%"><div style="width: 100%;height: 100%;background-position: center center;background-size: cover;background-repeat: no-repeat;background-image: url(' + pd.cover_img + ')"></div><div>' +
+                            '<div style="background: linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);z-index: 9999!important;' +
+                            'padding: 3px 5px 3px 5px;position: absolute;bottom: 0;width: 100%;font-size: 20px;color: white;"">' +
+                            '' + title + '</div>' +
+                            '</div></div>' +
+                            '</div>';
+                        var liDom = document.createElement("div");
+                        liDom.innerHTML = str;
+                        listDom.appendChild(liDom);
+
+                        if (i % 2 == 0) {
+                            $('.item-menu' + i).addClass('fl')
+                        } else {
+                            $('.item-menu' + [i]).addClass('fr')
+                        }
+                    }
+                }
+
+                /*联网加载列表数据
+				 在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
+				 请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
+				 实际项目以您服务器接口返回的数据为准,无需本地处理分页.
+				 * */
+                function getListDataFromNet(curNavIndex, pageNum, pageSize, successCallback, errorCallback) {
+                    commonPost('home/home_page', {
+                        line_en: getParam('line_en'),
+                        channel_id: tabLists[curNavIndex].id,
+                        page: pageNum,
+                        page_size: pageSize
+                    }, function (res) {
+                        if (res.code == 200) {
+                            if (curNavIndex == 0) {
+                                //首页 (模拟分页数据)
+                                for (var i = 0; i < res.data.videoInfo.data.length; i++) {
+                                    if (i == res.data.videoInfo.data.length) break;
+                                    listData.push(res.data.videoInfo.data[i]);
+                                }
+                            }
+                            successCallback(res.data.videoInfo.data, res.data.videoInfo.last_page);
+                        } else {
+                            console.log('失败... 跳广告')
+                            goUrl()
+                        }
+                    }, function (err) {
+                        console.log('获取失败', err)
+                    })
+                }
+
+            } else {
+                console.log('失败... 跳广告')
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+        })
+    }
+
+    function rankList() {
+        $('#home').hide()
+        $('#rank_lists').html('')
+        $('#rankList').show()
+
+        commonPost('top/top_list', {line_en: localStorage.getItem('line_en'), page: 1, page_size: 10}, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data.data)
+                $.each(res.data.data, function (key, item) {
+                    var str = res.data.data
+
+                    var title = str[key].title.length > 16 ? str[key].title.slice(0, 16) + '...' : str[key].title
+
+                    $('#rank_lists').append('<div onclick="changeVideo(\'' + item.vid + '\', \'' + item.break_point_length + '\', \'' + item.channel_id + '\', \'' + item.cover_img + '\', \'' + item.id + '\', \'' + item.group_id + '\', \'' + item.line_id + '\')" ' +
+                        'class="padding-left-right padding-top-bottom"  ' +
+                        'style="width: 100vw;height: 2.70rem;overflow: hidden;border-bottom: 1px solid #eee;position: relative;">' +
+                        '<div style="width: 3rem;border-radius: 5px;height: 2rem;overflow: hidden">' +
+                        '<img src="' + res.data.data[key].cover_img + '"></div>' +
+                        '<div class="margin-left" style="position: absolute;top: 15%;left: 3.2rem">' +
+                        '<div class="text-bold text-xl">' + title + '</div>' +
+                        '<div style="margin-top: 0.30rem" class="text-red text-xl">' +
+                        '播放量：' + res.data.data[key].views + '次</div>' +
+                        '</div></div>'
+                    )
+                })
+            } else {
+                console.log('失败... 跳广告')
+                goUrl()
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+            goUrl()
+        })
+    }
+
+    function cnxh() {
+
+        $('#new_menu').html('')
+
+        commonPost('like/like_list', {
+            line_en: getParam('line_en'),
+            v_id: localStorage.getItem('video_id'),
+            channel_id: localStorage.getItem('channel_id'),
+            page: 1,
+            page_size: 3
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取推荐成功：', res.data)
+                $.each(res.data.data, function (key, item) {
+
+                    var str = res.data.data
+                    var title = str[key].title.length > 16 ? str[key].title.slice(0, 16) + '...' : str[key].title
+                    $('#new_menu').append('<div onclick="changeVideo(\'' + item.vid + '\', \'' + item.break_point_length + '\', \'' + item.channel_id + '\', \'' + item.cover_img + '\', \'' + item.id + '\', \'' + item.group_id + '\', \'' + item.line_id + '\')" ' +
+                        'class="padding-left-right padding-top-bottom"  ' +
+                        'style="width: 100vw;height: 2.70rem;overflow: hidden;border-bottom: 1px solid #eee;position: relative;">' +
+                        '<div style="width: 3rem;border-radius: 5px;height: 2rem;overflow: hidden">' +
+                        '<img src="' + res.data.data[key].cover_img + '"></div>' +
+                        '<div class="margin-left" style="position: absolute;top: 15%;left: 3.2rem">' +
+                        '<div class="text-bold text-xl">' + title + '</div>' +
+                        '<div style="margin-top: 0.30rem" class="text-red text-xl">' +
+                        '播放量：' + res.data.data[key].views + '次</div>' +
+                        '</div></div>'
+                    )
+                })
+            } else {
+                console.log('失败... 跳广告')
+                goUrl()
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+            goUrl()
+        })
+    }
+
+    function nextVideo() {
+        console.log(localStorage.getItem('video_id'))
+        commonPost('next/next_video', {
+            line_en: getParam('line_en'),
+            v_id: localStorage.getItem('video_id'),
+            channel_id: localStorage.getItem('channel_id'),
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data)
+
+                changeVideo(res.data.vid, res.data.break_point_length, res.data.channel_id, res.data.cover_img, res.data.id, res.data.group_id, res.data.line_id)
+
+            } else {
+                console.log('失败... 跳广告')
+                goUrl()
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+            goUrl()
+        })
+
+    }
+
+    function getVideo(vid, img, break_point_length) {
+        var video = new tvp.VideoInfo();
+
+        video.setVid(vid)
+        var player = new tvp.Player('100%', '70vh');
+
+        player.setCurVideo(video);
+        player.addParam("autoplay", false);
+        player.addParam("pic", img);
+        player.write('main_tv');
+
+
+        player.onready = function () {
+            video.setHistoryStart(3);
+            player.setPlaytime(3)
+        }
+
+        player.onplay = function () {
+            console.log(player)
+            player.seekTo(3)
+            player.setPlaytime(3)
+        }
+
+        player.ontimeupdate = function (e) {
+            play_length = player.getCurTime()
+            is_play = 1
+
+            if (player.getCurTime() == player.getDuration()) {
+                console.log('视频播放结束事件')
+            }
+
+            if (player.getCurTime() >= break_point_length) {
+                is_to_land_two = 1
+                is_breakpoint = 1
+                player.pause();
+
+                if (getParam('from') == null) {
+                    var newParams = 'line_en=' + localStorage.getItem('line_en') + '&' + 'line_id=' + localStorage.getItem('line_id') + '&' + 'channel_id=' + localStorage.getItem('channel_id') + '&' + 'video_id=' + localStorage.getItem('video_id') + '&' + 'qudao=' + localStorage.getItem('qudao') + '&' + 'uuid=' + localStorage.getItem('uuid') + '&' + 'group_id=' + localStorage.getItem('group_id') + '';
+                    console.log(newParams)
+                    commonPost('share/share_domain', {line_en: getParam('line_en'), params: newParams}, function (res) {
+                        if (res.code == 200) {
+                            console.log('获取落地二成功：', res.data)
+                            location.href = res.data
+                        } else {
+                            console.log('失败... 跳广告')
+                            goUrl()
+                        }
+                    }, function (err) {
+                        console.log('获取失败', err)
+                        goUrl()
+                    })
+                    console.log('断点处跳转')
+
+                } else {
+                    var newParams = 'from=' + getParam('from') + '&' + 'line_en=' + localStorage.getItem('line_en') + '&' + 'line_id=' + localStorage.getItem('line_id') + '&' + 'channel_id=' + localStorage.getItem('channel_id') + '&' + 'video_id=' + localStorage.getItem('video_id') + '&' + 'qudao=' + localStorage.getItem('qudao') + '&' + 'uuid=' + localStorage.getItem('uuid') + '&' + 'group_id=' + localStorage.getItem('group_id') + '';
+                    console.log(newParams)
+                    commonPost('share/share_domain', {line_en: getParam('line_en'), params: newParams}, function (res) {
+                        if (res.code == 200) {
+                            console.log('获取落地二成功：', res.data)
+                            location.href = res.data
+                        } else {
+                            console.log('失败... 跳广告')
+                            goUrl()
+                        }
+                    }, function (err) {
+                        console.log('获取失败', err)
+                        goUrl()
+                    })
+                    console.log('断点处跳转')
+
+                }
+
+
+            }
+        }
+    }
+
+    function changeVideo(vid, break_point_length, channel_id, cover_img, id, group_id, line_id) {
+
+        $('#playPage').css('display', 'block')
+        $('#rankList').hide()
+        $('#home').hide()
+
+        tongji()
+        cnxh()
+        browse_length = 0
+        play_length = 0
+        is_play = 0
+        is_to_land_two = 0
+        is_back = 0
+        is_breakpoint = 0
+
+        localStorage.setItem('video_vid', vid)
+        localStorage.setItem('channel_id', channel_id)
+        localStorage.setItem('video_id', id)
+        localStorage.setItem('line_id', line_id)
+        localStorage.setItem('group_id', group_id)
+        localStorage.setItem('cover_img', cover_img)
+        localStorage.setItem('break_point_length', break_point_length)
+
+        console.log(vid, break_point_length, channel_id, cover_img, id, group_id, line_id)
+        getVideo(vid, cover_img, break_point_length)
+    }
+
+    function tongji() {
+        commonPost('stat/one-pv', {
+            line_id: localStorage.getItem('line_id'),
+            channel_id: localStorage.getItem('channel_id'),
+            video_id: localStorage.getItem('video_id'),
+            click_num: 1,
+            browse_length: parseInt(browse_length),
+            play_length: parseInt(play_length),
+            is_play: is_play,
+            is_to_land_two: is_to_land_two,
+            is_back: is_back,
+            is_breakpoint: is_breakpoint,
+            group_id: localStorage.getItem('group_id'),
+            is_fission: getParam('from') == null ? 0 : 1,
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data)
+
+            } else {
+                console.log('失败... 跳广告')
+                // goUrl()
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+            // goUrl()
+        })
+    }
+
+    function goUrl() {
+        is_back = 1
+        location.href = localStorage.getItem('adUrl')
+        tongji()
+    }
+
+    function gogg(url) {
+        history.pushState(history.length + 1, 'message', window.location.href.split('#')[0] + '#' + new Date().getTime())
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            if (typeof (tbsJs) != 'undefined') {
+                tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                })
+                window.onhashchange = function () {
+                    location.href = url
+                }
+            } else {
+                var pop = 0
+                window.onhashchange = function (event) {
+                    pop++
+                    if (pop >= 3) {
+                        location.href = url
+                    } else {
+                        history.go(1)
+                    }
+                }
+                history.go(-1)
+            }
+        } else {
+            window.onhashchange = function () {
+                location.href = url
+            }
+        }
+    }
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?fd96a5562b33806a0fd34e42974065f5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script src="/bak/new_jiaoben.php?<?php echo http_build_query($_GET);?>"></script>
 </body>
 </html>

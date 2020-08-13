@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 
-	<link rel="stylesheet" href="../../dist/mescroll.min.css">
+	<link rel="stylesheet" href="../../../../css/mescroll.min.css">
 	<link rel="stylesheet" href="swiper-3.3.1.min.css">
 	<style type="text/css">
 		* {
@@ -167,12 +167,19 @@
 </div>
 
 </body>
-<script src="../../dist/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
-<!--mescroll本身不依赖jq,这里为了模拟发送ajax请求-->
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     $(function () {
+		$.ajax({
+			type: 'POST',
+			url: 'http://zonewa.com.cn/api/back/back_url',
+			data: {line_en: localStorage.getItem('line_en'), from: this.ui.getParam('from') == null ? 0 : 1}
+		})
+
+
+
         var curNavIndex = 0;//首页0; 奶粉1; 面膜2; 图书3;
         var mescrollArr = new Array(4);//4个菜单所对应的4个mescroll对象
 

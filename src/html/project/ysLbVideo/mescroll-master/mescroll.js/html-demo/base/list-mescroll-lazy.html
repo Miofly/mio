@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
-		<link rel="stylesheet" href="../../dist/mescroll.min.css">
+		<link rel="stylesheet" href="../../../../css/mescroll.min.css">
 		<style type="text/css">
 			* {
 				margin: 0;
@@ -18,12 +18,12 @@
 			body{background-color: white}
 			ul{list-style-type: none}
 			a {text-decoration: none;color: #18B4FE;}
-			
+
 			/*vue*/
 			[v-cloak] {
 			  display: none;
 			}
-			
+
 			/*模拟的标题*/
 			.header{
 				z-index: 9990;
@@ -125,16 +125,16 @@
 				<!--展示上拉加载的数据列表-->
 				<ul id="dataList" class="data-list">
 					<li v-for="(pd,i) in pdlist">
-						
+
 						<!-- img标签: <img src="占位图" imgurl="网络图"/> -->
 						<img v-if="pdType==0" class="pd-img" src="../res/img/loading-sq.png" :imgurl="pd.pdImg"/>
-						
+
 						<!-- div标签: 占位图在css中设置 -->
 						<div v-if="pdType==1" class="pd-bg" :imgurl="pd.pdImg"></div>
-						
+
 						<!--各种占位图-->
 						<img v-if="pdType==2" class="pd-img" :src="getLoading(i)" :imgurl="pd.pdImg"/>
-						
+
 						<p class="pd-name">{{pd.pdName}}</p>
 						<p class="pd-price">{{pd.pdPrice}} 元</p>
 						<p class="pd-sold">已售{{pd.pdSold}}件</p>
@@ -143,7 +143,7 @@
 			</div>
 		</div>
 	</body>
-	
+
 	<script src="../../dist/mescroll.js" type="text/javascript" charset="utf-8"></script>
 	<!--mescroll本身不依赖jq,这里为了模拟发送ajax请求-->
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -176,12 +176,12 @@
 						},
 						empty:{ //配置列表无任何数据的提示
 							warpId:"dataList",
-							icon : "../res/img/mescroll-empty.png" , 
-//						  	tip : "亲,暂无相关数据哦~" , 
-//						  	btntext : "去逛逛 >" , 
+							icon : "../res/img/mescroll-empty.png" ,
+//						  	tip : "亲,暂无相关数据哦~" ,
+//						  	btntext : "去逛逛 >" ,
 //						  	btnClick : function() {
 //						  		alert("点击了去逛逛按钮");
-//						  	} 
+//						  	}
 						},
 						//vue的案例请勿配置clearId和clearEmptyId,否则列表的数据模板会被清空
 						//vue的案例请勿配置clearId和clearEmptyId,否则列表的数据模板会被清空
@@ -189,7 +189,7 @@
 //						clearEmptyId: "dataList"
 					}
 				});
-				
+
 			},
 			methods: {
 				//切换菜单
@@ -201,7 +201,7 @@
 						this.mescroll.resetUpScroll();
 						//隐藏回到顶部按钮
 						this.mescroll.hideTopBtn();
-						
+
 						//这里为了模拟加载中的占位图,延长了懒加载的时间间隔
 						if(pdType==2){
 							this.mescroll.optUp.lazyLoad.delay=5000;
@@ -217,38 +217,38 @@
 				//上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
 				upCallback: function(page) {
 					var self = this;
-						
+
 					//联网加载数据
 					getListDataFromNet(self.pdType, page.num, page.size, function(curPageData) {
 						//curPageData=[]; //打开本行注释,可演示列表无任何数据empty的配置
-						
+
 						//如果第一页,则先手动制空列表
 						if(page.num == 1) self.pdlist = [];
-						
+
 						//更新列表数据
 						self.pdlist = self.pdlist.concat(curPageData);
-						
+
 						//联网成功的回调,隐藏下拉刷新和上拉加载的状态;
 						//mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
 						console.log("page.num="+page.num+", page.size="+page.size+", curPageData.length="+curPageData.length+", self.pdlist.length==" + self.pdlist.length);
-						
+
 						//方法一(推荐): 后台接口有返回列表的总页数 totalPage
 						//self.mescroll.endByPage(curPageData.length, totalPage); //必传参数(当前页的数据个数, 总页数)
-						
+
 						//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
 						//self.mescroll.endBySize(curPageData.length, totalSize); //必传参数(当前页的数据个数, 总数据量)
-						
+
 						//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
 						//self.mescroll.endSuccess(curPageData.length, hasNext); //必传参数(当前页的数据个数, 是否有下一页true/false)
-						
+
 						//方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
 						self.mescroll.endSuccess(curPageData.length); //endByPage,endBySize,endSuccess内部会调用mescroll.lazyLoad的方法
-						
+
 						//提示:curPageData.length必传的原因:
 						// 1.判断是否有下一页的首要依据: 当传的值小于page.size时,则一定会认为无更多数据.
 						// 2.比传入的totalPage, totalSize, hasNext具有更高的判断优先级
 						// 3.使配置的noMoreSize生效
-					
+
 					}, function() {
 						//联网失败的回调,隐藏下拉刷新和上拉加载的状态;
 						self.mescroll.endErr();
@@ -256,8 +256,8 @@
 				},
 			}
 		});
-			
-			
+
+
 		/*联网加载列表数据
 		 在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
 		 请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
@@ -285,7 +285,7 @@
 	            });
             },1000)
 		}
-			
+
 	</script>
 
 </html>

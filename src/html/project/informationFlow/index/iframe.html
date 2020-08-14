@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<!-- saved from url=(0451)http://gmeauxbeaq.dfrjrbl.cn:443/video_kuaishou/iframe.html?user_id=800025&video_id=65861&ad_id=0&share_type=1&generate_time=1597300842&e=eyJ0eXBlIjoyLCJzaWduIjoiODBNNzRNIiwicGxhdGZvcm0iOjF9&appid=wx6c4753f4cb0e7693&shareIp=114.97.115.197&share_channel_code=2003&rec_requestid=&code=051WJi000Zwo6K10C6200sMag03WJi07&state=&requestIp=117.65.109.54&showAd=1&time=1597305221&mm=IrxqlarooI&twiceCallback=http%3A%2F%2Fgo-my.cn&appidtwice=wx6c4753f4cb0e7693 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./dcem"></script><script type="text/javascript" async="" src="./ycim"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="referrer" content="never">
+    <title>辣妹不起来 无语</title>
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./ad.css">
+    <link rel="stylesheet" href="./swiper.min.css">
+    <script src="./eruda.min.js"></script><style type="text/css">.eruda-search-highlight-block {<br>  display: inline; }<br>  .eruda-search-highlight-block .eruda-keyword {<br>    background: #ffc107;<br>    color: #fff; }<br></style>
+    <script src="./swiper.min.js"></script>
+    <script src="./base64.js"></script>
+    <script>
+      // eruda.init(); // 调试代码
+    </script>
+
+    <script>
+        var BASE = {"api":"http:\/\/kz-api.gaungdiyeya.com:10002","ws_api":"ws:\/\/kuaizhuandsp.cn:20003","APP_ID":102182,"user_api":"http:\/\/kuaizhuandsp.cn:10080","app_key":"jqxs7e","name":"kuaizhuan","CN_name":"\u5feb\u8f6c","re_uid":"http:\/\/kuaizhuandsp.cn:443\/iframe\/","baiduJs":"https:\/\/hm.baidu.com\/hm.js?0fb076b975e9adfb0e7cc57f207e3da7"}    </script>
+    <script src="./video_list.js"></script>
+    <script src="./default.js"></script>
+    <script src="./jquery-1.9.0.min.js"></script>
+    <script src="./uuidv4.min.js"></script>
+    <script>
+
+      function random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      function getParam(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable) {
+            return pair[1];
+          }
+        }
+        return false;
+      }
+      var share_type = getParam('share_type');
+      // websocket初始化的数据
+      var wsData = {
+        page: 1, // 落地頁type
+        shake: 0, // 陀螺仪晃动角度
+        charging: 0, // 设备电池状态
+        battery_level: 0, // 同上
+        event: '',
+        slide_num: 0,
+        share_type
+      };
+
+      // 判断设备为 ios
+      function isIos() {
+        var u = navigator.userAgent;
+        if (u.indexOf("iPhone") > -1 || u.indexOf("iOS") > -1) {
+            return true;
+        }
+        return false;
+      }
+
+      var system = undefined;
+      if (isIos()) {
+        system = 2
+      } else {
+        system = 1
+      }
+
+      var rec_requestid = getParam('rec_requestid');
+      var headersMessage = {};
+
+      // 从地址栏拿用户信息
+      var appidtwice = getParam('appidtwice');
+      var user_id = getParam('user_id');
+      var video_id = getParam('video_id');
+
+      var err_id = video_id;
+
+      var code = getParam('code');
+      var appid = getParam('appid');
+      var generate_time = getParam('generate_time');
+      var jump = getParam('jump');
+      var e = getParam('e');
+      var adSwitch = getParam('showAd');
+      var ad_id = getParam('ad_id');
+      var shareIp = getParam('shareIp');
+      var share_channel_code = getParam('share_channel_code');
+      // 判断是否从一返返回
+      var backOnoff = getParam('adBack');
+      var backAd = undefined;
+      var fromOneReturn = 0;
+      if (backOnoff && backOnoff != 0) {
+        fromOneReturn = 1
+        backAd = 1
+      } else {
+        fromOneReturn = 0
+        backAd = 0
+      }
+
+      // 处理是否为二次转发
+      var time = getParam('time');
+      var twiceCallback = getParam('twiceCallback');
+
+      var userObj = {
+        // ip: returnCitySN["cip"],
+        user_agent: navigator.userAgent,
+        system: system,
+        user_id,
+        video_id,
+        code,
+        appid,
+        generate_time,
+        fromOneReturn,
+        rec_requestid: rec_requestid ? rec_requestid : '',
+        share_channel_code: share_channel_code ? share_channel_code : ''
+      }
+
+      /*
+        pv_play:0, // 视频pv_id
+        uv: 0, // 访问视频 没到50%
+        paly:0, // 视频有效id
+        repeat: 0, // 重复播放id
+        like: 0, // 点赞id
+        share: 0, // 分享id
+        ret: 0 // 一返id
+      */
+      var videoState = {};
+
+      var ws = null;
+      Object.assign(wsData, userObj);
+
+      var heartbeatObj = {
+        event: 'heartbeat',
+        shake: 0
+      }
+
+      function socketSend() {
+        var ws_url = BASE.ws_api;
+        ws = new WebSocket(ws_url);
+        ws.onopen = function() {
+          wsData.event = 'reg';
+          ws.send(JSON.stringify(wsData));
+        };
+
+        var timer = setInterval(function() {
+          if (ws.readyState === ws.OPEN) {
+            ws.send(JSON.stringify(heartbeatObj));
+          } else if (ws.readyState === ws.CLOSED) {
+            console.log('websocket已重连');
+            ws = new WebSocket(ws_url);
+          }
+        }, 5000);
+
+        window.onunload = function() {
+          clearInterval(timer);
+        };
+
+      }
+      var nowTime = new Date().getTime();
+      var stringCode = BASE64.encode((nowTime / 1000).toFixed(0));
+
+
+      var isShow = adSwitch == 1 ? 1 : 0;
+      var redirect_uri = decodeURIComponent(twiceCallback) + `/${nowTime}` + '?' + 'user_id=' + user_id + '&video_id=' + video_id + '&share_type=' + share_type + '&generate_time=' + generate_time + '&e=' + e + '&appid=' + appidtwice + '&state=' + '&time=' + time + '&shareIp=' + shareIp + '&showAd=' + isShow + '&ad_id=' + ad_id + '&adBack=' + backAd + '&rec_requestid=' + rec_requestid;
+
+      var _url_ = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appidtwice}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=snsapi_base#wechat_redirect`;
+
+      var isOne = Math.round(nowTime / 1000) - (time * 1);
+
+      if (isOne >= 60) {
+        parent.location.href = _url_;
+        parent.iframeShow(2);
+      } else {
+        socketSend();
+        parent.iframeShow(1);
+        loadJsMini('/common/mini.js');
+      }
+
+      // socketSend();
+      // parent.iframeShow(1);
+
+      function loadJsMini (url) {
+        var script = document.createElement('script');
+        script.src = url;
+        var head = document.getElementsByTagName('head')[0];
+        head.appendChild(script);
+      };
+    </script><script src="./mini.js"></script>
+<script src="./dm.js" type="text/javascript"></script><script src="./dm.js" type="text/javascript"></script></head>
+<body style="zoom: 1;"><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div>
+
+  <img src="./300154_d96b40aa9f3ccfd94e38f3e4fcd3b05e.jpg" alt="" class="bugImg">
+  <div class="contBox">
+
+    <!-- 顶部悬浮广告位 -->
+    <div id="jj-ad-float-top" class="jj-ad-float-top"></div>
+    <!-- /顶部悬浮广告位 -->
+
+    <!-- 标题下方广告位 -->
+    <div id="jj-ad-title"></div>
+    <!-- /标题下方广告位 -->
+
+    <div class="top-box">
+      <div class="endBox">
+        <div class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-ios">
+          <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-2022px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate" onclick="slideClick(160796, 10)" data-swiper-slide-index="10" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./3fa80c9733004b05993b3f1d70fbc85e_1590124228_tplv-dy-360p.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(65861, 0)" data-swiper-slide-index="0" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./830b24bf7fd9478c8dac87fa043cc256_1592230608.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(143442, 1)" data-swiper-slide-index="1" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./5ef008bae1ba443c93dd5c8353b1e75f_1595767112_tplv-dy-360p.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(159780, 2)" data-swiper-slide-index="2" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./c1e4845f42eb486ea3c84fe5e2f1f50f_1590901840_tplv-dy-360p.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(148015, 3)" data-swiper-slide-index="3" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDA3MzExMjUwNDZfMzM5NDUyNTg2XzMzNDE1ODUzODYyXzJfMw==_Ba6657371c700efc59050c0980f887222.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide swiper-slide-prev" onclick="slideClick(140253, 4)" data-swiper-slide-index="4" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDA3MjAwODU2NDBfMzE5NDM2MTQ3XzMyNzEwODgwMTQ3XzJfMw==_Bb8b879b379b9c4519c66e96b50761d8c.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide swiper-slide-active" onclick="slideClick(151617, 5)" data-swiper-slide-index="5" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAxOTEwMDIxMzQ0MDFfNzI3NDc1NjE4XzE4MDg4ODM0MzQyXzFfMw==_B22d90faeeba2572750a1842c6ea85c8b.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide swiper-slide-next" onclick="slideClick(138822, 6)" data-swiper-slide-index="6" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDA2MDIxMzM1MjRfMTMzNjI5NDg1MV8yOTc0NDkzMDU0MV8yXzM=_Ba384ded3d87c163e25c5694987b71718.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(135327, 7)" data-swiper-slide-index="7" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDAyMjUyMzQwMDRfMTQ1MTUyMzQxNF8yNDA2NTYyMzc2MF8yXzM=_B5c57df4f357e250b4abffb62f90bb09a.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(145943, 8)" data-swiper-slide-index="8" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDA2MjAxMTEzNTZfNTg2NDMxNjRfMzA4MDc2OTk3OTRfMl8z_Bbed9d4be1b1bb873dd1d85305aa98f49.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(96975, 9)" data-swiper-slide-index="9" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./BMjAyMDA1MDQwMDM5MzhfMTc2MjQ0NDM4XzI3OTIxMzc1MDE5XzFfMw==_Beef147b8a760c85b21777fbba051de8a.jpg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+      <div class="swiper-slide" onclick="slideClick(160796, 10)" data-swiper-slide-index="10" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./3fa80c9733004b05993b3f1d70fbc85e_1590124228_tplv-dy-360p.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div>
+
+    <div class="swiper-slide swiper-slide-duplicate" onclick="slideClick(65861, 0)" data-swiper-slide-index="0" style="width: 337px;">
+        <div class="cover-img">
+          <img src="./830b24bf7fd9478c8dac87fa043cc256_1592230608.jpeg" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="./playBtn.png" alt="">
+        </div>
+      </div></div>
+          <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"></div>
+          <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"></div>
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+        <div class="ToastBtnBox">
+          <div class="replayBox">
+            <img src="./replay_btn.png" alt="">
+          </div>
+          <div id="downloadBtn">
+            <img src="./2.png" alt="" class="downloadBtnImg">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="loading">
+        <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/douzhuan_videos/loading.gif" alt="">
+      </div> -->
+      <!-- 视频错误处理 -->
+      <div class="videoError">
+        播放错误，请点击重试
+      </div>
+
+      <div class="secondError">
+        网络连接失败，请重试
+      </div>
+
+      <!-- 请求视频错误 -->
+      <div class="reqErr">
+        网络错误，请稍后重试
+      </div>
+      <!-- 播放进度 -->
+      <div class="progress-line">
+        <div class="line"></div>
+      </div>
+      <!-- 视频 -->
+      <div id="video-dom">
+      <video id="video" class="video" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-type="h5-page" x5-video-player-fullscreen="true" width="94%" preload="auto" autoplay="autoplay" poster="https://p3-dy.byteimg.com/img/tos-cn-p-0015/54f5f4ee9ca34141a1248fdb6dff7fc0~c5_300x400.jpeg?from=2563711402_large&amp;l=202006191732310100140460141524C6DE" src="https://aweme.snssdk.com/aweme/v1/play/?video_id=v0200f130000brjo5icpg620ppleav80&amp;ratio=720p&amp;line=0" onerror="vc.onVideoError()">
+        </video>
+    </div>
+      <!-- 看更多 -->
+      <div id="see-more">
+        <a href="javaScript:;" id="see-more-btn">点击查看视频</a>
+        <div class="see-more-down">
+          <img src="./see-down.png" alt="">
+        </div>
+      </div>
+      <div id="footer">
+        <div class="footer-top">
+          <div class="user-img">
+            <img src="./173520001ca3b73a27105.jpeg" alt="">
+          </div>
+          <div class="author">
+
+            学妹
+
+          </div>
+        </div>
+        <div class="describe">
+
+          辣妹不起来 无语
+
+        </div>
+    </div>
+      <!-- 播放按钮 -->
+      <div class="play-btn"></div>
+      <!-- loading -->
+      <div class="loading-box" style="display: none;">
+        <img src="./loading.gif" alt="">
+      </div>
+      <div class="share-box">
+        <div class="box-item pdd" style="">
+          <img src="./WechatIMG69.jpeg" class="shoppingImg">
+        </div>
+        <span class="pdd pddTitle" style="">测八字</span>
+
+        <div class="box-item zan-btn">
+          <img src="./like.png">
+        </div>
+        <span class="likeBox">112.01w</span>
+
+        <div class="box-item nextBtn">
+          <img src="./next.png">
+        </div>
+        <span>换一个</span>
+
+        <div class="box-item more-btn">
+          <img src="./more2.png">
+        </div>
+        <span>更多</span>
+      </div>
+    </div>
+
+
+    <!-- 用户二维码弹窗 -->
+    <div class="userCode">
+      <div class="flexBox">
+        <div class="infoImg">
+          <img src="http://gmeauxbeaq.dfrjrbl.cn:443/video_kuaishou/iframe.html?user_id=800025&amp;video_id=65861&amp;ad_id=0&amp;share_type=1&amp;generate_time=1597300842&amp;e=eyJ0eXBlIjoyLCJzaWduIjoiODBNNzRNIiwicGxhdGZvcm0iOjF9&amp;appid=wx6c4753f4cb0e7693&amp;shareIp=114.97.115.197&amp;share_channel_code=2003&amp;rec_requestid=&amp;code=051WJi000Zwo6K10C6200sMag03WJi07&amp;state=&amp;requestIp=117.65.109.54&amp;showAd=1&amp;time=1597305221&amp;mm=IrxqlarooI&amp;twiceCallback=http%3A%2F%2Fgo-my.cn&amp;appidtwice=wx6c4753f4cb0e7693" alt="" class="userInfoImg">
+        </div>
+        <div class="infoName"></div>
+        <div class="describe"></div>
+        <div class="codeImgBox"></div>
+        <!-- <img src="" alt="" class="codeImg"> -->
+        <div id="autoCode"></div>
+        <p class="desc">长按识别二维码</p>
+
+        <div class="codeClose">
+          <!-- <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/douzhuan_videos/codeClose.png" alt="" class="codeClose"> -->
+          ×
+        </div>
+      </div>
+      <div class="flexBtn">
+        查看详情
+      </div>
+    </div>
+
+    <!-- <div class="downUp">
+      <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/shuixianzhuan/downUp.gif" alt="">
+    </div> -->
+    <p class="ad-title">
+      ——&nbsp; <span class="userName_title">学妹</span>的更多热门视频 &nbsp;——
+    </p>
+    <!-- 启动量广告 -->
+    <div id="qdl"></div>
+
+
+    <!-- 广告容器 -->
+    <div class="adBox" id="adBox">
+    </div>
+
+    <div class="arrow-down">
+      <img src="./downUp.gif" alt="">
+    </div>
+
+    <!-- video -->
+    <script id="template-video" type="text/html">
+      <video
+          id="video"
+          class="video"
+          webkit-playsinline="true"
+          x-webkit-airplay="true"
+          playsinline="true"
+          x5-video-player-type="h5-page"
+          x5-video-player-fullscreen="true"
+          width="94%"
+          preload="auto"
+          autoplay="autoplay"
+          poster="{{imgSrc}}"
+          src="{{src}}"
+          onerror="vc.onVideoError()"
+        >
+        </video>
+    </script>
+
+    <!-- 播放结束后slide模板 -->
+    <script id="template-box" type="text/html">
+      {{each data value index}}
+      <div class="swiper-slide" onclick="slideClick({{value.id}}, {{index}})">
+        <div class="cover-img">
+          <img src="{{value.video_cover}}" alt="">
+        </div>
+        <div class="silde-img">
+          <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/douzhuan_videos/playBtn.png" alt="">
+        </div>
+      </div>
+      {{/each}}
+    </script>
+
+    <!-- 底部模板 -->
+    <script id="template-footer" type="text/html">
+        <div class="footer-top">
+          <div class="user-img">
+            <img src="{{src}}" alt="">
+          </div>
+          <div class="author">
+            <% if(value.qr_code && value.qr_code.length > 0) {%>
+              {{value.qr_code[0].name && value.qr_code[0].name}}
+              <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/douzhuan_videos/handle.gif" alt="" class="point">
+            <% }else{%>
+            {{author}}
+            <% } %>
+          </div>
+        </div>
+        <div class="describe">
+          <% if(value.qr_code && value.qr_code[0] && value.qr_code[0].describe) {%>
+            {{value.qr_code[0].describe}}
+          <%} else {%>
+          {{describe}}
+          <% } %>
+        </div>
+    </script>
+
+    <!-- 广告模板 -->
+    <script id="template-adItem" type="text/html">
+      <div class="adItem">
+        <div class="adImg" onclick="vc.adClick({{clickUrl}},{{dUrl}})">
+          <img src="{{srcUrls}}" alt="" class="singleAd">
+          <p class="icon">
+            <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/douzhuan_videos/playBtn.png" alt="">
+            <span class="like-num">{{like}}</span>
+          </p>
+        </div>
+        <div class="adDesc">
+          {{title}}
+        </div>
+      </div>
+    </script>
+
+    <!-- 广告 -->
+    <!-- 顶部悬浮广告位 -->
+    <div id="jj-ad-float-top" class="jj-ad-float-top"></div>
+    <!-- /顶部悬浮广告位 -->
+
+    <!-- 文末广告位 -->
+    <div id="jj-ad-article-after" class="jj-ad-article-after"></div>
+    <!-- /文末广告位 -->
+
+    <!-- 精彩推荐广告位 has-float-bottom-->
+    <div id="ad-list" class="ad-list-box">
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzUxODkwLG9pZD0xMTAwNDEyNzc5LGNpZD0sdXVpZD1VRG5SZVFZMm16YVZKdTJzbUltRXZSLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMzgsdXQ9MTU5NzMwNTIyOSxzYT0xNDQ2MjQ4MTU2LGRvbT0scGlkPTEwMTEyNzcsb2NjPWNpbSxjY3A9MTI4ODAwMDAsYWlkPTExMDA0OTE5NDgseT0wLGF2PTAsb3NpZD0wLGNwPTAuMDQsdmNwPTAuMDQ%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=93b5f16a-ed33-4f42-8314-3701a4f799af&amp;strategy_dealid=7345&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011277&amp;creative_id=424321&amp;account_id=200536&amp;flag=&amp;signature=24df232180d4c8c41fd6e641d23064d0&quot;],[&quot;https://qwertyuu.kuaizhan.com/91/53/p7361394514f1b7&quot;],1011277,1)">
+        <div class="item-left">
+          <div class="title">【福利】一男子哄骗大学生发生关系的全过程，真是让人深思</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>51176次浏览</span>
+             <span>37分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./eaac65b0f3ad1a810803c1a16deb5d19.gif" alt="">
+      </div>
+
+        <div class="ad-template-info ad-wrap-single-big" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzUzMTk5LG9pZD0xMTAwNDE1NTY5LGNpZD0sdXVpZD1VREVmUjJtUk1lZWZNSVpJNXM3RkZNLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMjAsdXQ9MTU5NzMwNTIyOSxzYT0zMDUxNjU3MzI1LGRvbT0scGlkPTEwMTEyNzYsb2NjPWNpbSxjY3A9Mzg4ODAwMDAsYWlkPTExMDA0OTQ5MDQseT0wLGF2PTAsb3NpZD0wLGNwPTAuMDQsdmNwPTAuMDQ%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=70b66421-5c4b-4c8d-9849-04025a2c2f8b&amp;strategy_dealid=7345&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011276&amp;creative_id=427291&amp;account_id=202052&amp;flag=&amp;signature=0efc219d0465384b3f74aaf1f55d8e0b&quot;],[&quot;https://beiyong1.kuaizhan.com/14/60/p730670958f5f0e&quot;],1011276,3)">
+          <div class="title">姐夫吃这个太猛了，一晚狂弄我2小时。让我腿软求饶…</div>
+          <img class="ad-img" src="./eb92f229963ac05b5ef2dc0c19f98884.jpg" alt="">
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+             <span>23063次浏览</span>
+             <span>15分钟前</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzYxMTUxLG9pZD0xMTAwNDExMDI2LGNpZD0sdXVpZD1VRFFOakFuZTJtZVZiZW12N3NVTVptLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIyOSxzYT0zMDA4MDI3NjQ2LGRvbT0scGlkPTEwMTE0NDAsb2NjPWNpbSxjY3A9MTAyNTAwMDAsYWlkPTExMDA0ODk0MzMseT0wLGF2PTAsb3NpZD0wLGNwPTAuMTIsdmNwPTAuMTI%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=4fa3d103-576f-4a82-9fdb-f7abd30c724f&amp;strategy_dealid=11079&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011440&amp;creative_id=421583&amp;account_id=209432&amp;flag=&amp;signature=cf088ca41d01978ec2e0da8d58734f90&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=676fa79e-ea59-45d2-a81c-e0be7eb040f0&amp;accept_id=10189&amp;adv_id=1011265&amp;strategy_dealid=11434&amp;media_id=102182&amp;creative_id=&amp;signature=134d9ed0d67598e8724f5f8d08733792&quot;],[&quot;http://tisykan.xyz/0813-nxq&quot;],1011265,1)">
+        <div class="item-left">
+          <div class="title">让女人连连高潮的原因原来是这个！男人必看</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>83508次浏览</span>
+             <span>5分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./b23d55519d1096484699eb9ae442fa85.gif" alt="">
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzUxODY5LG9pZD0xMTAwMjg3ODc3LGNpZD0sdXVpZD1VRHFFVWIybUViYWJKdVltM3N1dlo2LG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMTksdXQ9MTU5NzMwNTIzMCxzYT0zNDMxNjc4OTg5LGRvbT0scGlkPTEwMTE0NDAsb2NjPWNpbSxjY3A9ODgwMDAwMCxhaWQ9MTEwMDM2OTY4Myx5PTAsYXY9MCxvc2lkPTAsY3A9MC4wNCx2Y3A9MC4wNA%3D%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=72a2be47-ab21-46c9-bf84-2dbdee36d8db&amp;strategy_dealid=11079&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011440&amp;creative_id=290706&amp;account_id=200524&amp;flag=&amp;signature=a0a740df670b04420a11dafeeee7d334&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=af6aa2ff-b2d5-4e33-8d74-c40553464804&amp;accept_id=10189&amp;adv_id=1011264&amp;strategy_dealid=11434&amp;media_id=102182&amp;creative_id=&amp;signature=f0294128ab5854ffa2e9f3201dba41f7&quot;],[&quot;http://xldg.ahcaf1.cn/jyhg/index.html&quot;],1011264,1)">
+        <div class="item-left">
+          <div class="title">“性生活”多吃它，又粗又硬，女人高潮不断~~~~~</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>27388次浏览</span>
+             <span>57分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./8e669cbe27a8ee58e68d4f614a20c370.gif" alt="">
+      </div>
+
+        <div class="ad-template-info ad-wrap-single-big" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzUzMzIyLG9pZD0xMTAwNDEyMzQzLGNpZD0sdXVpZD1VRDZtWnV1RUpmaUJBcXFmNnMzQXV5LG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMzUsdXQ9MTU5NzMwNTIzMCxzYT00MDYxMjY2NjQ2LGRvbT0scGlkPTEwMTE0NDIsb2NjPWNpbSxjY3A9MzgwMDAwMDAsYWlkPTExMDAzOTMzMzUseT0wLGF2PTAsb3NpZD0wLGNwPTAuMDQsdmNwPTAuMDQ%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=8f67126d-cce1-447c-8a9e-ce99c4b08c46&amp;strategy_dealid=11078&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011442&amp;creative_id=318922&amp;account_id=202139&amp;flag=&amp;signature=69cbfa74dee126077274407d2b1eb61c&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=23042b71-eba0-4c29-a40c-22f456ea8209&amp;accept_id=10189&amp;adv_id=1011263&amp;strategy_dealid=11436&amp;media_id=102182&amp;creative_id=&amp;signature=24c91a7b987e3210d2a2bcc310f5f8c1&quot;],[&quot;https://qwertyuu.kuaizhan.com/87/29/p73122126021546&quot;],1011263,3)">
+          <div class="title">男人最想要的“性生活”，学我一招，女人累到双腿发抖</div>
+          <img class="ad-img" src="./2edfc3f8700164e061f93c04df5c87bb.gif" alt="">
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+             <span>66691次浏览</span>
+             <span>5分钟前</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzU3ODQ5LG9pZD0xMTAwNDA5ODQzLGNpZD0sdXVpZD1VRFFxUjNtYU1SamJJYVJpMXNZUjJyLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIzMCxzYT0xMDk3MDI2NjQxLGRvbT0scGlkPTEwMTEyNjgsb2NjPWNpbSxjY3A9ODAxMDAwMCxhaWQ9MTEwMDQ4NzQ0OCx5PTAsYXY9MCxvc2lkPTAsY3A9MC4wMSx2Y3A9MC4wMQ%3D%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=509406d4-528b-4426-a1bd-fb4def92b299&amp;strategy_dealid=11083&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011268&amp;creative_id=419563&amp;account_id=206432&amp;flag=&amp;signature=68624d604161b41b98cd3115df351df5&quot;],[&quot;http://i.feigo.wang/001/?xt&quot;],1011268,1)">
+        <div class="item-left">
+          <div class="title">男人床上不行？教你一招，让老婆双腿发抖！</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>82845次浏览</span>
+             <span>14分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./69f24ed7da51d69bb75e7f84ef59a151.png" alt="">
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzYxMTUxLG9pZD0xMTAwNDE3MjUwLGNpZD0sdXVpZD1VREpuUTZtUklVblo2c0FNamJiakZlLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIzMCxzYT00OTgzOTUzMDcsZG9tPSxwaWQ9MTAxMTI3NCxvY2M9Y2ltLGNjcD04MjUwMDAwLGFpZD0xMTAwNDk4MzI3LHk9MCxhdj0wLG9zaWQ9MCxjcD0wLjEyLHZjcD0wLjEy&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=a48783a8-4261-4c3b-b29b-6eeed54f13ff&amp;strategy_dealid=7345&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011274&amp;creative_id=431339&amp;account_id=209432&amp;flag=&amp;signature=1a70b5efb482179879c8d18e133f8d0d&quot;],[&quot;http://tisykan.xyz/0813-nxq&quot;],1011274,1)">
+        <div class="item-left">
+          <div class="title">几乎没人知道，男人睡之前用这个，下面变大变粗，女人根本受不了</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>28112次浏览</span>
+             <span>10分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./422ffe3d2c435911caca468f2c99b00c.gif" alt="">
+      </div>
+
+        <div class="ad-template-info ad-wrap-3img" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzUzMTk5LG9pZD0xMTAwMzc0NTc4LGNpZD0sdXVpZD1VRE51enE3bW16YnJNdUF2N3NSRW1aLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMjAsdXQ9MTU5NzMwNTIzMCxzYT02MDI3MDk0ODIsZG9tPSxwaWQ9MTAxMTQ0MSxvY2M9Y2ltLGNjcD0xODg4MDAwMCxhaWQ9MTEwMDQ5NDkwNSx5PTAsYXY9MCxvc2lkPTAsY3A9MC4wNCx2Y3A9MC4wNA%3D%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=ff398378-356e-487b-a773-ae2d92dd9a75&amp;strategy_dealid=11080&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011441&amp;creative_id=427292&amp;account_id=202052&amp;flag=&amp;signature=b58a35828b301fe94cd87e51a4f9b84c&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=9669cba3-090d-4323-960d-c8ab87107cd8&amp;accept_id=10189&amp;adv_id=1011275&amp;strategy_dealid=11435&amp;media_id=102182&amp;creative_id=&amp;signature=c90ef73711fe239676e3c91232a70dba&quot;],[&quot;https://beiyong1.kuaizhan.com/14/60/p730670958f5f0e&quot;],1011275,2)">
+          <div class="title">姐夫吃这个太猛了，一晚狂弄我2小时。让我腿软求饶…</div>
+          <div class="img-box">
+
+              <img class="ad-img" src="./0b13660d3ac8fee95eeebd74464c802c.gif" alt="">
+
+              <img class="ad-img" src="./bdd83b51270407b659c2597a3f071f64.gif" alt="">
+
+              <img class="ad-img" src="./ee06a6feb901ac70f84437be1b4c9782.gif" alt="">
+
+          </div>
+
+          <div class="item-extra">
+
+            <img class="hd-img" src="./15.jpg" alt="">
+
+            <img class="hd-img" src="./20.jpg" alt="">
+
+            <img class="hd-img" src="./9.jpg" alt="">
+
+          <div class="read-date">
+           <span>78人正在浏览</span>
+           <span>8分钟前</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzYyMTEzLG9pZD0xMTAwNDE0MTY2LGNpZD0sdXVpZD1VRHVxRnJmVno2bUJiYXlGNXNGTmlpLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIzMCxzYT04ODkwMjcxMzUsZG9tPSxwaWQ9MTAxMTI2MixvY2M9Y2ltLGNjcD02MzMwMDAwLGFpZD0xMTAwNDk0MTg3LHk9MCxhdj0wLG9zaWQ9MCxjcD0wLjAxLHZjcD0wLjAx&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=fdb074dc-2c00-4764-a962-59f4e0ef8aeb&amp;strategy_dealid=11083&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011262&amp;creative_id=426617&amp;account_id=210317&amp;flag=&amp;signature=f92ede273521e4af5ffaba0c66820834&quot;],[&quot;http://zdvlzhh.cn/bak/ad3/cfrkz&quot;],1011262,1)">
+        <div class="item-left">
+          <div class="title">姐夫吃这个太猛了！一晚上操我③小时就是不泄！令我下面喷水...</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>52801次浏览</span>
+             <span>48分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./50447be280126ea529280dbfae502f95.gif" alt="">
+      </div>
+
+        <div class="ad-template-info ad-wrap-single-big" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzU3MzMxLG9pZD0xMTAwNDE1NDA2LGNpZD0sdXVpZD1VREYybW5qRnI2c2pmbW5KcTd1akVJLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMzcsdXQ9MTU5NzMwNTIzMCxzYT0yNDQxNjY2MDI4LGRvbT0scGlkPTEwMTE0NDIsb2NjPWNpbSxjY3A9MzUwMDAwMDAsYWlkPTExMDA0OTU3NTAseT0wLGF2PTAsb3NpZD0wLGNwPTAuMDQsdmNwPTAuMDQ%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=8effad2d-95e9-4aff-a2e1-f9db1499befd&amp;strategy_dealid=11078&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011442&amp;creative_id=428134&amp;account_id=205923&amp;flag=&amp;signature=083992318e02eb69f54e0e808a8512a6&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=d3048bb4-e4a4-4d57-9603-6c55e31aebf6&amp;accept_id=10189&amp;adv_id=1011267&amp;strategy_dealid=11436&amp;media_id=102182&amp;creative_id=&amp;signature=5c699216c2b8c5c2d1546a40f27a43ed&quot;],[&quot;https://yynnkk.kuaizhan.com/93/71/p738157026de3ab&quot;],1011267,3)">
+          <div class="title">男人床上不行？教你一招，滚烫粗硬，弄的老婆啊啊叫！！</div>
+          <img class="ad-img" src="./8b7bf77738bd721839709aeaad94096e.gif" alt="">
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+             <span>15700次浏览</span>
+             <span>27分钟前</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzYwNTI5LG9pZD0xMTAwMzk2OTczLGNpZD0sdXVpZD1VRHZyVW1hMm1NZXZRaUE3c2FZMzNOLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIzMCxzYT0yODQ2MjUwODQ2LGRvbT0scGlkPTEwMTEyNjYsb2NjPWNpbSxjY3A9NTg5MDAwMCxhaWQ9MTEwMDQ2OTkxNix5PTAsYXY9MCxvc2lkPTAsY3A9MC4wMSx2Y3A9MC4wMQ%3D%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=3543db9a-4ae4-4418-84b2-c11aab8a231f&amp;strategy_dealid=11083&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011266&amp;creative_id=398528&amp;account_id=208904&amp;flag=&amp;signature=b27a22dcf627082327b57c7ef8d1ec2c&quot;],[&quot;http://1ls.bucocyc.cn/bak/ad3/lizonglr1&quot;],1011266,1)">
+        <div class="item-left">
+          <div class="title">隔壁寡妇诱惑我，不料吃这个太猛了，被我弄得直求饶.....</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>99348次浏览</span>
+             <span>23分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./5ed7d08a2efa92a444f3569709e443f4.gif" alt="">
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzU3Njg4LG9pZD0xMTAwMzkzMjAwLGNpZD0sdXVpZD1VRE1KRmJZbVZRaWp1ZUpVMm1BMnNOLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjI3OTYsdXQ9MTU5NzMwNTIzMCxzYT0xMDI2Mzg0Nyxkb209LHBpZD0xMDExMjY5LG9jYz1jaW0sY2NwPTU5OTAwMDAsYWlkPTExMDA0NjQ0ODMseT0wLGF2PTAsb3NpZD0wLGNwPTAuMSx2Y3A9MC4x&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=97cf2fe3-520d-4500-8c57-58cf059fadde&amp;strategy_dealid=11083&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011269&amp;creative_id=392399&amp;account_id=206265&amp;flag=&amp;signature=3d11b038eecd6623cf75a298c89c5208&quot;],[&quot;http://www.kosbedj.cn&quot;],1011269,1)">
+        <div class="item-left">
+          <div class="title">“做爱”吃点它，马上又大又硬，女人看着都高潮</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>59417次浏览</span>
+             <span>30分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./224e704ede50d1efab447090721fffcd.gif" alt="">
+      </div>
+
+        <div class="ad-template-info ad-wrap-3img" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzU3Njg4LG9pZD0xMTAwMzkzMjAzLGNpZD0sdXVpZD1VRE5qWjZtQnFFakZlWXFKNHNiQnY2LG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjI3OTYsdXQ9MTU5NzMwNTIzMCxzYT0zMDQ2ODk4NjUsZG9tPSxwaWQ9MTAxMTQ0MSxvY2M9Y2ltLGNjcD0xNTk5MDAwMCxhaWQ9MTEwMDQ2NDQ3Nyx5PTAsYXY9MCxvc2lkPTAsY3A9MC4xLHZjcD0wLjE%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=d3abef15-3506-4c28-81fa-149b4e0f6e7b&amp;strategy_dealid=11080&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011441&amp;creative_id=392394&amp;account_id=206265&amp;flag=&amp;signature=5cdba01d7802df21af386ed656e2a09f&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=b3b645c2-5f93-4c6d-8a6b-7b38b3af3359&amp;accept_id=10189&amp;adv_id=1011272&amp;strategy_dealid=11435&amp;media_id=102182&amp;creative_id=&amp;signature=e94176a0fc1bb6c0c01200934f090a9f&quot;],[&quot;http://www.kosbedj.cn&quot;],1011272,2)">
+          <div class="title">老公天天吃它，下面又粗又硬，老婆直呼受不了！</div>
+          <div class="img-box">
+
+              <img class="ad-img" src="./3cb1e46b22dcca5a822096a0f03db275.gif" alt="">
+
+              <img class="ad-img" src="./737663fe792a751fff7c9dea2e5f55c1.gif" alt="">
+
+              <img class="ad-img" src="./63d697af583d07700d7ec6e415e50727.gif" alt="">
+
+          </div>
+
+          <div class="item-extra">
+
+            <img class="hd-img" src="./20.jpg" alt="">
+
+            <img class="hd-img" src="./2.jpg" alt="">
+
+            <img class="hd-img" src="./18.jpg" alt="">
+
+          <div class="read-date">
+           <span>61人正在浏览</span>
+           <span>22分钟前</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick([&quot;http://dsp.1rtb.com/clk?ext_data=YW1pZD0xMDczNzYwNTI5LG9pZD0xMTAwMzk3NjQzLGNpZD0sdXVpZD1VRFFFQmZyTmU3bXJSTWpiMXNBaXJtLG1lPW1zLGV4PTczNSxwYz0wLGxpZD0sbmF0PTEsdnI9MCx2ZXg9NzM1LGZhbj0wLjAwMDAsdXQ9MTU5NzMwNTIzMCxzYT0zMTA2Mzc4OTkxLGRvbT0scGlkPTEwMTEyNzEsb2NjPWNpbSxjY3A9NTYxMDAwMCxhaWQ9MTEwMDQ3MDc2MSx5PTAsYXY9MCxvc2lkPTAsY3A9MC4wMSx2Y3A9MC4wMQ%3D%3D&amp;ver=1&amp;url=&quot;,&quot;http://ssp.1rtb.com/clk?ua=Mozilla%2F5.0+%28iPhone%3B+CPU+iPhone+OS+11_0+like+Mac+OS+X%29+AppleWebKit%2F604.1.38+%28KHTML%2C+like+Gecko%29+Version%2F11.0+Mobile%2F15A372+Safari%2F604.1&amp;ssp_req_id=478e12c9-d912-4def-9bff-5945b140086d&amp;strategy_dealid=7345&amp;media_id=102182&amp;accept_id=10258&amp;adv_id=1011271&amp;creative_id=399337&amp;account_id=208904&amp;flag=&amp;signature=e778c685fbd5b44ed9079a26251148c1&quot;],[&quot;http://1ls.bucocyc.cn/bak/ad3/lizonglr1&quot;],1011271,1)">
+        <div class="item-left">
+          <div class="title">禁止外传：医院一名退休女护士酒后不下心说出壮阳真相</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>31385次浏览</span>
+             <span>5分钟前</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="./c6b713a7b41b8e35ace745c0a05f34b1.gif" alt="">
+      </div>
+    </div>
+    <!-- /精彩推荐广告位 -->
+
+    <!-- 底部悬浮 -->
+    <div id="jj-ad-float-bottom" class="jj-ad-float-bottom slide-bottom"></div>
+    <!-- /底部悬浮 -->
+
+
+    <!-- 广告1 百度广告 -->
+        <div class="1bdad2vcod5el7m"><iframe src="./sign.html" style="display: none;"></iframe><div style="z-index: 2147483647; height: auto;" cprotype="_bd" id="zmeng_0r9mrlc34vi"><div style="box-sizing: content-box;width:375px;height:113px;position:relative;margin:0 auto;"><iframe id="iframeu6198501_0" name="iframeu6198501_0" src="./ycim.html" width="375" height="113" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0;vertical-align:bottom;margin:0;width:375px;height:113px" allowtransparency="true"></iframe></div></div><script type="text/javascript" src="./d.js"></script></div>
+        <!-- 广告2 百度广告-->
+        <div class="1bdad2vcod5el7m"><iframe src="./sign(1).html" style="display: none;"></iframe><div style="z-index: 2147483647; height: auto;" cprotype="_bd" id="zmeng_7lmftzmsnmv"><div style="box-sizing: content-box;width:375px;height:113px;position:relative;margin:0 auto;"><iframe id="iframeu6198500_0" name="iframeu6198500_0" src="./ycim(1).html" width="375" height="113" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0;vertical-align:bottom;margin:0;width:375px;height:113px" allowtransparency="true"></iframe></div></div><script type="text/javascript" src="./d.js(1)"></script></div>
+        <!-- 返回首页 -->
+    <div class="goAd">
+      <a href="javaScript:;" class="goBtn">返回首页</a>
+    </div>
+
+    <!-- 以下全是二类广告 -->
+    <!-- 二类广告 -->
+    <!-- <script src="http://8ki87hdshfduwe.by4m2ou.cn/acg.js"></script> -->
+
+    <!-- <script src="http://8ki87hdshfduwe.by4m2ou.cn/pjbc.js"></script> -->
+
+    <!-- 男科 -->
+    <!--     <script src="http://8ki87hdshfduwe.by4m2ou.cn/scy003.js"></script>
+     -->
+
+    <!-- <script src="http://8ki87hdshfduwe.by4m2ou.cn/ss.js"></script> -->
+
+    <!-- <script src="http://8ki87hdshfduwe.by4m2ou.cn/zt001.js"></script> -->
+
+
+
+
+    <!-- 京东广告 -->
+        <!-- 京东二 （只在火山, 刷快转）-->
+    <!--  -->
+
+    <!-- 所有台子都上暗刷 7 - 17 (西安广告合作三部1)-->
+    <!-- <script src='//spl.ztvx8.com/wtwei5.js'></script> -->
+
+    <!-- 单图 -->
+    <script id="ad-template-single" type="text/html">
+      <div class="ad-template-info ad-wrap-single" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}},{{1}})">
+        <div class="item-left">
+          <div class="title">{{title}}</div>
+          <div class="item-extra">
+            <!-- <span class="type-tag-red">热门</span> -->
+            <div class="read-date">
+             <span>{{readNum}}次浏览</span>
+             <span>{{date}}</span>
+            </div>
+          </div>
+        </div>
+        <img class="ad-img" src="{{srcUrls[0]}}" alt="">
+      </div>
+    </script>
+
+    <!-- 单大图 -->
+    <script id="ad-template-single-big" type="text/html">
+        <div class="ad-template-info ad-wrap-single-big" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}},{{3}})">
+          <div class="title">{{title}}</div>
+          <img class="ad-img" src="{{srcUrls[0]}}" alt="">
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+             <span>{{readNum}}次浏览</span>
+             <span>{{date}}</span>
+            </div>
+          </div>
+      </div>
+    </script>
+
+    <!-- 三图 -->
+    <script id="ad-template-3img" type="text/html">
+        <div class="ad-template-info ad-wrap-3img" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}},{{2}})">
+          <div class="title">{{title}}</div>
+          <div class="img-box">
+            {{each srcUrls value index}}
+              <img class="ad-img" src="{{value}}" alt="">
+            {{/each}}
+          </div>
+
+          <div class="item-extra">
+            {{each viewHeadImgs hdimg index}}
+            <img class="hd-img" src="{{hdimg}}" alt="">
+            {{/each}}
+          <div class="read-date">
+           <span>{{viewNum}}人正在浏览</span>
+           <span>{{date}}</span>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <!-- template 悬浮广告 -->
+    <script id="ad-template-float" type="text/html">
+      <div class="ad-wrap-float" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}},{{4}})">
+        <img class="ad-img" src="{{srcUrls[0]}}" alt="">
+      </div>
+    </script>
+
+    <!-- template 文字链 -->
+    <script id="ad-template-textlink" type="text/html">
+      <div class="ad-wrap-textlink" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}},{{5}})">
+        <img src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/shou.png" alt="">{{title}}
+      </div>
+    </script>
+
+    <!-- 视频 -->
+    <script id="ad-template-single-article" type="text/html">
+      {{each videoList value index}}
+      <a class="ad-template-info ad-wrap-single" ref="noreferrer" onclick="Ad.clickVideo('{{value.href}}')">
+        <div class="item-left">
+          <div class="title">{{value.title}}</div>
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+              <span>{{value.readNum}}次浏览</span>
+              <span>{{value.date}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="videoImg">
+          <img class="video-img" src="{{value.video_cover}}" alt="">
+        </div>
+      </a>
+      {{/each}}
+    </script>
+
+    <!-- 固定广告模板 -->
+    <script id="qdl-template" type="text/html">
+      <a class="ad-template-info ad-wrap-single" ref="noreferrer" onclick="vc.qdlClick('{{value.url}}')">
+        <div class="item-left">
+          <div class="title">{{value.obj.title}}</div>
+          <div class="item-extra">
+            <span class="type-tag">视频</span>
+            <div class="read-date">
+              <span>{{value.readNum}}次浏览</span>
+              <span>{{value.date}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="videoImg">
+          <img class="video-img" src="{{value.obj.img}}" alt="">
+        </div>
+      </a>
+    </script>
+  </div>
+
+<script>
+      // 来源限制
+      var reg = new RegExp("/iframe/")
+      var originStr = BASE.re_uid.replace(reg, "")
+      var brower_id = '';
+      // 用户唯一标识， 判断用户准确性
+      browerId();
+
+      function browerId() {
+        var Idobj = {};
+        var iframe = document.createElement('iframe');
+        iframe.src = BASE.re_uid;
+        iframe.style.display = 'none'
+        iframe.frameBorder = 0;
+        iframe.onload = function () {
+          var w = this.contentWindow;
+          var uid = uuidv4();
+          w.postMessage('init', BASE.re_uid);
+
+          window.addEventListener('message', function (e) {
+            if (e.origin != originStr) {
+              return
+            }
+            if (e.data == null || e.data == 'undefined' || e.data == undefined) {
+              Idobj.brower_id = uid;
+            } else {
+              Idobj.brower_id = e.data;
+            }
+            Idobj.event = 'ready';
+            var type = typeof Idobj.brower_id;
+            if (type == 'string') {
+              ws.send(JSON.stringify(Idobj))
+              brower_id = Idobj.brower_id
+            } else {
+            }
+            if (!e.data) {
+              w.postMessage(uid, BASE.re_uid);
+            }
+          })
+        }
+        document.body.appendChild(iframe);
+      }
+
+</script><iframe src="./saved_resource.html" frameborder="0" style="display: none;"></iframe>
+<script>
+    randomRet();
+    function randomRet () {
+      var list_index = DEFAULTETURL_LIST.length - 1;
+      var randomIndex = Math.round(Math.random() * list_index);
+      DEFAULTETURL = DEFAULTETURL_LIST[randomIndex];
+    }
+    //从一个给定的数组arr中,随机返回num个不重复项
+    function getArrayItems(arr, num) {
+        //新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
+        var temp_array = new Array();
+        for (var index in arr) {
+            temp_array.push(arr[index]);
+        }
+        //取出的数值项,保存在此数组
+        var return_array = new Array();
+        for (var i = 0; i<num; i++) {
+            //判断如果数组还有可以取出的元素,以防下标越界
+            if (temp_array.length>0) {
+                //在数组中产生一个随机索引
+                var arrIndex = Math.floor(Math.random()*temp_array.length);
+                //将此随机索引的对应的数组元素值复制出来
+                return_array[i] = temp_array[arrIndex];
+                //然后删掉此索引的数组元素,这时候temp_array变为新的数组
+                temp_array.splice(arrIndex, 1);
+            } else {
+                //数组中数据项取完后,退出循环,比如数组本来只有10项,但要求取出20项.
+                break;
+            }
+        }
+        return return_array;
+    }
+    DEFAULT_VIDEOS = getArrayItems(VIDEOS_LIST, 11);
+</script>
+<script type="text/javascript" charset="UTF-8" src="./openinstall.js"></script>
+<script src="./art-template.js"></script>
+<script src="./jweixin-1.2.0.js"></script>
+<script src="./EventEmitter.min.js"></script>
+<script type="text/javascript" src="./qrcode.min.js"></script>
+<script src="./common.js"></script>
+<script src="./index.js"></script>
+<script src="./ad.js"></script>
+<script src="./goal_ret.js"></script>
+<script src="./art-template.js"></script><img src="./imp" style="display: none;"><img src="./imp(1)" style="display: none;"><img src="./imp(2)" style="display: none;"><img src="./imp(3)" style="display: none;"></body></html>

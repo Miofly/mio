@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://kuaizhuandsp.cn:443/iframe/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+  
+
+<script src="./js.cookie.min.js.下载"></script>
+<script>
+  window.onmessage = function (e) {
+    if (e.data === 'init') {
+     
+      var uid = Cookies.get('egee@uuid');
+      Cookies.set('egee@uuid', uid, { expires: 365 });
+      e.source.postMessage(uid, '*');
+      return;
+    }
+    var uuid = Cookies.set('egee@uuid', e.data, { expires: 365 });
+  };
+</script>
+</body></html>

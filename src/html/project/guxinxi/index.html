@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title></title>
+	<link rel="stylesheet" href="css/back_ret.css"/>
+</head>
+
+<body style="padding-bottom: 30vw;">
+<div class="title_wrap">
+	<img
+			class="title_img"
+			src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/mz/back_ret.png"
+			alt=""
+	/>
+</div>
+<div class="container">
+	<!-- adList -->
+	<div id="adList"></div>
+	<!-- template 用于广告列表 单图 -->
+	<script id="ad-template" type="text/html">
+		<div class="ad-template-info" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="item-left">
+				<div class="title">{{title}}</div>
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+			<img class="ad-img" src="{{srcUrls[0]}}" alt="">
+		</div>
+	</script>
+	<!-- template 用于广告列表 大图 -->
+	<script id="ad-template-big" type="text/html">
+		<div class="ad-template-info-big" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="item-left">
+				<div class="title">{{title}}</div>
+				<img class="ad-img-big" src="{{srcUrls[0]}}" alt="">
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<!-- 三图 -->
+	<script id="ad-template-3img" type="text/html">
+		<div class="ad-template-3img" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="title">{{title}}</div>
+			<div class="img_wrap">
+				{{each srcUrls as value}}
+				<img class="ad-img" src="{{value}}" alt="">
+				{{/each}}
+			</div>
+
+			<div class="item-left">
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<!-- template 悬浮广告 -->
+	<script id="ad-template-float" type="text/html">
+		<div class="ad-wrap-float top-xuanfu" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<img class="ad-img" src="{{srcUrls[0]}}" alt="">
+		</div>
+	</script>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="js/ad.js"></script>
+<script src="http://e-static.oss-cn-shanghai.aliyuncs.com/js/EventEmitter.min.js"></script>
+<script src="http://e-static.oss-cn-shanghai.aliyuncs.com/js/art-template.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b333f2583cbab61aab2db6aead165563";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script>
+    /* 精彩推荐中的竞价广告 */
+
+    //需要请求的广告pid 及数据
+    var adListIndex = 0;
+    var adList = [
+        {
+            pid: '1012218', //广告位id
+            templateId: 'ad-template-float', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-wrap-float' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012206', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012207', //广告位id
+            templateId: 'ad-template-3img', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-3img' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012208', //广告位id
+            templateId: 'ad-template-big', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info-big' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012209', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012210', //广告位id
+            templateId: 'ad-template-3img', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-3img' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012211', //广告位id
+            templateId: 'ad-template-big', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info-big' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012212', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012213', //广告位id
+            templateId: 'ad-template-3img', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-3img' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012214', //广告位id
+            templateId: 'ad-template-big', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info-big' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012215', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012216', //广告位id
+            templateId: 'ad-template-3img', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-3img' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1012217', //广告位id
+            templateId: 'ad-template-big', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info-big' //广告wrap的class 用于寻找被插入的广告
+        }
+    ];
+    var deny_cids = []; // 被禁止的创意广告id
+</script>
+<script type="text/javascript" src="js/ret2.js"></script>
+</html>

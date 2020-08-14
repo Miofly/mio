@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  overflow: hidden;
+}
+.tongji {
+  width: 100vw;
+  display: none;
+  position: relative;
+  z-index: 2;
+}
+.erweimaclass {
+  position: fixed;
+  width: 50vw;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0;
+  z-index: 1;
+}

@@ -1,0 +1,180 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+.title_wrap {
+  padding: 15px;
+  border-bottom: 1px solid #e3e3e3;
+}
+.title_wrap .title_img {
+  width: 88px;
+  height: auto;
+}
+/* 单图 */
+.ad-template-info {
+  padding: 2vw 0;
+  margin: 0 15px;
+  display: flex;
+  border-bottom: 1px solid #e3e3e3;
+}
+.no-border .ad-template-info {
+  border: 0;
+}
+.ad-template-info .item-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 4vw;
+}
+
+.ad-template-info .item-left .title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.ad-template-info .item-left .item-extra {
+  display: flex;
+  align-items: center;
+}
+
+.ad-template-info .item-left .item-extra .read-date {
+  font-size: 12px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  color: #aaa;
+}
+.ad-template-info .ad-img {
+  border-radius: 5px;
+  display: block;
+  width: 113px;
+  height: 80px;
+}
+
+/* 大图广告 */
+.ad-template-info-big {
+  padding: 2vw 0;
+  margin: 0 15px;
+  display: flex;
+  border-bottom: 1px solid #e3e3e3;
+}
+.no-border .ad-template-info-big {
+  border: 0;
+}
+.ad-template-info-big .item-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 4vw;
+}
+
+.ad-template-info-big .item-left .title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.ad-template-info-big .item-left .item-extra {
+  display: flex;
+  align-items: center;
+}
+
+.ad-template-info-big .item-left .item-extra .read-date {
+  font-size: 12px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  color: #aaa;
+}
+.ad-template-info-big .ad-img-big {
+  margin: 8px 0;
+  border-radius: 5px;
+  display: block;
+  width: 345px;
+  height: 195px;
+}
+
+/* 三图广告 */
+.ad-template-3img {
+  padding: 2vw 0;
+  margin: 0 15px;
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.no-border .ad-template-3img {
+  border: 0;
+}
+.ad-template-3img .item-left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 4vw;
+}
+
+.ad-template-3img .item-left .title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.ad-template-3img .item-left .item-extra {
+  display: flex;
+  align-items: center;
+}
+
+.ad-template-3img .item-left .item-extra .read-date {
+  font-size: 12px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  color: #aaa;
+}
+.ad-template-3img .ad-img {
+  border-radius: 5px;
+  display: block;
+  width: 113px;
+  height: 80px;
+}
+
+.ad-template-3img .img_wrap {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+
+.img_wrap .ad-img {
+  border-radius: 5px;
+  width: 113px;
+  height: 80px;
+}
+
+.ad-wrap-float{
+  background: #fff;
+  width: 100vw;
+  height: 20vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.ad-wrap-float img{
+  
+  width: 100vw;
+  height: 20vw;
+
+}

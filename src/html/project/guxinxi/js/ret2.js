@@ -7,7 +7,7 @@ $(function() {
     Ad.singleAd(
       $.extend(curData, {
         data: {
-          app_id:102309,
+          app_id:101918,
           deny_cids: deny_cids.join(',')
         }
       }),

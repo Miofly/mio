@@ -1,0 +1,97 @@
+
+<!doctype html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>m3u8-hls形式播放视频，浏览本页效果请使用chrome,firefox,ie11浏览器-ckplayer帮助手册</title>
+	<meta name="keywords" content="flv,f4v,mp4,hlv,rtmp,html5,m3u8,播放器,视频流,网页视频播放器,ckplayer,ckplayer官网" />
+	<meta name="description" content="m3u8-hls形式播放视频，浏览本页效果请使用chrome,firefox,ie11浏览器,ckplayer,支持http协议下的flv,f4v,mp4,支持rtmp视频流和rtmp视频回放，支持m3u8格式，是你做视频直播，视频点播的理想播放器 " />
+	<meta name="author" content="ckplayer,超酷网页视频播放器" />
+	<meta name="copyright" content="ckplayer,超酷网页视频播放器" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<script type="text/javascript" src="./js/ckplayer.js"></script>
+	<script src="http://dup.baidustatic.com/js/ds.js"></script>
+	<script> var thisName='';var classTowId=0;</script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+<div class="container-fluid tophead">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+			<div class="logo">
+			</div>
+			<div class="logotab btn btn-link">
+				当前版本(version)：X
+			</div>
+		</div>
+		<div class="rightsearch col-xs-12 col-sm-6 col-md-4 col-lg-3">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">搜索：</div>
+						<input type="text" class="form-control" id="word" name="word" value="" placeholder="请输入关键字">
+						<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="headtab col-xs-12 col-sm-7 col-md-7">
+			<a href="http://www.ckplayer.com">首页</a>
+			<a href="http://www.ckplayer.com/down/">下载</a>
+			<a href="http://www.ckplayer.com/manualX/">手册</a>
+			<a href="http://www.ckplayer.com/sampleX/">演示</a>
+			<a href="http://manual.ckplayer.com">视频教程</a>
+			<a href="http://bbs.ckplayer.com" target="_blank">论坛</a>
+		</div>
+		<div class="headtabright col-xs-12 col-sm-5 col-md-5">
+			<a href="http://manual.ckplayer.com/index/buyguide.html">商业服务</a>
+			<a href="http://www.ckplayer.com/xtool.html">加密转码</a>
+			<a href="http://www.ckplayer.com/metadata.html">分析视频</a>
+			<a href="http://www.ckplayer.com/xtoolimg.html">图片合并</a>
+			<a href="http://manual.ckplayer.com/user.html"><i class="glyphicon glyphicon-user"></i>我</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid padding-top-20">
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+			<div class="videosamplex max1000">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--本示例中用到的js代码开始-->
+<script type="text/javascript">
+    var videoObject = {
+        container: '.videosamplex',//“#”代表容器的ID，“.”或“”代表容器的class
+        variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+        autoplay:true,
+        html5m3u8:true,
+        video:'https://sohu.com-v-sohu.com/20180905/12418_2fc56e95/index.m3u8'
+    };
+    var player=new ckplayer(videoObject);
+</script>
+<!--本示例中用到的js代码结束-->
+<div class="container-fluid copy padding-top-20">
+	<div class="row">
+		Powered by ckplayer.com<br/> Copyright&copy;ckplayer，2011-2017(
+		<a href="http://www.miitbeian.gov.cn/" target="_blank">苏ICP备11026158号</a> )<span style='display:none;'><script src="http://s19.cnzz.com/stat.php?id=3514729&web_id=3514729&online=2" language="JavaScript"></script></span>
+	</div>
+</div>
+</body>
+
+</html>

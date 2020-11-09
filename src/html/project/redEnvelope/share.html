@@ -12,39 +12,39 @@
 	<title>端午节</title>
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/adaptive.js"></script>
-	<script type="text/javascript" src="js/share.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/share.css"/>
 </head>
 <body style="font-size: 0.05rem;" class="bg-white">
-<audio src="./img/gold.mp3" preload="auto" id="mp3"></audio>
 <div>
-	<!--此处跳广告-->
-	<div style="position: fixed;left: 0.3rem;top: 0.5rem;z-index: 9999">
-		<img src="./img/back.png" style="width: 0.27rem;height: 0.43rem">
-	</div>
-	<div style="text-align: center" onclick="">
-		<img src="./img/shang@2x.png" style="width: 100%">
-		<h1 style="font-size:1.15rem;height: 1.61rem;font-weight:600;color:rgba(204,170,118,1);">100.00</h1>
-		<img onclick="ljlq()" src="./img/anniu@2x.png" style="width: 4.48rem;height: 1.13rem;z-index: 99999;
-		animation: scale-upOne 2s linear 0s infinite alternate;">
-	</div>
-
-	<div id="sum" style="display: none">
-		<div id="mb" style="display: block" class="mio-modal-mask"></div>
-		<div style="position: fixed;top: 0;right: 0.5rem;z-index: 13">
-			<img id="fxImg" style="width: 6.02rem;height: 1.83rem;" src="./img/wei.png">
-		</div>
-
-		<div style="position: fixed;width: 100%;left: 0;text-align: center;top: 25%;z-index: 13">
-			<img id="shareImg" style="width: 5.81rem;height: 5.78rem;" class="shake" src="./img/jx.png">
-		</div>
-	</div>
-
 	<div class="show_list">
 		<ul id="demoDown"></ul>
 	</div>
 </div>
 <script>
+
+
+    function sjMoneyNum(){
+        var moneySjs = (Math.random() * 6000 + 6000) / 100;
+        var moneyNum = moneySjs.toFixed(2);
+        return moneyNum;
+    }
+    function remainMoneyNum(){
+        var remainSjs = Math.random() * 600000 + 200000;
+        var remainNum = remainSjs.toFixed(2);
+        return remainNum;
+    }
+    function sjTimeAdd(){
+        var now = new Date();
+        var hour = now.getHours();
+        var minu = now.getMinutes();
+        var c_minu = 0;
+        var sjst = Math.floor(Math.random() * minu);
+        if(sjst<10){
+            sjst = "0"+sjst;
+        }
+        return hour+":"+sjst;
+    }
+
 
     var mList = [{mimg: '../../img/xtx/1.jpg', mname: "love girl"}, {
         mimg: '../../img/xtx/2.jpg',
@@ -74,6 +74,7 @@
         mimg: '../../img/xtx/18.jpg',
         mname: "柳暗花明"
     }, {mimg: '../../img/xtx/19.jpg', mname: "pgOne"}, {mimg: '../../img/xtx/20.jpg', mname: "周.."}]
+
     for (var i = 0; i < mList.length; i++) {
         var img = mList[i].mimg;
         var name = mList[i].mname;
@@ -112,96 +113,6 @@
     myScroll.upScroll("demoDown", "-1.2rem", 2500);
 
 
-    // 免接口分享
-    var shareATimes = 0
-    var shareTTimes = 0
-    var hiddenProperty = 'hidden' in document ? 'hidden'
-        : 'webkitHidden' in document ? 'webkitHidden'
-            : 'mozHidden' in document ? 'mozHidden'
-                : null
-    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
-    var onVisibilityChange = function () {
-        if (!document[hiddenProperty]) {
-            window.show_time = Date.now()
-            shareATimes += 1
-            if (shareATimes > 4) {
-                shareTTimes += 1
-                setTimeout(share_tip(shareATimes, shareTTimes), 100)
-            } else {
-                setTimeout(share_tip(shareATimes, -1), 100)
-            }
-        } else {
-            window.hidden_time = Date.now()
-        }
-    }
-    document.addEventListener(visibilityChangeEvent, onVisibilityChange) // 监听
-
-    function share_tip(share_app_times, share_timeline_times) { // 分享处理
-        console.log('处理了吗')
-
-        if (share_timeline_times == -1) {
-            if (shareATimes == 1) {
-                $('#shareImg').css('height', '6.28rem')
-                $('#shareImg').removeClass('shake')
-                $('#shareImg').addClass('shakeTwo')
-                $('#shareImg').attr('src', './img/jx1.png')
-            } else if (shareATimes == 2) {
-                $('#shareImg').css('height', '5.78rem')
-                $('#shareImg').removeClass('shakeTwo')
-                $('#shareImg').addClass('shake')
-                $('#shareImg').attr('src', './img/jx2.png')
-            } else if (shareATimes == 3) {
-                $('#shareImg').removeClass('shake')
-                $('#shareImg').addClass('shakeTwo')
-                $('#shareImg').attr('src', './img/jx3.png')
-            } else if (shareATimes == 4) {
-                $('#shareImg').css('height', '6.28rem')
-                $('#shareImg').removeClass('shakeTwo')
-                $('#shareImg').addClass('shake')
-                $('#shareImg').attr('src', './img/jx4.png')
-                $('#fxImg').attr('src', './img/peng.png')
-            } else {
-                console.log('结束')
-            }
-        }
-    }
-
-    function start() {
-        $('body').append('<img id="goldimg" ' +
-            'src="./img/icon1.png" />').append(
-            '<canvas id="canvas" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0"></canvas>');
-        $('#canvas').click(function () {
-            $('.btn2').click();
-        });
-        mainheight = $('#canvas').height(); //高
-        mainwidth = $('#canvas').width(); //宽
-        goldimg = document.getElementById("goldimg");
-        mians = document.getElementById("canvas");
-        mainbox = mians.getContext("2d");
-        $('#canvas').attr({
-            width: $(window).width(),
-            height: $(window).height()
-        });
-        // 开始动画   金币位置数据
-        for (var i = 0; i < 70; i++) {
-            main.push({
-                x: randomNum(50, mainwidth - 50),
-                y: randomNum(-800, 0),
-                direction: Math.round(Math.random()) ? 'left' : 'right', //左右方向
-                updown: 'down', //上下方向
-                jump: randomNum(30, 80), //到底跳跃
-                bottom: 0, //到底第几次
-                jumpspeed: randomNum(5, 10), //跳跃速度
-                downspeed: randomNum(15, 25), //下降速度
-                leftright: randomNum(10, 15) //左右跳跃幅度
-            });
-        }
-        playdh();
-    }
-
-    function ljlq() {
-		$('#sum').show(100)
-    }
 
 </script>
 </body>

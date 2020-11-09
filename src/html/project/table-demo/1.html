@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		.wrap {
+			width: 800px;
+			margin: 100px auto 0;
+		}
+
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			border: 1px solid #c0c0c0;
+			width: 800px;
+		}
+
+		caption {
+			width: 100%;
+			text-align: center;
+			background-color: #09c;
+			height: 80px;
+			line-height: 80px;
+			font-size: 20px;
+			font-weight: 700;
+		}
+
+		th,
+		td {
+			border: 1px solid #d0d0d0;
+			height: 40px;
+		}
+
+		th {
+			background-color: #09c;
+			font: bold 16px "微软雅黑";
+			color: #fff;
+		}
+
+		td {
+			font: 20px "微软雅黑";
+			text-align: center;
+		}
+
+		tbody tr {
+			text-align: center;
+		}
+
+		tbody tr:hover {
+			cursor: pointer;
+		}
+
+		.input {
+			border: none;
+			overflow: hidden;
+			height: 100%;
+			width: 100%;
+			font: 18px "微软雅黑";
+			text-align: center;
+
+		}
+
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<table>
+		<caption>需求列表</caption>
+		<thead>
+		<tr id="detail">
+			<th style="width: 30px; padding: 10px;">
+				<input type="checkbox" id="j_cbAll"/>
+			</th>
+		</tr>
+		</thead>
+		<tbody id="j_tb"></tbody>
+	</table>
+</div>
+<script src="./lib/jquery/jquery-1.12.4.js"></script>
+<script src="./lib/art-template/template-web.js"></script>
+<!-- 模板 -->
+<script type="text/html" id="tmp">
+	{{ each list v i  }}
+	<tr>
+		<td style="width: 30px; padding: 10px;">
+			<input class="checkbox" type="checkbox"/>
+		</td>
+		<td><input class="input" type="text" value={{ v.id }}></td>
+		<td><input class="input" type="text" value={{ v.name }}></td>
+		<td><input class="input" type="text" value={{ v.content }}></td>
+		<td><input class="input" type="text" value={{ v.created }}></td>
+		<td><input class="input" type="text" value={{ v.completed }}></td>
+	</tr>
+	{{ /each }}
+</script>
+<script>
+
+    var thDeail = [
+        {name: '序号', type: 'xh'},
+        {name: '姓名', type: 'xm'},
+        {name: '工作内容', type: 'con'},
+        {name: '已完成时间', type: 'ftime'},
+        {name: '未完成时间', type: 'wtime'},
+    ]
+
+    $.each(thDeail, function (i, val) {
+        $('#detail').append('<th type="' + val.type + '">' + val.name + '</th>')
+    })
+
+    var res = [
+        {id: 1, name: '1啦啦', content: '1小程序', created: '2020-08-01', completed: '2020-8-11'},
+        {id: 2, name: '2啦啦', content: '2小程序', created: '2020-08-02', completed: '2020-8-12'},
+        {id: 3, name: '3啦啦', content: '3小程序', created: '2020-08-03', completed: '2020-8-13'},
+        {id: 4, name: '4啦啦', content: '4小程序', created: '2020-08-04', completed: '2020-8-14'},
+        {id: 5, name: '5啦啦', content: '5小程序', created: '2020-08-05', completed: '2020-8-15'},
+        {id: 6, name: '6啦啦', content: '6小程序', created: '2020-08-06', completed: '2020-8-16'},
+    ]
+    var list = {list: res};
+    var str = template('tmp', list);
+    $('tbody').html(str);
+    $(function () {
+        //input 单击事件
+        $(".checkbox").click(function () {
+            //获取checkbox选中项
+            if ($(this).prop("checked")) {
+                $(this).parent().parent().find('.input').css({
+                    backgroundColor: "#F5F5F5",
+                    textDecoration: 'line-through',
+                    color: '#DCDCDC'
+                });
+                $(this).parent().parent().find('.input').attr({disabled: false});
+            } else {
+                $(this).parent().parent().find('.input').css({
+                    backgroundColor: "",
+                    textDecoration: 'none',
+                    color: '#000000'
+                });
+                $(this).parent().parent().find('.input').prop({disabled: false});
+
+            }
+        });
+
+        $(".input").focus(function () {
+            var arr = []
+            for (let i = 1; i <= 5; i++) {
+                arr.push({id: i, val: $(this).parent().parent()[0].cells[i].children[0].value})
+            }
+
+            var myIndex = arr.findIndex((item) => {
+                return item.val == $(this)[0].value
+            })
+
+            console.log(myIndex)
+            console.log(thDeail[myIndex].type)
+            // console.log($(this).parent().parent()[0].cells[1].children[0].value)
+        });
+
+        // $(".input").blur(function () {
+        //     console.log('失焦事件')
+        //     // console.log($(this).parent().parent())
+        //
+        // });
+        // $(".input").change(function (e) {
+        //     console.log($(this).val())
+        // })
+
+    })
+
+
+</script>
+</body>
+</html>

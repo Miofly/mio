@@ -8,6 +8,7 @@
 
 <script>
     export default {
+
         data() {
             return {
                 animate: false,

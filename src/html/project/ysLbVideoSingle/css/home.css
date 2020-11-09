@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: PingFangSC-Regular, Source Han Sans
+}
+
+a, abbr, acronym, address, app, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, input, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 400;
+    vertical-align: initial
+}
+
+body {
+    background-color: white
+}
+
+ul {
+    list-style-type: none
+}
+
+a {
+    text-decoration: none;
+    color: #18B4FE;
+}
+
+/*模拟的标题*/
+.header {
+    z-index: 9990;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: 16px;
+    padding-top: 0.12rem;
+    text-align: left;
+    background-color: white;
+    padding-left: 0.3rem;
+    color: rgb(102, 102, 102);
+}
+
+.header .btn-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 12px;
+}
+
+.header .btn-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 8px 0px 12px;
+}
+
+.header .tip {
+    margin-top: 4px;
+    font-size: 12px;
+    color: gray;
+}
+
+/*菜单*/
+.header .nav {
+    margin-top: 8px;
+    /*border-bottom: 1px solid #ddd;*/
+}
+
+.header .nav p {
+    display: inline-block;
+    width: 20%;
+    padding: 5px 0;
+}
+
+.header .nav .active {
+    border-radius: 1px;
+    border-bottom: 0.1rem solid rgb(253, 156, 139);
+    font-weight: bolder;
+    font-size: 24px;
+    color: #000;
+}
+
+/*列表*/
+.swiper-container {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/*展示上拉加载的数据列表*/
+.data-list li {
+    position: relative;
+    padding: 10px 8px 10px 120px;
+    border-bottom: 1px solid #eee;
+}
+
+.data-list .pd-img {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 80px;
+    height: 80px;
+}
+
+.data-list .pd-name {
+    font-size: 16px;
+    line-height: 20px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.data-list .pd-price {
+    margin-top: 8px;
+    color: red;
+}
+
+.data-list .pd-sold {
+    font-size: 12px;
+    margin-top: 8px;
+    color: gray;
+}
+
+/*隐藏*/
+.hide {
+    display: none;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+@keyframes fingerHandle {
+    0% {
+        transform: none;
+    }
+    70% {
+        transform: scale3d(.8, .8, .8);
+    }
+    100% {
+        transform: none;
+    }
+}
+
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex
+}
+
+.justify-around {
+    -webkit-justify-content: space-around;
+    justify-content: space-around
+}
+
+.margin-top {
+    margin-top: 3%
+}
+
+.padding-left-right {
+    padding-left: 3%;
+    padding-right: 3%
+}
+
+.margin-top-bottom-xxl {
+    margin-top: 7.5%;
+    margin-bottom: 7.5%
+}
+
+.justify-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.text-center {
+    text-align: center;
+}
+
+button, input, textarea {
+    border: none;
+    outline: none
+}
+
+button {
+    cursor: pointer
+}
+
+.text-bold {
+    font-weight: 700
+}
+
+.text-xl {
+    font-size: 4.6vw
+}
+
+.margin-left {
+    margin-left: 3%
+}
+
+
+
+.line-red, .lines-red, .text-red {
+    color: #e54d42
+}
+
+.padding-top-bottom {
+    padding-top: 3%;
+    padding-bottom: 0%
+}
+
+img {
+    border: none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle
+}
+.msglistbody{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}

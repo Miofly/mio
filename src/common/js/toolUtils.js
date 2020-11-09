@@ -254,6 +254,7 @@ const tu = {
             }
         }
         return r
+
     },
     randomNum(min, max) { // 生成随机数 min<=num<=max
         return Math.floor(Math.random() * (max - min + 1)) + min
@@ -328,7 +329,14 @@ const tu = {
         let last
         let timer
         const interval = wait
+
+
+        console.log(this, 'this')
+
         return function () {
+            console.log(last, 'last')
+            console.log(timer, 'timer')
+            console.log(this, 'this')
             const th = this
             const args = arguments
             const now = +new Date()
@@ -352,7 +360,6 @@ const tu = {
         return Array.from(new Set(arr))
     },
     getClipboardData(data, callback = (res) => {
-        console.log(res)
         if (res) {
             ui.showToast('复制成功')
         } else {

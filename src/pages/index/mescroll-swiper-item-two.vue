@@ -31,7 +31,6 @@
         },
         data() {
             return {
-
                 downOption: { // 下拉刷新的配置参数
                     use: true, // 是否启用下拉刷新
                     auto: false, // 是否在初始化完毕之后自动执行一次下拉刷新的回调

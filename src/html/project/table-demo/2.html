@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		#tb{
+			width: 600px;
+			margin: 100px auto;
+			text-align: center;
+		}
+		.header{
+			background-color: aqua;
+			color: white;
+		}
+		#tb td{
+			width: 100px;
+		}
+		input{
+			width: 99%;
+			height: 10px;
+			outline: none;
+			/*border: none;*/
+		}
+    </style>
+    <script>
+		window.onload = function(){
+			var tb = document.getElementById('tb');
+			var allA = tb.getElementsByTagName('a');
+			//给每一个a绑定事件
+			for(let i = 0;i<allA.length;i++){
+				
+				allA[i].onclick = function(){
+					//获取该a的tr
+					var tr = this.parentNode.parentNode;
+					var tds = tr.getElementsByTagName('td');
+					//获取到每一个td为他们绑定点击事件
+					for(let i = 0;i<tds.length - 1;i++){
+						tds[i].index = i; // 为下面下标准备
+						tds[i].onclick = function(event){
+							var evt = event||window.event;
+							//这一行很重要防止多次点击出现错误，只有第一次点击td时才能触发，
+							//当然这个需要配合上面的input的样式刚好和td的高度和宽度一样，这样才能防止误触
+							if(evt.target.tagName.toLowerCase() == "td"){
+								var input = document.createElement('input');
+								input.value = this.innerHTML;
+								tds[this.index].innerHTML = ''; //清除td中原有的文字
+								tds[this.index].appendChild(input); 
+								input.focus(); //获取焦点
+							}
+							//失去焦点保存，如果数据是动态获取的则可以在这个里面操作数据
+							input.onblur = function(){
+								this.parentNode.innerHTML = this.value;
+								tds[i].onclick = null;
+							}
+
+						}
+					}
+				}
+			}
+			
+		}
+	</script>
+</head>
+<body>
+    <table border="1" cellpadding="0" cellspacing="0" id="tb">
+		<tr class="header">
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>操作</td>
+		</tr>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td><a href="javascript:;">修改</a></td>
+		</tr>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td><a href="javascript:;" >修改</a></td>
+		</tr>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+			<td><a href="javascript:;" >修改</a></td>
+		</tr>
+
+	</table>
+</body>
+</html>

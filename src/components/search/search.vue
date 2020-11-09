@@ -260,6 +260,7 @@
             }, 2000),
             // 执行搜索
             doSearch: tu.throttle(function (key) {
+                console.log('执行了吗')
                 if (this.ssBackIndex) {
                     this.indexShow = true
                     if (this.keyword !== key.trim() && key.trim() != '') { // eslint-disable-line

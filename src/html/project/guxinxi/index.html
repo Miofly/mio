@@ -1,20 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="width: 100%;height: 100%">
 <head>
 	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
 	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 	<title></title>
 	<link rel="stylesheet" href="css/back_ret.css"/>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/tvp.js"></script>
+	<style>
+		@keyframes extandArrowFlow {
+			0%,
+			100% {
+				margin-top: 5px;
+				opacity: 0;
+			}
+			50% {
+				margin-top: 10px;
+				opacity: 0.7;
+			}
+		}
+
+		.txp_btn_replay{display: none!important;}
+	</style>
 </head>
 
-<body style="padding-bottom: 30vw;">
-<div class="title_wrap">
-	<img
-			class="title_img"
-			src="http://e-static.oss-cn-shanghai.aliyuncs.com/img/mz/back_ret.png"
-			alt=""
-	/>
+<body style="padding-bottom: 30vw;width: 100%;height: 100%">
+<div class="video-big" style="width: 100%;height: 30%;position:relative;">
+	<div id="main_tv" style="width: 100%;height:100%"></div>
+
+	<div onclick="playVideoFn()" id="playVideo" style="position: absolute;width: 100vw;bottom: 0;height: 100px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255,  1) 100%);">
+		<div style="position: absolute;width: 100vw;bottom: 0;padding: 80px 0;text-align: center;color: #FE3F64;left: 0;
+			font-weight: 900;font-size: 22px;z-index: 9999899999999999!important;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255,  1) 100%);">
+			点击查看视频
+			<div style="position: absolute;bottom: 15%;left: 0;width: 100vw;z-index: 9999899999999999;text-align: center;">
+				<img src="./img/see-down.png"
+					 style="width:7vw;-webkit-animation: extandArrowFlow 0.8s ease infinite;
+					 animation: extandArrowFlow 0.8s ease infinite;"/>
+			</div>
+		</div>
+	</div>
+
+	<div id="changeVideo" onclick="changeVideo()" style="display: none;position: absolute;top: 45%;width: 100vw;text-align: center;z-index: 9999999999999999999">
+		<button style="height: 40px;border: none;background: black;border-radius: 10px;width: 120px;color: white;font-size: 16px">下一个视频</button>
+	</div>
+
 </div>
 <div class="container">
 	<!-- adList -->
@@ -77,6 +110,97 @@
 		</div>
 	</script>
 </div>
+<script>
+    var vidList = ['s0933wywbao', 'u3081s8o9q0', 's3014hnb1zn', 'k3054ei489f']
+    // function pp(ptPG4ssDYd8RiX3dsPeP4TNYPJjfwrkQ, img, zTX6WP3tmjfKGGc8jRrEk3XC2HjiybhJ) {
+    var newTT = new tvp.VideoInfo();
+
+    newTT.setVid('s0933wywbao')
+    var newVV = new tvp.Player('100%', '30vh'); // 100vh代表满屏
+    newVV.setCurVideo(newTT);
+    newVV.addParam("autoplay", false);
+    newVV.addParam("pic", 'https://www.baidu.com/link?url=OHYcNpMC9xL4vdPAbZvk2HsSFwJeRXqDk75UGXSFnvzqHYYKJSGPlavHzTihweTjGeL-TzidXgVcsNRi4lAAHG8GkCb_mnCCVuEiiHsl7npCAiRMo-PF5OTwXa4Zv7IqWQ_7_eKqFrVkU0PYpp7PCQyyEn1jITv0XP91eMysGf0PRknTNAwyV3072QpTSc__SiGFknLiTKLrV0wy_SPkOwnaQ0ylmB5afmqhJBiDX300ldxb-lFV74wZiYZN9DLsC5bQfgTtwa0zFqahNY_G5JVnY-zgU8t9vRRB6Xi14GBVYJWg5lQeL6wTOnFlTU6uYcJ94_eJ6Y_Q1RFs7hSFe784utKmMpz9Ko-z5Ro7ncPDpVkVwC2CaGwTMR40cm2s3Xnf5s2_BEOyZre22yFQIoQpzyZMOM5sCb12ENxjMXEU71OfFqlh2IoLWwOYpOivub73LDBJ6spjcuP1sv3hyjlwbMSRSjUaMlNBp_2B4j4c0dyLa9zBwbOAGxi6MjYEDW0WI3L9XMJHZIpAy9VeL6y_IyY-uwEVGlsOcIXCVstR897iyA9Qa-2wvWzSordiLBtzmK_NMBpDlJht2Mq9aZW8gbz3jPDXim7xcZWSQ1u&timg=https%3A%2F%2Fss0.bdstatic.com%2F94oJfD_bAAcT8t7mm9GUKT-xh_%2Ftimg%3Fimage%26quality%3D100%26size%3Db4000_4000%26sec%3D1599560182%26di%3D3d2b3453b60a5f0f47b52ab40cf95224%26src%3Dhttp%3A%2F%2Fa3.att.hudong.com%2F14%2F75%2F01300000164186121366756803686.jpg&click_t=1599560182885&s_info=1841_977&wd=&eqid=8c4ca1cd000378e6000000065f5759f5');
+    newVV.write('main_tv');
+
+    newVV.onended = function () {
+
+    }
+
+    function makeRandomArr(arrList, num) { // 随机取出数组元素
+        if (num > arrList.length) {
+            num = arrList.length
+        }
+        const tempArr = arrList.slice(0)
+        const newArrList = []
+        for (var i = 0; i < num; i++) {
+            const random = Math.floor(Math.random() * (tempArr.length - 1))
+            const arr = tempArr[random]
+            tempArr.splice(random, 1)
+            newArrList.push(arr)
+        }
+        return newArrList
+    }
+
+    function arrChange(a, b) { // 两个数组相减，大数组中去除小数组含有的项
+        for (let i = 0; i < b.length; i++) {
+            for (let j = 0; j < a.length; j++) {
+                if (a[j] === b[i]) { // 如果是id相同的，那么a[ j ].id === b[ i ].id
+                    a.splice(j, 1)
+                    j = j - 1
+                }
+            }
+        }
+        return a
+    }
+	//
+    // var newVid = makeRandomArr(vidList, 1)
+    // var newVidOne = newVid.join(',')
+	//
+	// var newArr = arrChange(vidList, newVid)
+	//
+    // getVideo(newVidOne)
+    // var player = null
+    // function getVideo(vid) {
+    //     player = new Txplayer({
+    //         containerId: 'main_tv',
+    //         vid: vid,
+    //         width: '100%', // 数值600
+    //         height: '100%',
+    //         isUsePreload: false, // 是否预加载
+    //         miniSkinAdaptive: true,
+    //         showBullet: true,
+    //         virtualTranslate: true,
+    //         showBulletInput: true
+    //     });
+	//
+    //     player.on('playStateChange',function(e){
+    //         if (e == 0) {
+    //             $('#changeVideo').show()
+    //         }
+    //     })
+    // }
+	//
+	function playVideoFn() {
+        // getVideo(newVidOne)
+        newVV.play()
+        $('.video-big').css('height', '40%')
+		$('#playVideo').hide()
+    }
+	//
+	//
+    // var temp = 0
+	//
+	// function changeVideo() {
+    //     $('#changeVideo').hide()
+    //     getVideo(newArr[temp])
+	// 	temp = temp + 1
+	// 	if (temp == newArr.length) {
+	// 	    temp = 0
+	// 	}
+    //     player.play(newArr[temp])
+    // }
+
+</script>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 <script src="js/ad.js"></script>
@@ -110,7 +234,19 @@
         //     adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
         // },
         {
-            pid: '1009958', //广告位id
+            pid: '1009957', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1009956', //广告位id
+            templateId: 'ad-template', //模板script的id
+            wrapDomId: 'adList', //插入广告模板的父级id
+            adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告
+        },
+        {
+            pid: '1009955', //广告位id
             templateId: 'ad-template', //模板script的id
             wrapDomId: 'adList', //插入广告模板的父级id
             adWrapClass: 'ad-template-info' //广告wrap的class 用于寻找被插入的广告

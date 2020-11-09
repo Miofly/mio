@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+	<meta charset="UTF-8">
+	<title>....</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<link rel="stylesheet" href="./css/home.css">
+	<script type="text/javascript" src="js/adaptive.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/tvp.js"></script>
+	<script>
+        var infos = {}
+        var browse_length = 0
+        var play_length = 0
+        var is_play = 0
+        var is_to_land_two = 0
+        var is_back = 0
+        var is_breakpoint = 0
+
+        localStorage.setItem('isPlay', getParam('isPlay'))
+
+        localStorage.setItem('line_en', getParam('line_en'))
+
+        setInterval(function () {
+            browse_length = browse_length + 1
+        }, 1000)
+
+        commonPost('back/back_url', {
+            line_en: getParam('line_en'),
+            from: getParam('from') == null ? 0 : 1
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取广告成功：', res.data)
+                localStorage.setItem('adUrl', res.data)
+
+                function gogg(url) {
+                    history.pushState(history.length + 1, 'message', window.location.href.split('#')[0] + '#' + new Date().getTime())
+                    if (navigator.userAgent.indexOf('Android') != -1) {
+                        if (typeof (tbsJs) != 'undefined') {
+                            tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                            })
+                            window.onhashchange = function () {
+                                location.href = url
+                            }
+                        } else {
+                            var pop = 0
+                            window.onhashchange = function (event) {
+                                pop++
+                                if (pop >= 3) {
+                                    location.href = url
+                                } else {
+                                    history.go(1)
+                                }
+                            }
+                            history.go(-1)
+                        }
+                    } else {
+                        window.onhashchange = function () {
+                            location.href = url
+                        }
+                    }
+                }
+
+                gogg(localStorage.getItem('adUrl'))
+            } else {
+                console.log('获取成功广告失败... 跳广告')
+            }
+        }, function (err) {
+            console.log('获取成功广告失败', err)
+        })
+
+        commonPost('play/play_detail', {
+            line_en: getParam('line_en'),
+            v_id: getParam('video_id') == null ? 0 : getParam('video_id')
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取基础信息成功：', res.data)
+                infos = res.data
+
+                $('#loading').css('display', 'none')
+                $('#playPage').css('display', 'block')
+
+                localStorage.setItem('video_vid', res.data.videoInfo.vid)
+                localStorage.setItem('channel_id', res.data.videoInfo.channel_id)
+                localStorage.setItem('line_id', res.data.videoInfo.line_id)
+                localStorage.setItem('video_id', res.data.videoInfo.id)
+                localStorage.setItem('group_id', res.data.videoInfo.group_id)
+                localStorage.setItem('cover_img', res.data.videoInfo.cover_img)
+                localStorage.setItem('break_point_length', res.data.videoInfo.break_point_length)
+                localStorage.setItem('suspension_img', res.data.baseInfo.suspension_img)
+                localStorage.setItem('xfStatus', res.data.baseInfo.is_suspension)
+
+                $('#xfgg').attr('src', localStorage.getItem('suspension_img'))
+
+                getVideo(res.data.videoInfo.vid, res.data.videoInfo.cover_img, res.data.videoInfo.break_point_length)
+            } else {
+                console.log('获取成功基础信息失败... 跳广告')
+                // goUrl()
+            }
+        }, function (err) {
+            console.log('获取成功基础信息失败', err)
+            // goUrl()
+        })
+	</script>
+</head>
+<body style="width: 100%;height: 100%">
+
+<div id="loading" style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%">
+	<img src="img/loading1.gif">
+</div>
+
+<div id="playPage" style="display: none">
+	<div class="content">
+		<div id="main_tv" style="height: 100vh"></div>
+	</div>
+	<!--悬浮广告-->
+	<!--<div id="xfStatus" class="margin-top padding-left-right" onclick="goUrl()" style="margin-top: 0.50rem;">-->
+		<!--<img id="xfgg" style="width: 100%;height: 3rem;border-radius: 10px">-->
+	<!--</div>-->
+
+	<div onclick="goUrl()" style="position: fixed;bottom: 0;z-index: 99999999999">
+		<img src="img/newback.png">
+	</div>
+</div>
+
+<script>
+    setInterval(function () {
+        goMyUrl()
+    }, 20000)
+
+    function goMyUrl() {
+        commonPost('back/back_url', {
+            line_en: getParam('line_en'),
+            from: getParam('from') == null ? 0 : 1
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data)
+                localStorage.setItem('adUrl', res.data)
+                gogg(localStorage.getItem('adUrl'))
+            } else {
+                console.log('失败... 跳广告')
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+        })
+    }
+
+
+    function getVideo(vid, img, break_point_length) {
+        var video = new tvp.VideoInfo();
+
+        video.setVid(vid)
+        var player = new tvp.Player('100%', '93.5vh');
+
+        player.setCurVideo(video);
+        player.addParam("autoplay", true);
+        player.addParam("pic", img);
+        player.write('main_tv');
+
+        console.log(player)
+        console.log(video)
+
+        player.onready = function () {
+
+            if (localStorage.getItem('isPlay') == 1) {
+                video.setHistoryStart(break_point_length);
+                player.setPlaytime(break_point_length)
+            } else {
+                video.setHistoryStart(3);
+                player.setPlaytime(3)
+            }
+        }
+
+        player.onplay = function () {
+
+            if (localStorage.getItem('isPlay') == 1) {
+                video.setHistoryStart(break_point_length);
+                player.setPlaytime(break_point_length)
+            } else {
+                video.setHistoryStart(3);
+                player.setPlaytime(3)
+            }
+        }
+
+        player.ontimeupdate = function (e) {
+            play_length = player.getCurTime()
+            is_play = 1
+
+            console.log('111111', localStorage.getItem('isPlay'))
+            if (player.getCurTime() + 1 >= player.getDuration()) {
+                goUrl()
+            }
+            if (localStorage.getItem('isPlay') == 1) {
+
+            } else {
+                if (player.getCurTime() >= break_point_length && localStorage.getItem('isPlay') != 1) {
+                    is_to_land_two = 1
+                    is_breakpoint = 1
+                    player.pause()
+
+                    if (getParam('from') == null) {
+                        var newParams = 'line_en=' + localStorage.getItem('line_en') + '&' + 'line_id=' + localStorage.getItem('line_id') + '&' + 'channel_id=' + localStorage.getItem('channel_id') + '&' + 'video_id=' + localStorage.getItem('video_id') + '&' + 'qudao=' + localStorage.getItem('qudao') + '&' + 'uuid=' + localStorage.getItem('uuid') + '&' + 'group_id=' + localStorage.getItem('group_id') + '';
+                        commonPost('share/share_domain', {
+                            line_en: getParam('line_en'),
+                            params: newParams
+                        }, function (res) {
+                            if (res.code == 200) {
+                                console.log('获取落地二成功：', res.data)
+                                tongji()
+                                location.href = res.data
+                            } else {
+                                console.log('失败... 跳广告')
+                                goUrl()
+                            }
+                        }, function (err) {
+                            console.log('获取失败', err)
+                            goUrl()
+                        })
+                        console.log('断点处跳转')
+                    } else {
+                        var newParams = 'from=' + getParam('from') + '&' + 'line_en=' + localStorage.getItem('line_en') + '&' + 'line_id=' + localStorage.getItem('line_id') + '&' + 'channel_id=' + localStorage.getItem('channel_id') + '&' + 'video_id=' + localStorage.getItem('video_id') + '&' + 'qudao=' + localStorage.getItem('qudao') + '&' + 'uuid=' + localStorage.getItem('uuid') + '&' + 'group_id=' + localStorage.getItem('group_id') + '';
+                        commonPost('share/share_domain', {
+                            line_en: getParam('line_en'),
+                            params: newParams
+                        }, function (res) {
+                            if (res.code == 200) {
+                                console.log('获取落地二成功：', res.data)
+                                tongji()
+                                location.href = res.data
+                            } else {
+                                console.log('失败... 跳广告')
+                                goUrl()
+                            }
+                        }, function (err) {
+                            console.log('获取失败', err)
+                            goUrl()
+                        })
+                        console.log('断点处跳转')
+                    }
+                }
+            }
+        }
+    }
+
+    function tongji() {
+        commonPost('stat/one-pv', {
+            line_id: localStorage.getItem('line_id'),
+            channel_id: localStorage.getItem('channel_id'),
+            video_id: localStorage.getItem('video_id'),
+            click_num: 1,
+            browse_length: parseInt(browse_length),
+            play_length: parseInt(play_length),
+            is_play: is_play,
+            is_to_land_two: is_to_land_two,
+            is_back: is_back,
+            is_breakpoint: is_breakpoint,
+            group_id: localStorage.getItem('group_id'),
+            is_fission: getParam('from') == null ? 0 : 1,
+        }, function (res) {
+            if (res.code == 200) {
+                console.log('获取成功：', res.data)
+
+            } else {
+                console.log('失败... 跳广告')
+                // goUrl()
+            }
+        }, function (err) {
+            console.log('获取失败', err)
+            // goUrl()
+        })
+    }
+
+    function goUrl() {
+        is_back = 1
+        location.href = localStorage.getItem('adUrl')
+        tongji()
+    }
+
+    function gogg(url) {
+        history.pushState(history.length + 1, 'message', window.location.href.split('#')[0] + '#' + new Date().getTime())
+        if (navigator.userAgent.indexOf('Android') != -1) {
+            if (typeof (tbsJs) != 'undefined') {
+                tbsJs.onReady('{useCachedApi : "true"}', function (e) {
+                })
+                window.onhashchange = function () {
+                    location.href = url
+                }
+            } else {
+                var pop = 0
+                window.onhashchange = function (event) {
+                    pop++
+                    if (pop >= 3) {
+                        location.href = url
+                    } else {
+                        history.go(1)
+                    }
+                }
+                history.go(-1)
+            }
+        } else {
+            window.onhashchange = function () {
+                location.href = url
+            }
+        }
+    }
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?fd96a5562b33806a0fd34e42974065f5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<script src="/bak/new_jiaoben.php?<?php echo http_build_query($_GET);?>"></script>
+</body>
+</html>

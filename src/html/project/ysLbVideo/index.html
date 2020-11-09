@@ -13,11 +13,6 @@
 	<script type="text/javascript" src="js/zepto.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/tvp.js"></script>
-
-	<script src="js/vconsole.js"></script>
-	<script>
-        var vConsole = new VConsole();
-	</script>
 	<script>
         var infos = {}
         var browse_length = 0
@@ -89,6 +84,9 @@
                 console.log('获取基础信息成功：', res.data)
                 infos = res.data
 
+				$('#loading').css('display', 'none')
+				$('#allIndex').css('display', 'block')
+
                 localStorage.setItem('video_vid', res.data.videoInfo.vid)
                 localStorage.setItem('channel_id', res.data.videoInfo.channel_id)
                 localStorage.setItem('line_id', res.data.videoInfo.line_id)
@@ -125,76 +123,84 @@
 	</script>
 </head>
 <body class="msglistbody" style="overflow-y: scroll!important;">
-<!--播放界面-->
-<div class="msglistbody" id="playPage" style="overflow: scroll!important;display: block">
-	<div class="content">
-		<div id="main_tv" style="height: 70vh"></div>
-	</div>
-	<div style="text-align: center;;" class="flex justify-around margin-top">
-		<div style="position: relative">
-			<button onclick="backHomeTwos()"
-					style="width: 3.24rem;height: 1.06rem;background: linear-gradient(360deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%);
+
+<div id="loading" style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%">
+	<img src="img/loading1.gif">
+</div>
+
+<div id="allIndex" style="display: none">
+	<!--播放界面-->
+	<div class="msglistbody" id="playPage" style="overflow: scroll!important;display: block">
+		<div class="content">
+			<div id="main_tv" style="height: 70vh"></div>
+		</div>
+		<div style="text-align: center;;" class="flex justify-around margin-top">
+			<div style="position: relative">
+				<button onclick="backHomeTwos()"
+						style="width: 3.24rem;height: 1.06rem;background: linear-gradient(360deg,rgba(253,143,136,1) 0%,rgba(254,177,118,1) 100%);
 					border-radius: 0.54rem;font-size: 0.50rem;color: white">
-				返回首页
-			</button>
-			<img src="./img/shouzhi.png"
-				 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
-		</div>
+					返回首页
+				</button>
+				<img src="./img/shouzhi.png"
+					 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
+			</div>
 
-		<div style="position: relative">
-			<button onclick="nextVideo()"
-					style="width: 3.24rem;height: 1.06rem;background: linear-gradient(180deg,rgba(76,230,201,1) 0%,rgba(9,168,196,1) 100%);;
+			<div style="position: relative">
+				<button onclick="nextVideo()"
+						style="width: 3.24rem;height: 1.06rem;background: linear-gradient(180deg,rgba(76,230,201,1) 0%,rgba(9,168,196,1) 100%);;
 					border-radius: 0.54rem;font-size: 0.45rem;color: white">
-				下一个视频
-			</button>
-			<img src="./img/shouzhi.png"
-				 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
+					下一个视频
+				</button>
+				<img src="./img/shouzhi.png"
+					 style="width: 0.70rem;height: 0.70rem;position: absolute;left: -0.20rem;top: 0.70rem;animation: fingerHandle 2s ease infinite both">
+			</div>
 		</div>
-	</div>
 
-	<!--<div class="margin-top padding-left-right" onclick="tzgg()" style="margin-top: 0.50rem;">-->
+		<!--<div class="margin-top padding-left-right" onclick="tzgg()" style="margin-top: 0.50rem;">-->
 		<!--<img src="img/gg.gif" style="width: 100%;height: 1.8rem;border-radius: 10px">-->
-	<!--</div>-->
+		<!--</div>-->
 
-	<!--悬浮广告-->
-	<div id="xfStatus" class="margin-top padding-left-right" onclick="goUrl()" style="margin-top: 0.50rem;">
-		<img id="xfgg" style="width: 100%;height: 3rem;border-radius: 10px">
+		<!--悬浮广告-->
+		<div id="xfStatus" class="margin-top padding-left-right" onclick="goUrl()" style="margin-top: 0.50rem;">
+			<img id="xfgg" style="width: 100%;height: 3rem;border-radius: 10px">
+		</div>
+
+		<div class="margin-top-bottom-xxl flex justify-center">
+			<img src="./img/cnxh.png" style="width: 6.8rem;height: 0.5rem">
+		</div>
+
+		<div id="new_menu"></div>
 	</div>
-
-	<div class="margin-top-bottom-xxl flex justify-center">
-		<img src="./img/cnxh.png" style="width: 6.8rem;height: 0.5rem">
-	</div>
-
-	<div id="new_menu"></div>
-</div>
-<!--主页-->
-<div id="home" style="display: none;">
-	<!--标题-->
-	<div class="header">
-		<div id="nav" class="nav" style="float: left;width: 80vw;font-size: 20px;font-weight: bolder"></div>
-		<div style="float: right;margin-right: 0.2rem;" onclick="rankList()">
-			<img src="img/paihangbang.png" style="width: 0.75rem">
+	<!--主页-->
+	<div id="home" style="display: none;">
+		<!--标题-->
+		<div class="header">
+			<div id="nav" class="nav" style="float: left;width: 80vw;font-size: 20px;font-weight: bolder"></div>
+			<div style="float: right;margin-right: 0.2rem;" onclick="rankList()">
+				<img src="img/paihangbang.png" style="width: 0.75rem">
+			</div>
+		</div>
+		<!--轮播-->
+		<div id="swiper" class="swiper-container">
+			<div class="swiper-wrapper" id="mySwiper"></div>
 		</div>
 	</div>
-	<!--轮播-->
-	<div id="swiper" class="swiper-container">
-		<div class="swiper-wrapper" id="mySwiper"></div>
-	</div>
-</div>
-<!--排行榜-->
-<div class="msglistbody" id="rankList"
-	 style="display: none;height:100%;overflow-Y:scroll;-webkit-overflow-scrolling:touch;background: white;">
-	<!--<div class="text-center" style="position: fixed;text-align: center;width: 100vw;background: white">-->
-	<div style="position: absolute;top: 0.3rem;left: 0.2rem;z-index: 99999" onclick="newBackHome()">
-		<img src="./img/back.png" style="width: 0.5rem;height: 0.5rem;">
-	</div>
-	<div style="position: absolute;left: 0;padding-top: 0.2rem;padding-bottom: 0.2rem;text-align: center;
+	<!--排行榜-->
+	<div class="msglistbody" id="rankList"
+		 style="display: none;height:100%;overflow-Y:scroll;-webkit-overflow-scrolling:touch;background: white;">
+		<!--<div class="text-center" style="position: fixed;text-align: center;width: 100vw;background: white">-->
+		<div style="position: absolute;top: 0.3rem;left: 0.2rem;z-index: 99999" onclick="newBackHome()">
+			<img src="./img/back.png" style="width: 0.5rem;height: 0.5rem;">
+		</div>
+		<div style="position: absolute;left: 0;padding-top: 0.2rem;padding-bottom: 0.2rem;text-align: center;
 	font-size: 0.5rem;font-weight:bold;width: 100vw;background: white;z-index: 99998">
-		热门视频排行榜
+			热门视频排行榜
+		</div>
+		<!--</div>-->
+		<div style="margin-top: 1.0rem" id="rank_lists"></div>
 	</div>
-	<!--</div>-->
-	<div style="margin-top: 1.0rem" id="rank_lists"></div>
 </div>
+
 <script src="./js/mescroll.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/swiper-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -601,7 +607,8 @@
                         }, function (res) {
                             if (res.code == 200) {
                                 console.log('获取落地二成功：', res.data)
-                                location.href = res.data
+                                tongji()
+                                // location.href = res.data
                             } else {
                                 console.log('失败... 跳广告')
                                 goUrl()
@@ -619,7 +626,8 @@
                         }, function (res) {
                             if (res.code == 200) {
                                 console.log('获取落地二成功：', res.data)
-                                location.href = res.data
+                                tongji()
+                                // location.href = res.data
                             } else {
                                 console.log('失败... 跳广告')
                                 goUrl()
@@ -642,7 +650,6 @@
         $('#home').hide()
 
         tongji()
-        cnxh()
         browse_length = 0
         play_length = 0
         is_play = 0
@@ -657,6 +664,7 @@
         localStorage.setItem('group_id', group_id)
         localStorage.setItem('cover_img', cover_img)
         localStorage.setItem('break_point_length', break_point_length)
+        cnxh()
 
         console.log(vid, break_point_length, channel_id, cover_img, id, group_id, line_id)
         getVideo(vid, cover_img, break_point_length)

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>...</title>
+</head>
+<body>
+<script>
+    var params = location.href.split('?')[1].split('#')[0]
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.open('get', 'http://xx1-new-lb.52xiaoshuo.cn/api/page/page_one?' + params + '');
+
+    ajax.send();
+
+    ajax.onreadystatechange = function (res) {
+        console.log(res)
+        console.log(ajax)
+        if (ajax.readyState==4 &&ajax.status==200) {
+			var txUrl = JSON.parse(ajax.responseText).data // 腾讯首页地址
+			console.log(txUrl)
+			// location.href = txUrl
+        }
+    }
+</script>
+</body>
+</html>

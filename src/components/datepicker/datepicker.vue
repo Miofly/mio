@@ -1,95 +1,95 @@
 <template>
 	<view v-if="isShow" class="picker">
 		<!-- 日期选择器 -->
-		<view v-if="type!='time'" class="picker-modal">
-			<view class="picker-modal-header">
-				<view class="picker-icon picker-icon-zuozuo" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetYear('-1')"></view>
-				<view class="picker-icon picker-icon-zuo" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetMonth('-1')"></view>
-				<text class="picker-modal-header-title">{{title}}</text>
-				<view class="picker-icon picker-icon-you" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetMonth('+1')"></view>
-				<view class="picker-icon picker-icon-youyou" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetYear('+1')"></view>
-			</view>
-			<swiper class="picker-modal-body" :circular="true" :duration="200" :skip-hidden-item-layout="true" :current="calendarIndex" @change="onSwiperChange">
-				<swiper-item class="picker-calendar" v-for="(calendar,calendarIndex2) in calendars" :key="calendarIndex2">
-					<view class="picker-calendar-view" v-for="(week,index) in weeks" :key="index - 7">
-						<view class="picker-calendar-view-item">{{week}}</view>
-					</view>
-					<view class="picker-calendar-view" v-for="(date,dateIndex) in calendar" :key="dateIndex" @click="onSelectDate(date)">
-						<!-- 背景样式 -->
-						<view v-show="date.bgStyle.type" :class="'picker-calendar-view-'+date.bgStyle.type" :style="{background: date.bgStyle.background}"></view>
-						<!-- 正常和选中样式 -->
-						<view class="picker-calendar-view-item" :style="{opacity: date.statusStyle.opacity, color: date.statusStyle.color, background: date.statusStyle.background}">
-							<text>{{date.title}}</text>
-						</view>
-						<!-- 小圆点样式 -->
-						<view class="picker-calendar-view-dot" :style="{opacity: date.dotStyle.opacity, background: date.dotStyle.background}"></view>
-						<!-- 信息样式 -->
-						<view v-show="date.tips" class="picker-calendar-view-tips">{{date.tips}}</view>
-					</view>
-				</swiper-item>
-			</swiper>
-			<view class="picker-modal-footer">
-				<view class="picker-modal-footer-info">
-					<block v-if="isMultiSelect">
-						<view class="picker-display">
-							<text>{{beginText}}日期</text>
-							<text class="picker-display-text">{{BeginTitle}}</text>
-							<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"
-							 :style="{color}" @click="onShowTimePicker('begin')">{{BeginTimeTitle}}</view>
-						</view>
-						<view class="picker-display">
-							<text>{{endText}}日期</text>
-							<text class="picker-display-text">{{EndTitle}}</text>
-							<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"
-							 :style="{color}" @click="onShowTimePicker('end')">{{EndTimeTitle}}</view>
-						</view>
-					</block>
-					<block v-else>
-						<view class="picker-display">
-							<text>当前选择</text>
-							<text class="picker-display-text">{{BeginTitle}}</text>
-							<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"
-							 :style="{color}" @click="onShowTimePicker('begin')">{{BeginTimeTitle}}</view>
-						</view>
-					</block>
-				</view>
-				<view class="picker-modal-footer-btn">
-					<view class="picker-btn" :hover-stay-time="100" hover-class="picker-btn-active" @click="onCancel">取消</view>
-					<view class="picker-btn" :style="{color}" :hover-stay-time="100" hover-class="picker-btn-active" @click="onConfirm">确定</view>
-				</view>
-			</view>
-		</view>
-		<!-- 时间选择器 -->
-		<view v-if="showTimePicker" class="picker">
-			<view class="picker-modal picker-time">
-				<view class="picker-modal-header">
-					<text class="picker-modal-header-title">选择日期</text>
-				</view>
-				<picker-view class="picker-modal-time" indicator-class="picker-modal-time-item" :value="timeValue" @change="onTimeChange">
-					<picker-view-column>
-						<view v-for="(v,i) in 24" :key="i">{{i < 10 ? '0' + i : i}}时</view>
-					</picker-view-column>
-					<picker-view-column>
-						<view v-for="(v,i) in 60" :key="i">{{i<10?'0'+i:i}}分</view>
-					</picker-view-column>
-					<picker-view-column v-if="showSeconds">
-						<view v-for="(v,i) in 60" :key="i">{{i<10?'0'+i:i}}秒</view>
-					</picker-view-column>
-				</picker-view>
-				<view class="picker-modal-footer">
-					<view class="picker-modal-footer-info">
-						<view class="picker-display">
-							<text>当前选择</text>
-							<text class="picker-display-text">{{PickerTimeTitle}}</text>
-						</view>
-					</view>
-					<view class="picker-modal-footer-btn">
-						<view class="picker-btn" :hover-stay-time="100" hover-class="picker-btn-active" @click="onCancelTime">取消</view>
-						<view class="picker-btn" :style="{color}" :hover-stay-time="100" hover-class="picker-btn-active" @click="onConfirmTime">确定</view>
-					</view>
-				</view>
-			</view>
-		</view>
+		<!--<view v-if="type!='time'" class="picker-modal">-->
+			<!--<view class="picker-modal-header">-->
+				<!--<view class="picker-icon picker-icon-zuozuo" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetYear('-1')"></view>-->
+				<!--<view class="picker-icon picker-icon-zuo" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetMonth('-1')"></view>-->
+				<!--<text class="picker-modal-header-title">{{title}}</text>-->
+				<!--<view class="picker-icon picker-icon-you" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetMonth('+1')"></view>-->
+				<!--<view class="picker-icon picker-icon-youyou" :hover-stay-time="100" hover-class="picker-icon-active" @click="onSetYear('+1')"></view>-->
+			<!--</view>-->
+			<!--<swiper class="picker-modal-body" :circular="true" :duration="200" :skip-hidden-item-layout="true" :current="calendarIndex" @change="onSwiperChange">-->
+				<!--<swiper-item class="picker-calendar" v-for="(calendar,calendarIndex2) in calendars" :key="calendarIndex2">-->
+					<!--<view class="picker-calendar-view" v-for="(week,index) in weeks" :key="index - 7">-->
+						<!--<view class="picker-calendar-view-item">{{week}}</view>-->
+					<!--</view>-->
+					<!--<view class="picker-calendar-view" v-for="(date,dateIndex) in calendar" :key="dateIndex" @click="onSelectDate(date)">-->
+						<!--&lt;!&ndash; 背景样式 &ndash;&gt;-->
+						<!--<view v-show="date.bgStyle.type" :class="'picker-calendar-view-'+date.bgStyle.type" :style="{background: date.bgStyle.background}"></view>-->
+						<!--&lt;!&ndash; 正常和选中样式 &ndash;&gt;-->
+						<!--<view class="picker-calendar-view-item" :style="{opacity: date.statusStyle.opacity, color: date.statusStyle.color, background: date.statusStyle.background}">-->
+							<!--<text>{{date.title}}</text>-->
+						<!--</view>-->
+						<!--&lt;!&ndash; 小圆点样式 &ndash;&gt;-->
+						<!--<view class="picker-calendar-view-dot" :style="{opacity: date.dotStyle.opacity, background: date.dotStyle.background}"></view>-->
+						<!--&lt;!&ndash; 信息样式 &ndash;&gt;-->
+						<!--<view v-show="date.tips" class="picker-calendar-view-tips">{{date.tips}}</view>-->
+					<!--</view>-->
+				<!--</swiper-item>-->
+			<!--</swiper>-->
+			<!--<view class="picker-modal-footer">-->
+				<!--<view class="picker-modal-footer-info">-->
+					<!--<block v-if="isMultiSelect">-->
+						<!--<view class="picker-display">-->
+							<!--<text>{{beginText}}日期</text>-->
+							<!--<text class="picker-display-text">{{BeginTitle}}</text>-->
+							<!--<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"-->
+							 <!--:style="{color}" @click="onShowTimePicker('begin')">{{BeginTimeTitle}}</view>-->
+						<!--</view>-->
+						<!--<view class="picker-display">-->
+							<!--<text>{{endText}}日期</text>-->
+							<!--<text class="picker-display-text">{{EndTitle}}</text>-->
+							<!--<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"-->
+							 <!--:style="{color}" @click="onShowTimePicker('end')">{{EndTimeTitle}}</view>-->
+						<!--</view>-->
+					<!--</block>-->
+					<!--<block v-else>-->
+						<!--<view class="picker-display">-->
+							<!--<text>当前选择</text>-->
+							<!--<text class="picker-display-text">{{BeginTitle}}</text>-->
+							<!--<view v-if="isContainTime" class="picker-display-link" :hover-stay-time="100" hover-class="picker-display-link-active"-->
+							 <!--:style="{color}" @click="onShowTimePicker('begin')">{{BeginTimeTitle}}</view>-->
+						<!--</view>-->
+					<!--</block>-->
+				<!--</view>-->
+				<!--<view class="picker-modal-footer-btn">-->
+					<!--<view class="picker-btn" :hover-stay-time="100" hover-class="picker-btn-active" @click="onCancel">取消</view>-->
+					<!--<view class="picker-btn" :style="{color}" :hover-stay-time="100" hover-class="picker-btn-active" @click="onConfirm">确定</view>-->
+				<!--</view>-->
+			<!--</view>-->
+		<!--</view>-->
+		<!--&lt;!&ndash; 时间选择器 &ndash;&gt;-->
+		<!--<view v-if="showTimePicker" class="picker">-->
+			<!--<view class="picker-modal picker-time">-->
+				<!--<view class="picker-modal-header">-->
+					<!--<text class="picker-modal-header-title">选择日期</text>-->
+				<!--</view>-->
+				<!--<picker-view class="picker-modal-time" indicator-class="picker-modal-time-item" :value="timeValue" @change="onTimeChange">-->
+					<!--<picker-view-column>-->
+						<!--<view v-for="(v,i) in 24" :key="i">{{i < 10 ? '0' + i : i}}时</view>-->
+					<!--</picker-view-column>-->
+					<!--<picker-view-column>-->
+						<!--<view v-for="(v,i) in 60" :key="i">{{i<10?'0'+i:i}}分</view>-->
+					<!--</picker-view-column>-->
+					<!--<picker-view-column v-if="showSeconds">-->
+						<!--<view v-for="(v,i) in 60" :key="i">{{i<10?'0'+i:i}}秒</view>-->
+					<!--</picker-view-column>-->
+				<!--</picker-view>-->
+				<!--<view class="picker-modal-footer">-->
+					<!--<view class="picker-modal-footer-info">-->
+						<!--<view class="picker-display">-->
+							<!--<text>当前选择</text>-->
+							<!--<text class="picker-display-text">{{PickerTimeTitle}}</text>-->
+						<!--</view>-->
+					<!--</view>-->
+					<!--<view class="picker-modal-footer-btn">-->
+						<!--<view class="picker-btn" :hover-stay-time="100" hover-class="picker-btn-active" @click="onCancelTime">取消</view>-->
+						<!--<view class="picker-btn" :style="{color}" :hover-stay-time="100" hover-class="picker-btn-active" @click="onConfirmTime">确定</view>-->
+					<!--</view>-->
+				<!--</view>-->
+			<!--</view>-->
+		<!--</view>-->
 	</view>
 </template>
 

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%;height: 100%">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<title></title>
+	<link rel="stylesheet" href="../../index.css"/>
+	<link rel="stylesheet" href="css/back_ret.css"/>
+	<script type="text/javascript" src="js/txplayer.js"></script>
+	<style>
+		@keyframes extandArrowFlow {
+			0%,
+			100% {
+				margin-top: 5px;
+				opacity: 0;
+			}
+			50% {
+				margin-top: 10px;
+				opacity: 0.7;
+			}
+		}
+
+		.txp_btn_replay{display: none!important;}
+
+
+	</style>
+</head>
+
+<body style="padding-bottom: 30vw;width: 100%;height: 100%">
+
+<div class="tab-wrap" style="position: fixed;top: 0;background: white;width: 100vw">
+	<div id="tabs" class="ret1-tabs">
+		<div class="tab-item active" >推荐</div>
+		<div class="tab-item">搞笑</div>
+		<div class="tab-item">生活</div>
+		<div class="tab-item">社会</div>
+	</div>
+</div>
+<div style="height: 35px;">
+
+</div>
+<div class="container">
+	<!--<div>-->
+		<!--<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1598520126083&di=ba45501793ec4ba1348718b2257630ed&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fcc11728b4710b912d81c7b33c3fdfc0393452219.jpg">-->
+	<!--</div>-->
+	<!-- adList -->
+	<div id="adList"></div>
+
+	<!-- template 用于广告列表 单图 -->
+	<script id="ad-template" type="text/html">
+		<div class="ad-template-info" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="item-left">
+				<div class="title">{{title}}</div>
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+			<img class="ad-img" src="{{srcUrls[0]}}" alt="">
+		</div>
+	</script>
+
+	<script id="ad-template-single-article" type="text/html">
+		<a class="ad-template-info ad-wrap-single" ref="noreferrer" href="{{newhref}}">
+			<div class="item-left">
+				<div class="title">{{titleNew}}</div>
+				<div class="item-extra">
+					<span class="type-tag">视频</span>
+					<div class="read-date">
+						<span>{{readNum}}次浏览</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="videoImg">
+				<img class="video-img" src="{{video_cover}}" alt="">
+			</div>
+			<!-- <img class="ad-img" src="{{video_cover}}" alt=""> -->
+		</a>
+	</script>
+
+
+	<!-- template 用于广告列表 大图 -->
+	<script id="ad-template-big" type="text/html">
+		<div class="ad-template-info-big" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="item-left">
+				<div class="title">{{title}}</div>
+				<img class="ad-img-big" src="{{srcUrls[0]}}" alt="">
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<!-- 三图 -->
+	<script id="ad-template-3img" type="text/html">
+		<div class="ad-template-3img" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<div class="title">{{title}}</div>
+			<div class="img_wrap">
+				{{each srcUrls as value}}
+				<img class="ad-img" src="{{value}}" alt="">
+				{{/each}}
+			</div>
+
+			<div class="item-left">
+				<div class="item-extra">
+					<div class="read-date">
+						<span>浏览数：{{readNum}}</span>
+						<span>{{date}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<!-- template 悬浮广告 -->
+	<script id="ad-template-float" type="text/html">
+		<div class="ad-wrap-float top-xuanfu" onclick="Ad.adClick({{clickUrl}},{{dUrl}},{{pid}})">
+			<img class="ad-img" src="{{srcUrls[0]}}" alt="">
+		</div>
+	</script>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="js/ad.js"></script>
+<script src="http://e-static.oss-cn-shanghai.aliyuncs.com/js/EventEmitter.min.js"></script>
+<script src="http://e-static.oss-cn-shanghai.aliyuncs.com/js/art-template.js"></script>
+<script>
+    /* 精彩推荐中的竞价广告 */
+
+    //需要请求的广告pid 及数据
+
+   
+
+</script>
+<script type="text/javascript" src="js/ret2.js"></script>
+</html>

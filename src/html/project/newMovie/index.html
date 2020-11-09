@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>Title</title>
+	<script src="js/jquery.js"></script>
+	<script src="js/adaptive.js"></script>
+	<script src="js/hls.js"></script>
+	<script src="js/DPlayer.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/video.css"/>
+	<style>
+		#page li {
+			height: 0.4rem;
+			width: 0.9rem;
+			text-align: center;
+			list-style: none;
+			line-height: 0.3rem;
+			color: white;
+			float: left;
+		}
+
+		#page li span {
+			font-size: 0.16rem;
+		}
+
+		.active{
+			background: chocolate!important;
+		}
+	</style>
+</head>
+<body style="font-size: 0.05rem;background: black">
+<div id="dplayer" style="height: 50vh"></div>
+<div style="width: 100vw;text-align: center;margin: 0 auto;display: block">
+	<ul id="page" style="width: 100vw;height: 0.5rem;text-align: center;margin-left: 7%;margin-top: 3%">
+		<li mysrc="https://youku.cdn7-okzy.com/20200820/20513_6741611c/index.m3u8" style="background: rgba(51,58,68,1);border-radius: 10px;" class="active"><span>线路1</span></li>
+		<li mysrc="https://diaoshi.dehua-kuyun.com/20200820/12895_a1cd8d2a/index.m3u8" style="background: rgba(51,58,68,1);border-radius: 10px;"><span>线路2</span></li>
+		<li mysrc="https://yuledy.helanzuida.com/20200820/9183_da297a71/index.m3u8" style="background: rgba(51,58,68,1);border-radius: 10px;"><span>线路3</span></li>
+	</ul>
+</div>
+
+<div class="padding">
+	<div style="margin-top: 0.21rem">
+		<img style="width: 0.18rem;height: 0.21rem" class="fl" src="./img/huo.png">
+		<span class="fl"
+			  style="width:2.52rem;height:0.25rem;font-size:0.18rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.2rem;">八佰HC</span>
+	</div>
+	<div style="clear: both;margin-top: 0.08rem">
+			<span style="width:1.14rem;height:0.41rem;">
+				<span style="color:rgba(253,74,89,1);font-size: 0.29rem;font-weight:600;">9.9</span>
+				<span style="font-size: 0.16rem">· 超清</span>
+			</span>
+
+		<span class="margin-left-xxl"
+			  style="width:1rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">战争片 动作 战争</span>
+	</div>
+	<div style="margin-top: 0.08rem;width:100vw;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+		主演：王千源 / 张译 / 姜武 / 黄志忠 / 张俊一 / 欧豪
+	</div>
+	<div style="margin-top: 0.08rem;width:0.90rem;height:0.21rem;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+		导演：管虎
+	</div>
+	<div style="margin-top: 0.08rem;;font-size:0.15rem;font-weight:400;color:rgba(255,255,255,1);line-height:0.21rem;">
+		<div style="">
+			1937年淞沪会战的最后一役，“八百壮士”奉命坚守上海四行仓库，以少敌多顽强抵抗四天四夜。电影《八佰》由管虎导演，是亚洲首部全片使用IMAX摄影机拍摄的商业电影，将于2020年8月21日全国影院上映。
+		</div>
+	</div>
+</div>
+<script>
+    function getVideo(url) {
+        var dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            video: {
+                url: url,
+                // url: 'https://youku.cdn7-okzy.com/20200820/20513_6741611c/1000k/hls/index.m3u8',
+                pic: './img/loading_wap3.gif',
+                // url: 'http://okzy.xzokzyzy.com/20200820/20513_6741611c/八佰.mp4',
+                // url: 'https://youku.cdn7-okzy.com/share/ca2fb9274851370321bfa0017a5cc0d8',
+            },
+            preload: 'auto',
+            autoplay: true
+        });
+        dp.play()
+        dp.seek(100);
+        dp.on('timeupdate', function () {
+            console.log(dp.video.currentTime);
+        });
+        dp.on('ended', function () {
+            console.log('player ended');
+        });
+    }
+    getVideo('https://youku.cdn7-okzy.com/20200820/20513_6741611c/index.m3u8')
+	$('#page li').bind('click', function() {
+        $('#page li').removeClass('active')
+	    $(this).addClass('active')
+	    console.log($(this).attr('mysrc'))
+        getVideo($(this).attr('mysrc'))
+	})
+</script>
+</body>
+</html>

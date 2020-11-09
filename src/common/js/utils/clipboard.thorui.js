@@ -13,3 +13,4 @@ const thorui = {
 module.exports = {
 	getClipboardData: thorui.getClipboardData
 }
+

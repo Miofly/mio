@@ -55,7 +55,7 @@
         "@dcloudio/uni-quickapp-webview": "^2.0.0-alpha-28120200710001",
         "@dcloudio/uni-stat": "^2.0.0-alpha-28120200710001",
         "@vue/cli": "^4.4.6",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "cheerio": "^1.0.0-rc.3",
         "clipboard": "^2.0.6",
         "core-js": "^3.6.5",
